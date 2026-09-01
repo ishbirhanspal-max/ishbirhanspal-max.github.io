@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://ishbirhanspal-max.github.io/sitemap.xml
+
+# Block unimportant files
+Disallow: /ads.txt

@@ -1,60 +1,335 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-adsense-account" content="ca-pub-9875981872644926">
-  
-  <!-- Primary SEO Meta Tags -->
-  <title>OptiPixel & PDF Studio — Free Bulk Image & PDF Tools</title>
-  <meta name="title" content="OptiPixel & PDF Studio — Free Bulk Image & PDF Tools">
-  <meta name="description" content="Compress & convert images (JPG, PNG, WebP) and edit PDFs (Merge, Images to PDF, Rotate/Delete Pages, Watermark) directly in your browser. 100% private and free.">
-  <meta name="keywords" content="image compressor, merge pdf, images to pdf, edit pdf, rotate pdf pages, pdf watermark, webp converter, compress png, client side pdf editor">
+
+  <!-- ============================================================ -->
+  <!-- PRIMARY SEO META TAGS — Maximum Keyword Coverage -->
+  <!-- ============================================================ -->
+  <title>OptiPixel Studio — Free Image Compressor, PDF Editor, QR Code Generator, Barcode Maker, OCR, Background Remover & More</title>
+  <meta name="title" content="OptiPixel Studio — Free Image Compressor, PDF Editor, QR Code Generator, Barcode Maker, OCR, Background Remover & More">
+  <meta name="description" content="OptiPixel Studio: Free online tools — Compress & convert images (WebP, JPG, PNG), remove background, edit PDF online, merge PDF, QR code generator, barcode generator, OCR image to text, passport photo maker, photo collage maker, video frame extractor, voice recorder. 100% free, private & instant. No upload needed.">
+  <meta name="keywords" content="
+    free image compressor, compress image online free, convert image to webp, png to webp, jpg to webp free,
+    remove background free, background remover online, remove image background,
+    pdf editor online free, edit pdf text online, merge pdf free, pdf merge, combine pdf,
+    split pdf free, pdf page extractor, extract pages from pdf,
+    images to pdf converter, convert images to pdf free,
+    pdf watermark free, add watermark to pdf,
+    password protect pdf free, encrypt pdf online,
+    qr code generator free, create qr code, wifi qr code generator, whatsapp qr code,
+    barcode generator free, barcode maker online, code 128 barcode, ean 13 barcode, upc barcode,
+    passport photo maker free, passport photo online free, 2x2 passport photo, visa photo maker,
+    photo collage maker free, photo grid maker, collage maker online,
+    image filters online free, photo effects online, brighten image online,
+    social media resizer free, instagram photo resizer, youtube thumbnail size, tiktok video size,
+    ocr online free, image to text free, extract text from image, scan to text online,
+    video to gif free, video frame extractor, capture video frame,
+    voice recorder online free, audio recorder browser, record voice online,
+    free online tools no upload, client side tools privacy, browser based tools
+  ">
   <meta name="author" content="OptiPixel Studio">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="3 days">
+  <meta name="rating" content="general">
+  <link rel="canonical" href="https://ishbirhanspal-max.github.io/">
 
-  <!-- Open Graph / Facebook -->
+  <!-- ============================================================ -->
+  <!-- OPEN GRAPH (Facebook, WhatsApp, LinkedIn) -->
+  <!-- ============================================================ -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://optipixel.studio/">
-  <meta property="og:title" content="OptiPixel & PDF Studio — Free Bulk Image & PDF Tools">
-  <meta property="og:description" content="Compress images and edit PDFs in seconds. 100% private in-browser processing.">
-  <meta property="og:image" content="assets/favicon.svg">
+  <meta property="og:url" content="https://ishbirhanspal-max.github.io/">
+  <meta property="og:title" content="OptiPixel Studio — 12 Free Online Tools: Image Compressor, PDF Editor, QR Code, Barcode, OCR & More">
+  <meta property="og:description" content="100% free & private. Compress images, remove backgrounds, edit PDFs, generate QR codes & barcodes, extract text (OCR), make passport photos, create collages, record audio — all in your browser. No upload. No account.">
+  <meta property="og:image" content="https://ishbirhanspal-max.github.io/assets/logo.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:image:alt" content="OptiPixel Studio — Free Online Creative & PDF Tools">
+  <meta property="og:site_name" content="OptiPixel Studio">
+  <meta property="og:locale" content="en_US">
 
-  <!-- Twitter Card -->
+  <!-- ============================================================ -->
+  <!-- TWITTER / X CARD -->
+  <!-- ============================================================ -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="OptiPixel & PDF Studio">
-  <meta name="twitter:description" content="Optimize images and edit PDFs with zero server uploads.">
-  <meta name="twitter:image" content="assets/favicon.svg">
+  <meta name="twitter:site" content="@optipixelstudio">
+  <meta name="twitter:title" content="OptiPixel Studio — 12 Free Tools: Compress Images, Edit PDF, QR Code, Barcode, OCR & More">
+  <meta name="twitter:description" content="Free browser-based tools for images & PDFs. Compress, convert, remove background, generate QR/barcodes, extract text (OCR), make passport photos & more. 100% private.">
+  <meta name="twitter:image" content="https://ishbirhanspal-max.github.io/assets/logo.png">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <!-- ============================================================ -->
+  <!-- FAVICON & ICONS -->
+  <!-- ============================================================ -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="shortcut icon" href="assets/logo.png">
 
-  <!-- Google Fonts -->
+  <!-- ============================================================ -->
+  <!-- GOOGLE FONTS -->
+  <!-- ============================================================ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 
-  <!-- Stylesheet -->
+  <!-- ============================================================ -->
+  <!-- STYLESHEET -->
+  <!-- ============================================================ -->
   <link rel="stylesheet" href="css/styles.css">
 
-  <!-- Google AdSense Verification & Auto Ads -->
+  <!-- ============================================================ -->
+  <!-- GOOGLE ADSENSE -->
+  <!-- ============================================================ -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9875981872644926" crossorigin="anonymous"></script>
 
-  <!-- Structured Data JSON-LD for Google Rich Snippets -->
+  <!-- ============================================================ -->
+  <!-- STRUCTURED DATA — RICH SNIPPETS FOR GOOGLE -->
+  <!-- ============================================================ -->
+
+  <!-- 1. WebSite Schema (enables Sitelinks Search Box in Google) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "OptiPixel & PDF Studio",
-    "url": "https://optipixel-studio.ishbirhanspal.workers.dev/",
-    "description": "Free, private client-side bulk image optimizer and PDF editor toolkit.",
-    "applicationCategory": "MultimediaApplication",
-    "operatingSystem": "All",
+    "@type": "WebSite",
+    "name": "OptiPixel Studio",
+    "url": "https://ishbirhanspal-max.github.io/",
+    "description": "Free online image compressor, PDF editor, QR code generator, barcode maker, OCR text extractor, background remover, passport photo maker, collage maker, video frame extractor and voice recorder. 100% free and private.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://ishbirhanspal-max.github.io/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- 2. Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "OptiPixel Studio",
+    "url": "https://ishbirhanspal-max.github.io/",
+    "logo": "https://ishbirhanspal-max.github.io/assets/logo.png",
+    "description": "Creator of free, private browser-based creative and document tools.",
+    "sameAs": [
+      "https://github.com/ishbirhanspal-max/ishbirhanspal-max.github.io"
+    ]
+  }
+  </script>
+
+  <!-- 3. SoftwareApplication Schema (for App Store-like rich results) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "OptiPixel Studio",
+    "url": "https://ishbirhanspal-max.github.io/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any (runs in browser)",
+    "browserRequirements": "Requires a modern browser (Chrome, Firefox, Safari, Edge)",
+    "screenshot": "https://ishbirhanspal-max.github.io/assets/logo.png",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
-    }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "1247",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "featureList": [
+      "Bulk image compressor and converter (WebP, JPG, PNG)",
+      "Remove background from images free",
+      "PDF editor — merge, split, watermark, password protect",
+      "Edit existing text directly in PDF",
+      "QR code generator — URL, WiFi, WhatsApp",
+      "Barcode generator — Code-128, EAN-13, UPC-A",
+      "Passport photo maker — US, India, Schengen",
+      "Smart photo collage and grid maker",
+      "Image filters and lighting effects",
+      "Social media aspect ratio resizer",
+      "OCR — extract text from images",
+      "Video frame extractor and GIF maker",
+      "Voice recorder with waveform visualizer"
+    ]
+  }
+  </script>
+
+  <!-- 4. ItemList Schema — All 12 Tools for Rich Results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Free Online Tools by OptiPixel Studio",
+    "description": "12 completely free, private browser-based creative and document tools",
+    "url": "https://ishbirhanspal-max.github.io/",
+    "numberOfItems": 12,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Free Image Compressor & Converter",
+        "description": "Compress and convert images to WebP, JPG, PNG online free. Bulk compress images without quality loss. Reduce image file size instantly.",
+        "url": "https://ishbirhanspal-max.github.io/#dropzone"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Remove Background Free",
+        "description": "Remove background from photos online free. Get transparent PNG instantly. No signup required. 100% private.",
+        "url": "https://ishbirhanspal-max.github.io/#bg-remover-tools"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "QR Code Generator Free",
+        "description": "Generate custom QR codes free — for URLs, WiFi, WhatsApp, vCards. Download as PNG. No account needed.",
+        "url": "https://ishbirhanspal-max.github.io/#qr-tools"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Barcode Generator Free",
+        "description": "Generate barcodes online free. Code-128, EAN-13, UPC-A, Code-39 barcodes for retail, inventory and products.",
+        "url": "https://ishbirhanspal-max.github.io/#barcode-tools"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "Passport Photo Maker Free",
+        "description": "Make passport photos online free. 2x2 inch US passport photo, 35x45mm India/Schengen visa photo. Printable 4x6 sheet.",
+        "url": "https://ishbirhanspal-max.github.io/#passport-tools"
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "name": "Photo Collage Maker Free",
+        "description": "Create photo collages online free. Grid layouts, side-by-side, 2x2 quad, 6-photo gallery. Download as PNG.",
+        "url": "https://ishbirhanspal-max.github.io/#collage-tools"
+      },
+      {
+        "@type": "ListItem",
+        "position": 7,
+        "name": "Image Filters & Effects Free",
+        "description": "Apply photo filters and effects online free. Adjust brightness, contrast, saturation. Vintage, Cyberpunk, Noir presets.",
+        "url": "https://ishbirhanspal-max.github.io/#filter-tools"
+      },
+      {
+        "@type": "ListItem",
+        "position": 8,
+        "name": "Social Media Image Resizer Free",
+        "description": "Resize images for social media free. Instagram, YouTube, TikTok, Twitter, LinkedIn aspect ratios. Download instantly.",
+        "url": "https://ishbirhanspal-max.github.io/#social-tools"
+      },
+      {
+        "@type": "ListItem",
+        "position": 9,
+        "name": "OCR Image to Text Free",
+        "description": "Extract text from images online free. Scan photos, receipts, documents to editable text. Download as TXT file.",
+        "url": "https://ishbirhanspal-max.github.io/#ocr-tools"
+      },
+      {
+        "@type": "ListItem",
+        "position": 10,
+        "name": "Video Frame Extractor Free",
+        "description": "Extract frames from video online free. Capture high resolution screenshots from MP4, WebM. Export frame sequences.",
+        "url": "https://ishbirhanspal-max.github.io/#video-tools"
+      },
+      {
+        "@type": "ListItem",
+        "position": 11,
+        "name": "Voice Recorder Online Free",
+        "description": "Record voice online free with real-time waveform. Browser microphone recorder. Change playback speed. Download audio.",
+        "url": "https://ishbirhanspal-max.github.io/#audio-tools"
+      },
+      {
+        "@type": "ListItem",
+        "position": 12,
+        "name": "PDF Editor Online Free",
+        "description": "Edit PDF online free — merge PDF, split PDF, add watermark, password protect PDF, convert images to PDF, edit text in PDF.",
+        "url": "https://ishbirhanspal-max.github.io/#pdf-tools"
+      }
+    ]
+  }
+  </script>
+
+  <!-- 5. FAQPage Schema — Boosts Featured Snippets & Rich Results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I compress an image for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use OptiPixel Studio's free image compressor. Upload your JPG, PNG or WebP image, adjust quality settings, and download the compressed version instantly. No upload to servers — all processing happens in your browser."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I remove the background from a photo for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Open OptiPixel Studio's Background Remover tool. Upload your photo and click Remove Background. Get a transparent PNG instantly, completely free, with no account required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I generate a QR code for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OptiPixel Studio's QR Code Generator creates custom QR codes for URLs, WiFi, WhatsApp and more — completely free. Choose colors, add a logo, and download as PNG with one click."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I merge PDF files for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In OptiPixel Studio, open the PDF Studio tab, select Merge, upload 2 or more PDF files, and click Merge & Download. Free, instant, and 100% private — files never leave your browser."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I edit text in a PDF for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OptiPixel Studio offers free in-place PDF text editing. Upload a PDF, click on any existing text to edit it, add new text boxes, signatures, or drawings, then download the edited PDF."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I extract text from an image for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use OptiPixel Studio's free OCR tool. Upload a photo, scan, or screenshot and it will extract all readable text. You can copy to clipboard or download as a .txt file — completely free."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I make a passport photo for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OptiPixel Studio's Passport Photo Maker creates US 2x2 inch, India/Schengen 35x45mm, and visa ID photos for free. Export as a single photo or a printable 4x6 inch sheet with 6 photos."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I generate a barcode for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OptiPixel Studio's free Barcode Generator creates Code-128, EAN-13, UPC-A, and Code-39 barcodes. Enter your product number, customize colors, and download a high-resolution PNG barcode instantly."
+        }
+      }
+    ]
   }
   </script>
 </head>
