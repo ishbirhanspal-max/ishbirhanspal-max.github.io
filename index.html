@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>OptiPixel & PDF Studio — Free Bulk Image & PDF Tools</title>
+  <meta name="title" content="OptiPixel & PDF Studio — Free Bulk Image & PDF Tools">
+  <meta name="description" content="Compress & convert images (JPG, PNG, WebP) and edit PDFs (Merge, Images to PDF, Rotate/Delete Pages, Watermark) directly in your browser. 100% private and free.">
+  <meta name="keywords" content="image compressor, merge pdf, images to pdf, edit pdf, rotate pdf pages, pdf watermark, webp converter, compress png, client side pdf editor">
+  <meta name="author" content="OptiPixel Studio">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://optipixel.studio/">
+  <meta property="og:title" content="OptiPixel & PDF Studio — Free Bulk Image & PDF Tools">
+  <meta property="og:description" content="Compress images and edit PDFs in seconds. 100% private in-browser processing.">
+  <meta property="og:image" content="assets/favicon.svg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OptiPixel & PDF Studio">
+  <meta name="twitter:description" content="Optimize images and edit PDFs with zero server uploads.">
+  <meta name="twitter:image" content="assets/favicon.svg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Structured Data JSON-LD for Google Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "OptiPixel & PDF Studio",
+    "url": "https://optipixel.studio",
+    "description": "Free, private client-side bulk image optimizer and PDF editor toolkit.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Ambient Dynamic Lighting -->
+  <div class="bg-ambient" aria-hidden="true">
+    <div class="ambient-blob blob-1"></div>
+    <div class="ambient-blob blob-2"></div>
+    <div class="ambient-blob blob-3"></div>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="#" class="brand-logo" id="brandLogo">
+        <img src="assets/favicon.svg" alt="OptiPixel Logo" width="36" height="36">
+        <span>OptiPixel<span class="text-gradient">&amp; PDF</span></span>
+        <span class="logo-badge">Pro Studio</span>
+      </a>
+
+      <nav class="nav-actions">
+        <div class="lang-selector-wrap">
+          <select id="langSelect" class="custom-select" style="padding: 0.35rem 0.75rem; font-size: 0.85rem; border-radius: var(--radius-sm); background: var(--bg-surface-2); color: var(--text-primary); border: 1px solid var(--border-subtle); cursor: pointer;">
+            <option value="en">🇺🇸 English (EN)</option>
+            <option value="es">🇪🇸 Español (ES)</option>
+            <option value="fr">🇫🇷 Français (FR)</option>
+            <option value="de">🇩🇪 Deutsch (DE)</option>
+            <option value="hi">🇮🇳 हिन्दी (HI)</option>
+            <option value="ar">🇸🇦 العربية (AR)</option>
+            <option value="pt">🇧🇷 Português (PT)</option>
+            <option value="ja">🇯🇵 日本語 (JA)</option>
+          </select>
+        </div>
+        <a href="javascript:void(0)" class="nav-link" id="navImageLink">🖼️ Image Optimizer</a>
+        <a href="javascript:void(0)" class="nav-link" id="navPdfLink" style="color: var(--accent-cyan-light); font-weight: 700;">📄 PDF Studio</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="https://buymeacoffee.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" id="sponsorBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          Support Us
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Hero Header -->
+    <section class="hero-section">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        <span>100% Client-Side Private • Zero Cloud Uploads</span>
+      </div>
+
+      <h1 class="hero-title">
+        All-in-One Creative &amp; <br>
+        <span class="text-gradient">Document Powerhouse</span>
+      </h1>
+      
+      <p class="hero-subtitle">
+        Compress images, remove backgrounds, scan text (OCR), create barcodes, build collages, record audio, and edit PDFs with zero privacy risks.
+      </p>
+
+      <!-- Trust Badges -->
+      <div class="trust-badges">
+        <div class="badge-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Private &amp; Secure</span>
+        </div>
+        <div class="badge-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <span>Fast Client-Side Processing</span>
+        </div>
+        <div class="badge-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>No File Limits &amp; $0 Cost</span>
+        </div>
+      </div>
+
+      <!-- Main Workspace Tabs -->
+      <div class="tab-nav-container">
+        <button class="tab-btn active" id="tabImageBtn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+          🖼️ Image Optimizer
+        </button>
+        <button class="tab-btn" id="tabBgBtn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+          ✂️ Remove BG
+        </button>
+        <button class="tab-btn" id="tabQrBtn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/></svg>
+          🎨 QR Studio
+        </button>
+        <button class="tab-btn" id="tabBarcodeBtn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="5" x2="4" y2="19"/><line x1="8" y1="5" x2="8" y2="19"/><line x1="12" y1="5" x2="12" y2="19"/><line x1="16" y1="5" x2="16" y2="19"/><line x1="20" y1="5" x2="20" y2="19"/></svg>
+          📊 Barcodes
+        </button>
+        <button class="tab-btn" id="tabPassportBtn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M7 21v-2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/></svg>
+          🪪 Passport Maker
+        </button>
+        <button class="tab-btn" id="tabCollageBtn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/></svg>
+          🖼️ Collage Maker
+        </button>
+        <button class="tab-btn" id="tabFiltersBtn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+          🪄 Filters &amp; Effects
+        </button>
+        <button class="tab-btn" id="tabSocialCropBtn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="14" x="3" y="5" rx="2"/><line x1="8" y1="2" x2="8" y2="5"/><line x1="16" y1="2" x2="16" y2="5"/></svg>
+          📐 Social Crop
+        </button>
+        <button class="tab-btn" id="tabOcrBtn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+          🔍 Image to Text (OCR)
+        </button>
+        <button class="tab-btn" id="tabVideoBtn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="14" x="3" y="5" rx="2"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          🎞️ Video to GIF
+        </button>
+        <button class="tab-btn" id="tabAudioBtn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+          🎙️ Audio Studio
+        </button>
+        <button class="tab-btn" id="tabPdfBtn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          📄 PDF Studio
+        </button>
+      </div>
+
+    </section>
+
+    <!-- Top Responsive Ad Slot -->
+    <div class="ad-slot-horizontal" id="topAdSlot">
+      <span class="ad-label">Advertisement</span>
+      <div class="ad-placeholder-text">
+        ⚡ <strong>Boost Your Website Speed</strong> — High-performance cloud hosting &amp; CDN solutions for developers.
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- WORKSPACE 1: IMAGE OPTIMIZER & CONVERTER -->
+    <!-- ========================================== -->
+    <section class="studio-card" id="imageWorkspace">
+
+      <!-- Upload Dropzone -->
+      <div class="dropzone-container" id="dropzone" role="button" tabindex="0" aria-label="Upload images for optimization">
+        <input type="file" id="fileInput" multiple accept="image/jpeg,image/png,image/webp,image/avif,image/bmp,image/svg+xml" style="display: none;">
+        
+        <div class="dropzone-icon">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+        </div>
+
+        <h2 class="dropzone-title">Drop your images here, or <span class="text-gradient">browse files</span></h2>
+        <p class="dropzone-subtitle">Supports batch processing with no file size limits</p>
+        
+        <div class="dropzone-formats">
+          <span class="format-tag">PNG</span>
+          <span class="format-tag">JPG</span>
+          <span class="format-tag">WEBP</span>
+          <span class="format-tag">AVIF</span>
+          <span class="format-tag">SVG</span>
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <button type="button" class="btn btn-secondary btn-sm" id="sampleImagesBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"/><line x1="16" y1="5" x2="22" y2="5"/><line x1="19" y1="2" x2="19" y2="8"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+            Try with Demo Images
+          </button>
+        </div>
+      </div>
+
+      <!-- Compression & Format Toolbar -->
+      <div class="toolbar-section">
+        
+        <!-- Output Format -->
+        <div class="control-group">
+          <label class="control-label" for="formatSelect">
+            <span>Output Format</span>
+            <span class="control-value">Recommended</span>
+          </label>
+          <select id="formatSelect" class="custom-select">
+            <option value="image/webp" selected>WebP (Smallest file size)</option>
+            <option value="image/jpeg">JPEG / JPG (Universal compatibility)</option>
+            <option value="image/png">PNG (Lossless / Crisp transparency)</option>
+          </select>
+        </div>
+
+        <!-- Quality Control -->
+        <div class="control-group">
+          <div class="control-label">
+            <label for="qualitySlider">Compression Quality</label>
+            <span class="control-value" id="qualityValue">80%</span>
+          </div>
+          <div class="range-slider-wrapper">
+            <input type="range" id="qualitySlider" min="10" max="100" step="1" value="80" aria-label="Compression Quality">
+          </div>
+        </div>
+
+        <!-- Resize Options -->
+        <div class="control-group">
+          <label class="control-label" for="resizeSelect">
+            <span>Image Scaling</span>
+          </label>
+          <select id="resizeSelect" class="custom-select">
+            <option value="original" selected>Original Dimensions</option>
+            <option value="percentage">Scale by Percentage (e.g. 50%)</option>
+            <option value="maxBounds">Limit Max Width (e.g. 1920px)</option>
+          </select>
+          <div id="resizeOptionsContainer" style="margin-top: 0.5rem;"></div>
+        </div>
+
+      </div>
+
+      <!-- Options Row -->
+      <div class="options-row">
+        <label class="checkbox-label">
+          <input type="checkbox" id="stripMetaCheck" checked>
+          <span>Strip EXIF metadata (GPS location &amp; camera info for privacy)</span>
+        </label>
+      </div>
+
+      <!-- Real-time Stats & Batch Download Bar -->
+      <div class="stats-banner" id="statsBanner" style="display: none;">
+        <div class="stats-info">
+          <div class="stat-metric">
+            <span class="stat-label">Files</span>
+            <span class="stat-number" id="totalFilesCount">0 Images</span>
+          </div>
+          <div class="stat-metric">
+            <span class="stat-label">Original</span>
+            <span class="stat-number" id="totalOrigSize">0 MB</span>
+          </div>
+          <div class="stat-metric">
+            <span class="stat-label">Optimized</span>
+            <span class="stat-number" id="totalCompSize">0 MB</span>
+          </div>
+          <div class="stat-metric">
+            <span class="stat-label">Total Savings</span>
+            <span class="stat-number saved" id="totalSavings">0% (0 MB)</span>
+          </div>
+        </div>
+
+        <div class="stats-actions">
+          <button class="btn btn-secondary btn-sm" id="clearAllBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            Clear All
+          </button>
+          <button class="btn btn-primary" id="downloadAllBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            Download All (.ZIP)
+          </button>
+        </div>
+      </div>
+
+      <!-- File Grid Queue -->
+      <div id="filesContainer" style="display: none;">
+        <div class="file-grid" id="fileGrid"></div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- WORKSPACE 2: BACKGROUND REMOVER (AI & SMART)-->
+    <!-- ========================================== -->
+    <section class="studio-card" id="bgRemoverWorkspace" style="display: none;">
+
+      <!-- BG Dropzone -->
+      <div class="dropzone-container" id="bgDropzone" role="button" tabindex="0">
+        <input type="file" id="bgFileInput" accept="image/jpeg,image/png,image/webp" style="display: none;">
+        
+        <div class="dropzone-icon">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+            <line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/>
+          </svg>
+        </div>
+
+        <h2 class="dropzone-title">Drop your image here to <span class="text-gradient">Remove Background</span></h2>
+        <p class="dropzone-subtitle">Instant 100% private in-browser cutout for products, logos, and portraits</p>
+
+        <div style="margin-top: 1.25rem;">
+          <button type="button" class="btn btn-secondary btn-sm" id="sampleBgBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            Try with Sample Product Image
+          </button>
+        </div>
+      </div>
+
+      <!-- Background Remover Toolbar & Controls -->
+      <div id="bgControlsContainer" style="display: none; margin-top: 1.75rem;">
+        
+        <div class="toolbar-section">
+          
+          <!-- Color Tolerance -->
+          <div class="control-group">
+            <div class="control-label">
+              <label for="bgToleranceSlider">Edge &amp; Color Sensitivity</label>
+              <span class="control-value" id="bgToleranceValue">25%</span>
+            </div>
+            <input type="range" id="bgToleranceSlider" min="5" max="90" value="25" class="custom-slider">
+          </div>
+
+          <!-- Background Replacement Style -->
+          <div class="control-group">
+            <label class="control-label" for="bgReplaceSelect">New Background</label>
+            <select id="bgReplaceSelect" class="custom-select">
+              <option value="transparent" selected>🏁 Transparent (Clean PNG)</option>
+              <option value="#ffffff">⬜ Solid Clean White</option>
+              <option value="#0b0f19">⬛ Dark Obsidian</option>
+              <option value="custom">🎨 Custom Solid Color...</option>
+              <option value="sunset">🌅 Sunset Gradient</option>
+              <option value="cyber">⚡ Cyber Neon Gradient</option>
+            </select>
+          </div>
+
+          <!-- Custom Color Picker -->
+          <div class="control-group" id="customBgColorGroup" style="display: none;">
+            <label class="control-label">Pick Color</label>
+            <input type="color" id="bgCustomColorInput" value="#3b82f6" class="custom-input" style="height: 42px; padding: 2px;">
+          </div>
+
+        </div>
+
+        <!-- Live Cutout Preview & Export Card -->
+        <div class="bg-preview-container" style="margin-top: 1.5rem; text-align: center;">
+          <div class="checkerboard-bg" id="bgResultWrapper">
+            <canvas id="bgResultCanvas" style="max-width: 100%; max-height: 480px; object-fit: contain; border-radius: 8px; box-shadow: var(--shadow-lg);"></canvas>
+          </div>
+
+          <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
+            <button class="btn btn-secondary" id="bgResetBtn">Clear / Upload New</button>
+            <button class="btn btn-primary" id="bgDownloadBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Transparent Image (.PNG)
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- WORKSPACE 3: PRO QR CODE STUDIO            -->
+    <!-- ========================================== -->
+    <section class="studio-card" id="qrWorkspace" style="display: none;">
+      <div class="workspace-header" style="margin-bottom: 1.5rem; text-align: center;">
+        <h2 class="dropzone-title">Custom <span class="text-gradient">QR Code Studio</span></h2>
+        <p class="dropzone-subtitle">Create high-resolution QR codes with custom colors, WiFi sharing, and center logo embedding</p>
+      </div>
+
+      <div class="qr-layout" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; align-items: start;">
+        
+        <!-- Controls Left Column -->
+        <div class="qr-controls">
+          
+          <div class="control-group" style="margin-bottom: 1.25rem;">
+            <label class="control-label" for="qrTypeSelect">QR Code Type</label>
+            <select id="qrTypeSelect" class="custom-select">
+              <option value="url" selected>🔗 Website URL</option>
+              <option value="text">📝 Plain Text</option>
+              <option value="wifi">📶 WiFi Network Access</option>
+              <option value="whatsapp">💬 WhatsApp Direct Message</option>
+            </select>
+          </div>
+
+          <div class="control-group" id="qrContentGroup" style="margin-bottom: 1.25rem;">
+            <label class="control-label" for="qrTextInput">Target Content / URL</label>
+            <input type="text" id="qrTextInput" class="custom-input" placeholder="https://yourwebsite.com" value="https://optipixel.app">
+          </div>
+
+          <!-- WiFi Sub-fields -->
+          <div id="qrWifiGroup" style="display: none; margin-bottom: 1.25rem;">
+            <div class="control-group" style="margin-bottom: 0.75rem;">
+              <label class="control-label" for="qrWifiSsid">Network Name (SSID)</label>
+              <input type="text" id="qrWifiSsid" class="custom-input" placeholder="Home_WiFi">
+            </div>
+            <div class="control-group" style="margin-bottom: 0.75rem;">
+              <label class="control-label" for="qrWifiPass">Password</label>
+              <input type="text" id="qrWifiPass" class="custom-input" placeholder="Network password">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+            <div class="control-group">
+              <label class="control-label">QR Code Color</label>
+              <input type="color" id="qrDarkColor" value="#0f172a" class="custom-input" style="height: 42px; padding: 2px;">
+            </div>
+            <div class="control-group">
+              <label class="control-label">Background Color</label>
+              <input type="color" id="qrLightColor" value="#ffffff" class="custom-input" style="height: 42px; padding: 2px;">
+            </div>
+          </div>
+
+          <div class="control-group" style="margin-bottom: 1.5rem;">
+            <label class="control-label">Center Logo / Icon (Optional)</label>
+            <input type="file" id="qrLogoInput" accept="image/png,image/jpeg,image/svg+xml" class="custom-input" style="padding: 6px;">
+          </div>
+
+        </div>
+
+        <!-- Live Preview Right Column -->
+        <div class="qr-preview-card" style="text-align: center; background: rgba(255, 255, 255, 0.03); padding: 2rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <div id="qrCanvasContainer" style="display: inline-block; padding: 1rem; background: #ffffff; border-radius: 12px; box-shadow: var(--shadow-lg);">
+            <canvas id="qrResultCanvas" width="300" height="300" style="display: block; max-width: 100%; height: auto;"></canvas>
+          </div>
+
+          <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
+            <button class="btn btn-primary" id="qrDownloadPngBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download High-Res QR (.PNG)
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- WORKSPACE 4: SMART PASSPORT PHOTO MAKER    -->
+    <!-- ========================================== -->
+    <section class="studio-card" id="passportWorkspace" style="display: none;">
+      <div class="workspace-header" style="margin-bottom: 1.5rem; text-align: center;">
+        <h2 class="dropzone-title">Smart <span class="text-gradient">Passport &amp; Visa Photo Maker</span></h2>
+        <p class="dropzone-subtitle">Create official government-compliant passport photos &amp; printable 4x6" / A4 multi-photo sheets</p>
+      </div>
+
+      <!-- Passport Dropzone -->
+      <div class="dropzone-container" id="passportDropzone" role="button" tabindex="0">
+        <input type="file" id="passportFileInput" accept="image/jpeg,image/png,image/webp" style="display: none;">
+        <div class="dropzone-icon">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M7 21v-2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/></svg>
+        </div>
+        <h2 class="dropzone-title">Upload your portrait selfie</h2>
+        <p class="dropzone-subtitle">We will format, center, and align your photo to official passport dimensions</p>
+        <div style="margin-top: 1rem;">
+          <button type="button" class="btn btn-secondary btn-sm" id="samplePassportBtn">Try with Sample Portrait</button>
+        </div>
+      </div>
+
+      <!-- Passport Editor Controls & Preview -->
+      <div id="passportControlsContainer" style="display: none; margin-top: 1.5rem;">
+        <div class="toolbar-section" style="margin-bottom: 1.5rem;">
+          <div class="control-group">
+            <label class="control-label" for="passportTypeSelect">Country / Size Standard</label>
+            <select id="passportTypeSelect" class="custom-select">
+              <option value="us" selected>🇺🇸 US Passport &amp; Visa (2x2 inch / 51x51mm)</option>
+              <option value="eu">🇪🇺 Schengen, UK &amp; India Passport (35x45mm)</option>
+              <option value="id">🪪 Standard ID Badge (30x40mm)</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="passportBgSelect">Background Color</label>
+            <select id="passportBgSelect" class="custom-select">
+              <option value="#FFFFFF" selected>⬜ Official Clean White</option>
+              <option value="#1e40af">🟦 Passport Royal Blue</option>
+              <option value="#e2e8f0">🌫️ Light Neutral Grey</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="passportSheetSelect">Output Layout</label>
+            <select id="passportSheetSelect" class="custom-select">
+              <option value="single" selected>🖼️ Single Photo (High-Res)</option>
+              <option value="4x6">🖨️ Printable 4x6" Sheet (6 Photos with Cutting Lines)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+          <div class="checkerboard-bg">
+            <canvas id="passportResultCanvas" style="max-width: 100%; max-height: 480px; object-fit: contain; border-radius: 6px; box-shadow: var(--shadow-lg);"></canvas>
+          </div>
+
+          <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
+            <button class="btn btn-secondary" id="passportResetBtn">Clear / Upload New</button>
+            <button class="btn btn-primary" id="passportDownloadBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Ready-to-Print Photo (.PNG)
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- WORKSPACE 5: IMAGE FILTERS & EFFECTS       -->
+    <!-- ========================================== -->
+    <section class="studio-card" id="filtersWorkspace" style="display: none;">
+      <div class="workspace-header" style="margin-bottom: 1.5rem; text-align: center;">
+        <h2 class="dropzone-title">Image <span class="text-gradient">Filters &amp; Lighting Enhancer</span></h2>
+        <p class="dropzone-subtitle">Tweak brightness, contrast, saturation, and apply studio aesthetic color presets in real time</p>
+      </div>
+
+      <!-- Filters Dropzone -->
+      <div class="dropzone-container" id="filtersDropzone" role="button" tabindex="0">
+        <input type="file" id="filtersFileInput" accept="image/jpeg,image/png,image/webp" style="display: none;">
+        <div class="dropzone-icon">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+        </div>
+        <h2 class="dropzone-title">Drop an image to <span class="text-gradient">Enhance &amp; Apply Filters</span></h2>
+        <p class="dropzone-subtitle">Instant color grading with zero server latency</p>
+        <div style="margin-top: 1rem;">
+          <button type="button" class="btn btn-secondary btn-sm" id="sampleFilterBtn">Try with Demo Photo</button>
+        </div>
+      </div>
+
+      <div id="filtersControlsContainer" style="display: none; margin-top: 1.5rem;">
+        
+        <!-- Preset Buttons -->
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.5rem;">
+          <button type="button" class="btn btn-secondary btn-sm filter-preset-btn active" data-preset="none">Original</button>
+          <button type="button" class="btn btn-secondary btn-sm filter-preset-btn" data-preset="vibrant">⚡ Vibrant Glow</button>
+          <button type="button" class="btn btn-secondary btn-sm filter-preset-btn" data-preset="warm">🌅 Sunset Warm</button>
+          <button type="button" class="btn btn-secondary btn-sm filter-preset-btn" data-preset="vintage">📷 Vintage Film</button>
+          <button type="button" class="btn btn-secondary btn-sm filter-preset-btn" data-preset="cyberpunk">🌃 Cyberpunk</button>
+          <button type="button" class="btn btn-secondary btn-sm filter-preset-btn" data-preset="noir">🎞️ Film Noir (B&amp;W)</button>
+        </div>
+
+        <div class="toolbar-section" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+          <div class="control-group">
+            <div class="control-label">
+              <label>Brightness</label>
+              <span class="control-value" id="filterBrightVal">100%</span>
+            </div>
+            <input type="range" id="filterBrightSlider" min="20" max="200" value="100" class="custom-slider">
+          </div>
+
+          <div class="control-group">
+            <div class="control-label">
+              <label>Contrast</label>
+              <span class="control-value" id="filterContrastVal">100%</span>
+            </div>
+            <input type="range" id="filterContrastSlider" min="20" max="200" value="100" class="custom-slider">
+          </div>
+
+          <div class="control-group">
+            <div class="control-label">
+              <label>Saturation</label>
+              <span class="control-value" id="filterSaturateVal">100%</span>
+            </div>
+            <input type="range" id="filterSaturateSlider" min="0" max="250" value="100" class="custom-slider">
+          </div>
+
+          <div class="control-group">
+            <div class="control-label">
+              <label>Blur / Soft Focus</label>
+              <span class="control-value" id="filterBlurVal">0px</span>
+            </div>
+            <input type="range" id="filterBlurSlider" min="0" max="20" value="0" class="custom-slider">
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+          <canvas id="filterResultCanvas" style="max-width: 100%; max-height: 480px; object-fit: contain; border-radius: 8px; box-shadow: var(--shadow-lg);"></canvas>
+
+          <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
+            <button class="btn btn-secondary" id="filtersResetBtn">Clear / Upload New</button>
+            <button class="btn btn-primary" id="filtersDownloadBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Enhanced Photo (.PNG)
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- WORKSPACE 6: SOCIAL MEDIA CROP & RESIZE    -->
+    <!-- ========================================== -->
+    <section class="studio-card" id="socialCropWorkspace" style="display: none;">
+      <div class="workspace-header" style="margin-bottom: 1.5rem; text-align: center;">
+        <h2 class="dropzone-title">Social Media <span class="text-gradient">Aspect Ratio &amp; Canvas Resizer</span></h2>
+        <p class="dropzone-subtitle">1-Click presets for YouTube, Instagram, TikTok, LinkedIn, and Twitter with intelligent blurred-background padding</p>
+      </div>
+
+      <!-- Social Crop Dropzone -->
+      <div class="dropzone-container" id="socialCropDropzone" role="button" tabindex="0">
+        <input type="file" id="socialCropFileInput" accept="image/jpeg,image/png,image/webp" style="display: none;">
+        <div class="dropzone-icon">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="14" x="3" y="5" rx="2"/><line x1="8" y1="2" x2="8" y2="5"/><line x1="16" y1="2" x2="16" y2="5"/></svg>
+        </div>
+        <h2 class="dropzone-title">Drop an image for <span class="text-gradient">Social Media Presets</span></h2>
+        <p class="dropzone-subtitle">Resize instantly to fit Instagram, YouTube, TikTok, and Twitter standards</p>
+        <div style="margin-top: 1rem;">
+          <button type="button" class="btn btn-secondary btn-sm" id="sampleSocialBtn">Try with Demo Photo</button>
+        </div>
+      </div>
+
+      <div id="socialCropControlsContainer" style="display: none; margin-top: 1.5rem;">
+        
+        <div class="toolbar-section">
+          <div class="control-group">
+            <label class="control-label" for="socialRatioSelect">Platform Aspect Ratio</label>
+            <select id="socialRatioSelect" class="custom-select">
+              <option value="16:9" selected>📺 YouTube Thumbnail / Landscape (16:9 - 1920x1080)</option>
+              <option value="1:1">📸 Instagram Square Post (1:1 - 1080x1080)</option>
+              <option value="9:16">📱 TikTok / Reels / Shorts (9:16 - 1080x1920)</option>
+              <option value="4:5">🖼️ Instagram Portrait Feed (4:5 - 1080x1350)</option>
+              <option value="3:2">🐦 Twitter / X Header (3:2 - 1200x800)</option>
+              <option value="2:1">💼 LinkedIn Banner (2:1 - 1200x600)</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="socialFitSelect">Canvas Fill &amp; Padding Style</label>
+            <select id="socialFitSelect" class="custom-select">
+              <option value="blur-fill" selected>✨ Blurred Background Glow (No Content Cut)</option>
+              <option value="cover">🔍 Zoom &amp; Fill Entire Canvas</option>
+              <option value="contain-black">⬛ Solid Black Padding</option>
+              <option value="contain-white">⬜ Solid White Padding</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+          <canvas id="socialCropResultCanvas" style="max-width: 100%; max-height: 480px; object-fit: contain; border-radius: 8px; box-shadow: var(--shadow-lg);"></canvas>
+
+          <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
+            <button class="btn btn-secondary" id="socialCropResetBtn">Clear / Upload New</button>
+            <button class="btn btn-primary" id="socialCropDownloadBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Social Media Ready Image (.JPG)
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- WORKSPACE 7: UNIVERSAL BARCODE STUDIO      -->
+    <!-- ========================================== -->
+    <section class="studio-card" id="barcodeWorkspace" style="display: none;">
+      <div class="workspace-header" style="margin-bottom: 1.5rem; text-align: center;">
+        <h2 class="dropzone-title">Universal <span class="text-gradient">Barcode Generator</span></h2>
+        <p class="dropzone-subtitle">Generate high-density Code-128, EAN, and UPC barcodes for retail products and inventory</p>
+      </div>
+
+      <div class="toolbar-section">
+        <div class="control-group" style="flex: 2;">
+          <label class="control-label" for="barcodeTextInput">Barcode Data / Serial Number</label>
+          <input type="text" id="barcodeTextInput" class="custom-input" value="OPTI-89234710-PRO" placeholder="Enter alphanumeric code or number">
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="barcodeColor">Bar Color</label>
+          <input type="color" id="barcodeColor" value="#000000" class="color-picker-input">
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="barcodeBgColor">Background</label>
+          <input type="color" id="barcodeBgColor" value="#FFFFFF" class="color-picker-input">
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <div style="background: var(--bg-surface-2); padding: 2rem; border-radius: var(--radius-md); display: inline-block; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-md);">
+          <canvas id="barcodeResultCanvas" style="max-width: 100%; border-radius: 4px;"></canvas>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button class="btn btn-primary" id="barcodeDownloadBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Crisp Barcode (.PNG)
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- WORKSPACE 8: SMART PHOTO COLLAGE MAKER     -->
+    <!-- ========================================== -->
+    <section class="studio-card" id="collageWorkspace" style="display: none;">
+      <div class="workspace-header" style="margin-bottom: 1.5rem; text-align: center;">
+        <h2 class="dropzone-title">Smart Photo <span class="text-gradient">Collage &amp; Grid Maker</span></h2>
+        <p class="dropzone-subtitle">Combine multiple photos into aesthetic layouts with custom spacing and rounded corners</p>
+      </div>
+
+      <div class="dropzone-container" id="collageDropzone" role="button" tabindex="0">
+        <input type="file" id="collageFileInput" multiple accept="image/jpeg,image/png,image/webp" style="display: none;">
+        <div class="dropzone-icon">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/></svg>
+        </div>
+        <h2 class="dropzone-title">Drop 2 to 6 images to <span class="text-gradient">Create Collage</span></h2>
+        <p class="dropzone-subtitle">JPG, PNG, or WebP photos</p>
+        <div style="margin-top: 1rem;">
+          <button type="button" class="btn btn-secondary btn-sm" id="sampleCollageBtn">Try with Demo Photos</button>
+        </div>
+      </div>
+
+      <div id="collageControlsContainer" style="display: none; margin-top: 1.5rem;">
+        <div class="toolbar-section">
+          <div class="control-group">
+            <label class="control-label" for="collageLayoutSelect">Grid Layout</label>
+            <select id="collageLayoutSelect" class="custom-select">
+              <option value="2x2" selected>🔲 2x2 Quad Grid (4 Photos)</option>
+              <option value="2-side">⚖️ Side by Side (2 Photos)</option>
+              <option value="2-vert">📜 Vertical Split (2 Photos)</option>
+              <option value="3-grid">🌟 1 Top + 2 Bottom (3 Photos)</option>
+              <option value="6-grid">🖼️ 6-Photo Gallery Grid</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="collageSpacing">Border Spacing (px): <span id="collageSpacingVal">12px</span></label>
+            <input type="range" id="collageSpacing" min="0" max="36" value="12">
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="collageRadius">Corner Radius (px): <span id="collageRadiusVal">8px</span></label>
+            <input type="range" id="collageRadius" min="0" max="40" value="8">
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="collageBgColor">Background Color</label>
+            <input type="color" id="collageBgColor" value="#FFFFFF" class="color-picker-input">
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+          <canvas id="collageResultCanvas" style="max-width: 100%; max-height: 480px; object-fit: contain; border-radius: 8px; box-shadow: var(--shadow-lg);"></canvas>
+        </div>
+
+        <div style="text-align: center; margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center;">
+          <button class="btn btn-secondary" id="collageResetBtn">Upload Different Photos</button>
+          <button class="btn btn-primary" id="collageDownloadBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download High-Res Collage (.PNG)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- WORKSPACE 9: IMAGE TO TEXT (OCR)           -->
+    <!-- ========================================== -->
+    <section class="studio-card" id="ocrWorkspace" style="display: none;">
+      <div class="workspace-header" style="margin-bottom: 1.5rem; text-align: center;">
+        <h2 class="dropzone-title">Image &amp; Scan to <span class="text-gradient">Text (OCR)</span></h2>
+        <p class="dropzone-subtitle">Extract editable text from scanned documents, receipts, screenshots, and invoices in seconds</p>
+      </div>
+
+      <div class="dropzone-container" id="ocrDropzone" role="button" tabindex="0">
+        <input type="file" id="ocrFileInput" accept="image/jpeg,image/png,image/webp" style="display: none;">
+        <div class="dropzone-icon">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+        </div>
+        <h2 class="dropzone-title">Drop an image or scan to <span class="text-gradient">Extract Text</span></h2>
+        <p class="dropzone-subtitle">Extracts all readable text directly inside your browser</p>
+        <div style="margin-top: 1rem;">
+          <button type="button" class="btn btn-secondary btn-sm" id="sampleOcrBtn">Try with Demo Invoice Scan</button>
+        </div>
+      </div>
+
+      <div id="ocrControlsContainer" style="display: none; margin-top: 1.5rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start;">
+          <div>
+            <h4 style="margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--text-secondary);">Enhanced Source Scan</h4>
+            <canvas id="ocrPreviewCanvas" style="width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);"></canvas>
+          </div>
+
+          <div>
+            <h4 style="margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--text-secondary);">Extracted Text</h4>
+            <textarea id="ocrOutputText" class="custom-input" style="width: 100%; height: 260px; font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.6; resize: vertical;" placeholder="Extracted text will appear here..."></textarea>
+            
+            <div style="margin-top: 1rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <button class="btn btn-secondary btn-sm" id="ocrCopyBtn">📋 Copy to Clipboard</button>
+              <button class="btn btn-primary btn-sm" id="ocrDownloadTxtBtn">💾 Download .TXT File</button>
+              <button class="btn btn-secondary btn-sm" id="ocrResetBtn">Scan Another Image</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- WORKSPACE 10: VIDEO TO GIF & FRAME CAPTURE -->
+    <!-- ========================================== -->
+    <section class="studio-card" id="videoWorkspace" style="display: none;">
+      <div class="workspace-header" style="margin-bottom: 1.5rem; text-align: center;">
+        <h2 class="dropzone-title">Video to <span class="text-gradient">GIF &amp; Frame Extractor</span></h2>
+        <p class="dropzone-subtitle">Convert video clips to animated GIFs and capture ultra high-res still frames at exact timestamps</p>
+      </div>
+
+      <div class="dropzone-container" id="videoDropzone" role="button" tabindex="0">
+        <input type="file" id="videoFileInput" accept="video/mp4,video/webm" style="display: none;">
+        <div class="dropzone-icon">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="14" x="3" y="5" rx="2"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+        </div>
+        <h2 class="dropzone-title">Drop an MP4 or WebM video</h2>
+        <p class="dropzone-subtitle">Extract stills or generate animated GIFs</p>
+        <div style="margin-top: 1rem;">
+          <button type="button" class="btn btn-secondary btn-sm" id="sampleVideoBtn">Try with Demo Clip</button>
+        </div>
+      </div>
+
+      <div id="videoControlsContainer" style="display: none; margin-top: 1.5rem;">
+        <div style="text-align: center;">
+          <video id="videoPlayer" controls style="max-width: 100%; max-height: 400px; border-radius: var(--radius-md); box-shadow: var(--shadow-md); background: #000;"></video>
+        </div>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
+          <button class="btn btn-primary" id="videoCaptureFrameBtn">
+            📸 Capture Current Frame (PNG)
+          </button>
+          <button class="btn btn-secondary" id="videoGenerateGifBtn">
+            🎞️ Extract Frame Sequence (.PNG Grid)
+          </button>
+          <button class="btn btn-secondary" id="videoResetBtn">
+            Choose Another Video
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- WORKSPACE 11: AUDIO RECORDER & STUDIO      -->
+    <!-- ========================================== -->
+    <section class="studio-card" id="audioWorkspace" style="display: none;">
+      <div class="workspace-header" style="margin-bottom: 1.5rem; text-align: center;">
+        <h2 class="dropzone-title">Voice Recorder &amp; <span class="text-gradient">Audio Studio</span></h2>
+        <p class="dropzone-subtitle">Record crisp microphone audio notes with real-time waveform visualizer and variable speed playback</p>
+      </div>
+
+      <div style="text-align: center; padding: 2rem 1rem; background: var(--bg-surface-2); border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+        <canvas id="audioVisualizerCanvas" width="600" height="120" style="width: 100%; max-width: 600px; height: 120px; background: #0b0f19; border-radius: var(--radius-sm); margin-bottom: 1.5rem;"></canvas>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap;">
+          <button class="btn btn-primary" id="audioRecordBtn">
+            🎙️ Start Recording
+          </button>
+          <button class="btn btn-danger" id="audioStopBtn" style="display: none;">
+            ⏹️ Stop Recording
+          </button>
+        </div>
+
+        <div id="audioPlaybackContainer" style="display: none; margin-top: 1.5rem;">
+          <audio id="audioPlayer" controls style="width: 100%; max-width: 480px; margin: 0 auto; display: block;"></audio>
+
+          <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.25rem; align-items: center; flex-wrap: wrap;">
+            <label class="control-label" for="audioSpeedSelect">Playback Speed:</label>
+            <select id="audioSpeedSelect" class="custom-select" style="width: auto;">
+              <option value="0.75">0.75x (Slow)</option>
+              <option value="1.0" selected>1.0x (Normal)</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x (Fast)</option>
+              <option value="2.0">2.0x (Double)</option>
+            </select>
+            <button class="btn btn-primary" id="audioDownloadBtn">
+              💾 Download Audio (.WebM / .WAV)
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- WORKSPACE 12: PDF STUDIO & EDITOR          -->
+    <!-- ========================================== -->
+    <section class="studio-card" id="pdfWorkspace" style="display: none;">
+
+      <!-- PDF Subtools Navigation -->
+      <div class="pdf-subtools-nav">
+        <button class="pdf-subtool-btn active" data-tool="visual-edit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          ✍️ Visual PDF Editor (Sign, Text, Draw)
+        </button>
+        <button class="pdf-subtool-btn" data-tool="merge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-3"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Merge PDFs
+        </button>
+        <button class="pdf-subtool-btn" data-tool="split">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M12 22v-8.3"/><path d="m9 17 3-3 3 3"/></svg>
+          ✂️ Split &amp; Extract Pages
+        </button>
+        <button class="pdf-subtool-btn" data-tool="img2pdf">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+          Images to PDF
+        </button>
+        <button class="pdf-subtool-btn" data-tool="organize">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          Rotate &amp; Delete Pages
+        </button>
+        <button class="pdf-subtool-btn" data-tool="watermark">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Add Watermark
+        </button>
+        <button class="pdf-subtool-btn" data-tool="protect">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          🔒 Protect &amp; Encrypt
+        </button>
+      </div>
+
+      <!-- PDF Dropzone -->
+      <div class="dropzone-container" id="pdfDropzone" role="button" tabindex="0">
+        <input type="file" id="pdfFileInput" multiple accept=".pdf,application/pdf" style="display: none;">
+        
+        <div class="dropzone-icon">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="12" y1="18" x2="12" y2="12"/>
+            <line x1="9" y1="15" x2="15" y2="15"/>
+          </svg>
+        </div>
+
+        <h2 class="dropzone-title" id="pdfDropzoneTitle">Drop a PDF to <span class="text-gradient">Edit Existing Text, Sign &amp; Write</span></h2>
+        <p class="dropzone-subtitle" id="pdfDropzoneSubtitle">Upload a PDF document to modify words, type new text, or sign</p>
+
+        <div style="margin-top: 1.25rem;">
+          <button type="button" class="btn btn-secondary btn-sm" id="samplePdfBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Try with Sample Invoice PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Visual PDF Canvas Editor Container -->
+      <div id="visualEditorWorkspace" style="display: none; margin-top: 1.5rem;">
+        
+        <!-- Annotation Toolbar -->
+        <div class="annotation-toolbar">
+          <div class="annotation-tools-group">
+            <button class="tool-btn active" id="toolEditTextBtn" title="Click on any existing text to edit it">📝 Edit Existing Text</button>
+            <button class="tool-btn" id="toolTextBtn" title="Click anywhere to type new text">🔤 Add New Text</button>
+            <button class="tool-btn" id="toolWhiteoutBtn" title="Erase / Whiteout existing text">🧼 Whiteout / Erase</button>
+            <button class="tool-btn" id="toolPenBtn" title="Draw / Sign">✏️ Draw / Sign</button>
+            <button class="tool-btn" id="toolRectBtn" title="Highlight / Redaction Box">⬛ Redact Box</button>
+          </div>
+
+          <div class="annotation-controls-group">
+            <label class="control-label" style="font-size: 0.8rem;">Color:</label>
+            <input type="color" id="annotationColor" value="#000000" class="color-picker-input">
+            
+            <label class="control-label" style="font-size: 0.8rem; margin-left: 0.5rem;">Font/Size:</label>
+            <input type="range" id="annotationSize" min="2" max="48" value="16" style="width: 80px;" title="Adjust Font Size / Pen Size">
+          </div>
+
+          <div class="annotation-page-nav">
+            <button class="btn btn-secondary btn-sm" id="prevPdfPageBtn">&larr; Prev</button>
+            <span id="pdfPageIndicator" style="font-family: var(--font-mono); font-size: 0.85rem;">Page 1 / 1</span>
+            <button class="btn btn-secondary btn-sm" id="nextPdfPageBtn">Next &rarr;</button>
+          </div>
+
+          <button class="btn btn-danger btn-sm" id="clearCanvasBtn">🧹 Clear Annotations</button>
+        </div>
+
+        <!-- Tip Bar for user guidance -->
+        <div style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: var(--radius-sm); padding: 0.5rem 1rem; margin-bottom: 1rem; font-size: 0.85rem; color: var(--accent-cyan-light); display: flex; align-items: center; gap: 0.5rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span id="editorTipText">💡 <strong>Edit Existing Text Mode:</strong> Click on any word, heading, or paragraph in the PDF to replace it with your own text!</span>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="pdf-canvas-viewport">
+          <div class="pdf-canvas-wrapper" id="pdfCanvasWrapper">
+            <canvas id="pdfBaseCanvas"></canvas>
+            <canvas id="pdfAnnotationCanvas"></canvas>
+            <!-- Interactive Text Overlay Layer -->
+            <div id="pdfTextOverlayLayer" class="pdf-text-overlay-layer"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Watermark Input Option -->
+      <div class="watermark-input-group" id="pdfWatermarkInputContainer" style="display: none;">
+        <label class="control-label" for="watermarkTextInput">Watermark Stamp Text</label>
+        <input type="text" id="watermarkTextInput" class="custom-input" placeholder="e.g. CONFIDENTIAL / DRAFT / DO NOT COPY" value="CONFIDENTIAL">
+      </div>
+
+      <!-- Password Protect Input Option -->
+      <div class="watermark-input-group" id="pdfProtectInputContainer" style="display: none;">
+        <label class="control-label" for="pdfPasswordInput">Set Document Password</label>
+        <input type="password" id="pdfPasswordInput" class="custom-input" placeholder="Enter a secure password to encrypt PDF">
+      </div>
+
+      <!-- Split / Extract Pages Input Option -->
+      <div class="watermark-input-group" id="pdfSplitInputContainer" style="display: none;">
+        <label class="control-label" for="pdfSplitRangeInput">Page Ranges to Extract (e.g. 1-3, 5, 8-10):</label>
+        <input type="text" id="pdfSplitRangeInput" class="custom-input" placeholder="e.g. 1-3, 5, 8" value="1">
+      </div>
+
+      <!-- PDF Execution & Items Container -->
+      <div id="pdfActionsContainer" style="display: none; margin-top: 1.5rem;">
+        <div id="pdfItemsList"></div>
+
+        <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem; flex-wrap: wrap;">
+          <button class="btn btn-secondary" id="pdfResetBtn">Reset</button>
+          <button class="btn btn-primary" id="pdfExecuteBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            Process &amp; Download PDF
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Bottom Responsive Ad Slot -->
+    <div class="ad-slot-horizontal" id="bottomAdSlot">
+      <span class="ad-label">Sponsored</span>
+      <div class="ad-placeholder-text">
+        🔒 <strong>Try Cloudflare CDN &amp; Image Optimization</strong> — Accelerate your web apps globally.
+      </div>
+    </div>
+
+    <!-- Feature Highlights Section -->
+    <section class="info-section" id="features">
+      <div class="section-heading">
+        <h2 class="section-title">Why Use <span class="text-gradient">OptiPixel &amp; PDF Studio</span>?</h2>
+        <p class="section-desc">Designed for designers, developers, photographers, and marketers who demand maximum speed and privacy.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <h3 class="step-title">Zero Server Uploads</h3>
+          <p class="step-text">Your files never touch an external cloud or third-party server. All compression and conversions happen 100% locally in your browser RAM.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <h3 class="step-title">Complete Creative Toolkit</h3>
+          <p class="step-text">Merge multiple documents, scan OCR text, create barcodes, convert video to GIFs, record audio, and format passport photos in seconds.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <h3 class="step-title">1-Click ZIP &amp; PDF Export</h3>
+          <p class="step-text">Optimize hundreds of photos at once and download everything neatly packaged into a single compressed ZIP or pristine PDF file.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="info-section" id="how-it-works">
+      <div class="section-heading">
+        <h2 class="section-title">How It <span class="text-gradient">Works</span></h2>
+        <p class="section-desc">Three simple steps to optimize your multimedia workflow.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Select or Drop Files</h3>
+          <p class="step-text">Drag and drop any image, video, audio, or PDF file into the browser workspace.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Instant Live Processing</h3>
+          <p class="step-text">Our client-side engine uses WebAssembly and Canvas APIs to process media with zero delay.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Download &amp; Save</h3>
+          <p class="step-text">Export single files or bulk ZIP bundles instantly with 1 click.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO FAQ Section -->
+    <section class="info-section" id="faq">
+      <div class="section-heading">
+        <h2 class="section-title">Frequently Asked <span class="text-gradient">Questions</span></h2>
+      </div>
+
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Are my images and PDF files private?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, 100%. Everything runs locally inside your browser's memory using HTML5 Canvas, WebAssembly, and JavaScript. Your files never leave your device.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Is this tool completely free to use?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! There are no hidden fees, subscriptions, or file size limits. You can optimize, convert, and edit as many files as you want.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can I edit existing text on a PDF document?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! In the PDF Studio tab, click on "Edit Existing Text" mode and click on any word, heading, or paragraph on the PDF to modify it in-place.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive Comparison Modal -->
+  <div class="modal-backdrop" id="comparisonModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">Live Quality Comparison</h3>
+        <button class="modal-close" id="comparisonCloseBtn" aria-label="Close comparison modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center;">Drag the center slider left and right to inspect pixel sharpness</p>
+        
+        <div class="comparison-container" id="comparisonContainer">
+          <!-- Compressed Image (Underneath) -->
+          <img class="comparison-image" id="comparisonCompImg" src="" alt="Compressed image preview">
+          
+          <!-- Original Image (Overlay with clipping) -->
+          <div class="comparison-overlay" id="comparisonOverlay">
+            <img id="comparisonOrigImg" src="" alt="Original image preview">
+          </div>
+
+          <!-- Draggable Slider Handle -->
+          <div class="comparison-slider-handle" id="comparisonHandle">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 3 12 9 6"/></svg>
+          </div>
+
+          <!-- Labels -->
+          <span class="comparison-label orig" id="comparisonOrigMeta">Original</span>
+          <span class="comparison-label comp" id="comparisonCompMeta">Optimized</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Anchor -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="brand-logo">
+            <img src="assets/favicon.svg" alt="OptiPixel Logo" width="30" height="30">
+            <span>OptiPixel<span class="text-gradient">&amp; PDF</span></span>
+          </a>
+          <p>The privacy-first bulk image optimizer and client-side PDF editor. Runs 100% locally in your browser.</p>
+        </div>
+        <div>
+          <h4 class="footer-heading">Creative Tools</h4>
+          <ul class="footer-links">
+            <li><a href="#dropzone">WebP Converter</a></li>
+            <li><a href="#barcodeWorkspace">Barcode Studio</a></li>
+            <li><a href="#collageWorkspace">Collage Maker</a></li>
+            <li><a href="#ocrWorkspace">Image to Text (OCR)</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">PDF &amp; Media</h4>
+          <ul class="footer-links">
+            <li><a href="#pdfWorkspace">Visual PDF Editor</a></li>
+            <li><a href="#pdfWorkspace">Merge &amp; Split PDFs</a></li>
+            <li><a href="#videoWorkspace">Video to GIF</a></li>
+            <li><a href="#audioWorkspace">Voice Recorder</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 OptiPixel &amp; PDF Studio. Built for web performance &amp; privacy.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Third Party CDNs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- Application Scripts -->
+  <script src="js/i18n.js"></script>
+  <script src="js/compressor.js"></script>
+  <script src="js/bg-remover.js"></script>
+  <script src="js/qr-studio.js"></script>
+  <script src="js/barcode-engine.js"></script>
+  <script src="js/passport-maker.js"></script>
+  <script src="js/collage-maker.js"></script>
+  <script src="js/filter-studio.js"></script>
+  <script src="js/ocr-engine.js"></script>
+  <script src="js/video-gif.js"></script>
+  <script src="js/audio-studio.js"></script>
+  <script src="js/pdf-editor.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
