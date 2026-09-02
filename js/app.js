@@ -130,14 +130,30 @@
     bgDropzone: document.getElementById('bgDropzone'),
     bgFileInput: document.getElementById('bgFileInput'),
     sampleBgBtn: document.getElementById('sampleBgBtn'),
+    sampleBgPortraitBtn: document.getElementById('sampleBgPortraitBtn'),
     bgControlsContainer: document.getElementById('bgControlsContainer'),
+    bgLoadingIndicator: document.getElementById('bgLoadingIndicator'),
     bgToleranceSlider: document.getElementById('bgToleranceSlider'),
     bgToleranceValue: document.getElementById('bgToleranceValue'),
+    bgSmoothSlider: document.getElementById('bgSmoothSlider'),
+    bgSmoothValue: document.getElementById('bgSmoothValue'),
     bgReplaceSelect: document.getElementById('bgReplaceSelect'),
     customBgColorGroup: document.getElementById('customBgColorGroup'),
     bgCustomColorInput: document.getElementById('bgCustomColorInput'),
     bgResultCanvas: document.getElementById('bgResultCanvas'),
+    bgOriginalOverlay: document.getElementById('bgOriginalOverlay'),
+    bgOriginalImg: document.getElementById('bgOriginalImg'),
+    bgCompareHandle: document.getElementById('bgCompareHandle'),
+    bgCompareWrapper: document.getElementById('bgCompareWrapper'),
+    bgBrushOverlayCanvas: document.getElementById('bgBrushOverlayCanvas'),
+    bgBrushOffBtn: document.getElementById('bgBrushOffBtn'),
+    bgBrushEraseBtn: document.getElementById('bgBrushEraseBtn'),
+    bgBrushRestoreBtn: document.getElementById('bgBrushRestoreBtn'),
+    bgBrushClearBtn: document.getElementById('bgBrushClearBtn'),
+    bgBrushSizeSlider: document.getElementById('bgBrushSizeSlider'),
+    bgBrushSizeVal: document.getElementById('bgBrushSizeVal'),
     bgResetBtn: document.getElementById('bgResetBtn'),
+    bgCopyClipboardBtn: document.getElementById('bgCopyClipboardBtn'),
     bgDownloadBtn: document.getElementById('bgDownloadBtn'),
 
     // QR Code Studio Elements
@@ -396,13 +412,21 @@
   }
 
   // =========================================================================
-  // BACKGROUND REMOVER IMPLEMENTATION
+  // BACKGROUND REMOVER IMPLEMENTATION (AI & REMOVE.BG GRADE)
   // =========================================================================
   function setupBackgroundRemover() {
     let currentBgRawImage = null;
+    let currentMode = 'ai-portrait';
+    let currentBrushMode = 'off'; // 'off' | 'erase' | 'restore'
+    let brushSize = 25;
+    let isBrushing = false;
+    let manualMaskCanvas = null;
+    let isComparing = false;
+    let currentCutoutBlob = null;
 
     if (!elements.bgDropzone) return;
 
+    // Dropzone Listeners
     elements.bgDropzone.addEventListener('click', () => elements.bgFileInput.click());
     elements.bgFileInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
@@ -429,10 +453,37 @@
       if (file) loadBgImageFile(file);
     });
 
+    // Sample Image Buttons
+    if (elements.sampleBgPortraitBtn) {
+      elements.sampleBgPortraitBtn.addEventListener('click', loadSamplePortraitImage);
+    }
     if (elements.sampleBgBtn) {
       elements.sampleBgBtn.addEventListener('click', loadSampleBgImage);
     }
 
+    // Engine Mode Switcher
+    const modeBtns = document.querySelectorAll('.bg-mode-btn');
+    modeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        modeBtns.forEach(b => {
+          b.classList.remove('btn-primary');
+          b.classList.add('btn-secondary');
+        });
+        btn.classList.remove('btn-secondary');
+        btn.classList.add('btn-primary');
+        currentMode = btn.dataset.mode;
+        
+        // Show/hide tolerance slider based on mode
+        const tolGroup = document.getElementById('bgToleranceGroup');
+        if (tolGroup) {
+          tolGroup.style.display = currentMode === 'ai-portrait' ? 'none' : 'block';
+        }
+
+        runBgCutout();
+      });
+    });
+
+    // Tolerance & Smoothness Sliders
     if (elements.bgToleranceSlider) {
       elements.bgToleranceSlider.addEventListener('input', (e) => {
         elements.bgToleranceValue.textContent = `${e.target.value}%`;
@@ -440,6 +491,14 @@
       elements.bgToleranceSlider.addEventListener('change', () => runBgCutout());
     }
 
+    if (elements.bgSmoothSlider) {
+      elements.bgSmoothSlider.addEventListener('input', (e) => {
+        elements.bgSmoothValue.textContent = `${e.target.value}px`;
+      });
+      elements.bgSmoothSlider.addEventListener('change', () => runBgCutout());
+    }
+
+    // Background Replacement Select
     if (elements.bgReplaceSelect) {
       elements.bgReplaceSelect.addEventListener('change', (e) => {
         const val = e.target.value;
@@ -452,34 +511,100 @@
       elements.bgCustomColorInput.addEventListener('input', () => runBgCutout());
     }
 
+    // Touchup Brush Modes
+    const brushBtns = document.querySelectorAll('.bg-brush-btn');
+    brushBtns.forEach(b => {
+      b.addEventListener('click', () => {
+        brushBtns.forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        if (b.id === 'bgBrushEraseBtn') currentBrushMode = 'erase';
+        else if (b.id === 'bgBrushRestoreBtn') currentBrushMode = 'restore';
+        else currentBrushMode = 'off';
+
+        setupBrushOverlayState();
+      });
+    });
+
+    if (elements.bgBrushSizeSlider) {
+      elements.bgBrushSizeSlider.addEventListener('input', (e) => {
+        brushSize = parseInt(e.target.value, 10);
+        if (elements.bgBrushSizeVal) elements.bgBrushSizeVal.textContent = `${brushSize}px`;
+      });
+    }
+
+    if (elements.bgBrushClearBtn) {
+      elements.bgBrushClearBtn.addEventListener('click', () => {
+        manualMaskCanvas = null;
+        setupBrushOverlayState();
+        runBgCutout();
+        showToast('Touchup brush reset.', 'info');
+      });
+    }
+
+    // Reset Button
     if (elements.bgResetBtn) {
       elements.bgResetBtn.addEventListener('click', () => {
         currentBgRawImage = null;
+        manualMaskCanvas = null;
         elements.bgControlsContainer.style.display = 'none';
         elements.bgDropzone.style.display = 'block';
         elements.bgFileInput.value = '';
       });
     }
 
+    // Copy to Clipboard
+    if (elements.bgCopyClipboardBtn) {
+      elements.bgCopyClipboardBtn.addEventListener('click', async () => {
+        const canvas = elements.bgResultCanvas;
+        if (!canvas) return;
+        try {
+          canvas.toBlob(async (blob) => {
+            if (!blob) return;
+            if (navigator.clipboard && navigator.clipboard.write) {
+              await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+              showToast('✅ Cutout copied to clipboard!', 'success');
+            } else {
+              showToast('Clipboard copy not supported on this browser.', 'error');
+            }
+          }, 'image/png');
+        } catch (err) {
+          showToast('Could not copy to clipboard: ' + err.message, 'error');
+        }
+      });
+    }
+
+    // Download PNG Button
     if (elements.bgDownloadBtn) {
       elements.bgDownloadBtn.addEventListener('click', () => {
         const canvas = elements.bgResultCanvas;
         if (!canvas) return;
         const dataUrl = canvas.toDataURL('image/png');
-        triggerDownload(dataUrl, 'optipixel-transparent-cutout.png');
-        showToast('Transparent PNG downloaded!', 'success');
+        triggerDownload(dataUrl, 'optipixel-ai-cutout.png');
+        showToast('HD Transparent PNG downloaded!', 'success');
       });
     }
 
+    // Setup Interactive Split Comparison Handle
+    setupComparisonSlider();
+
+    // Brush canvas listeners
+    setupBrushDrawingEvents();
+
     function loadBgImageFile(file) {
-      showToast('Processing photo for background removal...', 'info');
+      showToast('Analyzing image with AI...', 'info');
       const reader = new FileReader();
       reader.onload = (e) => {
         const img = new Image();
         img.onload = () => {
           currentBgRawImage = img;
+          manualMaskCanvas = null;
           elements.bgDropzone.style.display = 'none';
           elements.bgControlsContainer.style.display = 'block';
+          
+          if (elements.bgOriginalImg) {
+            elements.bgOriginalImg.src = e.target.result;
+          }
+
           runBgCutout();
         };
         img.src = e.target.result;
@@ -487,38 +612,297 @@
       reader.readAsDataURL(file);
     }
 
-    function runBgCutout() {
+    async function runBgCutout() {
       if (!currentBgRawImage || !window.BackgroundRemoverEngine) return;
-      const tolerance = parseInt(elements.bgToleranceSlider.value, 10);
-      const bgChoice = elements.bgReplaceSelect.value;
+
+      if (elements.bgLoadingIndicator) {
+        elements.bgLoadingIndicator.style.display = 'block';
+      }
+
+      const tolerance = parseInt(elements.bgToleranceSlider ? elements.bgToleranceSlider.value : 30, 10);
+      const smoothness = parseInt(elements.bgSmoothSlider ? elements.bgSmoothSlider.value : 3, 10);
+      const bgChoice = elements.bgReplaceSelect ? elements.bgReplaceSelect.value : 'transparent';
+      
       let customBg = 'transparent';
       let gradientType = 'none';
+      let blurOriginal = false;
 
       if (bgChoice === '#ffffff' || bgChoice === '#0b0f19') {
         customBg = bgChoice;
+      } else if (bgChoice === 'blur') {
+        blurOriginal = true;
       } else if (bgChoice === 'custom') {
-        customBg = elements.bgCustomColorInput.value;
-      } else if (bgChoice === 'sunset' || bgChoice === 'cyber') {
+        customBg = elements.bgCustomColorInput ? elements.bgCustomColorInput.value : '#3b82f6';
+      } else if (bgChoice === 'sunset' || bgChoice === 'cyber' || bgChoice === 'neon' || bgChoice === 'studio') {
         customBg = 'gradient';
         gradientType = bgChoice;
       }
 
-      const resultCanvas = BackgroundRemoverEngine.processBackgroundRemoval(currentBgRawImage, {
-        tolerance,
-        customBg,
-        gradientType
-      });
+      try {
+        const engine = window.bgEngine || new window.BackgroundRemoverEngine();
+        const result = await engine.removeBackground(currentBgRawImage, {
+          mode: currentMode,
+          tolerance,
+          smoothness,
+          customBg,
+          gradientType,
+          blurOriginal,
+          manualMaskCanvas
+        });
 
-      const displayCanvas = elements.bgResultCanvas;
-      displayCanvas.width = resultCanvas.width;
-      displayCanvas.height = resultCanvas.height;
-      const ctx = displayCanvas.getContext('2d');
-      ctx.clearRect(0, 0, displayCanvas.width, displayCanvas.height);
-      ctx.drawImage(resultCanvas, 0, 0);
+        const displayCanvas = elements.bgResultCanvas;
+        displayCanvas.width = result.resultCanvas.width;
+        displayCanvas.height = result.resultCanvas.height;
+        const ctx = displayCanvas.getContext('2d');
+        ctx.clearRect(0, 0, displayCanvas.width, displayCanvas.height);
+        ctx.drawImage(result.resultCanvas, 0, 0);
+
+        // Update brush overlay size
+        if (elements.bgBrushOverlayCanvas) {
+          elements.bgBrushOverlayCanvas.width = displayCanvas.width;
+          elements.bgBrushOverlayCanvas.height = displayCanvas.height;
+        }
+
+        // Set Split Slider to 50%
+        updateSplitSlider(50);
+      } catch (err) {
+        console.error('Background removal error:', err);
+        showToast('AI removal error: ' + err.message, 'error');
+      } finally {
+        if (elements.bgLoadingIndicator) {
+          elements.bgLoadingIndicator.style.display = 'none';
+        }
+      }
     }
 
+    function setupComparisonSlider() {
+      const wrapper = elements.bgCompareWrapper;
+      const handle = elements.bgCompareHandle;
+      const overlay = elements.bgOriginalOverlay;
+      if (!wrapper || !handle || !overlay) return;
+
+      let isDragging = false;
+
+      function onPointerDown(e) {
+        if (currentBrushMode !== 'off') return; // Disable split dragging when in brush mode
+        isDragging = true;
+        updatePos(e);
+      }
+
+      function onPointerMove(e) {
+        if (!isDragging) return;
+        updatePos(e);
+      }
+
+      function onPointerUp() {
+        isDragging = false;
+      }
+
+      function updatePos(e) {
+        const rect = wrapper.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        let percentage = ((clientX - rect.left) / rect.width) * 100;
+        percentage = Math.max(0, Math.min(100, percentage));
+        updateSplitSlider(percentage);
+      }
+
+      wrapper.addEventListener('mousedown', onPointerDown);
+      window.addEventListener('mousemove', onPointerMove);
+      window.addEventListener('mouseup', onPointerUp);
+
+      wrapper.addEventListener('touchstart', onPointerDown, { passive: true });
+      window.addEventListener('touchmove', onPointerMove, { passive: true });
+      window.addEventListener('touchend', onPointerUp);
+    }
+
+    function updateSplitSlider(percentage) {
+      if (!elements.bgOriginalOverlay || !elements.bgCompareHandle) return;
+      elements.bgOriginalOverlay.style.width = `${percentage}%`;
+      elements.bgCompareHandle.style.left = `${percentage}%`;
+    }
+
+    function setupBrushOverlayState() {
+      const canvas = elements.bgBrushOverlayCanvas;
+      if (!canvas) return;
+      if (currentBrushMode === 'off') {
+        canvas.style.display = 'none';
+        canvas.style.pointerEvents = 'none';
+        if (elements.bgCompareHandle) elements.bgCompareHandle.style.display = 'flex';
+        if (elements.bgOriginalOverlay) elements.bgOriginalOverlay.style.display = 'block';
+      } else {
+        canvas.style.display = 'block';
+        canvas.style.pointerEvents = 'auto';
+        canvas.style.cursor = 'crosshair';
+        if (elements.bgCompareHandle) elements.bgCompareHandle.style.display = 'none';
+        if (elements.bgOriginalOverlay) elements.bgOriginalOverlay.style.display = 'none';
+      }
+    }
+
+    function setupBrushDrawingEvents() {
+      const canvas = elements.bgBrushOverlayCanvas;
+      if (!canvas) return;
+
+      const getPos = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        return {
+          x: (clientX - rect.left) * scaleX,
+          y: (clientY - rect.top) * scaleY
+        };
+      };
+
+      const startDraw = (e) => {
+        if (currentBrushMode === 'off') return;
+        isBrushing = true;
+        if (!manualMaskCanvas && currentBgRawImage) {
+          manualMaskCanvas = document.createElement('canvas');
+          manualMaskCanvas.width = currentBgRawImage.naturalWidth || currentBgRawImage.width;
+          manualMaskCanvas.height = currentBgRawImage.naturalHeight || currentBgRawImage.height;
+        }
+        draw(e);
+      };
+
+      const draw = (e) => {
+        if (!isBrushing || currentBrushMode === 'off' || !manualMaskCanvas) return;
+        const pos = getPos(e);
+        const mCtx = manualMaskCanvas.getContext('2d');
+        mCtx.fillStyle = currentBrushMode === 'erase' ? '#ff0000' : '#00ff00';
+        mCtx.beginPath();
+        mCtx.arc(pos.x, pos.y, brushSize, 0, Math.PI * 2);
+        mCtx.fill();
+
+        // Render preview overlay
+        const oCtx = canvas.getContext('2d');
+        oCtx.fillStyle = currentBrushMode === 'erase' ? 'rgba(239, 68, 68, 0.4)' : 'rgba(16, 185, 129, 0.4)';
+        oCtx.beginPath();
+        oCtx.arc(pos.x, pos.y, brushSize, 0, Math.PI * 2);
+        oCtx.fill();
+      };
+
+      const stopDraw = () => {
+        if (isBrushing) {
+          isBrushing = false;
+          runBgCutout();
+        }
+      };
+
+      canvas.addEventListener('mousedown', startDraw);
+      canvas.addEventListener('mousemove', draw);
+      window.addEventListener('mouseup', stopDraw);
+
+      canvas.addEventListener('touchstart', startDraw, { passive: true });
+      canvas.addEventListener('touchmove', draw, { passive: true });
+      window.addEventListener('touchend', stopDraw);
+    }
+
+    // Sample Portrait (Human AI Test)
+    function loadSamplePortraitImage() {
+      showToast('Generating HD model portrait for AI cutout...', 'info');
+      const c = document.createElement('canvas');
+      c.width = 720;
+      c.height = 900;
+      const ctx = c.getContext('2d');
+
+      // Natural gradient background with studio lighting
+      const bgGrad = ctx.createLinearGradient(0, 0, 720, 900);
+      bgGrad.addColorStop(0, '#f8fafc');
+      bgGrad.addColorStop(0.5, '#cbd5e1');
+      bgGrad.addColorStop(1, '#94a3b8');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, 720, 900);
+
+      // Studio light circles
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+      ctx.beginPath();
+      ctx.arc(360, 300, 240, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Human Silhouette / Portrait Illustration with hair details
+      // Shoulders / Jacket
+      ctx.fillStyle = '#1e293b';
+      ctx.beginPath();
+      ctx.moveTo(120, 900);
+      ctx.quadraticCurveTo(200, 600, 360, 600);
+      ctx.quadraticCurveTo(520, 600, 600, 900);
+      ctx.closePath();
+      ctx.fill();
+
+      // Shirt / Tie
+      ctx.fillStyle = '#06b6d4';
+      ctx.beginPath();
+      ctx.moveTo(330, 600);
+      ctx.lineTo(360, 720);
+      ctx.lineTo(390, 600);
+      ctx.closePath();
+      ctx.fill();
+
+      // Neck
+      ctx.fillStyle = '#e2a76f';
+      ctx.beginPath();
+      ctx.roundRect(325, 460, 70, 160, 20);
+      ctx.fill();
+
+      // Face
+      ctx.fillStyle = '#f5c69b';
+      ctx.beginPath();
+      ctx.ellipse(360, 380, 110, 140, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Hair
+      ctx.fillStyle = '#331800';
+      ctx.beginPath();
+      ctx.arc(360, 330, 125, Math.PI * 0.8, Math.PI * 2.2);
+      ctx.fill();
+
+      // Hair wisps
+      ctx.lineWidth = 6;
+      ctx.strokeStyle = '#331800';
+      for (let i = 0; i < 8; i++) {
+        ctx.beginPath();
+        ctx.arc(240 + i * 35, 250, 40, 0, Math.PI);
+        ctx.stroke();
+      }
+
+      // Sunglasses / Eyeglasses (Cool Look)
+      ctx.fillStyle = '#0f172a';
+      ctx.beginPath();
+      ctx.roundRect(280, 360, 65, 40, 10);
+      ctx.roundRect(375, 360, 65, 40, 10);
+      ctx.fill();
+      ctx.strokeStyle = '#0f172a';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(345, 380);
+      ctx.lineTo(375, 380);
+      ctx.stroke();
+
+      const img = new Image();
+      img.onload = () => {
+        currentBgRawImage = img;
+        manualMaskCanvas = null;
+        elements.bgDropzone.style.display = 'none';
+        elements.bgControlsContainer.style.display = 'block';
+        if (elements.bgOriginalImg) elements.bgOriginalImg.src = c.toDataURL('image/png');
+        
+        // Default to AI Portrait
+        currentMode = 'ai-portrait';
+        document.querySelectorAll('.bg-mode-btn').forEach(b => {
+          b.classList.toggle('btn-primary', b.dataset.mode === 'ai-portrait');
+          b.classList.toggle('btn-secondary', b.dataset.mode !== 'ai-portrait');
+        });
+
+        runBgCutout();
+        showToast('👤 Portrait loaded! AI Neural Cutout running...', 'success');
+      };
+      img.src = c.toDataURL('image/png');
+    }
+
+    // Sample Product (Wireless Headphones)
     function loadSampleBgImage() {
-      showToast('Creating demo product photo...', 'info');
+      showToast('Creating sample e-commerce product...', 'info');
       const c = document.createElement('canvas');
       c.width = 800;
       c.height = 800;
@@ -534,7 +918,7 @@
       ctx.ellipse(400, 620, 220, 45, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Modern Wireless Headphones / Sneaker graphic
+      // Modern Wireless Headphones graphic
       const grad = ctx.createLinearGradient(200, 200, 600, 600);
       grad.addColorStop(0, '#06b6d4');
       grad.addColorStop(0.5, '#6366f1');
@@ -570,10 +954,20 @@
       const img = new Image();
       img.onload = () => {
         currentBgRawImage = img;
+        manualMaskCanvas = null;
         elements.bgDropzone.style.display = 'none';
         elements.bgControlsContainer.style.display = 'block';
+        if (elements.bgOriginalImg) elements.bgOriginalImg.src = c.toDataURL('image/png');
+
+        // Switch to Product & Object mode
+        currentMode = 'ai-object';
+        document.querySelectorAll('.bg-mode-btn').forEach(b => {
+          b.classList.toggle('btn-primary', b.dataset.mode === 'ai-object');
+          b.classList.toggle('btn-secondary', b.dataset.mode !== 'ai-object');
+        });
+
         runBgCutout();
-        showToast('Sample product loaded! Background removed in real-time.', 'success');
+        showToast('📦 Sample product loaded! Object matting active.', 'success');
       };
       img.src = c.toDataURL('image/png');
     }
