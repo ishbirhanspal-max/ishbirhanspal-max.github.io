@@ -498,14 +498,28 @@
       elements.bgSmoothSlider.addEventListener('change', () => runBgCutout());
     }
 
-    // Background Replacement Select
-    if (elements.bgReplaceSelect) {
-      elements.bgReplaceSelect.addEventListener('change', (e) => {
-        const val = e.target.value;
-        elements.customBgColorGroup.style.display = val === 'custom' ? 'block' : 'none';
+    // Background Swatches Strip (Mobile-Native UI)
+    const swatchItems = document.querySelectorAll('.bg-swatch-item');
+    swatchItems.forEach(item => {
+      item.addEventListener('click', () => {
+        swatchItems.forEach(s => s.classList.remove('active'));
+        item.classList.add('active');
+        const bgVal = item.dataset.bg;
+        
+        if (elements.bgReplaceSelect) {
+          elements.bgReplaceSelect.value = bgVal;
+        }
+
+        if (bgVal === 'custom') {
+          elements.customBgColorGroup.style.display = 'block';
+          if (elements.bgCustomColorInput) elements.bgCustomColorInput.click();
+        } else {
+          elements.customBgColorGroup.style.display = 'none';
+        }
+
         runBgCutout();
       });
-    }
+    });
 
     if (elements.bgCustomColorInput) {
       elements.bgCustomColorInput.addEventListener('input', () => runBgCutout());

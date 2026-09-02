@@ -1707,3 +1707,114 @@ input[type="range"]::-webkit-slider-thumb:hover {
     width: 80px !important;
   }
 }
+
+/* Visual Background Swatches Strip */
+.bg-swatches-strip {
+  -ms-overflow-style: none;
+}
+.bg-swatches-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.bg-swatch-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 8px;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.bg-swatch-item:active {
+  transform: scale(0.92);
+}
+
+.swatch-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.bg-swatch-item.active .swatch-circle {
+  border-color: var(--accent-cyan) !important;
+  box-shadow: 0 0 14px rgba(6, 182, 212, 0.6);
+  transform: scale(1.08);
+}
+
+.swatch-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bg-swatch-item.active .swatch-label {
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+/* Mobile-First Tab Navigation Bar */
+.tab-nav-container {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 0.25rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+
+.tab-nav-container::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface-2);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tab-btn:hover, .tab-btn:focus-visible {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+}
+
+.tab-btn:active {
+  transform: scale(0.96);
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(6, 182, 212, 0.25)) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--accent-cyan) !important;
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.25);
+  font-weight: 700;
+}

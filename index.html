@@ -760,63 +760,102 @@
       <div id="bgControlsContainer" style="display: none; margin-top: 1.75rem;">
         
         <!-- Processing Status / Spinner Indicator -->
-        <div id="bgLoadingIndicator" style="display: none; text-align: center; padding: 1.5rem; background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.2); border-radius: var(--radius-md); margin-bottom: 1.5rem;">
-          <div style="display: inline-block; width: 28px; height: 28px; border: 3px solid rgba(6,182,212,0.3); border-top-color: var(--accent-cyan); border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 0.75rem;"></div>
-          <span style="font-weight: 600; color: var(--text-primary);">Running AI Background Removal...</span>
+        <div id="bgLoadingIndicator" style="display: none; text-align: center; padding: 1.25rem; background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.2); border-radius: var(--radius-md); margin-bottom: 1.25rem;">
+          <div style="display: inline-block; width: 26px; height: 26px; border: 3px solid rgba(6,182,212,0.3); border-top-color: var(--accent-cyan); border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 0.75rem;"></div>
+          <span style="font-weight: 600; color: var(--text-primary); font-size: 0.95rem;">AI Segmenting &amp; Removing Background...</span>
         </div>
 
         <!-- AI Engine Mode Switcher -->
-        <div style="display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <div style="display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.25rem; flex-wrap: wrap;">
           <button type="button" class="btn btn-sm btn-primary bg-mode-btn" data-mode="ai-portrait" id="bgModePortraitBtn">
-            🤖 AI People &amp; Portrait
+            🤖 AI Portrait
           </button>
           <button type="button" class="btn btn-sm btn-secondary bg-mode-btn" data-mode="ai-object" id="bgModeObjectBtn">
-            📦 AI Product &amp; Object
+            📦 AI Product
           </button>
           <button type="button" class="btn btn-sm btn-secondary bg-mode-btn" data-mode="color-key" id="bgModeColorKeyBtn">
-            🪄 Studio Chroma Key
+            🪄 Chroma Key
           </button>
         </div>
 
-        <!-- Controls Toolbar Grid -->
-        <div class="toolbar-section" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem;">
+        <!-- Visual Background Swatch Strip (Mobile App Style) -->
+        <div style="margin-bottom: 1.25rem;">
+          <label style="display: block; font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-bottom: 0.5rem; text-align: center;">⚡ Quick Backgrounds:</label>
+          <div class="bg-swatches-strip" style="display: flex; gap: 0.6rem; overflow-x: auto; padding: 0.4rem 0.2rem; justify-content: flex-start; scrollbar-width: none; -webkit-overflow-scrolling: touch;">
+            <button type="button" class="bg-swatch-item active" data-bg="transparent" title="Transparent PNG">
+              <span class="swatch-circle checkerboard-bg">🏁</span>
+              <span class="swatch-label">Clear</span>
+            </button>
+            <button type="button" class="bg-swatch-item" data-bg="#ffffff" title="Studio White">
+              <span class="swatch-circle" style="background: #ffffff; color: #000;">⬜</span>
+              <span class="swatch-label">White</span>
+            </button>
+            <button type="button" class="bg-swatch-item" data-bg="#0b0f19" title="Obsidian Black">
+              <span class="swatch-circle" style="background: #0b0f19; border-color: rgba(255,255,255,0.2);">⬛</span>
+              <span class="swatch-label">Dark</span>
+            </button>
+            <button type="button" class="bg-swatch-item" data-bg="blur" title="Portrait Blur">
+              <span class="swatch-circle" style="background: rgba(6,182,212,0.25);">🌫️</span>
+              <span class="swatch-label">Blur BG</span>
+            </button>
+            <button type="button" class="bg-swatch-item" data-bg="sunset" title="Sunset Gradient">
+              <span class="swatch-circle" style="background: linear-gradient(135deg, #ff512f, #dd2476);">🌅</span>
+              <span class="swatch-label">Sunset</span>
+            </button>
+            <button type="button" class="bg-swatch-item" data-bg="cyber" title="Cyber Neon">
+              <span class="swatch-circle" style="background: linear-gradient(135deg, #00f2fe, #4facfe);">⚡</span>
+              <span class="swatch-label">Cyber</span>
+            </button>
+            <button type="button" class="bg-swatch-item" data-bg="neon" title="Purple Neon">
+              <span class="swatch-circle" style="background: linear-gradient(135deg, #8e2de2, #4a00e0);">🟣</span>
+              <span class="swatch-label">Neon</span>
+            </button>
+            <button type="button" class="bg-swatch-item" data-bg="studio" title="Dark Studio">
+              <span class="swatch-circle" style="background: linear-gradient(135deg, #2c3e50, #000000);">🎬</span>
+              <span class="swatch-label">Studio</span>
+            </button>
+            <button type="button" class="bg-swatch-item" data-bg="custom" title="Custom Color Picker" id="bgSwatchCustomTrigger">
+              <span class="swatch-circle" style="background: linear-gradient(135deg, #f59e0b, #ec4899);">🎨</span>
+              <span class="swatch-label">Color...</span>
+            </button>
+          </div>
+          <!-- Hidden fallback select for programmatic sync -->
+          <select id="bgReplaceSelect" style="display: none;">
+            <option value="transparent" selected>Transparent</option>
+            <option value="#ffffff">White</option>
+            <option value="#0b0f19">Dark</option>
+            <option value="blur">Blur</option>
+            <option value="custom">Custom</option>
+            <option value="sunset">Sunset</option>
+            <option value="cyber">Cyber</option>
+            <option value="neon">Neon</option>
+            <option value="studio">Studio</option>
+          </select>
+        </div>
+
+        <!-- Custom Color Picker Hidden Group -->
+        <div class="control-group" id="customBgColorGroup" style="display: none; margin-bottom: 1.25rem; text-align: center;">
+          <label class="control-label" style="display: inline-block; margin-right: 0.75rem;">Pick Solid Color:</label>
+          <input type="color" id="bgCustomColorInput" value="#3b82f6" style="height: 38px; width: 60px; padding: 2px; cursor: pointer; border-radius: 8px; vertical-align: middle; border: 1px solid var(--border-subtle); background: transparent;">
+        </div>
+
+        <!-- Sliders Grid (Mobile Friendly 2-col) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
           
-          <!-- Background Replacement Style -->
-          <div class="control-group">
-            <label class="control-label" for="bgReplaceSelect">New Background</label>
-            <select id="bgReplaceSelect" class="custom-select">
-              <option value="transparent" selected>🏁 Transparent (Clean PNG)</option>
-              <option value="#ffffff">⬜ Solid Clean White</option>
-              <option value="#0b0f19">⬛ Dark Obsidian</option>
-              <option value="blur">🌫️ Portrait Blur (DSLR Effect)</option>
-              <option value="custom">🎨 Custom Solid Color...</option>
-              <option value="sunset">🌅 Sunset Gradient</option>
-              <option value="cyber">⚡ Cyber Neon Gradient</option>
-              <option value="neon">🟣 Purple Glow Gradient</option>
-              <option value="studio">🎬 Studio Backdrop</option>
-            </select>
-          </div>
-
-          <!-- Custom Color Picker -->
-          <div class="control-group" id="customBgColorGroup" style="display: none;">
-            <label class="control-label">Pick Solid Color</label>
-            <input type="color" id="bgCustomColorInput" value="#3b82f6" class="custom-input" style="height: 42px; padding: 2px; cursor: pointer;">
-          </div>
-
-          <!-- Edge Smoothness / Feathering -->
-          <div class="control-group">
+          <!-- Edge Smoothness -->
+          <div class="control-group" style="margin-bottom: 0;">
             <div class="control-label">
-              <label for="bgSmoothSlider">Edge Smoothness &amp; Feather</label>
-              <span class="control-value" id="bgSmoothValue">3px</span>
+              <label for="bgSmoothSlider" style="font-size: 0.85rem;">Edge Feather</label>
+              <span class="control-value" id="bgSmoothValue" style="font-size: 0.85rem;">3px</span>
             </div>
             <input type="range" id="bgSmoothSlider" min="0" max="6" value="3" class="custom-slider">
           </div>
 
-          <!-- Sensitivity / Tolerance (Object & Chroma modes) -->
-          <div class="control-group" id="bgToleranceGroup">
+          <!-- Sensitivity / Tolerance -->
+          <div class="control-group" id="bgToleranceGroup" style="margin-bottom: 0;">
             <div class="control-label">
-              <label for="bgToleranceSlider">AI Edge Sensitivity</label>
-              <span class="control-value" id="bgToleranceValue">30%</span>
+              <label for="bgToleranceSlider" style="font-size: 0.85rem;">AI Sensitivity</label>
+              <span class="control-value" id="bgToleranceValue" style="font-size: 0.85rem;">30%</span>
             </div>
             <input type="range" id="bgToleranceSlider" min="5" max="80" value="30" class="custom-slider">
           </div>
@@ -824,64 +863,64 @@
         </div>
 
         <!-- Touchup Erase & Restore Tool (Like Remove.bg) -->
-        <div style="background: var(--bg-surface-2); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1rem 1.25rem; margin-top: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
-          <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-            <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-right: 0.5rem;">🖌️ Touchup Brush:</span>
-            <button type="button" class="btn btn-secondary btn-sm bg-brush-btn active" id="bgBrushOffBtn">👁️ View</button>
-            <button type="button" class="btn btn-secondary btn-sm bg-brush-btn" id="bgBrushEraseBtn">🧹 Erase</button>
-            <button type="button" class="btn btn-secondary btn-sm bg-brush-btn" id="bgBrushRestoreBtn">✨ Restore</button>
-            <button type="button" class="btn btn-secondary btn-sm" id="bgBrushClearBtn">↺ Reset Brush</button>
+        <div style="background: var(--bg-surface-2); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 0.85rem 1rem; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); margin-right: 0.25rem;">🖌️ Brush:</span>
+            <button type="button" class="btn btn-secondary btn-sm bg-brush-btn active" id="bgBrushOffBtn" style="padding: 0.35rem 0.65rem; font-size: 0.82rem;">👁️ View</button>
+            <button type="button" class="btn btn-secondary btn-sm bg-brush-btn" id="bgBrushEraseBtn" style="padding: 0.35rem 0.65rem; font-size: 0.82rem;">🧹 Erase</button>
+            <button type="button" class="btn btn-secondary btn-sm bg-brush-btn" id="bgBrushRestoreBtn" style="padding: 0.35rem 0.65rem; font-size: 0.82rem;">✨ Restore</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="bgBrushClearBtn" style="padding: 0.35rem 0.65rem; font-size: 0.82rem;">↺ Reset</button>
           </div>
-          <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <span style="font-size: 0.85rem; color: var(--text-muted);">Brush Size:</span>
-            <input type="range" id="bgBrushSizeSlider" min="8" max="80" value="25" class="custom-slider" style="width: 110px;">
-            <span id="bgBrushSizeVal" style="font-size: 0.85rem; color: var(--accent-cyan); font-weight: 600;">25px</span>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 0.82rem; color: var(--text-muted);">Size:</span>
+            <input type="range" id="bgBrushSizeSlider" min="8" max="80" value="25" class="custom-slider" style="width: 80px;">
+            <span id="bgBrushSizeVal" style="font-size: 0.82rem; color: var(--accent-cyan); font-weight: 600;">25px</span>
           </div>
         </div>
 
         <!-- Interactive Before / After Split Slider & Canvas -->
-        <div class="bg-preview-container" style="margin-top: 1.5rem; position: relative;">
+        <div class="bg-preview-container" style="position: relative;">
           
           <div id="bgCompareWrapper" style="position: relative; max-width: 720px; margin: 0 auto; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid var(--border-subtle); user-select: none;">
             
             <!-- Checkerboard Background for Transparency -->
-            <div class="checkerboard-bg" style="position: relative; width: 100%; min-height: 280px; display: flex; align-items: center; justify-content: center; background-size: 20px 20px;">
+            <div class="checkerboard-bg" style="position: relative; width: 100%; min-height: 240px; display: flex; align-items: center; justify-content: center; background-size: 20px 20px;">
               
               <!-- Result Cutout Canvas -->
               <canvas id="bgResultCanvas" style="display: block; max-width: 100%; height: auto; max-height: 520px;"></canvas>
 
               <!-- Original Image Overlay Layer for Split Comparison -->
               <div id="bgOriginalOverlay" style="position: absolute; top: 0; left: 0; bottom: 0; width: 50%; overflow: hidden; border-right: 2px solid var(--accent-cyan); pointer-events: none; transition: width 0.05s ease-out;">
-                <img id="bgOriginalImg" src="" alt="Original" style="display: block; height: 100%; max-height: 520px; object-fit: contain;">
+                <img id="bgOriginalImg" src="" alt="Original" style="display: block; width: 100%; height: 100%; object-fit: contain;">
               </div>
 
               <!-- Manual Brush Stroke Overlay Canvas -->
               <canvas id="bgBrushOverlayCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; display: none;"></canvas>
 
-              <!-- Interactive Split Handle -->
-              <div id="bgCompareHandle" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; border-radius: 50%; background: var(--accent-cyan); color: #000; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; box-shadow: 0 0 15px rgba(6,182,212,0.8); cursor: ew-resize; z-index: 10;">
-                ⇄
+              <!-- Interactive Split Handle (44px mobile thumb target) -->
+              <div id="bgCompareHandle" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; border-radius: 50%; background: var(--accent-cyan); color: #000; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem; box-shadow: 0 0 20px rgba(6,182,212,0.9); cursor: ew-resize; z-index: 10;">
+                ◀ ▶
               </div>
 
             </div>
 
             <!-- Labels -->
-            <span style="position: absolute; bottom: 12px; left: 14px; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); color: #fff; padding: 0.25rem 0.65rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600; pointer-events: none; z-index: 5;">Original</span>
-            <span style="position: absolute; bottom: 12px; right: 14px; background: rgba(6,182,212,0.85); backdrop-filter: blur(8px); color: #000; padding: 0.25rem 0.65rem; border-radius: 6px; font-size: 0.8rem; font-weight: 700; pointer-events: none; z-index: 5;">Clean Cutout</span>
+            <span style="position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); color: #fff; padding: 0.2rem 0.55rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; pointer-events: none; z-index: 5;">Original</span>
+            <span style="position: absolute; bottom: 10px; right: 10px; background: rgba(6,182,212,0.85); backdrop-filter: blur(8px); color: #000; padding: 0.2rem 0.55rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700; pointer-events: none; z-index: 5;">Cutout</span>
 
           </div>
 
           <!-- Bottom Action Buttons -->
-          <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.75rem; flex-wrap: wrap;">
-            <button type="button" class="btn btn-secondary" id="bgResetBtn">
-              ↺ Upload New Image
+          <div style="display: flex; gap: 0.75rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
+            <button type="button" class="btn btn-secondary btn-sm" id="bgResetBtn" style="flex: 1 1 120px;">
+              ↺ Upload New
             </button>
-            <button type="button" class="btn btn-secondary" id="bgCopyClipboardBtn">
-              📋 Copy Cutout to Clipboard
+            <button type="button" class="btn btn-secondary btn-sm" id="bgCopyClipboardBtn" style="flex: 1 1 140px;">
+              📋 Copy Cutout
             </button>
-            <button type="button" class="btn btn-primary" id="bgDownloadBtn">
+            <button type="button" class="btn btn-primary" id="bgDownloadBtn" style="flex: 2 1 220px; font-weight: 700;">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Download HD Transparent PNG (.PNG)
+              Download HD PNG (.PNG)
             </button>
           </div>
 
