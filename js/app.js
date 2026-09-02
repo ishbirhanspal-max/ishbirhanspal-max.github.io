@@ -663,6 +663,12 @@
           elements.bgBrushOverlayCanvas.height = displayCanvas.height;
         }
 
+        // Align Original Image dimensions perfectly with display canvas for flawless split comparison
+        if (elements.bgOriginalImg) {
+          elements.bgOriginalImg.style.width = '100%';
+          elements.bgOriginalImg.style.height = '100%';
+        }
+
         // Set Split Slider to 50%
         updateSplitSlider(50);
       } catch (err) {
@@ -686,11 +692,13 @@
       function onPointerDown(e) {
         if (currentBrushMode !== 'off') return; // Disable split dragging when in brush mode
         isDragging = true;
+        if (e.cancelable) e.preventDefault();
         updatePos(e);
       }
 
       function onPointerMove(e) {
         if (!isDragging) return;
+        if (e.cancelable) e.preventDefault();
         updatePos(e);
       }
 
@@ -700,7 +708,8 @@
 
       function updatePos(e) {
         const rect = wrapper.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientX = (e.touches && e.touches.length > 0) ? e.touches[0].clientX : e.clientX;
+        if (clientX === undefined) return;
         let percentage = ((clientX - rect.left) / rect.width) * 100;
         percentage = Math.max(0, Math.min(100, percentage));
         updateSplitSlider(percentage);
@@ -710,8 +719,8 @@
       window.addEventListener('mousemove', onPointerMove);
       window.addEventListener('mouseup', onPointerUp);
 
-      wrapper.addEventListener('touchstart', onPointerDown, { passive: true });
-      window.addEventListener('touchmove', onPointerMove, { passive: true });
+      wrapper.addEventListener('touchstart', onPointerDown, { passive: false });
+      window.addEventListener('touchmove', onPointerMove, { passive: false });
       window.addEventListener('touchend', onPointerUp);
     }
 
@@ -744,8 +753,8 @@
 
       const getPos = (e) => {
         const rect = canvas.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const clientX = (e.touches && e.touches.length > 0) ? e.touches[0].clientX : e.clientX;
+        const clientY = (e.touches && e.touches.length > 0) ? e.touches[0].clientY : e.clientY;
         const scaleX = canvas.width / rect.width;
         const scaleY = canvas.height / rect.height;
         return {
@@ -756,6 +765,7 @@
 
       const startDraw = (e) => {
         if (currentBrushMode === 'off') return;
+        if (e.cancelable) e.preventDefault();
         isBrushing = true;
         if (!manualMaskCanvas && currentBgRawImage) {
           manualMaskCanvas = document.createElement('canvas');
@@ -767,6 +777,7 @@
 
       const draw = (e) => {
         if (!isBrushing || currentBrushMode === 'off' || !manualMaskCanvas) return;
+        if (e.cancelable) e.preventDefault();
         const pos = getPos(e);
         const mCtx = manualMaskCanvas.getContext('2d');
         mCtx.fillStyle = currentBrushMode === 'erase' ? '#ff0000' : '#00ff00';
@@ -793,8 +804,8 @@
       canvas.addEventListener('mousemove', draw);
       window.addEventListener('mouseup', stopDraw);
 
-      canvas.addEventListener('touchstart', startDraw, { passive: true });
-      canvas.addEventListener('touchmove', draw, { passive: true });
+      canvas.addEventListener('touchstart', startDraw, { passive: false });
+      canvas.addEventListener('touchmove', draw, { passive: false });
       window.addEventListener('touchend', stopDraw);
     }
 
