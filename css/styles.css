@@ -204,7 +204,7 @@ body {
   background: rgba(255, 255, 255, 0.04);
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1024px) {
   .desktop-only-link {
     display: none !important;
   }
@@ -212,14 +212,17 @@ body {
 
 @media (max-width: 480px) {
   .site-header {
-    padding: 0.5rem 0;
+    padding: 0.45rem 0;
   }
   .brand-logo span {
-    font-size: 1.05rem !important;
+    font-size: 1rem !important;
   }
   .brand-logo img {
-    width: 28px !important;
-    height: 28px !important;
+    width: 26px !important;
+    height: 26px !important;
+  }
+  .logo-badge {
+    display: none !important;
   }
   .coffee-text {
     display: none !important;
@@ -1796,13 +1799,15 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 /* Mobile-First Tab Navigation Bar */
 .tab-nav-container {
-  display: flex;
+  display: flex !important;
+  flex-wrap: nowrap !important;
   gap: 0.5rem;
-  overflow-x: auto;
+  overflow-x: auto !important;
   padding: 0.5rem 0.25rem;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
+  width: 100%;
 }
 
 .tab-nav-container::-webkit-scrollbar {
