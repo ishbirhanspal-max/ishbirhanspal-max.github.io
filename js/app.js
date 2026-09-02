@@ -340,6 +340,19 @@
     elements.dropzone.addEventListener('click', () => elements.fileInput.click());
     elements.fileInput.addEventListener('change', (e) => handleFilesSelected(e.target.files));
 
+    const mainAddFilesBtn = document.getElementById('mainAddFilesBtn');
+    if (mainAddFilesBtn) {
+      mainAddFilesBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        elements.fileInput.click();
+      });
+    }
+
+    const addMoreFilesBtn = document.getElementById('addMoreFilesBtn');
+    if (addMoreFilesBtn) {
+      addMoreFilesBtn.addEventListener('click', () => elements.fileInput.click());
+    }
+
     // Sample Images & PDF Buttons
     if (elements.sampleImagesBtn) elements.sampleImagesBtn.addEventListener('click', loadSampleImages);
     const samplePdfBtn = document.getElementById('samplePdfBtn');
@@ -428,6 +441,13 @@
 
     // Dropzone Listeners
     elements.bgDropzone.addEventListener('click', () => elements.bgFileInput.click());
+    const bgAddFileBtn = document.getElementById('bgAddFileBtn');
+    if (bgAddFileBtn) {
+      bgAddFileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        elements.bgFileInput.click();
+      });
+    }
     elements.bgFileInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (file) loadBgImageFile(file);
