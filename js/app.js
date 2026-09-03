@@ -1923,7 +1923,11 @@
   // =========================================================================
   function setupI18n() {
     if (window.I18nEngine) {
-      I18nEngine.setLanguage('en');
+      const saved = localStorage.getItem('optipixel_lang') || 'en';
+      I18nEngine.setLanguage(saved);
+      if (elements.langSelect) {
+        elements.langSelect.value = saved;
+      }
     }
   }
 

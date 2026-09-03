@@ -175,6 +175,14 @@ class BackgroundRemoverEngine {
    */
   _runMediaPipeSegmentation(sourceImage, width, height) {
     return new Promise(async (resolve, reject) => {
+      let isDone = false;
+      const timer = setTimeout(() => {
+        if (!isDone) {
+          isDone = true;
+          reject(new Error('MediaPipe segmentation timed out, using fast adaptive matting'));
+        }
+      }, 4000);
+
       try {
         if (!this.selfieSegmentation) {
           await this.initModel();
@@ -182,10 +190,16 @@ class BackgroundRemoverEngine {
 
         const seg = this.selfieSegmentation;
         if (!seg) {
+          clearTimeout(timer);
+          isDone = true;
           throw new Error('MediaPipe SelfieSegmentation not available');
         }
 
         seg.onResults((results) => {
+          if (isDone) return;
+          clearTimeout(timer);
+          isDone = true;
+
           if (!results.segmentationMask) {
             reject(new Error('No mask returned from AI'));
             return;
@@ -201,7 +215,6 @@ class BackgroundRemoverEngine {
           const raw = new Uint8Array(width * height);
 
           for (let i = 0; i < maskImgData.data.length; i += 4) {
-            // MediaPipe output mask is in red/alpha channel
             const val = maskImgData.data[i] || maskImgData.data[i + 3];
             raw[i / 4] = val;
           }
@@ -211,7 +224,11 @@ class BackgroundRemoverEngine {
 
         await seg.send({ image: sourceImage });
       } catch (err) {
-        reject(err);
+        if (!isDone) {
+          clearTimeout(timer);
+          isDone = true;
+          reject(err);
+        }
       }
     });
   }

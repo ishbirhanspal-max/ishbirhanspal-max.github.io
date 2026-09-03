@@ -5,6 +5,7 @@
 
 class AudioStudioEngine {
   constructor() {
+    this.stream = null;
     this.mediaRecorder = null;
     this.audioChunks = [];
     this.audioBlob = null;
@@ -16,17 +17,19 @@ class AudioStudioEngine {
 
   async startRecording(visualizerCanvas) {
     this.audioChunks = [];
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    this.mediaRecorder = new MediaRecorder(stream);
+    this.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    this.mediaRecorder = new MediaRecorder(this.stream);
 
     // Setup WebAudio Visualizer
-    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const source = this.audioContext.createMediaStreamSource(stream);
-    this.analyser = this.audioContext.createAnalyser();
-    this.analyser.fftSize = 256;
-    source.connect(this.analyser);
-
-    this.drawVisualizer(visualizerCanvas);
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (AudioContextClass) {
+      this.audioContext = new AudioContextClass();
+      const source = this.audioContext.createMediaStreamSource(this.stream);
+      this.analyser = this.audioContext.createAnalyser();
+      this.analyser.fftSize = 256;
+      source.connect(this.analyser);
+      this.drawVisualizer(visualizerCanvas);
+    }
 
     this.mediaRecorder.ondataavailable = (e) => {
       if (e.data.size > 0) this.audioChunks.push(e.data);
@@ -68,6 +71,14 @@ class AudioStudioEngine {
   stopRecording() {
     return new Promise((resolve) => {
       if (this.animId) cancelAnimationFrame(this.animId);
+      
+      if (this.stream) {
+        this.stream.getTracks().forEach(track => track.stop());
+      }
+      if (this.audioContext && this.audioContext.state !== 'closed') {
+        this.audioContext.close().catch(() => {});
+      }
+
       if (!this.mediaRecorder) return resolve(null);
 
       this.mediaRecorder.onstop = () => {
@@ -76,7 +87,11 @@ class AudioStudioEngine {
         resolve({ blob: this.audioBlob, url: this.audioUrl });
       };
 
-      this.mediaRecorder.stop();
+      if (this.mediaRecorder.state !== 'inactive') {
+        this.mediaRecorder.stop();
+      } else {
+        resolve(null);
+      }
     });
   }
 }

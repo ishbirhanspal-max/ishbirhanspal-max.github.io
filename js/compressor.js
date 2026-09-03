@@ -158,11 +158,13 @@ class ImageCompressorEngine {
    * @returns {string}
    */
   static formatBytes(bytes) {
-    if (!bytes || bytes === 0) return '0 B';
+    if (!bytes || isNaN(bytes) || bytes === 0) return '0 B';
+    const isNeg = bytes < 0;
+    const absBytes = Math.abs(bytes);
     const k = 1024;
     const sizes = ['B', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    const i = Math.min(sizes.length - 1, Math.floor(Math.log(absBytes) / Math.log(k)));
+    return (isNeg ? '-' : '') + parseFloat((absBytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   }
 
   /**
