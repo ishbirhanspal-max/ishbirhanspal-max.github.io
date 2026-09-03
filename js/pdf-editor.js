@@ -268,16 +268,47 @@ class PDFEditorEngine {
    * @param {HTMLCanvasElement} annotationCanvas 
    * @returns {Promise<Uint8Array>}
    */
-  static async burnVisualAnnotations(originalPdfFile, targetPageNum, annotationCanvas) {
+  static async burnVisualAnnotations(originalPdfFile, targetPageNumOrMap, annotationCanvas) {
     if (!window.PDFLib) throw new Error('PDFLib library not loaded');
     const { PDFDocument } = window.PDFLib;
 
     const arrayBuffer = await originalPdfFile.arrayBuffer();
     const pdfDoc = await PDFDocument.load(arrayBuffer);
+    const totalPages = pdfDoc.getPageCount();
+
+    // Multi-page dictionary support: { [pageNum]: dataUrl }
+    if (typeof targetPageNumOrMap === 'object' && targetPageNumOrMap !== null) {
+      const pageMap = targetPageNumOrMap;
+      for (let pNum = 1; pNum <= totalPages; pNum++) {
+        const dataUrl = pageMap[pNum];
+        if (!dataUrl) continue;
+
+        try {
+          const page = pdfDoc.getPage(pNum - 1);
+          const { width, height } = page.getSize();
+
+          const response = await fetch(dataUrl);
+          const pngBuffer = await response.arrayBuffer();
+          const embeddedPng = await pdfDoc.embedPng(pngBuffer);
+
+          page.drawImage(embeddedPng, {
+            x: 0,
+            y: 0,
+            width: width,
+            height: height
+          });
+        } catch (err) {
+          console.warn(`Could not burn annotations for page ${pNum}:`, err);
+        }
+      }
+      return await pdfDoc.save();
+    }
+
+    // Single page fallback
+    const targetPageNum = typeof targetPageNumOrMap === 'number' ? targetPageNumOrMap : 1;
     const page = pdfDoc.getPage(targetPageNum - 1);
     const { width, height } = page.getSize();
 
-    // Export transparent annotation canvas as PNG
     const pngDataUrl = annotationCanvas.toDataURL('image/png');
     const response = await fetch(pngDataUrl);
     const pngBuffer = await response.arrayBuffer();

@@ -2034,48 +2034,69 @@ input[type="range"]::-webkit-slider-thumb:hover {
   position: absolute;
   z-index: 20;
   pointer-events: auto;
-  border: 2px solid var(--accent-cyan);
-  border-radius: 6px;
-  background: #ffffff;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
-  padding: 4px;
-  display: flex;
-  flex-direction: column;
+  border: 1.5px dashed rgba(6, 182, 212, 0.6);
+  border-radius: 4px;
+  background: transparent;
+  padding: 2px 4px;
+  display: inline-block;
+  min-width: 80px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pdf-pro-text-widget.selected {
+  border: 1.5px solid var(--accent-cyan);
+  box-shadow: 0 0 14px rgba(6, 182, 212, 0.45);
 }
 
 .pdf-pro-text-widget.bg-white {
-  background: #ffffff;
+  background: #ffffff !important;
 }
 
 .pdf-pro-text-widget.bg-yellow {
-  background: #fef08a;
+  background: #fef08a !important;
 }
 
 .pdf-pro-text-widget.bg-trans {
-  background: rgba(255, 255, 255, 0.75);
+  background: transparent !important;
 }
 
+/* Floating mini toolbar detached above the text box */
 .text-mini-toolbar {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  z-index: 35;
   display: flex;
   align-items: center;
-  gap: 3px;
-  background: #0f172a;
-  padding: 3px 6px;
-  border-radius: 4px;
-  margin-bottom: 3px;
+  gap: 4px;
+  background: #090d16;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 4px 7px;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65);
   color: #ffffff;
   user-select: none;
+  white-space: nowrap;
+}
+
+.text-mini-toolbar.flipped-bottom {
+  bottom: auto;
+  top: calc(100% + 8px);
 }
 
 .mini-btn {
   background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
   border: none;
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-size: 0.72rem;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 0.74rem;
   font-weight: 700;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
 }
 
 .mini-btn:hover {
@@ -2083,42 +2104,45 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .mini-btn.active {
-  background: var(--accent-cyan);
-  color: #000000;
+  background: var(--accent-cyan) !important;
+  color: #000000 !important;
 }
 
 .mini-select {
   background: #1e293b;
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
-  font-size: 0.72rem;
-  padding: 2px 4px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+  font-size: 0.74rem;
+  padding: 2px 5px;
   outline: none;
 }
 
 .mini-color-input {
   width: 22px;
-  height: 20px;
+  height: 22px;
   padding: 0;
   border: none;
   cursor: pointer;
-  border-radius: 3px;
+  border-radius: 4px;
   background: transparent;
 }
 
-.widget-drag-handle {
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: #64748b;
-  cursor: move;
-  padding: 1px 4px;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.05);
+.widget-resize-handle {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  width: 10px;
+  height: 10px;
+  background: var(--accent-cyan);
+  border: 1.5px solid #ffffff;
   border-radius: 2px;
-  margin-bottom: 2px;
-  user-select: none;
+  cursor: se-resize;
+  display: none;
+}
+
+.pdf-pro-text-widget.selected .widget-resize-handle {
+  display: block;
 }
 
 .pdf-pro-text-textarea {
@@ -2133,6 +2157,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
   padding: 2px 4px;
   line-height: 1.25;
   display: block;
+  min-width: 60px;
+  width: 100%;
 }
 
 /* Page Grid for PDF Organization */

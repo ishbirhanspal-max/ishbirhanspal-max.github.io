@@ -2163,7 +2163,16 @@
     const ctx = annotCanvas.getContext('2d');
     ctx.clearRect(0, 0, annotCanvas.width, annotCanvas.height);
 
-    // Clear existing floating text boxes
+    // Restore saved page annotations if user previously edited this page
+    if (state.pageAnnotations && state.pageAnnotations[state.visualPageNum]) {
+      const savedImg = new Image();
+      savedImg.onload = () => {
+        ctx.drawImage(savedImg, 0, 0);
+      };
+      savedImg.src = state.pageAnnotations[state.visualPageNum];
+    }
+
+    // Clear existing floating text boxes for current page
     elements.pdfTextOverlayLayer.innerHTML = '';
     state.floatingTextBoxes = [];
 
@@ -2177,6 +2186,7 @@
   }
 
   // Render clickable hover boxes over existing text when in 'edit-text' mode
+  // Render clickable hover boxes over existing text with smart background color matching
   function renderDetectedTextHighlights() {
     elements.pdfTextOverlayLayer.innerHTML = '';
     const scaleX = elements.pdfBaseCanvas.clientWidth / elements.pdfBaseCanvas.width;
@@ -2188,22 +2198,47 @@
         box.className = 'pdf-detected-text-box';
         box.style.left = `${item.x * scaleX}px`;
         box.style.top = `${item.y * scaleY}px`;
-        box.style.width = `${Math.max(20, item.width * scaleX)}px`;
-        box.style.height = `${Math.max(14, item.height * scaleY)}px`;
+        box.style.width = `${Math.max(24, item.width * scaleX)}px`;
+        box.style.height = `${Math.max(16, item.height * scaleY)}px`;
         box.title = `Click to edit: "${item.str}"`;
 
         box.addEventListener('click', (e) => {
           e.stopPropagation();
-          // 1. Cover original text with clean whiteout rectangle on annotation canvas
+
+          // Sample background color and luminance from base canvas at this text's coordinates
+          let sampledBg = '#FFFFFF';
+          let textColor = '#000000';
+          try {
+            const bCtx = elements.pdfBaseCanvas.getContext('2d', { willReadFrequently: true });
+            const sampleX = Math.max(0, Math.min(elements.pdfBaseCanvas.width - 2, Math.floor(item.x + 2)));
+            const sampleY = Math.max(0, Math.min(elements.pdfBaseCanvas.height - 2, Math.floor(item.y + item.height / 2)));
+            const pixel = bCtx.getImageData(sampleX, sampleY, 1, 1).data;
+            const r = pixel[0], g = pixel[1], b = pixel[2];
+            sampledBg = `rgb(${r},${g},${b})`;
+            const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+            textColor = lum < 130 ? '#FFFFFF' : '#000000';
+          } catch (err) {
+            console.warn('Color sampling error:', err);
+          }
+
+          // 1. Cover original text with clean whiteout/background rectangle on annotation canvas
           const ctx = elements.pdfAnnotationCanvas.getContext('2d');
-          ctx.fillStyle = '#FFFFFF';
-          ctx.fillRect(item.x - 2, item.y - 2, item.width + 6, item.height + 4);
+          ctx.fillStyle = sampledBg;
+          ctx.fillRect(item.x - 3, item.y - 2, item.width + 6, item.height + 6);
 
           // 2. Remove the hover box
           box.remove();
 
-          // 3. Create interactive editable text box prefilled with the original text!
-          createFloatingTextBox(item.x * scaleX, item.y * scaleY, item.str, Math.max(12, item.fontSize));
+          // 3. Create interactive editable text box prefilled with original text, matched font size and colors!
+          createFloatingTextBox(
+            item.x * scaleX,
+            item.y * scaleY,
+            item.str,
+            Math.max(12, item.fontSize),
+            "'Outfit', sans-serif",
+            textColor,
+            sampledBg
+          );
         });
 
         elements.pdfTextOverlayLayer.appendChild(box);
@@ -2217,12 +2252,14 @@
   }
 
   // Create a Pro Editable & Draggable Floating Text Widget on the PDF
-  function createFloatingTextBox(screenX, screenY, initialText = '', fontSize = 18, fontFamily = "'Outfit', sans-serif") {
+  function createFloatingTextBox(screenX, screenY, initialText = '', fontSize = 18, fontFamily = "'Outfit', sans-serif", initialColor = null, initialBg = null) {
     deselectAllTextWidgets();
 
     const boxId = 'txt_' + Math.random().toString(36).substr(2, 9);
     const widget = document.createElement('div');
-    widget.className = 'pdf-pro-text-widget selected bg-white';
+    const defaultBgMode = initialBg ? 'custom' : 'trans';
+    widget.className = `pdf-pro-text-widget selected ${defaultBgMode === 'custom' ? '' : 'bg-trans'}`;
+    if (initialBg) widget.style.backgroundColor = initialBg;
     widget.style.left = `${screenX}px`;
     widget.style.top = `${screenY}px`;
 
@@ -2232,77 +2269,84 @@
       widget: widget,
       fontFamily: fontFamily,
       fontSize: fontSize,
-      isBold: true,
+      isBold: false,
       isItalic: false,
       isUnderline: false,
       align: 'left',
-      color: state.visualColor || '#000000',
-      bgMode: 'white' // 'white' | 'yellow' | 'trans'
+      color: initialColor || state.visualColor || '#000000',
+      bgMode: defaultBgMode, // 'trans' | 'white' | 'yellow' | 'custom'
+      bgColor: initialBg || null
     };
 
-    // 1. Floating Mini Toolbar
+    // 1. Floating Mini Toolbar (Detached above the widget)
     const toolbar = document.createElement('div');
     toolbar.className = 'text-mini-toolbar';
+    if (screenY < 50) toolbar.classList.add('flipped-bottom');
 
     toolbar.innerHTML = `
+      <!-- Move Grab Button -->
+      <button type="button" class="mini-btn drag-btn" title="Click and drag to move">✋ Move</button>
+
       <!-- Font Family -->
       <select class="mini-select font-family-select" title="Font Family">
         <option value="'Outfit', sans-serif" selected>Modern Sans</option>
         <option value="'Playfair Display', serif">Classic Serif</option>
         <option value="'JetBrains Mono', monospace">Monospace</option>
-        <option value="'Caveat', cursive">✍️ Signature Font</option>
+        <option value="'Caveat', cursive">✍️ Signature</option>
       </select>
 
       <!-- Font Size Controls -->
       <button type="button" class="mini-btn size-dec-btn" title="Decrease size">-</button>
-      <span class="font-size-label" style="font-family: var(--font-mono); font-size: 0.75rem; min-width: 28px; text-align: center;">${fontSize}px</span>
+      <span class="font-size-label" style="font-family: var(--font-mono); font-size: 0.74rem; min-width: 24px; text-align: center;">${fontSize}px</span>
       <button type="button" class="mini-btn size-inc-btn" title="Increase size">+</button>
 
       <!-- Bold / Italic / Underline -->
-      <button type="button" class="mini-btn bold-toggle active" title="Bold">B</button>
+      <button type="button" class="mini-btn bold-toggle" title="Bold">B</button>
       <button type="button" class="mini-btn italic-toggle" title="Italic"><i>I</i></button>
       <button type="button" class="mini-btn underline-toggle" title="Underline"><u>U</u></button>
 
-      <!-- Background Fill -->
-      <button type="button" class="mini-btn bg-toggle-btn" title="Background: White / Transparent / Yellow">⬜</button>
+      <!-- Background Fill Toggle -->
+      <button type="button" class="mini-btn bg-toggle-btn" title="Background: Transparent / White / Yellow">${initialBg ? '🎨' : '🪟'}</button>
 
       <!-- Color -->
-      <input type="color" class="mini-color-input" value="${state.visualColor || '#000000'}" title="Text Color">
+      <input type="color" class="mini-color-input" value="${textState.color.startsWith('#') ? textState.color : '#000000'}" title="Text Color">
 
-      <!-- Duplicate & Delete -->
-      <button type="button" class="mini-btn duplicate-btn" title="Duplicate Text">📋</button>
-      <button type="button" class="mini-btn delete-btn" style="color: var(--accent-rose);" title="Delete">🗑️</button>
+      <!-- Delete -->
+      <button type="button" class="mini-btn delete-btn" style="color: #f87171;" title="Delete">🗑️</button>
     `;
 
-    // 2. Drag Handle
-    const dragHandle = document.createElement('div');
-    dragHandle.className = 'widget-drag-handle';
-    dragHandle.innerHTML = `<span>⋮⋮ DRAG &amp; MOVE</span>`;
-
-    // 3. Text Area
+    // 2. Text Area (auto-expanding)
     const textarea = document.createElement('textarea');
     textarea.className = 'pdf-pro-text-textarea';
     textarea.style.fontSize = `${fontSize}px`;
     textarea.style.fontFamily = fontFamily;
-    textarea.style.fontWeight = 'bold';
-    textarea.style.color = state.visualColor || '#000000';
-    textarea.value = initialText || 'Type text here...';
+    textarea.style.fontWeight = 'normal';
+    textarea.style.color = textState.color;
+    textarea.value = initialText || '';
+    textarea.placeholder = 'Type text...';
     textarea.rows = 1;
+
+    // 3. Corner Resize Handle
+    const resizeHandle = document.createElement('div');
+    resizeHandle.className = 'widget-resize-handle';
+    resizeHandle.title = 'Drag to resize text box width';
 
     // Auto-adjust size
     const adjustTextarea = () => {
-      textarea.style.width = 'auto';
-      textarea.style.width = Math.max(140, textarea.scrollWidth + 16) + 'px';
       textarea.style.height = 'auto';
-      textarea.style.height = Math.max(32, textarea.scrollHeight) + 'px';
+      textarea.style.height = Math.max(28, textarea.scrollHeight) + 'px';
+      if (!textarea.style.width || parseInt(textarea.style.width, 10) < textarea.scrollWidth + 12) {
+        textarea.style.width = Math.max(70, textarea.scrollWidth + 16) + 'px';
+      }
     };
 
     textarea.addEventListener('input', adjustTextarea);
 
-    // Stop canvas draw propagation on widget interaction
+    // Stop propagation on interaction
     ['mousedown', 'mousemove', 'mouseup', 'click', 'touchstart', 'touchmove', 'touchend'].forEach(evt => {
       toolbar.addEventListener(evt, e => e.stopPropagation());
       textarea.addEventListener(evt, e => e.stopPropagation());
+      resizeHandle.addEventListener(evt, e => e.stopPropagation());
     });
 
     widget.addEventListener('click', (e) => {
@@ -2311,7 +2355,8 @@
       widget.classList.add('selected');
     });
 
-    // Wire Mini Toolbar Controls
+    // Wire Controls
+    const dragBtn = toolbar.querySelector('.drag-btn');
     const fontSelect = toolbar.querySelector('.font-family-select');
     const sizeDec = toolbar.querySelector('.size-dec-btn');
     const sizeInc = toolbar.querySelector('.size-inc-btn');
@@ -2321,7 +2366,6 @@
     const underlineBtn = toolbar.querySelector('.underline-toggle');
     const bgBtn = toolbar.querySelector('.bg-toggle-btn');
     const colorInput = toolbar.querySelector('.mini-color-input');
-    const duplicateBtn = toolbar.querySelector('.duplicate-btn');
     const deleteBtn = toolbar.querySelector('.delete-btn');
 
     fontSelect.addEventListener('change', (e) => {
@@ -2331,14 +2375,14 @@
     });
 
     sizeDec.addEventListener('click', () => {
-      textState.fontSize = Math.max(10, textState.fontSize - 2);
+      textState.fontSize = Math.max(8, textState.fontSize - 2);
       textarea.style.fontSize = `${textState.fontSize}px`;
       sizeLabel.textContent = `${textState.fontSize}px`;
       adjustTextarea();
     });
 
     sizeInc.addEventListener('click', () => {
-      textState.fontSize = Math.min(72, textState.fontSize + 2);
+      textState.fontSize = Math.min(80, textState.fontSize + 2);
       textarea.style.fontSize = `${textState.fontSize}px`;
       sizeLabel.textContent = `${textState.fontSize}px`;
       adjustTextarea();
@@ -2365,21 +2409,24 @@
     });
 
     bgBtn.addEventListener('click', () => {
-      if (textState.bgMode === 'white') {
-        textState.bgMode = 'yellow';
-        widget.className = 'pdf-pro-text-widget selected bg-yellow';
-        bgBtn.textContent = '🟨';
-        bgBtn.title = 'Background: Yellow Highlight';
-      } else if (textState.bgMode === 'yellow') {
-        textState.bgMode = 'trans';
-        widget.className = 'pdf-pro-text-widget selected bg-trans';
-        bgBtn.textContent = '⬛';
-        bgBtn.title = 'Background: Transparent';
-      } else {
+      if (textState.bgMode === 'trans') {
         textState.bgMode = 'white';
+        widget.style.backgroundColor = '#FFFFFF';
         widget.className = 'pdf-pro-text-widget selected bg-white';
         bgBtn.textContent = '⬜';
         bgBtn.title = 'Background: Solid White';
+      } else if (textState.bgMode === 'white') {
+        textState.bgMode = 'yellow';
+        widget.style.backgroundColor = '#fef08a';
+        widget.className = 'pdf-pro-text-widget selected bg-yellow';
+        bgBtn.textContent = '🟨';
+        bgBtn.title = 'Background: Yellow Highlight';
+      } else {
+        textState.bgMode = 'trans';
+        widget.style.backgroundColor = 'transparent';
+        widget.className = 'pdf-pro-text-widget selected bg-trans';
+        bgBtn.textContent = '🪟';
+        bgBtn.title = 'Background: Transparent';
       }
     });
 
@@ -2388,45 +2435,92 @@
       textarea.style.color = e.target.value;
     });
 
-    duplicateBtn.addEventListener('click', () => {
-      createFloatingTextBox(parseInt(widget.style.left, 10) + 20, parseInt(widget.style.top, 10) + 25, textarea.value, textState.fontSize, textState.fontFamily);
-    });
-
     deleteBtn.addEventListener('click', () => {
       widget.remove();
       state.floatingTextBoxes = state.floatingTextBoxes.filter(t => t.id !== boxId);
     });
 
-    // Dragging Logic
-    let isDraggingWidget = false;
-    let dragOffsetX = 0;
-    let dragOffsetY = 0;
+    // 4. Drag-to-move logic (via Drag Button or widget frame)
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let initialWidgetLeft = 0;
+    let initialWidgetTop = 0;
 
-    dragHandle.addEventListener('mousedown', (e) => {
+    const startDragAction = (clientX, clientY) => {
+      isDragging = true;
+      dragStartX = clientX;
+      dragStartY = clientY;
+      initialWidgetLeft = parseInt(widget.style.left, 10) || 0;
+      initialWidgetTop = parseInt(widget.style.top, 10) || 0;
+      deselectAllTextWidgets();
+      widget.classList.add('selected');
+    };
+
+    const moveDragAction = (clientX, clientY) => {
+      if (!isDragging) return;
+      const dx = clientX - dragStartX;
+      const dy = clientY - dragStartY;
+      const wrapperRect = elements.pdfCanvasWrapper.getBoundingClientRect();
+      const newLeft = Math.max(0, Math.min(initialWidgetLeft + dx, wrapperRect.width - 40));
+      const newTop = Math.max(0, Math.min(initialWidgetTop + dy, wrapperRect.height - 25));
+      widget.style.left = `${newLeft}px`;
+      widget.style.top = `${newTop}px`;
+
+      if (newTop < 50) {
+        toolbar.classList.add('flipped-bottom');
+      } else {
+        toolbar.classList.remove('flipped-bottom');
+      }
+    };
+
+    dragBtn.addEventListener('mousedown', (e) => { e.preventDefault(); startDragAction(e.clientX, e.clientY); });
+    dragBtn.addEventListener('touchstart', (e) => { startDragAction(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+
+    // 5. Corner Resize Logic
+    let isResizing = false;
+    let resizeStartX = 0;
+    let initialWidth = 0;
+
+    resizeHandle.addEventListener('mousedown', (e) => {
       e.stopPropagation();
-      isDraggingWidget = true;
-      const rect = widget.getBoundingClientRect();
-      dragOffsetX = e.clientX - rect.left;
-      dragOffsetY = e.clientY - rect.top;
+      e.preventDefault();
+      isResizing = true;
+      resizeStartX = e.clientX;
+      initialWidth = textarea.offsetWidth;
     });
 
     window.addEventListener('mousemove', (e) => {
-      if (!isDraggingWidget) return;
-      const wrapperRect = elements.pdfCanvasWrapper.getBoundingClientRect();
-      const newLeft = Math.max(0, Math.min(e.clientX - wrapperRect.left - dragOffsetX, wrapperRect.width - 50));
-      const newTop = Math.max(0, Math.min(e.clientY - wrapperRect.top - dragOffsetY, wrapperRect.height - 30));
-      widget.style.left = `${newLeft}px`;
-      widget.style.top = `${newTop}px`;
+      if (isDragging) {
+        e.preventDefault();
+        moveDragAction(e.clientX, e.clientY);
+      } else if (isResizing) {
+        e.preventDefault();
+        const newW = Math.max(70, initialWidth + (e.clientX - resizeStartX));
+        textarea.style.width = `${newW}px`;
+        adjustTextarea();
+      }
     });
 
+    window.addEventListener('touchmove', (e) => {
+      if (isDragging) {
+        moveDragAction(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+
     window.addEventListener('mouseup', () => {
-      isDraggingWidget = false;
+      isDragging = false;
+      isResizing = false;
+    });
+
+    window.addEventListener('touchend', () => {
+      isDragging = false;
     });
 
     // Assemble Widget
     widget.appendChild(toolbar);
-    widget.appendChild(dragHandle);
     widget.appendChild(textarea);
+    widget.appendChild(resizeHandle);
     elements.pdfTextOverlayLayer.appendChild(widget);
 
     adjustTextarea();
@@ -2434,10 +2528,11 @@
     setTimeout(() => {
       textarea.focus();
       if (!initialText) textarea.select();
-    }, 50);
+    }, 40);
 
     textState.textarea = textarea;
     state.floatingTextBoxes.push(textState);
+    return textState;
   }
 
   function setupVisualCanvasEditor() {
@@ -2467,10 +2562,20 @@
       elements.annotationSize.addEventListener('input', (e) => state.visualSize = parseInt(e.target.value, 10));
     }
 
+    if (elements.quickAddTextBoxBtn) {
+      elements.quickAddTextBoxBtn.addEventListener('click', () => {
+        const wrapperRect = elements.pdfCanvasWrapper.getBoundingClientRect();
+        const centerX = Math.max(30, (wrapperRect.width - 200) / 2);
+        const centerY = Math.max(50, (wrapperRect.height - 80) / 3);
+        const tb = createFloatingTextBox(centerX, centerY, '', state.visualSize || 18);
+        showToast('Text box added! Type your text or drag it anywhere.', 'success');
+      });
+    }
+
     if (elements.prevPdfPageBtn) {
       elements.prevPdfPageBtn.addEventListener('click', async () => {
         if (state.visualPageNum > 1) {
-          bakeFloatingTextToCanvas();
+          saveCurrentPageAnnotationState();
           state.visualPageNum--;
           await renderCurrentVisualPage();
         }
@@ -2480,7 +2585,7 @@
     if (elements.nextPdfPageBtn) {
       elements.nextPdfPageBtn.addEventListener('click', async () => {
         if (state.visualPageNum < state.visualTotalPages) {
-          bakeFloatingTextToCanvas();
+          saveCurrentPageAnnotationState();
           state.visualPageNum++;
           await renderCurrentVisualPage();
         }
@@ -2493,6 +2598,7 @@
         ctx.clearRect(0, 0, elements.pdfAnnotationCanvas.width, elements.pdfAnnotationCanvas.height);
         elements.pdfTextOverlayLayer.innerHTML = '';
         state.floatingTextBoxes = [];
+        if (state.pageAnnotations) delete state.pageAnnotations[state.visualPageNum];
         showToast('Page annotations cleared', 'info');
       });
     }
@@ -2516,12 +2622,12 @@
     };
 
     const startDraw = (e) => {
-      if (e.target.classList.contains('delete-text-btn') || e.target.classList.contains('pdf-editable-text-item') || e.target.classList.contains('pdf-detected-text-box')) return;
+      if (e.target.classList.contains('delete-text-btn') || e.target.classList.contains('pdf-editable-text-item') || e.target.classList.contains('pdf-detected-text-box') || e.target.closest('.pdf-pro-text-widget')) return;
       const pos = getCanvasPos(e);
       const ctx = canvas.getContext('2d');
 
       if (state.visualTool === 'add-text') {
-        createFloatingTextBox(pos.screenX, pos.screenY, 'New text', state.visualSize);
+        createFloatingTextBox(pos.screenX, pos.screenY, '', state.visualSize || 18);
         return;
       }
 
@@ -2578,6 +2684,14 @@
     window.addEventListener('touchend', endDraw);
   }
 
+  // Saves current page's annotations & baked text into persistent state
+  function saveCurrentPageAnnotationState() {
+    bakeFloatingTextToCanvas();
+    const canvas = elements.pdfAnnotationCanvas;
+    if (!state.pageAnnotations) state.pageAnnotations = {};
+    state.pageAnnotations[state.visualPageNum] = canvas.toDataURL('image/png');
+  }
+
   // Rasterizes all floating text boxes onto the canvas before export/page change
   function bakeFloatingTextToCanvas() {
     const canvas = elements.pdfAnnotationCanvas;
@@ -2593,41 +2707,49 @@
 
       const rect = textarea.getBoundingClientRect();
       const wrapperRect = elements.pdfCanvasWrapper.getBoundingClientRect();
-      const left = (rect.left - wrapperRect.left + 8) * scaleX;
+      const left = (rect.left - wrapperRect.left + 4) * scaleX;
+      const top = (rect.top - wrapperRect.top + 2) * scaleY;
       const width = (rect.width) * scaleX;
       const height = (rect.height) * scaleY;
-      const top = (rect.top - wrapperRect.top + rect.height * 0.72) * scaleY;
-      const boxTop = (rect.top - wrapperRect.top) * scaleY;
 
       // 1. Draw Background Fill if not transparent
       if (item.bgMode === 'white') {
         ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect((rect.left - wrapperRect.left) * scaleX, boxTop, width, height);
+        ctx.fillRect(left - 2, top - 2, width + 4, height + 4);
+      } else if (item.bgMode === 'custom' && item.bgColor) {
+        ctx.fillStyle = item.bgColor;
+        ctx.fillRect(left - 2, top - 2, width + 4, height + 4);
       } else if (item.bgMode === 'yellow') {
         ctx.fillStyle = 'rgba(254, 240, 138, 0.9)';
-        ctx.fillRect((rect.left - wrapperRect.left) * scaleX, boxTop, width, height);
+        ctx.fillRect(left - 2, top - 2, width + 4, height + 4);
       }
 
-      // 2. Setup Font & Style
+      // 2. Setup Font & Baseline
       const fontStyle = item.isItalic ? 'italic' : 'normal';
       const fontWeight = item.isBold ? 'bold' : 'normal';
       const fontSize = Math.round(item.fontSize * scaleY);
       ctx.font = `${fontStyle} ${fontWeight} ${fontSize}px ${item.fontFamily}`;
       ctx.fillStyle = item.color || '#000000';
+      ctx.textBaseline = 'top';
 
-      // 3. Draw Text
-      ctx.fillText(text, left, top);
+      // 3. Multi-line drawing support
+      const lines = text.split(/\r?\n/);
+      const lineHeight = fontSize * 1.25;
 
-      // 4. Draw Underline if enabled
-      if (item.isUnderline) {
-        const textWidth = ctx.measureText(text).width;
-        ctx.beginPath();
-        ctx.strokeStyle = item.color || '#000000';
-        ctx.lineWidth = Math.max(1.5, fontSize / 12);
-        ctx.moveTo(left, top + 3);
-        ctx.lineTo(left + textWidth, top + 3);
-        ctx.stroke();
-      }
+      lines.forEach((line, lineIdx) => {
+        const lineY = top + (lineIdx * lineHeight);
+        ctx.fillText(line, left, lineY);
+
+        if (item.isUnderline) {
+          const textWidth = ctx.measureText(line).width;
+          ctx.beginPath();
+          ctx.strokeStyle = item.color || '#000000';
+          ctx.lineWidth = Math.max(1.5, fontSize / 14);
+          ctx.moveTo(left, lineY + fontSize + 1);
+          ctx.lineTo(left + textWidth, lineY + fontSize + 1);
+          ctx.stroke();
+        }
+      });
     });
   }
 
@@ -2738,8 +2860,8 @@
 
       if (tool === 'visual-edit') {
         if (!state.currentPdfFile) return;
-        bakeFloatingTextToCanvas();
-        resultBytes = await PDFEditorEngine.burnVisualAnnotations(state.currentPdfFile, state.visualPageNum, elements.pdfAnnotationCanvas);
+        saveCurrentPageAnnotationState();
+        resultBytes = await PDFEditorEngine.burnVisualAnnotations(state.currentPdfFile, state.pageAnnotations || elements.pdfAnnotationCanvas);
         filename = `edited-${state.currentPdfFile.name}`;
       } else if (tool === 'word2pdf') {
         if (!state.currentDocFile) return showToast('Please select a Word or Docs document to convert.', 'info');
@@ -2809,6 +2931,7 @@
     elements.visualEditorWorkspace.style.display = 'none';
     elements.pdfTextOverlayLayer.innerHTML = '';
     state.floatingTextBoxes = [];
+    state.pageAnnotations = {};
   }
 
   // =========================================================================
