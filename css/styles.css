@@ -1852,3 +1852,346 @@ input[type="range"]::-webkit-slider-thumb:hover {
   box-shadow: 0 0 15px rgba(6, 182, 212, 0.25);
   font-weight: 700;
 }
+
+/* =========================================================================
+   PDF STUDIO & VISUAL IN-PLACE TEXT EDITOR STYLES
+   ========================================================================= */
+.pdf-subtools-nav {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 0.25rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1.5rem;
+}
+
+.pdf-subtools-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.pdf-subtool-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.84rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.pdf-subtool-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+
+.pdf-subtool-btn.active {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.25)) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--accent-cyan) !important;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+  font-weight: 700;
+}
+
+.annotation-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.6rem 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.annotation-tools-group {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.tool-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tool-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.tool-btn.active {
+  background: var(--accent-cyan) !important;
+  color: #000000 !important;
+  border-color: var(--accent-cyan) !important;
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+}
+
+.annotation-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.annotation-page-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pdf-canvas-viewport {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: auto;
+  background: #080c14;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  text-align: center;
+  min-height: 480px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.pdf-canvas-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: 0 auto;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65);
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+#pdfBaseCanvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#pdfAnnotationCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  cursor: crosshair;
+}
+
+.pdf-text-overlay-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Clickable hover box over existing PDF text */
+.pdf-detected-text-box {
+  position: absolute;
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px dashed rgba(6, 182, 212, 0.8);
+  border-radius: 2px;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s;
+}
+
+.pdf-detected-text-box:hover {
+  background: rgba(6, 182, 212, 0.38);
+  border-color: #38bdf8;
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.7);
+  transform: scale(1.02);
+}
+
+/* Floating interactive text widget */
+.pdf-pro-text-widget {
+  position: absolute;
+  z-index: 20;
+  pointer-events: auto;
+  border: 2px solid var(--accent-cyan);
+  border-radius: 6px;
+  background: #ffffff;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pdf-pro-text-widget.bg-white {
+  background: #ffffff;
+}
+
+.pdf-pro-text-widget.bg-yellow {
+  background: #fef08a;
+}
+
+.pdf-pro-text-widget.bg-trans {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.text-mini-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: #0f172a;
+  padding: 3px 6px;
+  border-radius: 4px;
+  margin-bottom: 3px;
+  color: #ffffff;
+  user-select: none;
+}
+
+.mini-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: none;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mini-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.mini-btn.active {
+  background: var(--accent-cyan);
+  color: #000000;
+}
+
+.mini-select {
+  background: #1e293b;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  font-size: 0.72rem;
+  padding: 2px 4px;
+  outline: none;
+}
+
+.mini-color-input {
+  width: 22px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  background: transparent;
+}
+
+.widget-drag-handle {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  cursor: move;
+  padding: 1px 4px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+  margin-bottom: 2px;
+  user-select: none;
+}
+
+.pdf-pro-text-textarea {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: #000000;
+  resize: none;
+  padding: 2px 4px;
+  line-height: 1.25;
+  display: block;
+}
+
+/* Page Grid for PDF Organization */
+.pdf-page-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.pdf-page-card {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  text-align: center;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pdf-page-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.page-num-pill {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.pdf-page-thumb {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 4px;
+}
+
+.pdf-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 0.6rem;
+}
+
+.pdf-item-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}

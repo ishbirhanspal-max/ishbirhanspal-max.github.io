@@ -1997,6 +1997,24 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Save &amp; Download Edited PDF
       `;
+    } else if (tool === 'word2pdf') {
+      elements.pdfFileInput.accept = '.docx,.doc,.txt,.rtf,.html,.md,.odt';
+      elements.pdfFileInput.multiple = false;
+      elements.pdfDropzoneTitle.innerHTML = 'Drop a Word or Docs file to <span class="text-gradient">Convert to PDF</span>';
+      elements.pdfDropzoneSubtitle.textContent = 'Supports Microsoft Word (.DOCX, .DOC), Google Docs, Text, Markdown & HTML';
+      elements.pdfExecuteBtn.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Convert &amp; Download PDF
+      `;
+    } else if (tool === 'pdf2word') {
+      elements.pdfFileInput.accept = '.pdf,application/pdf';
+      elements.pdfFileInput.multiple = false;
+      elements.pdfDropzoneTitle.innerHTML = 'Drop a PDF file to <span class="text-gradient">Convert to Word (.DOCX) &amp; Docs</span>';
+      elements.pdfDropzoneSubtitle.textContent = 'Converts PDF text, paragraphs, and structure into an editable Microsoft Word document';
+      elements.pdfExecuteBtn.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        Convert &amp; Download Word (.DOCX)
+      `;
     } else if (tool === 'split') {
       elements.pdfFileInput.accept = '.pdf,application/pdf';
       elements.pdfFileInput.multiple = false;
@@ -2064,6 +2082,16 @@
       if (!pdf) return showToast('Please select a valid PDF file.', 'info');
       state.currentPdfFile = pdf;
       await loadPDFInVisualEditor(pdf);
+    } else if (tool === 'word2pdf') {
+      const doc = files[0];
+      if (!doc) return showToast('Please select a Word or Docs document.', 'info');
+      state.currentDocFile = doc;
+      renderSinglePDFInfo(doc);
+    } else if (tool === 'pdf2word') {
+      const pdf = files.find(f => f.type === 'application/pdf' || f.name.endsWith('.pdf'));
+      if (!pdf) return showToast('Please select a valid PDF document.', 'info');
+      state.currentPdfFile = pdf;
+      renderSinglePDFInfo(pdf);
     } else if (tool === 'merge') {
       const pdfs = files.filter(f => f.type === 'application/pdf' || f.name.endsWith('.pdf'));
       if (pdfs.length === 0) return showToast('Please select PDF files.', 'info');
@@ -2074,7 +2102,7 @@
       if (imgs.length === 0) return showToast('Please select image files.', 'info');
       state.pdfFiles.push(...imgs);
       renderPDFImg2PdfList();
-    } else if (tool === 'organize' || tool === 'watermark') {
+    } else if (tool === 'organize' || tool === 'watermark' || tool === 'split' || tool === 'protect') {
       const pdf = files.find(f => f.type === 'application/pdf' || f.name.endsWith('.pdf'));
       if (!pdf) return showToast('Please upload a valid PDF document.', 'info');
       state.currentPdfFile = pdf;
@@ -2713,6 +2741,19 @@
         bakeFloatingTextToCanvas();
         resultBytes = await PDFEditorEngine.burnVisualAnnotations(state.currentPdfFile, state.visualPageNum, elements.pdfAnnotationCanvas);
         filename = `edited-${state.currentPdfFile.name}`;
+      } else if (tool === 'word2pdf') {
+        if (!state.currentDocFile) return showToast('Please select a Word or Docs document to convert.', 'info');
+        showToast('Converting Word document to PDF...', 'info');
+        resultBytes = await PDFEditorEngine.wordToPDF(state.currentDocFile);
+        filename = `${state.currentDocFile.name.replace(/\.[^/.]+$/, "")}.pdf`;
+      } else if (tool === 'pdf2word') {
+        if (!state.currentPdfFile) return showToast('Please select a PDF document to convert.', 'info');
+        showToast('Extracting document text and formatting into Word DOCX...', 'info');
+        const { docxBlob } = await PDFEditorEngine.pdfToWordDocx(state.currentPdfFile);
+        filename = `${state.currentPdfFile.name.replace(/\.[^/.]+$/, "")}.docx`;
+        triggerDownload(docxBlob, filename);
+        showToast('Word (.DOCX) document downloaded successfully!', 'success');
+        return;
       } else if (tool === 'merge') {
         if (state.pdfFiles.length < 2) return showToast('Please select at least 2 PDFs to merge.', 'info');
         resultBytes = await PDFEditorEngine.mergePDFs(state.pdfFiles);
@@ -3189,6 +3230,37 @@
 
   async function loadSamplePDF() {
     if (!window.PDFLib) return showToast('PDF library loading...', 'info');
+
+    const tool = state.pdfActiveSubtool;
+
+    if (tool === 'word2pdf') {
+      showToast('Generating sample Word & Docs text file...', 'info');
+      const sampleText = `OPTICORP EXECUTIVE SUMMARY & PROPOSAL
+Date: ${new Date().toLocaleDateString()}
+Client: Global Technologies Enterprise
+Prepared by: OptiPixel Engineering Team
+
+1. EXECUTIVE OVERVIEW
+OptiPixel Studio provides next-generation 100% client-side privacy-first web utilities.
+All image compression, background removal, and PDF manipulation happen locally on the user's machine without any server uploads.
+
+2. KEY DELIVERABLES
+- Universal PDF & Word Bidirectional Document Converter
+- Real-time OCR Text Scanner & In-Place Text Editor
+- High-Performance WebAssembly Media Matting Engine
+
+3. CONFIDENTIALITY & TERMS
+This document is confidential and proprietary. Generated securely 100% in-browser.`;
+
+      const blob = new Blob([sampleText], { type: 'text/plain;charset=utf-8' });
+      const sampleDocFile = new File([blob], 'OptiPixel_Executive_Proposal.docx', { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      state.currentDocFile = sampleDocFile;
+      renderSinglePDFInfo(sampleDocFile);
+      elements.pdfActionsContainer.style.display = 'block';
+      showToast('Sample Word document loaded! Click Convert to PDF.', 'success');
+      return;
+    }
+
     showToast('Generating sample invoice PDF...', 'info');
 
     try {
@@ -3300,7 +3372,15 @@
       const pdfBytes = await pdfDoc.save();
       const file = new File([pdfBytes], 'sample-invoice.pdf', { type: 'application/pdf' });
 
-      // Switch to visual-edit tool and load file
+      if (tool === 'pdf2word') {
+        state.currentPdfFile = file;
+        renderSinglePDFInfo(file);
+        elements.pdfActionsContainer.style.display = 'block';
+        showToast('Sample PDF loaded! Click "Convert & Download Word (.DOCX)".', 'success');
+        return;
+      }
+
+      // Default: visual-edit tool
       state.pdfActiveSubtool = 'visual-edit';
       elements.pdfSubtoolBtns.forEach(b => {
         if (b.dataset.tool === 'visual-edit') b.classList.add('active');
