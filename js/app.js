@@ -419,10 +419,45 @@
     if (elements.audioWorkspace) elements.audioWorkspace.style.display = tabId === 'audio-tools' ? 'block' : 'none';
     elements.pdfWorkspace.style.display = tabId === 'pdf-tools' ? 'block' : 'none';
 
+    // Auto-scroll active tab into center on mobile carousel
+    const activeBtn = document.querySelector('.tab-btn.active');
+    if (activeBtn && window.innerWidth <= 768) {
+      activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+
+    // Sync mobile bottom thumb bar
+    document.querySelectorAll('.mobile-bottom-btn').forEach(b => b.classList.remove('active'));
+    if (tabId === 'image-tools') document.getElementById('mobTabCompress')?.classList.add('active');
+    else if (tabId === 'bg-tools') document.getElementById('mobTabBg')?.classList.add('active');
+    else if (tabId === 'pdf-tools') document.getElementById('mobTabPdf')?.classList.add('active');
+    else if (tabId === 'ocr-tools') document.getElementById('mobTabOcr')?.classList.add('active');
+
     // Auto update for QR or Barcode
     if (tabId === 'qr-tools' && window.updateQRCode) window.updateQRCode();
     if (tabId === 'barcode-tools' && window.updateBarcode) window.updateBarcode();
   }
+
+  // Global Helpers for Mobile Bottom Navigation
+  window.switchMobileTool = function(tabBtnId) {
+    const btn = document.getElementById(tabBtnId);
+    if (btn) {
+      btn.click();
+      const targetWorkspace = document.querySelector('.studio-card');
+      if (targetWorkspace) {
+        targetWorkspace.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
+  window.scrollToToolsMenu = function() {
+    const container = document.querySelector('.tab-nav-container');
+    if (container) {
+      container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      container.style.transition = 'all 0.3s ease';
+      container.style.filter = 'drop-shadow(0 0 12px rgba(6, 182, 212, 0.7))';
+      setTimeout(() => container.style.filter = '', 1200);
+    }
+  };
 
   // =========================================================================
   // BACKGROUND REMOVER IMPLEMENTATION (AI & REMOVE.BG GRADE)
