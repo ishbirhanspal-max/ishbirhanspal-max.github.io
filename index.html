@@ -633,6 +633,12 @@
           <div class="range-slider-wrapper">
             <input type="range" id="qualitySlider" min="10" max="100" step="1" value="80" aria-label="Compression Quality">
           </div>
+          <div style="display: flex; gap: 0.35rem; flex-wrap: wrap; margin-top: 0.5rem;">
+            <button type="button" class="btn btn-xs btn-secondary compress-preset-btn" data-quality="60">⚡ Web (60%)</button>
+            <button type="button" class="btn btn-xs btn-primary compress-preset-btn active" data-quality="80">⚖️ Balanced (80%)</button>
+            <button type="button" class="btn btn-xs btn-secondary compress-preset-btn" data-quality="92">💎 High (92%)</button>
+            <button type="button" class="btn btn-xs btn-secondary compress-preset-btn" data-quality="98">✨ Max (98%)</button>
+          </div>
         </div>
 
         <!-- Resize Options -->
@@ -977,7 +983,10 @@
             <canvas id="qrResultCanvas" width="300" height="300" style="display: block; max-width: 100%; height: auto;"></canvas>
           </div>
 
-          <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
+          <div style="display: flex; gap: 0.75rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
+            <button class="btn btn-secondary" id="qrCopyClipboardBtn" type="button">
+              📋 Copy QR Image
+            </button>
             <button class="btn btn-primary" id="qrDownloadPngBtn">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               Download High-Res QR (.PNG)
@@ -1037,6 +1046,15 @@
               <option value="single" selected>🖼️ Single Photo (High-Res)</option>
               <option value="4x6">🖨️ Printable 4x6" Sheet (6 Photos with Cutting Lines)</option>
             </select>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Biometric Tools</label>
+            <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
+              <button type="button" class="btn btn-secondary btn-sm" id="passportFaceGuideBtn" style="font-size: 0.78rem; flex: 1;">🎯 Face Guide</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="passportRotateBtn" style="font-size: 0.78rem;">🔄 Rotate</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="passportAutoEnhanceBtn" style="font-size: 0.78rem; flex: 1;">✨ Auto-Brighten</button>
+            </div>
           </div>
         </div>
 
@@ -1212,6 +1230,15 @@
       </div>
 
       <div class="toolbar-section">
+        <div class="control-group">
+          <label class="control-label" for="barcodeFormatSelect">Barcode Symbology</label>
+          <select id="barcodeFormatSelect" class="custom-select">
+            <option value="code128" selected>Code 128 (Universal Alpha-Numeric)</option>
+            <option value="ean13">EAN-13 (International Retail)</option>
+            <option value="upca">UPC-A (US Products)</option>
+            <option value="code39">Code 39 (Alphanumeric/Industrial)</option>
+          </select>
+        </div>
         <div class="control-group" style="flex: 2;">
           <label class="control-label" for="barcodeTextInput">Barcode Data / Serial Number</label>
           <input type="text" id="barcodeTextInput" class="custom-input" value="OPTI-89234710-PRO" placeholder="Enter alphanumeric code or number">
@@ -1333,8 +1360,14 @@
           </div>
 
           <div>
-            <h4 style="margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--text-secondary);">Extracted Text</h4>
-            <textarea id="ocrOutputText" class="custom-input" style="width: 100%; height: 260px; font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.6; resize: vertical;" placeholder="Extracted text will appear here..."></textarea>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <h4 style="margin: 0; font-size: 0.95rem; color: var(--text-secondary);">Extracted Text</h4>
+              <div style="display: flex; gap: 0.4rem; font-size: 0.76rem; color: var(--accent-cyan); font-family: var(--font-mono); font-weight: 600;">
+                <span id="ocrWordCount">0 Words</span> • <span id="ocrCharCount">0 Chars</span>
+              </div>
+            </div>
+            <input type="text" id="ocrSearchInput" class="custom-input" placeholder="🔍 Search within extracted text..." style="margin-bottom: 0.5rem; padding: 0.35rem 0.65rem; font-size: 0.82rem;">
+            <textarea id="ocrOutputText" class="custom-input" style="width: 100%; height: 230px; font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.6; resize: vertical;" placeholder="Extracted text will appear here..."></textarea>
             
             <div style="margin-top: 1rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
               <button class="btn btn-secondary btn-sm" id="ocrCopyBtn">📋 Copy to Clipboard</button>
@@ -1508,6 +1541,8 @@
             <button class="tool-btn" id="toolWhiteoutBtn" title="Erase / Whiteout existing text">🧼 Whiteout / Erase</button>
             <button class="tool-btn" id="toolPenBtn" title="Draw / Sign">✏️ Draw / Sign</button>
             <button class="tool-btn" id="toolRectBtn" title="Highlight / Redaction Box">⬛ Redact Box</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="pdfUndoBtn" title="Undo (Ctrl+Z)" style="padding: 0.35rem 0.6rem; font-size: 0.8rem;">↩ Undo</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="pdfRedoBtn" title="Redo (Ctrl+Y)" style="padding: 0.35rem 0.6rem; font-size: 0.8rem;">↪ Redo</button>
           </div>
 
           <div class="annotation-controls-group">
@@ -1516,6 +1551,12 @@
             
             <label class="control-label" style="font-size: 0.8rem; margin-left: 0.5rem;">Font/Size:</label>
             <input type="range" id="annotationSize" min="2" max="48" value="16" style="width: 80px;" title="Adjust Font Size / Pen Size">
+
+            <div style="display: flex; align-items: center; gap: 0.25rem; margin-left: 0.5rem;">
+              <button type="button" class="btn btn-secondary btn-sm" id="pdfZoomOutBtn" style="padding: 0.25rem 0.45rem; font-size: 0.75rem;" title="Zoom Out">🔍−</button>
+              <span id="pdfZoomLevel" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan); min-width: 38px; text-align: center;">100%</span>
+              <button type="button" class="btn btn-secondary btn-sm" id="pdfZoomInBtn" style="padding: 0.25rem 0.45rem; font-size: 0.75rem;" title="Zoom In">🔍+</button>
+            </div>
           </div>
 
           <div class="annotation-page-nav">

@@ -112,8 +112,13 @@
     toolWhiteoutBtn: document.getElementById('toolWhiteoutBtn'),
     toolPenBtn: document.getElementById('toolPenBtn'),
     toolRectBtn: document.getElementById('toolRectBtn'),
+    pdfUndoBtn: document.getElementById('pdfUndoBtn'),
+    pdfRedoBtn: document.getElementById('pdfRedoBtn'),
     annotationColor: document.getElementById('annotationColor'),
     annotationSize: document.getElementById('annotationSize'),
+    pdfZoomOutBtn: document.getElementById('pdfZoomOutBtn'),
+    pdfZoomInBtn: document.getElementById('pdfZoomInBtn'),
+    pdfZoomLevel: document.getElementById('pdfZoomLevel'),
     prevPdfPageBtn: document.getElementById('prevPdfPageBtn'),
     nextPdfPageBtn: document.getElementById('nextPdfPageBtn'),
     pdfPageIndicator: document.getElementById('pdfPageIndicator'),
@@ -169,6 +174,7 @@
     qrLightColor: document.getElementById('qrLightColor'),
     qrLogoInput: document.getElementById('qrLogoInput'),
     qrResultCanvas: document.getElementById('qrResultCanvas'),
+    qrCopyClipboardBtn: document.getElementById('qrCopyClipboardBtn'),
     qrDownloadPngBtn: document.getElementById('qrDownloadPngBtn'),
 
     // Passport Photo Elements
@@ -182,6 +188,9 @@
     passportBgSelect: document.getElementById('passportBgSelect'),
     passportSheetSelect: document.getElementById('passportSheetSelect'),
     passportResultCanvas: document.getElementById('passportResultCanvas'),
+    passportFaceGuideBtn: document.getElementById('passportFaceGuideBtn'),
+    passportRotateBtn: document.getElementById('passportRotateBtn'),
+    passportAutoEnhanceBtn: document.getElementById('passportAutoEnhanceBtn'),
     passportResetBtn: document.getElementById('passportResetBtn'),
     passportDownloadBtn: document.getElementById('passportDownloadBtn'),
 
@@ -219,6 +228,7 @@
     // Barcode Elements
     tabBarcodeBtn: document.getElementById('tabBarcodeBtn'),
     barcodeWorkspace: document.getElementById('barcodeWorkspace'),
+    barcodeFormatSelect: document.getElementById('barcodeFormatSelect'),
     barcodeTextInput: document.getElementById('barcodeTextInput'),
     barcodeColor: document.getElementById('barcodeColor'),
     barcodeBgColor: document.getElementById('barcodeBgColor'),
@@ -250,6 +260,9 @@
     sampleOcrBtn: document.getElementById('sampleOcrBtn'),
     ocrControlsContainer: document.getElementById('ocrControlsContainer'),
     ocrPreviewCanvas: document.getElementById('ocrPreviewCanvas'),
+    ocrWordCount: document.getElementById('ocrWordCount'),
+    ocrCharCount: document.getElementById('ocrCharCount'),
+    ocrSearchInput: document.getElementById('ocrSearchInput'),
     ocrOutputText: document.getElementById('ocrOutputText'),
     ocrCopyBtn: document.getElementById('ocrCopyBtn'),
     ocrDownloadTxtBtn: document.getElementById('ocrDownloadTxtBtn'),
@@ -305,6 +318,7 @@
     setupVisualCanvasEditor();
     setupComparisonSlider();
     setupFAQAccordion();
+    setupGlobalClipboardAndShortcuts();
   }
 
   // Setup Event Listeners
@@ -369,8 +383,32 @@
       const val = parseInt(e.target.value, 10);
       elements.qualityValue.textContent = `${val}%`;
       state.settings.quality = val / 100;
+      document.querySelectorAll('.compress-preset-btn').forEach(btn => {
+        const matches = parseInt(btn.dataset.quality, 10) === val;
+        btn.classList.toggle('active', matches);
+        btn.classList.toggle('btn-primary', matches);
+        btn.classList.toggle('btn-secondary', !matches);
+      });
     });
     elements.qualitySlider.addEventListener('change', () => recompressAll());
+
+    // Quality Quick Preset Buttons
+    document.querySelectorAll('.compress-preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const q = parseInt(btn.dataset.quality, 10);
+        elements.qualitySlider.value = q;
+        elements.qualityValue.textContent = `${q}%`;
+        state.settings.quality = q / 100;
+        document.querySelectorAll('.compress-preset-btn').forEach(b => {
+          b.classList.remove('active', 'btn-primary');
+          b.classList.add('btn-secondary');
+        });
+        btn.classList.remove('btn-secondary');
+        btn.classList.add('active', 'btn-primary');
+        recompressAll();
+        showToast(`⚡ Quality preset applied: ${q}%`, 'info');
+      });
+    });
 
     // Resize Mode Change
     elements.resizeSelect.addEventListener('change', (e) => {
@@ -688,6 +726,7 @@
     setupBrushDrawingEvents();
 
     function loadBgImageFile(file) {
+      window.loadBgImageFile = loadBgImageFile;
       showToast('Analyzing image with AI...', 'info');
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -1168,6 +1207,28 @@
       });
     }
 
+    if (elements.qrCopyClipboardBtn) {
+      elements.qrCopyClipboardBtn.addEventListener('click', async () => {
+        const canvas = elements.qrResultCanvas;
+        if (!canvas) return;
+        try {
+          canvas.toBlob(async (blob) => {
+            if (!blob) return;
+            if (navigator.clipboard && navigator.clipboard.write) {
+              await navigator.clipboard.write([
+                new ClipboardItem({ 'image/png': blob })
+              ]);
+              showToast('📋 QR Code image copied to clipboard!', 'success');
+            } else {
+              showToast('Clipboard copy not supported by browser', 'error');
+            }
+          }, 'image/png');
+        } catch (err) {
+          showToast('Unable to copy QR to clipboard', 'error');
+        }
+      });
+    }
+
     if (elements.qrDownloadPngBtn) {
       elements.qrDownloadPngBtn.addEventListener('click', () => {
         const dataUrl = elements.qrResultCanvas.toDataURL('image/png');
@@ -1204,9 +1265,64 @@
       if (el) el.addEventListener('change', () => renderPassport());
     });
 
+    if (elements.passportFaceGuideBtn) {
+      elements.passportFaceGuideBtn.addEventListener('click', () => {
+        state.passportFaceGuide = !state.passportFaceGuide;
+        elements.passportFaceGuideBtn.classList.toggle('active', state.passportFaceGuide);
+        elements.passportFaceGuideBtn.classList.toggle('btn-primary', state.passportFaceGuide);
+        elements.passportFaceGuideBtn.classList.toggle('btn-secondary', !state.passportFaceGuide);
+        renderPassport();
+        showToast(state.passportFaceGuide ? '🎯 Biometric face guide overlay enabled' : 'Face guide hidden', 'info');
+      });
+    }
+
+    if (elements.passportRotateBtn) {
+      elements.passportRotateBtn.addEventListener('click', () => {
+        if (!currentPortraitImg) return;
+        const rotCanvas = document.createElement('canvas');
+        rotCanvas.width = currentPortraitImg.height;
+        rotCanvas.height = currentPortraitImg.width;
+        const rotCtx = rotCanvas.getContext('2d');
+        rotCtx.translate(rotCanvas.width / 2, rotCanvas.height / 2);
+        rotCtx.rotate(90 * Math.PI / 180);
+        rotCtx.drawImage(currentPortraitImg, -currentPortraitImg.width / 2, -currentPortraitImg.height / 2);
+        const newImg = new Image();
+        newImg.onload = () => {
+          currentPortraitImg = newImg;
+          renderPassport();
+          showToast('🔄 Portrait rotated 90°', 'info');
+        };
+        newImg.src = rotCanvas.toDataURL('image/png');
+      });
+    }
+
+    if (elements.passportAutoEnhanceBtn) {
+      elements.passportAutoEnhanceBtn.addEventListener('click', () => {
+        if (!currentPortraitImg) return;
+        const enhCanvas = document.createElement('canvas');
+        enhCanvas.width = currentPortraitImg.width;
+        enhCanvas.height = currentPortraitImg.height;
+        const enhCtx = enhCanvas.getContext('2d');
+        enhCtx.filter = 'brightness(1.08) contrast(1.06) saturate(1.04)';
+        enhCtx.drawImage(currentPortraitImg, 0, 0);
+        const newImg = new Image();
+        newImg.onload = () => {
+          currentPortraitImg = newImg;
+          renderPassport();
+          showToast('✨ Portrait auto-brightened & enhanced for embassy standards!', 'success');
+        };
+        newImg.src = enhCanvas.toDataURL('image/png');
+      });
+    }
+
     if (elements.passportResetBtn) {
       elements.passportResetBtn.addEventListener('click', () => {
         currentPortraitImg = null;
+        state.passportFaceGuide = false;
+        if (elements.passportFaceGuideBtn) {
+          elements.passportFaceGuideBtn.classList.remove('active', 'btn-primary');
+          elements.passportFaceGuideBtn.classList.add('btn-secondary');
+        }
         elements.passportControlsContainer.style.display = 'none';
         elements.passportDropzone.style.display = 'block';
         elements.passportFileInput.value = '';
@@ -1217,10 +1333,20 @@
       elements.passportDownloadBtn.addEventListener('click', () => {
         const canvas = elements.passportResultCanvas;
         if (!canvas) return;
+        // Temporarily hide face guide when exporting to save clean photo
+        const guideState = state.passportFaceGuide;
+        if (guideState) {
+          state.passportFaceGuide = false;
+          renderPassport();
+        }
         const isSheet = elements.passportSheetSelect.value === '4x6';
         const dataUrl = canvas.toDataURL('image/png');
         triggerDownload(dataUrl, isSheet ? 'passport-photos-4x6-sheet.png' : 'passport-photo.png');
         showToast('Passport Photo downloaded!', 'success');
+        if (guideState) {
+          state.passportFaceGuide = true;
+          renderPassport();
+        }
       });
     }
 
@@ -1239,6 +1365,7 @@
       };
       reader.readAsDataURL(file);
     }
+    window.loadPassportImageFromFile = loadPassportImage;
 
     function renderPassport() {
       if (!currentPortraitImg || !window.PassportMakerEngine) return;
@@ -1263,6 +1390,40 @@
       const ctx = display.getContext('2d');
       ctx.clearRect(0, 0, display.width, display.height);
       ctx.drawImage(finalCanvas, 0, 0);
+
+      // Biometric face guide overlay for single photo mode
+      if (state.passportFaceGuide && sheet !== '4x6') {
+        ctx.save();
+        ctx.strokeStyle = '#00e5ff';
+        ctx.lineWidth = Math.max(2, display.width / 180);
+        ctx.setLineDash([8, 6]);
+
+        const centerX = display.width / 2;
+        const centerY = display.height * 0.48;
+        const radiusX = display.width * 0.23;
+        const radiusY = display.height * 0.28;
+
+        // Head ellipse
+        ctx.beginPath();
+        ctx.ellipse(centerX, centerY, radiusX, radiusY, 0, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Eye alignment line
+        ctx.strokeStyle = '#38bdf8';
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(centerX - radiusX * 1.25, centerY - radiusY * 0.15);
+        ctx.lineTo(centerX + radiusX * 1.25, centerY - radiusY * 0.15);
+        ctx.stroke();
+
+        // Chin limit line
+        ctx.beginPath();
+        ctx.moveTo(centerX - radiusX * 0.85, centerY + radiusY);
+        ctx.lineTo(centerX + radiusX * 0.85, centerY + radiusY);
+        ctx.stroke();
+
+        ctx.restore();
+      }
     }
 
     function loadSamplePassport() {
@@ -1562,11 +1723,13 @@
       const text = elements.barcodeTextInput.value.trim() || 'OPTI-89234710-PRO';
       const color = elements.barcodeColor.value;
       const bgColor = elements.barcodeBgColor.value;
+      const format = elements.barcodeFormatSelect ? elements.barcodeFormatSelect.value : 'code128';
 
       const barcodeCanvas = BarcodeEngine.generateBarcode(text, {
+        format,
         color,
         bgColor,
-        width: 440,
+        width: 460,
         height: 160,
         showText: true
       });
@@ -1579,7 +1742,7 @@
       ctx.drawImage(barcodeCanvas, 0, 0);
     };
 
-    [elements.barcodeTextInput, elements.barcodeColor, elements.barcodeBgColor].forEach(el => {
+    [elements.barcodeTextInput, elements.barcodeColor, elements.barcodeBgColor, elements.barcodeFormatSelect].forEach(el => {
       if (el) {
         el.addEventListener('input', window.updateBarcode);
         el.addEventListener('change', window.updateBarcode);
@@ -1790,12 +1953,40 @@
       });
     }
 
+    function updateOcrStats() {
+      if (!elements.ocrOutputText) return;
+      const txt = elements.ocrOutputText.value || '';
+      const words = txt.trim() ? txt.trim().split(/\s+/).length : 0;
+      const chars = txt.length;
+      if (elements.ocrWordCount) elements.ocrWordCount.textContent = `${words} Words`;
+      if (elements.ocrCharCount) elements.ocrCharCount.textContent = `${chars} Chars`;
+    }
+
+    if (elements.ocrOutputText) {
+      elements.ocrOutputText.addEventListener('input', updateOcrStats);
+    }
+
+    if (elements.ocrSearchInput) {
+      elements.ocrSearchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        if (!query || !elements.ocrOutputText) return;
+        const txt = elements.ocrOutputText.value;
+        const idx = txt.toLowerCase().indexOf(query);
+        if (idx !== -1) {
+          elements.ocrOutputText.focus();
+          elements.ocrOutputText.setSelectionRange(idx, idx + query.length);
+        }
+      });
+    }
+
     if (elements.ocrResetBtn) {
       elements.ocrResetBtn.addEventListener('click', () => {
         elements.ocrControlsContainer.style.display = 'none';
         elements.ocrDropzone.style.display = 'block';
         elements.ocrFileInput.value = '';
         elements.ocrOutputText.value = '';
+        if (elements.ocrSearchInput) elements.ocrSearchInput.value = '';
+        updateOcrStats();
       });
     }
 
@@ -1812,6 +2003,7 @@
       };
       reader.readAsDataURL(file);
     }
+    window.runOCROnFile = runOCROnFile;
 
     function renderOCRResults(img, text) {
       elements.ocrDropzone.style.display = 'none';
@@ -1825,6 +2017,7 @@
       ctx.drawImage(preview, 0, 0);
 
       elements.ocrOutputText.value = text;
+      updateOcrStats();
       showToast('Text extracted successfully!', 'success');
     }
   }
@@ -2315,7 +2508,8 @@
   }
 
   // Create a Pro Editable & Draggable Floating Text Widget on the PDF
-  function createFloatingTextBox(screenX, screenY, initialText = '', fontSize = 18, fontFamily = "'Outfit', sans-serif", initialColor = null, initialBg = null) {
+  function createFloatingTextBox(screenX, screenY, initialText = '', fontSize = 18, fontFamily = "'Outfit', sans-serif", initialColor = null, initialBg = null, saveHistory = true) {
+    if (saveHistory && window.savePdfHistoryState) window.savePdfHistoryState();
     deselectAllTextWidgets();
 
     const boxId = 'txt_' + Math.random().toString(36).substr(2, 9);
@@ -2499,6 +2693,7 @@
     });
 
     deleteBtn.addEventListener('click', () => {
+      if (window.savePdfHistoryState) window.savePdfHistoryState();
       widget.remove();
       state.floatingTextBoxes = state.floatingTextBoxes.filter(t => t.id !== boxId);
     });
@@ -2657,6 +2852,7 @@
 
     if (elements.clearCanvasBtn) {
       elements.clearCanvasBtn.addEventListener('click', () => {
+        savePdfHistoryState();
         const ctx = elements.pdfAnnotationCanvas.getContext('2d');
         ctx.clearRect(0, 0, elements.pdfAnnotationCanvas.width, elements.pdfAnnotationCanvas.height);
         elements.pdfTextOverlayLayer.innerHTML = '';
@@ -2665,6 +2861,147 @@
         showToast('Page annotations cleared', 'info');
       });
     }
+
+    // PDF Undo / Redo & Zoom Implementation
+    function savePdfHistoryState() {
+      if (!state.pdfUndoStack) state.pdfUndoStack = [];
+      if (!state.pdfRedoStack) state.pdfRedoStack = [];
+      const canvas = elements.pdfAnnotationCanvas;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const snapshot = {
+        canvasData: ctx.getImageData(0, 0, canvas.width, canvas.height),
+        textBoxes: (state.floatingTextBoxes || []).map(tb => ({
+          id: tb.id,
+          left: tb.widget ? tb.widget.style.left : '30px',
+          top: tb.widget ? tb.widget.style.top : '30px',
+          value: tb.textarea ? tb.textarea.value : '',
+          fontSize: tb.fontSize || 18,
+          fontFamily: tb.fontFamily || "'Outfit', sans-serif",
+          isBold: !!tb.isBold,
+          isItalic: !!tb.isItalic,
+          isUnderline: !!tb.isUnderline,
+          color: tb.color || '#000000',
+          bgMode: tb.bgMode || 'trans',
+          bgColor: tb.bgColor || null
+        }))
+      };
+      state.pdfUndoStack.push(snapshot);
+      if (state.pdfUndoStack.length > 25) state.pdfUndoStack.shift();
+      state.pdfRedoStack = [];
+    }
+    window.savePdfHistoryState = savePdfHistoryState;
+
+    function pdfUndo() {
+      if (!state.pdfUndoStack || state.pdfUndoStack.length === 0) {
+        showToast('Nothing to undo', 'info');
+        return;
+      }
+      const canvas = elements.pdfAnnotationCanvas;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      if (!state.pdfRedoStack) state.pdfRedoStack = [];
+      state.pdfRedoStack.push({
+        canvasData: ctx.getImageData(0, 0, canvas.width, canvas.height),
+        textBoxes: (state.floatingTextBoxes || []).map(tb => ({
+          id: tb.id,
+          left: tb.widget ? tb.widget.style.left : '30px',
+          top: tb.widget ? tb.widget.style.top : '30px',
+          value: tb.textarea ? tb.textarea.value : '',
+          fontSize: tb.fontSize || 18,
+          fontFamily: tb.fontFamily || "'Outfit', sans-serif",
+          isBold: !!tb.isBold,
+          isItalic: !!tb.isItalic,
+          isUnderline: !!tb.isUnderline,
+          color: tb.color || '#000000',
+          bgMode: tb.bgMode || 'trans',
+          bgColor: tb.bgColor || null
+        }))
+      });
+
+      const prev = state.pdfUndoStack.pop();
+      ctx.putImageData(prev.canvasData, 0, 0);
+
+      // Restore text boxes
+      if (elements.pdfTextOverlayLayer) elements.pdfTextOverlayLayer.innerHTML = '';
+      state.floatingTextBoxes = [];
+      if (prev.textBoxes && prev.textBoxes.length > 0) {
+        prev.textBoxes.forEach(tb => {
+          const x = parseFloat(tb.left) || 30;
+          const y = parseFloat(tb.top) || 30;
+          createFloatingTextBox(x, y, tb.value, tb.fontSize, tb.fontFamily, tb.color, tb.bgColor, false);
+        });
+      }
+      showToast('Undo performed ↩', 'info');
+    }
+    window.pdfUndo = pdfUndo;
+
+    function pdfRedo() {
+      if (!state.pdfRedoStack || state.pdfRedoStack.length === 0) {
+        showToast('Nothing to redo', 'info');
+        return;
+      }
+      const canvas = elements.pdfAnnotationCanvas;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      if (!state.pdfUndoStack) state.pdfUndoStack = [];
+      state.pdfUndoStack.push({
+        canvasData: ctx.getImageData(0, 0, canvas.width, canvas.height),
+        textBoxes: (state.floatingTextBoxes || []).map(tb => ({
+          id: tb.id,
+          left: tb.widget ? tb.widget.style.left : '30px',
+          top: tb.widget ? tb.widget.style.top : '30px',
+          value: tb.textarea ? tb.textarea.value : '',
+          fontSize: tb.fontSize || 18,
+          fontFamily: tb.fontFamily || "'Outfit', sans-serif",
+          isBold: !!tb.isBold,
+          isItalic: !!tb.isItalic,
+          isUnderline: !!tb.isUnderline,
+          color: tb.color || '#000000',
+          bgMode: tb.bgMode || 'trans',
+          bgColor: tb.bgColor || null
+        }))
+      });
+
+      const next = state.pdfRedoStack.pop();
+      ctx.putImageData(next.canvasData, 0, 0);
+
+      if (elements.pdfTextOverlayLayer) elements.pdfTextOverlayLayer.innerHTML = '';
+      state.floatingTextBoxes = [];
+      if (next.textBoxes && next.textBoxes.length > 0) {
+        next.textBoxes.forEach(tb => {
+          const x = parseFloat(tb.left) || 30;
+          const y = parseFloat(tb.top) || 30;
+          createFloatingTextBox(x, y, tb.value, tb.fontSize, tb.fontFamily, tb.color, tb.bgColor, false);
+        });
+      }
+      showToast('Redo performed ↪', 'info');
+    }
+    window.pdfRedo = pdfRedo;
+
+    function updatePdfZoom(delta) {
+      if (!state.pdfZoom) state.pdfZoom = 1.0;
+      if (delta === 0) {
+        state.pdfZoom = 1.0;
+      } else {
+        state.pdfZoom = Math.max(0.5, Math.min(2.5, Math.round((state.pdfZoom + delta) * 100) / 100));
+      }
+      if (elements.pdfZoomLevel) {
+        elements.pdfZoomLevel.textContent = `${Math.round(state.pdfZoom * 100)}%`;
+      }
+      if (elements.pdfCanvasWrapper) {
+        elements.pdfCanvasWrapper.style.transform = `scale(${state.pdfZoom})`;
+        elements.pdfCanvasWrapper.style.transformOrigin = 'top center';
+      }
+    }
+    window.updatePdfZoom = updatePdfZoom;
+
+    if (elements.pdfUndoBtn) elements.pdfUndoBtn.addEventListener('click', pdfUndo);
+    if (elements.pdfRedoBtn) elements.pdfRedoBtn.addEventListener('click', pdfRedo);
+    if (elements.pdfZoomInBtn) elements.pdfZoomInBtn.addEventListener('click', () => updatePdfZoom(0.15));
+    if (elements.pdfZoomOutBtn) elements.pdfZoomOutBtn.addEventListener('click', () => updatePdfZoom(-0.15));
 
     // Canvas drawing interaction
     const canvas = elements.pdfAnnotationCanvas;
@@ -2692,6 +3029,10 @@
       if (state.visualTool === 'add-text') {
         createFloatingTextBox(pos.screenX, pos.screenY, '', state.visualSize || 18);
         return;
+      }
+
+      if (state.visualTool === 'pen' || state.visualTool === 'whiteout' || state.visualTool === 'rect') {
+        savePdfHistoryState();
       }
 
       state.isDrawing = true;
@@ -2745,6 +3086,87 @@
     canvas.addEventListener('touchstart', startDraw, { passive: false });
     window.addEventListener('touchmove', moveDraw, { passive: false });
     window.addEventListener('touchend', endDraw);
+  }
+
+  // =========================================================================
+  // GLOBAL CLIPBOARD & SHORTCUTS (Professional Workflow)
+  // =========================================================================
+  function setupGlobalClipboardAndShortcuts() {
+    window.addEventListener('paste', async (e) => {
+      const target = e.target;
+      const isTyping = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable);
+      const items = (e.clipboardData || e.originalEvent?.clipboardData)?.items;
+      if (!items) return;
+
+      let imageFile = null;
+      let pastedText = null;
+
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          imageFile = items[i].getAsFile();
+          break;
+        } else if (items[i].type === 'text/plain') {
+          pastedText = e.clipboardData.getData('text/plain');
+        }
+      }
+
+      if (imageFile) {
+        e.preventDefault();
+        const activeTab = state.activeTab;
+        if (activeTab === 'bg-tools') {
+          showToast('📋 Image pasted into Background Remover!', 'success');
+          if (window.loadBgImageFile) window.loadBgImageFile(imageFile);
+        } else if (activeTab === 'passport-tools') {
+          showToast('📋 Image pasted into Passport Maker!', 'success');
+          if (window.loadPassportImageFromFile) window.loadPassportImageFromFile(imageFile);
+        } else if (activeTab === 'ocr-tools') {
+          showToast('📋 Image pasted into OCR Scanner!', 'success');
+          if (window.runOCROnFile) window.runOCROnFile(imageFile);
+        } else {
+          switchMainTab('image-tools');
+          showToast('📋 Image pasted into Optimizer!', 'success');
+          handleFilesSelected([imageFile]);
+        }
+      } else if (pastedText && !isTyping) {
+        const activeTab = state.activeTab;
+        if (activeTab === 'qr-tools' && elements.qrTextInput) {
+          elements.qrTextInput.value = pastedText.trim();
+          if (window.updateQRCode) window.updateQRCode();
+          showToast('📋 Pasted text into QR Generator!', 'info');
+        } else if (activeTab === 'barcode-tools' && elements.barcodeTextInput) {
+          elements.barcodeTextInput.value = pastedText.trim();
+          if (window.updateBarcode) window.updateBarcode();
+          showToast('📋 Pasted serial/code into Barcode Studio!', 'info');
+        }
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      const isTyping = e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable);
+
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.key === 'Z') && !e.shiftKey) {
+        if (state.activeTab === 'pdf-tools' && !isTyping) {
+          e.preventDefault();
+          if (window.pdfUndo) window.pdfUndo();
+        }
+      } else if (((e.ctrlKey || e.metaKey) && (e.key === 'y' || e.key === 'Y')) ||
+                 ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'z' || e.key === 'Z'))) {
+        if (state.activeTab === 'pdf-tools' && !isTyping) {
+          e.preventDefault();
+          if (window.pdfRedo) window.pdfRedo();
+        }
+      } else if ((e.ctrlKey || e.metaKey) && (e.key === '=' || e.key === '+')) {
+        if (state.activeTab === 'pdf-tools' && !isTyping) {
+          e.preventDefault();
+          if (window.updatePdfZoom) window.updatePdfZoom(0.15);
+        }
+      } else if ((e.ctrlKey || e.metaKey) && e.key === '-') {
+        if (state.activeTab === 'pdf-tools' && !isTyping) {
+          e.preventDefault();
+          if (window.updatePdfZoom) window.updatePdfZoom(-0.15);
+        }
+      }
+    });
   }
 
   // Saves current page's annotations & baked text into persistent state
