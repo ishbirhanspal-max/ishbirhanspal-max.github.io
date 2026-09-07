@@ -437,26 +437,54 @@
     if (tabId === 'barcode-tools' && window.updateBarcode) window.updateBarcode();
   }
 
-  // Global Helpers for Mobile Bottom Navigation
+  // Global Helpers for Mobile Bottom Navigation & Tools Drawer
+  window.openMobileToolsDrawer = function() {
+    const drawer = document.getElementById('mobileToolsDrawer');
+    if (drawer) {
+      drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  window.closeMobileToolsDrawer = function() {
+    const drawer = document.getElementById('mobileToolsDrawer');
+    if (drawer) {
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  };
+
+  window.selectDrawerTool = function(tabBtnId) {
+    window.closeMobileToolsDrawer();
+    const btn = document.getElementById(tabBtnId);
+    if (btn) {
+      btn.click();
+      setTimeout(() => {
+        const targetWorkspace = document.querySelector('.studio-card[style*="display: block"]') || document.querySelector('.studio-card');
+        if (targetWorkspace) {
+          targetWorkspace.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  };
+
   window.switchMobileTool = function(tabBtnId) {
     const btn = document.getElementById(tabBtnId);
     if (btn) {
       btn.click();
-      const targetWorkspace = document.querySelector('.studio-card');
-      if (targetWorkspace) {
-        targetWorkspace.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      setTimeout(() => {
+        const targetWorkspace = document.querySelector('.studio-card[style*="display: block"]') || document.querySelector('.studio-card');
+        if (targetWorkspace) {
+          targetWorkspace.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
     }
   };
 
   window.scrollToToolsMenu = function() {
-    const container = document.querySelector('.tab-nav-container');
-    if (container) {
-      container.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      container.style.transition = 'all 0.3s ease';
-      container.style.filter = 'drop-shadow(0 0 12px rgba(6, 182, 212, 0.7))';
-      setTimeout(() => container.style.filter = '', 1200);
-    }
+    window.openMobileToolsDrawer();
   };
 
   // =========================================================================

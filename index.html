@@ -332,70 +332,17 @@
   <!-- ============================================================ -->
   <!-- GDPR COOKIE CONSENT BANNER -->
   <!-- ============================================================ -->
-  <div id="cookieConsentBanner" style="
-    display: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 99999;
-    background: rgba(10, 14, 26, 0.97);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(99,102,241,0.35);
-    padding: 1.25rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    box-shadow: 0 -8px 40px rgba(6,182,212,0.1);
-  " role="dialog" aria-label="Cookie consent">
-    <div style="flex: 1; min-width: 280px;">
-      <p style="font-family: 'Outfit', sans-serif; font-size: 0.92rem; color: #cbd5e1; line-height: 1.6; margin: 0;">
-        🍪 <strong style="color: #e2e8f0;">We use cookies</strong> to serve relevant ads and improve your experience.
-        All your files are processed <strong style="color: #06b6d4;">100% locally in your browser</strong> — never uploaded to our servers.
-        <a href="privacy.html" target="_blank" style="color: #6366f1; text-decoration: underline;">Privacy Policy</a>
+  <div id="cookieConsentBanner" class="cookie-banner-container" style="display: none;" role="dialog" aria-label="Cookie consent">
+    <div class="cookie-banner-text">
+      <p>
+        🍪 <strong style="color: #e2e8f0;">Cookies &amp; Privacy:</strong> We use cookies for ads and analytics. Files are processed <strong style="color: var(--accent-cyan);">100% in your browser</strong> — zero uploads.
+        <a href="privacy.html" target="_blank" style="color: var(--accent-cyan-light); text-decoration: underline;">Privacy</a>
       </p>
     </div>
-    <div style="display: flex; gap: 0.75rem; flex-shrink: 0; align-items: center; flex-wrap: wrap;">
-      <button id="cookieManageBtn" onclick="manageCookies()" style="
-        font-family: 'Outfit', sans-serif;
-        font-size: 0.88rem;
-        font-weight: 600;
-        padding: 0.55rem 1.25rem;
-        border-radius: 999px;
-        border: 1px solid rgba(255,255,255,0.15);
-        background: transparent;
-        color: #94a3b8;
-        cursor: pointer;
-        transition: all 0.2s;
-      " onmouseover="this.style.color='#e2e8f0';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='rgba(255,255,255,0.15)'">⚙️ Manage Options</button>
-      <button id="cookieRejectBtn" onclick="rejectCookies()" style="
-        font-family: 'Outfit', sans-serif;
-        font-size: 0.88rem;
-        font-weight: 600;
-        padding: 0.55rem 1.25rem;
-        border-radius: 999px;
-        border: 1px solid rgba(255,255,255,0.15);
-        background: transparent;
-        color: #94a3b8;
-        cursor: pointer;
-        transition: all 0.2s;
-      " onmouseover="this.style.color='#e2e8f0'" onmouseout="this.style.color='#94a3b8'">✕ Decline</button>
-      <button id="cookieAcceptBtn" onclick="acceptCookies()" style="
-        font-family: 'Outfit', sans-serif;
-        font-size: 0.92rem;
-        font-weight: 700;
-        padding: 0.6rem 1.75rem;
-        border-radius: 999px;
-        border: none;
-        background: linear-gradient(135deg, #6366f1, #06b6d4);
-        color: #fff;
-        cursor: pointer;
-        box-shadow: 0 4px 15px rgba(6,182,212,0.35);
-        transition: all 0.2s;
-      " onmouseover="this.style.boxShadow='0 6px 25px rgba(6,182,212,0.55)'" onmouseout="this.style.boxShadow='0 4px 15px rgba(6,182,212,0.35)'">✅ Accept All</button>
+    <div class="cookie-banner-actions">
+      <button id="cookieManageBtn" onclick="manageCookies()" class="btn btn-sm cookie-btn-manage">⚙️</button>
+      <button id="cookieRejectBtn" onclick="rejectCookies()" class="btn btn-sm cookie-btn-decline">Decline</button>
+      <button id="cookieAcceptBtn" onclick="acceptCookies()" class="btn btn-sm cookie-btn-accept">Accept All</button>
     </div>
   </div>
 
@@ -548,10 +495,11 @@
         </div>
       </div>
 
-      <!-- Mobile Swipe Hint -->
+      <!-- Mobile Swipe Hint & Quick Tool Picker Trigger -->
       <div class="mobile-swipe-hint">
         <span class="swipe-arrow">⇄</span>
-        <span>Swipe tools below to browse all 12 apps</span>
+        <span>Swipe tools below or</span>
+        <button type="button" class="mobile-open-all-btn" onclick="openMobileToolsDrawer()">⚡ View All 12 Tools</button>
       </div>
 
       <!-- Main Workspace 12-Tool Tabs Navigation -->
@@ -1850,10 +1798,128 @@
       <span class="nav-icon">🔍</span>
       <span>OCR Text</span>
     </button>
-    <button type="button" class="mobile-bottom-btn" id="mobTabAll" onclick="scrollToToolsMenu()">
+    <button type="button" class="mobile-bottom-btn" id="mobTabAll" onclick="openMobileToolsDrawer()">
       <span class="nav-icon">⚡</span>
       <span>All Tools</span>
     </button>
   </nav>
+
+  <!-- Mobile All Tools Bottom Sheet Drawer -->
+  <div id="mobileToolsDrawer" class="mobile-tools-drawer" aria-hidden="true">
+    <div class="mobile-drawer-backdrop" onclick="closeMobileToolsDrawer()"></div>
+    <div class="mobile-drawer-sheet">
+      <div class="mobile-drawer-handle-bar">
+        <span class="mobile-drawer-handle"></span>
+      </div>
+      <div class="mobile-drawer-header">
+        <div class="mobile-drawer-title-group">
+          <span class="drawer-header-icon">⚡</span>
+          <div>
+            <h3 class="drawer-title">All 12 Studio Tools</h3>
+            <span class="drawer-subtitle">100% Free &amp; Private in Browser</span>
+          </div>
+        </div>
+        <button type="button" class="mobile-drawer-close-btn" onclick="closeMobileToolsDrawer()" aria-label="Close tools menu">✕</button>
+      </div>
+
+      <div class="mobile-tools-grid">
+        <button type="button" class="mobile-tool-card" onclick="selectDrawerTool('tabImageBtn')">
+          <span class="tool-card-icon">🖼️</span>
+          <div class="tool-card-info">
+            <span class="tool-card-name">Image Optimizer</span>
+            <span class="tool-card-desc">Compress &amp; Convert</span>
+          </div>
+        </button>
+
+        <button type="button" class="mobile-tool-card" onclick="selectDrawerTool('tabBgBtn')">
+          <span class="tool-card-icon">✂️</span>
+          <div class="tool-card-info">
+            <span class="tool-card-name">Remove BG</span>
+            <span class="tool-card-desc">AI Background Eraser</span>
+          </div>
+        </button>
+
+        <button type="button" class="mobile-tool-card" onclick="selectDrawerTool('tabPdfBtn')">
+          <span class="tool-card-icon">📄</span>
+          <div class="tool-card-info">
+            <span class="tool-card-name">PDF Studio</span>
+            <span class="tool-card-desc">Visual Edit, Sign, Word</span>
+          </div>
+        </button>
+
+        <button type="button" class="mobile-tool-card" onclick="selectDrawerTool('tabQrBtn')">
+          <span class="tool-card-icon">🎨</span>
+          <div class="tool-card-info">
+            <span class="tool-card-name">QR Studio</span>
+            <span class="tool-card-desc">WiFi, URLs, WhatsApp</span>
+          </div>
+        </button>
+
+        <button type="button" class="mobile-tool-card" onclick="selectDrawerTool('tabBarcodeBtn')">
+          <span class="tool-card-icon">📊</span>
+          <div class="tool-card-info">
+            <span class="tool-card-name">Barcodes</span>
+            <span class="tool-card-desc">Code-128 &amp; EAN-13</span>
+          </div>
+        </button>
+
+        <button type="button" class="mobile-tool-card" onclick="selectDrawerTool('tabPassportBtn')">
+          <span class="tool-card-icon">🪪</span>
+          <div class="tool-card-info">
+            <span class="tool-card-name">Passport Maker</span>
+            <span class="tool-card-desc">2x2 &amp; Visa Sheets</span>
+          </div>
+        </button>
+
+        <button type="button" class="mobile-tool-card" onclick="selectDrawerTool('tabCollageBtn')">
+          <span class="tool-card-icon">🖼️</span>
+          <div class="tool-card-info">
+            <span class="tool-card-name">Collage Maker</span>
+            <span class="tool-card-desc">Grid Layouts &amp; Splits</span>
+          </div>
+        </button>
+
+        <button type="button" class="mobile-tool-card" onclick="selectDrawerTool('tabFiltersBtn')">
+          <span class="tool-card-icon">🪄</span>
+          <div class="tool-card-info">
+            <span class="tool-card-name">Filters &amp; Lighting</span>
+            <span class="tool-card-desc">Aesthetic Presets</span>
+          </div>
+        </button>
+
+        <button type="button" class="mobile-tool-card" onclick="selectDrawerTool('tabSocialCropBtn')">
+          <span class="tool-card-icon">📐</span>
+          <div class="tool-card-info">
+            <span class="tool-card-name">Social Crop</span>
+            <span class="tool-card-desc">IG, TikTok, YouTube</span>
+          </div>
+        </button>
+
+        <button type="button" class="mobile-tool-card" onclick="selectDrawerTool('tabOcrBtn')">
+          <span class="tool-card-icon">🔍</span>
+          <div class="tool-card-info">
+            <span class="tool-card-name">OCR Text Scan</span>
+            <span class="tool-card-desc">Extract from Photos</span>
+          </div>
+        </button>
+
+        <button type="button" class="mobile-tool-card" onclick="selectDrawerTool('tabVideoBtn')">
+          <span class="tool-card-icon">🎞️</span>
+          <div class="tool-card-info">
+            <span class="tool-card-name">Video to GIF</span>
+            <span class="tool-card-desc">Extract Still Frames</span>
+          </div>
+        </button>
+
+        <button type="button" class="mobile-tool-card" onclick="selectDrawerTool('tabAudioBtn')">
+          <span class="tool-card-icon">🎙️</span>
+          <div class="tool-card-info">
+            <span class="tool-card-name">Voice Studio</span>
+            <span class="tool-card-desc">Record &amp; Speed Control</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
