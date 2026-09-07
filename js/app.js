@@ -299,26 +299,36 @@
     toastContainer: document.getElementById('toastContainer')
   };
 
-  // Initialize Application
+  // Initialize Application (Resilient Failure-Proof Architecture)
   function init() {
-    setupEventListeners();
-    setupDropzone();
-    setupBackgroundRemover();
-    setupQRCodeStudio();
-    setupBarcodeStudio();
-    setupPassportMaker();
-    setupCollageMaker();
-    setupFiltersStudio();
-    setupSocialCropStudio();
-    setupOCRStudio();
-    setupVideoGIFStudio();
-    setupAudioStudio();
-    setupI18n();
-    setupPDFStudio();
-    setupVisualCanvasEditor();
-    setupComparisonSlider();
-    setupFAQAccordion();
-    setupGlobalClipboardAndShortcuts();
+    const modules = [
+      ['EventListeners', setupEventListeners],
+      ['Dropzone', setupDropzone],
+      ['BackgroundRemover', setupBackgroundRemover],
+      ['QRCodeStudio', setupQRCodeStudio],
+      ['BarcodeStudio', setupBarcodeStudio],
+      ['PassportMaker', setupPassportMaker],
+      ['CollageMaker', setupCollageMaker],
+      ['FiltersStudio', setupFiltersStudio],
+      ['SocialCropStudio', setupSocialCropStudio],
+      ['OCRStudio', setupOCRStudio],
+      ['VideoGIFStudio', setupVideoGIFStudio],
+      ['AudioStudio', setupAudioStudio],
+      ['I18n', setupI18n],
+      ['PDFStudio', setupPDFStudio],
+      ['VisualCanvasEditor', setupVisualCanvasEditor],
+      ['ComparisonSlider', setupComparisonSlider],
+      ['FAQAccordion', setupFAQAccordion],
+      ['GlobalShortcuts', setupGlobalClipboardAndShortcuts]
+    ];
+
+    modules.forEach(([name, fn]) => {
+      try {
+        if (typeof fn === 'function') fn();
+      } catch (err) {
+        console.warn(`[OptiPixel Module] ${name} notice:`, err);
+      }
+    });
   }
 
   // Setup Event Listeners
