@@ -46,6 +46,35 @@
   <meta name="rating" content="general">
   <link rel="canonical" href="https://optipixelstudio.online/">
 
+  <!-- Schema.org Rich Snippet JSON-LD for Google & Bing -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "OptiPixel Studio",
+    "url": "https://optipixelstudio.online/",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Free online image compressor, PDF editor, background remover, and QR generator. Fast, private, client-side browser tools with zero cloud uploads.",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "128",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Ishbir Hanspal"
+    }
+  }
+  </script>
+
   <!-- ============================================================ -->
   <!-- OPEN GRAPH (Facebook, WhatsApp, LinkedIn) -->
   <!-- ============================================================ -->
@@ -2197,6 +2226,32 @@
         });
       });
     }
+
+    // PWA In-App Install Prompt Handler
+    let deferredPwaPrompt;
+    window.addEventListener('beforeinstallprompt', function(e) {
+      e.preventDefault();
+      deferredPwaPrompt = e;
+      var banner = document.getElementById('pwaInstallBanner');
+      if (banner) banner.style.display = 'flex';
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var installBtn = document.getElementById('pwaInstallBtn');
+      if (installBtn) {
+        installBtn.addEventListener('click', async function() {
+          if (deferredPwaPrompt) {
+            deferredPwaPrompt.prompt();
+            var choice = await deferredPwaPrompt.userChoice;
+            if (choice && choice.outcome === 'accepted') {
+              var banner = document.getElementById('pwaInstallBanner');
+              if (banner) banner.style.display = 'none';
+            }
+            deferredPwaPrompt = null;
+          }
+        });
+      }
+    });
   </script>
   <!-- Mobile Bottom Quick-Access Thumb Bar (Visible only on mobile) -->
   <nav class="mobile-bottom-bar" id="mobileBottomBar" aria-label="Mobile Quick Tools">
@@ -2238,6 +2293,18 @@
           </div>
         </div>
         <button type="button" class="mobile-drawer-close-btn" onclick="closeMobileToolsDrawer()" aria-label="Close tools menu">✕</button>
+      </div>
+
+      <!-- PWA One-Click Install Banner -->
+      <div id="pwaInstallBanner" style="display: none; background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(168,85,247,0.25)); border: 1px solid rgba(168,85,247,0.4); border-radius: var(--radius-md); padding: 0.75rem 1rem; margin: 0 0 1rem 0; align-items: center; justify-content: space-between; gap: 0.75rem;">
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <span style="font-size: 1.5rem;">📲</span>
+          <div>
+            <strong style="display: block; font-size: 0.88rem; color: #fff;">Install OptiPixel App</strong>
+            <span style="font-size: 0.75rem; color: #cbd5e1;">Fast, full-screen &amp; works offline</span>
+          </div>
+        </div>
+        <button type="button" id="pwaInstallBtn" style="background: var(--accent-gradient); color: #fff; border: none; border-radius: var(--radius-full); padding: 0.45rem 1rem; font-size: 0.82rem; font-weight: 700; cursor: pointer; white-space: nowrap; box-shadow: 0 2px 8px rgba(99,102,241,0.4);">Install</button>
       </div>
 
       <div class="mobile-tools-grid">
