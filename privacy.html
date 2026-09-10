@@ -3,265 +3,261 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-adsense-account" content="ca-pub-9875981872644926">
-  <title>Privacy Policy — OptiPixel Studio</title>
-  <meta name="description" content="Privacy Policy for OptiPixel Studio. Learn how we handle your data with 100% client-side processing and no server uploads.">
+  <title>Privacy Policy — OptiPixel Studio | optipixelstudio.online</title>
+  <meta name="description" content="Privacy Policy for OptiPixel Studio. Learn how we handle your data, use cookies, and serve ads via Google AdSense. Your files never leave your device.">
   <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://optipixelstudio.online/privacy.html">
   <link rel="icon" type="image/png" href="assets/logo.png">
+  <meta name="google-adsense-account" content="ca-pub-9875981872644926">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9875981872644926" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9875981872644926" crossorigin="anonymous"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #070a12;
-      --surface: #0f1520;
-      --border: rgba(255,255,255,0.08);
-      --text: #e2e8f0;
-      --muted: #94a3b8;
-      --accent: #06b6d4;
-      --accent2: #6366f1;
-      --radius: 14px;
-    }
     body {
-      font-family: 'Outfit', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.8;
+      background: #070a12;
+      color: #f1f5f9;
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
       min-height: 100vh;
     }
+    a { color: #06b6d4; }
+    a:hover { color: #67e8f9; }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
     header {
       background: rgba(7,10,18,0.9);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
       backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 2rem;
+    }
+    .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    header a.brand {
+    .logo {
       display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-    header a.brand img { width: 34px; height: 34px; border-radius: 8px; }
-    header a.back {
-      display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       text-decoration: none;
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 0.95rem;
-      border: 1px solid var(--accent);
-      padding: 0.4rem 1rem;
-      border-radius: 999px;
-      transition: all 0.2s;
-    }
-    header a.back:hover { background: var(--accent); color: #000; }
-    .hero {
-      background: linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(6,182,212,0.08) 100%);
-      border-bottom: 1px solid var(--border);
-      padding: 3.5rem 2rem 2.5rem;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: #fff;
       font-weight: 800;
-      background: linear-gradient(135deg, #6366f1, #06b6d4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.75rem;
+      font-size: 1.15rem;
     }
-    .hero p { color: var(--muted); font-size: 1.05rem; }
-    .hero .badge {
+    .logo img { width: 30px; height: 30px; border-radius: 6px; }
+    .back-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      background: rgba(16,185,129,0.12);
-      border: 1px solid rgba(16,185,129,0.3);
-      color: #10b981;
-      padding: 0.3rem 0.9rem;
-      border-radius: 999px;
-      font-size: 0.85rem;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.9rem;
       font-weight: 600;
-      margin-bottom: 1.25rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.2s;
     }
-    main {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 3rem 2rem 5rem;
+    .back-btn:hover { color: #fff; border-color: #06b6d4; }
+    main { padding: 3rem 0 4rem; }
+    .page-title {
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .section {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem 2.25rem;
+    .last-updated {
+      color: #64748b;
+      font-size: 0.88rem;
+      margin-bottom: 2.5rem;
+    }
+    .policy-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 2rem;
       margin-bottom: 1.5rem;
     }
-    .section h2 {
-      font-size: 1.2rem;
+    h2 {
+      font-size: 1.25rem;
       font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 1rem;
+      color: #e2e8f0;
+      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
     }
-    .section p { color: var(--muted); margin-bottom: 0.85rem; font-size: 0.98rem; }
-    .section p:last-child { margin-bottom: 0; }
-    .section ul {
-      list-style: none;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-    .section ul li {
-      padding: 0.3rem 0 0.3rem 1.5rem;
-      position: relative;
-    }
-    .section ul li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-    }
-    .highlight-box {
-      background: rgba(16,185,129,0.07);
-      border: 1px solid rgba(16,185,129,0.2);
+    h2 .icon { font-size: 1.1rem; }
+    p { color: #94a3b8; margin-bottom: 0.85rem; }
+    p:last-child { margin-bottom: 0; }
+    ul { color: #94a3b8; padding-left: 1.5rem; margin-bottom: 0.85rem; }
+    ul li { margin-bottom: 0.4rem; }
+    strong { color: #e2e8f0; }
+    .highlight {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
       border-radius: 10px;
-      padding: 1.25rem 1.5rem;
-      color: #10b981;
+      padding: 1rem 1.25rem;
+      color: #6ee7b7;
       font-weight: 600;
-      font-size: 0.97rem;
-      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
     }
-    .updated {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.85rem;
-      margin-top: 2rem;
-    }
-    a { color: var(--accent); }
     footer {
       text-align: center;
-      padding: 2rem;
-      color: var(--muted);
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: #475569;
       font-size: 0.85rem;
-      border-top: 1px solid var(--border);
+    }
+    @media (max-width: 640px) {
+      .policy-card { padding: 1.25rem; }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <a href="index.html" class="brand">
-    <img src="assets/logo.png" alt="OptiPixel Logo">
-    <span>OptiPixel Studio</span>
-  </a>
-  <div style="display: flex; align-items: center; gap: 0.75rem;">
-    <a href="https://buymeacoffee.com/ISHBIR" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.4rem; background: #FFDD00; color: #000; font-weight: 700; font-size: 0.88rem; padding: 0.4rem 0.95rem; border-radius: 999px; text-decoration: none; box-shadow: 0 4px 12px rgba(255,221,0,0.3);">
-      <span>☕</span>
-      <span>Buy me a coffee</span>
+  <div class="container nav-inner">
+    <a href="/" class="logo">
+      <img src="assets/logo.png" alt="OptiPixel Logo" loading="eager">
+      <span>OptiPixel<span style="background:linear-gradient(135deg,#6366f1,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">&amp;PDF</span></span>
     </a>
-    <a href="index.html" class="back">← Back to App</a>
+    <a href="/" class="back-btn">← Back to Tools</a>
   </div>
 </header>
 
-<div class="hero">
-  <div class="badge">🔒 100% Private &amp; Transparent</div>
-  <h1>Privacy Policy</h1>
-  <p>Your data stays in your browser. Always. No exceptions.</p>
-</div>
-
 <main>
+  <div class="container">
+    <h1 class="page-title">Privacy Policy</h1>
+    <p class="last-updated">Last updated: September 11, 2026 | Effective date: September 10, 2026</p>
 
-  <div class="highlight-box">
-    🛡️ OptiPixel Studio processes ALL files (images, PDFs, audio, video) 100% locally inside your browser. Your files are NEVER uploaded to any server.
+    <div class="highlight">
+      🛡️ <strong>Key Promise:</strong> Your files (images, PDFs, documents) are processed 100% inside your browser. Nothing is ever uploaded to our servers. We have no servers that receive your files.
+    </div>
+
+    <div class="policy-card">
+      <h2><span class="icon">📋</span> 1. Who We Are</h2>
+      <p><strong>OptiPixel Studio</strong> ("we", "us", "our") operates the website <strong>optipixelstudio.online</strong> (also hosted at <a href="https://ishbirhanspal-max.github.io">ishbirhanspal-max.github.io</a>). This Privacy Policy explains how we collect, use, and protect your information when you use our free online tools.</p>
+      <p>For privacy-related questions, you may contact us via our <a href="https://github.com/ishbirhanspal-max/ishbirhanspal-max.github.io/issues" target="_blank" rel="noopener">GitHub repository</a>.</p>
+    </div>
+
+    <div class="policy-card">
+      <h2><span class="icon">💾</span> 2. Information We Do NOT Collect</h2>
+      <p>We do <strong>not</strong> collect, store, or transmit any of the following:</p>
+      <ul>
+        <li>Images, photos, or any uploaded files</li>
+        <li>PDF documents or Word files</li>
+        <li>Extracted text from OCR processing</li>
+        <li>QR code or barcode content</li>
+        <li>Audio recordings</li>
+        <li>Your name, email address, or account information (we have no accounts)</li>
+        <li>Your location beyond what your browser already exposes</li>
+      </ul>
+      <p>All tool processing (image compression, background removal, PDF editing, OCR, QR/barcode generation, etc.) happens exclusively inside your browser using JavaScript, HTML5 Canvas, and WebAssembly. <strong>No files ever leave your device.</strong></p>
+    </div>
+
+    <div class="policy-card">
+      <h2><span class="icon">📊</span> 3. Information We DO Collect (Automatically)</h2>
+      <p>Like most websites, our hosting provider (GitHub Pages) and analytics tools may automatically collect:</p>
+      <ul>
+        <li><strong>Log data:</strong> Your IP address, browser type, operating system, referring URL, pages visited, and time of visit — collected by GitHub Pages infrastructure</li>
+        <li><strong>Usage analytics:</strong> Page views and general site usage patterns (via anonymized analytics)</li>
+      </ul>
+      <p>This data is used solely to understand general traffic patterns and improve the site. It is not linked to your identity and is not used for remarketing.</p>
+    </div>
+
+    <div class="policy-card">
+      <h2><span class="icon">🍪</span> 4. Cookies & Local Storage</h2>
+      <p>We use the following cookies and browser storage:</p>
+      <ul>
+        <li><strong>Cookie Consent Storage (localStorage):</strong> We store <code>optipixel_cookie_consent</code> in your browser's localStorage to remember your cookie preference. This is a first-party, essential function and cannot be disabled.</li>
+        <li><strong>Google AdSense Cookies:</strong> If you accept advertising cookies, Google may set cookies to serve relevant ads. Google's ad cookies track your general browsing interests (not your files) across websites to serve personalized ads.</li>
+        <li><strong>Google Analytics Cookies:</strong> If enabled, Google Analytics sets cookies to measure aggregate website traffic.</li>
+      </ul>
+      <p>You can control advertising cookies via our cookie consent banner shown when you first visit the site. You may also opt out of Google's interest-based advertising at <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">google.com/settings/ads</a>.</p>
+    </div>
+
+    <div class="policy-card">
+      <h2><span class="icon">📢</span> 5. Google AdSense &amp; Advertising</h2>
+      <p>We use <strong>Google AdSense</strong> (Publisher ID: <code>ca-pub-9875981872644926</code>) to display advertisements on this site. Google AdSense uses cookies and similar tracking technologies to serve ads based on your browsing history and interests.</p>
+      <p>Google, as a third-party vendor, uses cookies to serve ads on our site. Google's use of the DoubleClick cookie enables it and its partners to serve ads based on your visit to our site and other sites. You may opt out of the use of the DoubleClick cookie by visiting the <a href="https://www.google.com/settings/ads/plugin" target="_blank" rel="noopener">Google Ads Settings page</a>.</p>
+      <p><strong>Ads are clearly labeled</strong> as "Advertisement" or "Sponsored" on our website. We do not place ads in a way that is misleading or designed to be confused with our tool content.</p>
+      <p>For more information on Google AdSense and privacy, see: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a> and <a href="https://support.google.com/adsense/answer/1348695" target="_blank" rel="noopener">AdSense Privacy Policy</a>.</p>
+    </div>
+
+    <div class="policy-card">
+      <h2><span class="icon">🔗</span> 6. Third-Party Services</h2>
+      <p>Our tools use the following third-party JavaScript libraries loaded from CDNs. These CDNs may set their own cookies or log requests:</p>
+      <ul>
+        <li><strong>Google Fonts (fonts.googleapis.com)</strong> — Serves the Outfit and JetBrains Mono fonts</li>
+        <li><strong>cdnjs.cloudflare.com</strong> — Serves JSZip, PDF.js, QRCode.js libraries</li>
+        <li><strong>unpkg.com</strong> — Serves pdf-lib.js library</li>
+        <li><strong>cdn.jsdelivr.net</strong> — Serves MediaPipe (background removal) and Tesseract.js (OCR)</li>
+      </ul>
+      <p>These services have their own privacy policies. We recommend reviewing them if you are concerned about CDN data collection.</p>
+    </div>
+
+    <div class="policy-card">
+      <h2><span class="icon">👶</span> 7. Children's Privacy (COPPA)</h2>
+      <p>Our service is intended for general audiences and does not knowingly collect personal information from children under the age of 13. We do not have user accounts, registration, or any mechanism that would allow us to collect personal data from children.</p>
+      <p>Google AdSense is configured to serve general audience ads. We have not enabled interest-based ads targeting children.</p>
+    </div>
+
+    <div class="policy-card">
+      <h2><span class="icon">🌍</span> 8. Your Rights (GDPR / CCPA)</h2>
+      <p>If you are a resident of the European Union (GDPR) or California (CCPA), you have the right to:</p>
+      <ul>
+        <li>Know what personal data we collect (see Section 3)</li>
+        <li>Opt out of advertising cookies using our cookie consent banner</li>
+        <li>Opt out of Google's personalized advertising at <a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a></li>
+        <li>Clear your local cookie consent preference by clearing your browser's localStorage for this site</li>
+      </ul>
+      <p>Since we do not collect personal data directly, we cannot fulfill data deletion or access requests for user-specific data — because we simply don't have any.</p>
+    </div>
+
+    <div class="policy-card">
+      <h2><span class="icon">🔄</span> 9. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. When we do, we will update the "Last updated" date at the top of this page. We encourage you to review this page periodically. Continued use of the site after changes constitutes acceptance of the new policy.</p>
+    </div>
+
+    <div class="policy-card">
+      <h2><span class="icon">📮</span> 10. Contact Us</h2>
+      <p>If you have questions, concerns, or requests regarding this Privacy Policy, you may contact us via:</p>
+      <ul>
+        <li><strong>GitHub Issues:</strong> <a href="https://github.com/ishbirhanspal-max/ishbirhanspal-max.github.io/issues" target="_blank" rel="noopener">github.com/ishbirhanspal-max/.../issues</a></li>
+        <li><strong>Website:</strong> <a href="https://optipixelstudio.online">optipixelstudio.online</a></li>
+      </ul>
+    </div>
+
+    <!-- AdSense Ad Slot in Privacy Page -->
+    <div style="text-align:center; margin: 2rem 0; overflow:hidden; min-height:90px;">
+      <span style="font-size:0.7rem;color:#475569;display:block;margin-bottom:4px;">Advertisement</span>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9875981872644926"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
   </div>
-
-  <div class="section">
-    <h2>📋 Overview</h2>
-    <p>This Privacy Policy describes how OptiPixel Studio ("we", "us", or "our") handles information when you visit and use our website at <strong>optipixelstudio.online</strong> (the "Service").</p>
-    <p>By using our Service, you agree to this Privacy Policy. If you disagree, please discontinue use of the Service.</p>
-    <p><strong>Last Updated: September 1, 2026</strong></p>
-  </div>
-
-  <div class="section">
-    <h2>📂 Information We Collect</h2>
-    <p>We collect the absolute minimum information necessary to operate the Service:</p>
-    <ul>
-      <li><strong>No file data:</strong> All images, PDFs, audio, video, and documents you process stay 100% in your browser's local memory. They are never transmitted anywhere.</li>
-      <li><strong>No account required:</strong> We do not collect names, email addresses, or passwords.</li>
-      <li><strong>No login:</strong> The Service requires no registration to use.</li>
-      <li><strong>Usage data:</strong> Google Analytics and Google AdSense may collect anonymised aggregated usage statistics such as country, browser type, and pages visited.</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>🍪 Cookies &amp; Advertising</h2>
-    <p>We use Google AdSense to display relevant advertisements on our site to support free access to our tools. Google AdSense uses cookies to serve ads based on your prior visits to this and other websites.</p>
-    <p>You may opt out of personalised advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a> or <a href="https://www.aboutads.info" target="_blank" rel="noopener">www.aboutads.info</a>.</p>
-    <p>For users in the EEA, UK and Switzerland, we present a GDPR-compliant consent banner before serving any personalised ads.</p>
-  </div>
-
-  <div class="section">
-    <h2>🌍 Third-Party Services</h2>
-    <p>We use the following third-party services that may collect data under their own privacy policies:</p>
-    <ul>
-      <li><strong>Google AdSense</strong> — Advertising: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a></li>
-      <li><strong>Google Fonts</strong> — Typography delivery: <a href="https://fonts.google.com/about" target="_blank" rel="noopener">Privacy Info</a></li>
-      <li><strong>Cloudflare Pages / GitHub Pages</strong> — Hosting: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Privacy</a></li>
-      <li><strong>PDF.js (Mozilla)</strong> — Client-side PDF rendering (offline library, no data sent)</li>
-      <li><strong>pdf-lib</strong> — Client-side PDF editing (offline library, no data sent)</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>👶 Children's Privacy</h2>
-    <p>Our Service is not directed to children under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If you are a parent or guardian and believe your child has provided us with personal data, please contact us immediately.</p>
-  </div>
-
-  <div class="section">
-    <h2>🔐 Data Security</h2>
-    <p>Since all processing happens locally in your browser and no files or personal data are uploaded to our servers, your data never leaves your device. This design makes OptiPixel Studio inherently secure — there is no server-side database that could be breached.</p>
-  </div>
-
-  <div class="section">
-    <h2>⚖️ Your GDPR Rights (EEA/UK Users)</h2>
-    <p>If you are located in the European Economic Area, United Kingdom or Switzerland, you have the right to:</p>
-    <ul>
-      <li>Access the personal data we hold about you</li>
-      <li>Request correction or deletion of your data</li>
-      <li>Object to or restrict processing of your data</li>
-      <li>Withdraw consent at any time for cookie-based personalised advertising</li>
-      <li>Lodge a complaint with your local data protection authority</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>📬 Contact Us</h2>
-    <p>If you have any questions about this Privacy Policy or our data practices, please contact us at:</p>
-    <p>📧 <a href="mailto:privacy@optipixelstudio.dev">privacy@optipixelstudio.dev</a></p>
-    <p>🌐 Website: <a href="https://optipixelstudio.online" target="_blank">https://optipixelstudio.online</a></p>
-  </div>
-
-  <div class="section">
-    <h2>🔄 Changes to This Policy</h2>
-    <p>We may update this Privacy Policy from time to time. We will notify you of any significant changes by updating the "Last Updated" date at the top of this page. Continued use of the Service after changes constitutes your acceptance of the revised policy.</p>
-  </div>
-
-  <p class="updated">© 2026 OptiPixel Studio. All rights reserved. | Last Updated: September 1, 2026</p>
-
 </main>
 
 <footer>
-  <p>OptiPixel Studio — 100% Free, 100% Private, 100% Client-Side Processing. &nbsp;|&nbsp; <a href="about.html">About Us</a> &nbsp;|&nbsp; <a href="contact.html">Contact</a> &nbsp;|&nbsp; <a href="terms.html">Terms</a> &nbsp;|&nbsp; <a href="disclaimer.html">Disclaimer</a> &nbsp;|&nbsp; <a href="https://buymeacoffee.com/ISHBIR" target="_blank" rel="noopener noreferrer" style="color: #FFDD00; font-weight: 600; text-decoration: none;">☕ Buy me a coffee</a> &nbsp;|&nbsp; <a href="index.html">← Back to App</a></p>
+  <div class="container" style="text-align: center; padding: 2rem 0; font-size: 0.9rem; color: #94a3b8;">
+    <p>© 2026 OptiPixel Studio — <a href="index.html" style="color: var(--accent-cyan); text-decoration: none;">optipixelstudio.online</a> | <a href="about.html" style="color: var(--accent-cyan); text-decoration: none;">About Us</a> | <a href="contact.html" style="color: var(--accent-cyan); text-decoration: none;">Contact</a> | <a href="privacy.html" style="color: var(--accent-cyan); text-decoration: none;">Privacy Policy</a> | <a href="terms.html" style="color: var(--accent-cyan); text-decoration: none;">Terms of Service</a> | <a href="disclaimer.html" style="color: var(--accent-cyan); text-decoration: none;">Disclaimer</a></p>
+    <p style="margin-top: 0.5rem;">All tools run 100% client-side in your browser. Your files never touch any external server.</p>
+    <p style="margin-top: 0.5rem;"><a href="index.html" style="display: inline-block; padding: 0.4rem 1rem; border-radius: 999px; background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3); color: #a5b4fc; text-decoration: none; font-weight: 600;">← Back to OptiPixel Studio Tools</a></p>
+  </div>
 </footer>
 
 </body>

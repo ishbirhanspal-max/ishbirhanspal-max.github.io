@@ -1764,7 +1764,10 @@
         const display = elements.barcodeResultCanvas;
         if (!display) return;
         const dataUrl = display.toDataURL('image/png');
-        triggerDownload(dataUrl, 'optipixel-barcode.png');
+        const format = elements.barcodeFormatSelect ? elements.barcodeFormatSelect.value : 'barcode';
+        const rawText = (elements.barcodeTextInput ? elements.barcodeTextInput.value.trim() : '') || 'code';
+        const cleanText = rawText.replace(/[^a-zA-Z0-9-_]/g, '_').substring(0, 20);
+        triggerDownload(dataUrl, `optipixel-${format}-${cleanText}.png`);
         showToast('Barcode downloaded successfully!', 'success');
       });
     }

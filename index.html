@@ -483,92 +483,105 @@
       <!-- Privacy Badge -->
       <div class="hero-badge" style="display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.35rem 0.95rem; background: rgba(99, 102, 241, 0.12); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: var(--radius-full); font-size: 0.82rem; font-weight: 600; color: var(--accent-cyan-light); margin-bottom: 1rem;">
         <span class="pulse-dot" style="width: 7px; height: 7px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981;"></span>
-        <span>100% Client-Side Private • Zero Cloud Uploads</span>
+        <span>🔒 100% Private — Files Never Leave Your Phone or Computer</span>
       </div>
 
       <!-- Main Title -->
       <h1 class="hero-title" style="font-size: clamp(1.85rem, 4.5vw, 3.2rem); font-weight: 800; line-height: 1.18; letter-spacing: -0.03em; margin-bottom: 0.75rem;">
-        All-in-One Creative &amp; <br>
-        <span class="text-gradient">Document Powerhouse</span>
+        Free Online Tools — <br>
+        <span class="text-gradient">No Sign-Up. No Cost. No Limits.</span>
       </h1>
       
       <!-- Subtitle -->
       <p class="hero-subtitle" style="font-size: clamp(0.92rem, 1.8vw, 1.1rem); color: var(--text-muted); max-width: 680px; margin: 0 auto 1.25rem; line-height: 1.55;">
-        Compress images, remove backgrounds, scan text (OCR), create barcodes, build collages, record audio, and edit PDFs with zero privacy risks.
+        Compress images, remove photo backgrounds, scan text, generate QR codes, edit PDFs, make passport photos &amp; more — all free, all instant, works on mobile &amp; computer.
       </p>
+
+      <!-- Child-Friendly 3-Step Guide -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 1rem; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 700; color: #6ee7b7;">
+          1️⃣ Pick a Tool Below
+        </div>
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 1rem; background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.25); border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 700; color: #67e8f9;">
+          2️⃣ Upload Your File
+        </div>
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 1rem; background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.25); border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 700; color: #a5b4fc;">
+          3️⃣ Download Result — Done! 🎉
+        </div>
+      </div>
 
       <!-- Trust Badges Strip -->
       <div class="trust-badges" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin-bottom: 1.75rem;">
         <div class="badge-item" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.75rem; background: var(--bg-surface-2); border: 1px solid var(--border-subtle); border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span>Private &amp; Secure</span>
+          <span>🛡️ 100% Private &amp; Secure</span>
         </div>
         <div class="badge-item" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.75rem; background: var(--bg-surface-2); border: 1px solid var(--border-subtle); border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          <span>Fast Client-Side Processing</span>
+          <span>⚡ Instant — Works Offline Too</span>
         </div>
         <div class="badge-item" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.75rem; background: var(--bg-surface-2); border: 1px solid var(--border-subtle); border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <span>No File Limits &amp; $0 Cost</span>
+          <span>⭐ Free Forever — No Account Needed</span>
         </div>
       </div>
 
       <!-- Mobile Swipe Hint & Quick Tool Picker Trigger -->
       <div class="mobile-swipe-hint">
         <span class="swipe-arrow">⇄</span>
-        <span>Swipe tools below or</span>
-        <button type="button" class="mobile-open-all-btn" onclick="openMobileToolsDrawer()">⚡ View All 12 Tools</button>
+        <span>Swipe to see all tools or</span>
+        <button type="button" class="mobile-open-all-btn" onclick="openMobileToolsDrawer()">📋 See All 12 Tools</button>
       </div>
 
       <!-- Main Workspace 12-Tool Tabs Navigation -->
-      <div class="tab-nav-container">
-        <button class="tab-btn active" id="tabImageBtn">
+      <div class="tab-nav-container" role="tablist" aria-label="Tool selector">
+        <button class="tab-btn active" id="tabImageBtn" role="tab" aria-selected="true" aria-controls="imageWorkspace" title="Compress & convert images — JPG, PNG, WebP">
           <span>🖼️</span>
-          <span>Image Optimizer</span>
+          <span>Compress Images</span>
         </button>
-        <button class="tab-btn" id="tabBgBtn">
+        <button class="tab-btn" id="tabBgBtn" role="tab" aria-selected="false" aria-controls="bgRemoverWorkspace" title="Remove background from any photo for free">
           <span>✂️</span>
-          <span>Remove BG</span>
+          <span>Remove Background</span>
         </button>
-        <button class="tab-btn" id="tabQrBtn">
+        <button class="tab-btn" id="tabQrBtn" role="tab" aria-selected="false" aria-controls="qrWorkspace" title="Generate QR codes for URLs, WiFi, WhatsApp">
           <span>🎨</span>
-          <span>QR Studio</span>
+          <span>QR Code Maker</span>
         </button>
-        <button class="tab-btn" id="tabBarcodeBtn">
+        <button class="tab-btn" id="tabBarcodeBtn" role="tab" aria-selected="false" aria-controls="barcodeWorkspace" title="Generate Code-128, EAN-13, UPC-A barcodes">
           <span>📊</span>
-          <span>Barcodes</span>
+          <span>Barcode Maker</span>
         </button>
-        <button class="tab-btn" id="tabPassportBtn">
+        <button class="tab-btn" id="tabPassportBtn" role="tab" aria-selected="false" aria-controls="passportWorkspace" title="Make passport & visa photos for free">
           <span>🪪</span>
-          <span>Passport Maker</span>
+          <span>Passport Photo</span>
         </button>
-        <button class="tab-btn" id="tabCollageBtn">
+        <button class="tab-btn" id="tabCollageBtn" role="tab" aria-selected="false" aria-controls="collageWorkspace" title="Create photo collages and grids">
           <span>🖼️</span>
-          <span>Collage Maker</span>
+          <span>Photo Collage</span>
         </button>
-        <button class="tab-btn" id="tabFiltersBtn">
+        <button class="tab-btn" id="tabFiltersBtn" role="tab" aria-selected="false" aria-controls="filtersWorkspace" title="Apply photo filters and effects">
           <span>🪄</span>
-          <span>Filters &amp; Effects</span>
+          <span>Photo Filters</span>
         </button>
-        <button class="tab-btn" id="tabSocialCropBtn">
+        <button class="tab-btn" id="tabSocialCropBtn" role="tab" aria-selected="false" aria-controls="socialCropWorkspace" title="Resize images for Instagram, TikTok, YouTube">
           <span>📐</span>
-          <span>Social Crop</span>
+          <span>Social Media Resize</span>
         </button>
-        <button class="tab-btn" id="tabOcrBtn">
+        <button class="tab-btn" id="tabOcrBtn" role="tab" aria-selected="false" aria-controls="ocrWorkspace" title="Extract text from photos and scanned documents">
           <span>🔍</span>
-          <span>Image to Text (OCR)</span>
+          <span>Scan Text (OCR)</span>
         </button>
-        <button class="tab-btn" id="tabVideoBtn">
+        <button class="tab-btn" id="tabVideoBtn" role="tab" aria-selected="false" aria-controls="videoWorkspace" title="Extract frames from videos as PNG images">
           <span>🎞️</span>
-          <span>Video to GIF</span>
+          <span>Video Frames</span>
         </button>
-        <button class="tab-btn" id="tabAudioBtn">
+        <button class="tab-btn" id="tabAudioBtn" role="tab" aria-selected="false" aria-controls="audioWorkspace" title="Record your voice and download as audio">
           <span>🎙️</span>
-          <span>Audio Studio</span>
+          <span>Voice Recorder</span>
         </button>
-        <button class="tab-btn" id="tabPdfBtn">
+        <button class="tab-btn" id="tabPdfBtn" role="tab" aria-selected="false" aria-controls="pdfWorkspace" title="Merge, split, edit, watermark and convert PDFs">
           <span>📄</span>
-          <span>PDF Studio</span>
+          <span>PDF Tools</span>
         </button>
       </div>
 
@@ -1643,7 +1656,7 @@
 
     <!-- Bottom Responsive Ad Slot (Google AdSense) -->
     <div class="ad-slot-horizontal" id="bottomAdSlot" style="text-align:center; overflow:hidden; min-height:90px;">
-      <span class="ad-label">Sponsored</span>
+      <span class="ad-label">Advertisement</span>
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-9875981872644926"
