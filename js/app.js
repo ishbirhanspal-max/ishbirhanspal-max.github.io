@@ -1140,10 +1140,10 @@
       if (!elements.qrResultCanvas || !window.QRCodeEngine) return;
 
       const type = elements.qrTypeSelect.value;
-      let text = 'https://optipixel.app';
+      let text = 'https://optipixelstudio.online';
 
       if (type === 'url' || type === 'text') {
-        text = elements.qrTextInput.value.trim() || 'https://optipixel.app';
+        text = elements.qrTextInput.value.trim() || 'https://optipixelstudio.online';
       } else if (type === 'wifi') {
         const ssid = elements.qrWifiSsid.value.trim() || 'My_WiFi';
         const pass = elements.qrWifiPass.value.trim() || '';

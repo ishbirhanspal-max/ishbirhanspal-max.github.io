@@ -12,7 +12,7 @@ class QRCodeEngine {
    */
   static generateQRCode(options = {}) {
     const {
-      text = 'https://optipixel.app',
+      text = 'https://optipixelstudio.online',
       size = 400,
       colorDark = '#000000',
       colorLight = '#ffffff',
