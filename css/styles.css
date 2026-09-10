@@ -3161,3 +3161,100 @@ input[type="range"]::-webkit-slider-thumb:hover {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
+/* ============================================================ */
+/* RESPONSIVE CANVAS & TOOL OUTPUT — Zero-overflow guarantee    */
+/* ============================================================ */
+#socialCropResultCanvas,
+#filterResultCanvas,
+#collageResultCanvas,
+#bgResultCanvas,
+#passportResultCanvas,
+#barcodeResultCanvas,
+#ocrPreviewCanvas,
+#qrResultCanvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* OCR 2-column layout — stack on mobile */
+@media (max-width: 640px) {
+  #ocrControlsContainer > div {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+  }
+
+  #ocrControlsContainer textarea {
+    height: 160px !important;
+  }
+
+  /* Social crop preview — aspect ratio maintained */
+  #socialCropResultCanvas {
+    max-height: 280px;
+    object-fit: contain;
+  }
+
+  /* Video player responsive */
+  #videoPlayer {
+    max-height: 250px !important;
+    width: 100% !important;
+  }
+
+  /* PDF annotation toolbar — horizontal scroll */
+  .annotation-toolbar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  /* Improve button hit targets for mobile */
+  .btn {
+    min-height: 44px !important;
+    touch-action: manipulation;
+  }
+
+  .btn-sm {
+    min-height: 38px !important;
+  }
+
+  /* Ad slot sizing */
+  .ad-slot-horizontal {
+    min-height: 60px !important;
+  }
+}
+
+/* ============================================================ */
+/* PERFORMANCE — Smooth scrolling & rendering hints             */
+/* ============================================================ */
+.studio-card,
+.tab-btn,
+.btn,
+.dropzone-container,
+.file-card {
+  will-change: auto;
+}
+
+/* Focus visible outlines for accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Print styles — hide UI chrome when printing */
+@media print {
+  .site-header,
+  .tab-nav-container,
+  .mobile-bottom-bar,
+  .cookie-banner-container,
+  .ad-slot-horizontal,
+  footer {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+}
