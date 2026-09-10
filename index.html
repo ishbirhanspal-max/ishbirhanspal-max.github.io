@@ -125,14 +125,53 @@
         font-size: 1rem !important;
       }
       #langSelect {
-        max-width: 90px !important;
-        font-size: 0.76rem !important;
-        padding: 0.25rem 0.35rem !important;
+        max-width: 82px !important;
+        font-size: 0.74rem !important;
+        padding: 0.2rem 0.35rem !important;
       }
     }
     @media (max-width: 640px) {
+      .hide-on-mobile {
+        display: none !important;
+      }
+      .site-header {
+        padding: 0.4rem 0 !important;
+      }
+      .site-header .navbar {
+        gap: 0.4rem !important;
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+      }
+      .brand-logo {
+        gap: 0.35rem !important;
+      }
+      .brand-logo img {
+        width: 28px !important;
+        height: 28px !important;
+      }
+      .brand-title {
+        font-size: 0.95rem !important;
+      }
+      #langSelect {
+        max-width: 80px !important;
+        height: 32px !important;
+      }
+      #sponsorBtn {
+        display: inline-flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        padding: 0.25rem 0.6rem !important;
+        font-size: 0.78rem !important;
+        height: 32px !important;
+        flex-shrink: 0 !important;
+      }
+      #sponsorBtn .coffee-text {
+        display: inline !important;
+        font-weight: 700 !important;
+      }
+      /* Footer clearance so mobile-bottom-bar NEVER overlaps any footer links */
       .site-footer {
-        padding: 2.5rem 0 1.5rem !important;
+        padding: 2.5rem 0 6.5rem !important;
       }
       .footer-grid {
         display: flex !important;
@@ -172,15 +211,15 @@
       }
     }
     @media (max-width: 380px) {
-      .brand-logo span {
+      .brand-title {
         font-size: 0.88rem !important;
       }
       #langSelect {
-        max-width: 70px !important;
+        max-width: 68px !important;
       }
       #sponsorBtn {
-        padding: 0.25rem 0.5rem !important;
-        font-size: 0.78rem !important;
+        padding: 0.25rem 0.45rem !important;
+        font-size: 0.75rem !important;
       }
     }
   </style>
@@ -525,7 +564,7 @@
       <!-- Brand Logo -->
       <a href="#" class="brand-logo" id="brandLogo" style="flex-shrink: 0; display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
         <img src="assets/logo.png" alt="OptiPixel Logo" width="34" height="34" loading="eager" decoding="async" style="border-radius: var(--radius-sm); box-shadow: 0 0 12px rgba(6, 182, 212, 0.4); flex-shrink: 0;">
-        <span style="font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; white-space: nowrap;">OptiPixel<span class="text-gradient">&amp;PDF</span></span>
+        <span class="brand-title" style="font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; white-space: nowrap;">OptiPixel<span class="text-gradient hide-on-mobile">&amp;PDF</span></span>
       </a>
 
       <!-- Right Nav Actions (Always single row) -->
