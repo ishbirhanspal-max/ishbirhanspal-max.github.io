@@ -1,0 +1,23 @@
+{
+  "name": "OptiPixel Studio — Free Image & PDF Tools",
+  "short_name": "OptiPixel",
+  "description": "100% free, private browser suite for image compression, PDF editing, background removal, and QR codes.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070a12",
+  "theme_color": "#070a12",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
