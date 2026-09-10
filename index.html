@@ -93,7 +93,7 @@
   <!-- ============================================================ -->
   <!-- STYLESHEET (Cache-busted v3.0) & CRITICAL MOBILE OVERRIDES   -->
   <!-- ============================================================ -->
-  <link rel="stylesheet" href="css/styles.css?v=3.1">
+  <link rel="stylesheet" href="css/styles.css?v=3.2">
   <style>
     /* Critical Mobile Header & Footer Rules */
     #sponsorBtn {
@@ -137,10 +137,25 @@
       .site-header {
         padding: 0.4rem 0 !important;
       }
-      .site-header .navbar {
-        gap: 0.4rem !important;
+      .site-header .container {
         padding-left: 0.5rem !important;
         padding-right: 0.5rem !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .site-header .navbar {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 0.3rem !important;
+      }
+      .nav-actions {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.35rem !important;
+        flex-shrink: 0 !important;
       }
       .brand-logo {
         gap: 0.35rem !important;
@@ -153,15 +168,18 @@
         font-size: 0.95rem !important;
       }
       #langSelect {
-        max-width: 80px !important;
+        max-width: 75px !important;
+        width: 75px !important;
         height: 32px !important;
+        font-size: 0.75rem !important;
+        padding: 0.15rem 0.3rem !important;
       }
       #sponsorBtn {
         display: inline-flex !important;
         visibility: visible !important;
         opacity: 1 !important;
-        padding: 0.25rem 0.6rem !important;
-        font-size: 0.78rem !important;
+        padding: 0.25rem 0.55rem !important;
+        font-size: 0.76rem !important;
         height: 32px !important;
         flex-shrink: 0 !important;
       }
@@ -559,16 +577,16 @@
 
   <!-- Header & Navigation (Guaranteed Single-Line Fit) -->
   <header class="site-header">
-    <div class="container navbar" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 0.75rem;">
+    <div class="container navbar">
       
       <!-- Brand Logo -->
-      <a href="#" class="brand-logo" id="brandLogo" style="flex-shrink: 0; display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
-        <img src="assets/logo.png" alt="OptiPixel Logo" width="34" height="34" loading="eager" decoding="async" style="border-radius: var(--radius-sm); box-shadow: 0 0 12px rgba(6, 182, 212, 0.4); flex-shrink: 0;">
+      <a href="#" class="brand-logo" id="brandLogo">
+        <img src="assets/logo.png" alt="OptiPixel Logo" width="30" height="30" loading="eager" decoding="async" style="border-radius: var(--radius-sm); box-shadow: 0 0 12px rgba(6, 182, 212, 0.4); flex-shrink: 0;">
         <span class="brand-title" style="font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; white-space: nowrap;">OptiPixel<span class="text-gradient hide-on-mobile">&amp;PDF</span></span>
       </a>
 
       <!-- Right Nav Actions (Always single row) -->
-      <nav class="nav-actions" style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: nowrap; flex-shrink: 0;">
+      <nav class="nav-actions">
         
         <!-- Language Switcher -->
         <div class="lang-selector-wrap" style="flex-shrink: 0;">
@@ -727,6 +745,7 @@
            data-ad-client="ca-pub-9875981872644926"
            data-ad-slot="auto"
            data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
       <script>
         window.addEventListener('load', function() {
           var el = document.getElementById('topAdSlot');
@@ -1800,6 +1819,7 @@
            data-ad-client="ca-pub-9875981872644926"
            data-ad-slot="auto"
            data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
       <script>
         window.addEventListener('load', function() {
           var el = document.getElementById('bottomAdSlot');
