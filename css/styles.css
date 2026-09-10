@@ -2410,26 +2410,27 @@ input[type="range"]::-webkit-slider-thumb:hover {
     font-size: 1rem !important;
   }
 
-  .github-badge-text {
+  .github-badge-text,
+  .github-repo-badge {
     display: none !important;
   }
 
-  .github-repo-badge {
-    padding: 0.3rem !important;
-    height: 30px !important;
-  }
-
   #langSelect {
-    height: 30px !important;
+    height: 32px !important;
     font-size: 0.74rem !important;
     padding: 0.15rem 0.35rem !important;
-    max-width: 95px !important;
+    max-width: 80px !important;
+    width: 80px !important;
   }
 
   #sponsorBtn {
-    height: 30px !important;
-    padding: 0.15rem 0.5rem !important;
-    font-size: 0.74rem !important;
+    height: 32px !important;
+    padding: 0.2rem 0.65rem !important;
+    font-size: 0.76rem !important;
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex-shrink: 0 !important;
   }
 
   /* Compact Hero Section */
@@ -2534,9 +2535,12 @@ input[type="range"]::-webkit-slider-thumb:hover {
     font-size: 0.95rem !important;
   }
 
-  /* Hide Top Ad Placeholder on Mobile to bring tool directly into view */
+  /* Responsive Top Ad Slot on Mobile */
   #topAdSlot {
-    display: none !important;
+    min-height: 50px !important;
+    max-height: 90px;
+    margin: 0.5rem auto !important;
+    overflow: hidden;
   }
 
   /* Studio Cards & Dropzones */
