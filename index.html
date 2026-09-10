@@ -2180,6 +2180,15 @@
   <script defer src="js/audio-studio.js"></script>
   <script defer src="js/pdf-editor.js"></script>
   <script defer src="js/app.js?v=2.5"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').catch(function(e) {
+          console.log('SW registration skipped:', e);
+        });
+      });
+    }
+  </script>
   <!-- Mobile Bottom Quick-Access Thumb Bar (Visible only on mobile) -->
   <nav class="mobile-bottom-bar" id="mobileBottomBar" aria-label="Mobile Quick Tools">
     <button type="button" class="mobile-bottom-btn active" id="mobTabCompress" onclick="switchMobileTool('tabImageBtn')">
