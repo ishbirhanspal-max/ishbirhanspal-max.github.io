@@ -91,9 +91,99 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap&display=swap" rel="stylesheet">
 
   <!-- ============================================================ -->
-  <!-- STYLESHEET -->
+  <!-- STYLESHEET (Cache-busted v3.0) & CRITICAL MOBILE OVERRIDES   -->
   <!-- ============================================================ -->
-  <link rel="stylesheet" href="css/styles.css?v=2.5">
+  <link rel="stylesheet" href="css/styles.css?v=3.0">
+  <style>
+    /* Critical Mobile Header & Footer Rules */
+    #sponsorBtn {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0.35rem !important;
+      background: #FFDD00 !important;
+      color: #000000 !important;
+      font-weight: 700 !important;
+      font-size: 0.82rem !important;
+      padding: 0.35rem 0.75rem !important;
+      border-radius: 999px !important;
+      text-decoration: none !important;
+      white-space: nowrap !important;
+      flex-shrink: 0 !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    #sponsorBtn .coffee-text {
+      display: inline !important;
+      font-weight: 700 !important;
+    }
+    @media (max-width: 768px) {
+      .github-repo-badge,
+      .desktop-only-link {
+        display: none !important;
+      }
+      .brand-logo span {
+        font-size: 1rem !important;
+      }
+      #langSelect {
+        max-width: 90px !important;
+        font-size: 0.76rem !important;
+        padding: 0.25rem 0.35rem !important;
+      }
+    }
+    @media (max-width: 640px) {
+      .site-footer {
+        padding: 2.5rem 0 1.5rem !important;
+      }
+      .footer-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        width: 100% !important;
+      }
+      .footer-brand,
+      .footer-grid > div {
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .footer-brand {
+        padding-bottom: 1rem !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+      }
+      .footer-heading {
+        color: #38bdf8 !important;
+        font-size: 1.05rem !important;
+        margin-bottom: 0.75rem !important;
+      }
+      .footer-links {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+      }
+      .footer-links li a {
+        font-size: 0.95rem !important;
+        color: #cbd5e1 !important;
+        display: inline-block !important;
+        padding: 0.2rem 0 !important;
+      }
+      .footer-bottom {
+        padding-top: 1.5rem !important;
+        font-size: 0.82rem !important;
+        line-height: 1.8 !important;
+      }
+    }
+    @media (max-width: 380px) {
+      .brand-logo span {
+        font-size: 0.88rem !important;
+      }
+      #langSelect {
+        max-width: 70px !important;
+      }
+      #sponsorBtn {
+        padding: 0.25rem 0.5rem !important;
+        font-size: 0.78rem !important;
+      }
+    }
+  </style>
 
   <!-- ============================================================ -->
   <!-- STRUCTURED DATA — RICH SNIPPETS FOR GOOGLE -->
