@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-9875981872644926">
+  <meta name="google-site-verification" content="jVQJff56nis0RTvooVRwHp6-dbM8nsIMy12GFCqMtJU">
+  <title>Free OCR Image to Text Converter Online — OptiPixel Studio</title>
+  <meta name="description" content="Extract editable text from images, photos, receipts, and book scans online for free. In-browser OCR text recognition with 100% privacy and no server uploads.">
+  <meta name="keywords" content="ocr online, image to text converter, extract text from image, photo to text, scan receipt to text, client-side ocr">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ishbirhanspal-max.github.io/ocr-text-scan.html">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9875981872644926" crossorigin="anonymous"></script>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free OCR Image to Text Converter — OptiPixel Studio">
+  <meta property="og:description" content="Extract clean, editable text from images and screenshots right in your browser with zero server uploads.">
+  <meta property="og:url" content="https://ishbirhanspal-max.github.io/ocr-text-scan.html">
+  <meta property="og:image" content="https://ishbirhanspal-max.github.io/assets/logo.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "OptiPixel OCR Text Scanner",
+        "url": "https://ishbirhanspal-max.github.io/ocr-text-scan.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All modern browsers",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "High-accuracy client-side optical character recognition scanner."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does OptiPixel OCR extract text without uploading images to a server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "OptiPixel Studio uses an in-browser WebAssembly port of optical character recognition engine models. The image is parsed directly inside your device's memory, recognizing glyph patterns and converting them into unicode text strings offline."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I copy or download the recognized text?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! With one click you can copy the full transcript to your system clipboard or export it directly as a clean .txt plain text file."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #070a12;
+      --surface: #0e1424;
+      --surface-card: rgba(18, 26, 44, 0.7);
+      --border: rgba(255,255,255,0.08);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #f59e0b;
+      --accent2: #ef4444;
+      --radius: 16px;
+    }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+    header {
+      background: rgba(7,10,18,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header a.brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+    header a.brand img { width: 34px; height: 34px; border-radius: 8px; }
+    .nav-links { display: flex; align-items: center; gap: 1.25rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;
+      color: #000; background: var(--accent); font-weight: 700; font-size: 0.9rem;
+      padding: 0.45rem 1.1rem; border-radius: 999px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(245,158,11,0.12) 0%, rgba(239,68,68,0.08) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 3.5rem 2rem 3rem;
+      text-align: center;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3);
+      color: #fbbf24; padding: 0.35rem 1rem; border-radius: 999px;
+      font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b 50%, #ef4444);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .hero p { max-width: 700px; margin: 0 auto 1.5rem; color: var(--muted); font-size: 1.15rem; }
+
+    .tool-widget-card {
+      max-width: 800px;
+      margin: -2rem auto 3rem;
+      background: var(--surface);
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 25px rgba(245,158,11,0.15);
+      text-align: center;
+    }
+    .drop-zone {
+      border: 2px dashed rgba(245,158,11,0.4);
+      border-radius: 12px;
+      padding: 3rem 1.5rem;
+      background: rgba(255,255,255,0.02);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .drop-zone:hover {
+      border-color: #fbbf24;
+      background: rgba(245,158,11,0.05);
+      transform: scale(1.01);
+    }
+    .drop-icon { font-size: 3rem; margin-bottom: 0.75rem; display: block; }
+    .btn-action {
+      display: inline-block;
+      margin-top: 1.25rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #000;
+      font-weight: 700;
+      padding: 0.8rem 2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1.05rem;
+    }
+
+    main { max-width: 900px; margin: 0 auto; padding: 1rem 2rem 6rem; }
+    .content-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(12px);
+    }
+    h2 { font-size: 1.5rem; font-weight: 700; color: #f1f5f9; margin-bottom: 1rem; }
+    h3 { font-size: 1.2rem; font-weight: 600; color: #fbbf24; margin: 1.25rem 0 0.5rem; }
+    p { color: #cbd5e1; margin-bottom: 1.25rem; font-size: 1.05rem; }
+    ul, ol { margin: 0 0 1.25rem 1.5rem; color: #cbd5e1; }
+    li { margin-bottom: 0.5rem; }
+    strong { color: #fff; }
+
+    footer {
+      background: #05070d;
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 2rem 2.5rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-col h4 { color: #fff; font-size: 1rem; margin-bottom: 1rem; font-weight: 700; }
+    .footer-col ul { list-style: none; margin: 0; padding: 0; }
+    .footer-col li { margin-bottom: 0.6rem; }
+    .footer-col a { color: var(--muted); text-decoration: none; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      max-width: 1100px; margin: 0 auto; padding-top: 2rem;
+      border-top: 1px solid var(--border); display: flex;
+      justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    @media (max-width: 768px) {
+      .footer-container { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="OptiPixel Studio">
+      <span>OptiPixel<span style="color: #fbbf24;">Studio</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="image-compressor.html">Image Compressor</a>
+      <a href="pdf-editor.html">PDF Studio</a>
+      <a href="background-remover.html">Remove BG</a>
+      <a href="qr-code-generator.html">QR Studio</a>
+      <a href="ocr-text-scan.html" style="color: #fbbf24; font-weight: 700;">OCR Scan</a>
+      <a href="about.html">About</a>
+    </nav>
+    <a href="index.html#ocr-tools" class="nav-btn">Launch OCR ⚡</a>
+  </header>
+
+  <!-- Hero Header -->
+  <div class="hero">
+    <div class="badge">🔍 Optical Character Recognition • 100% Private</div>
+    <h1>Free Online OCR Image to Text Converter</h1>
+    <p>Extract editable text from scanned book pages, tax receipts, business cards, and screenshots instantly. Runs locally inside your web browser—zero server uploads.</p>
+  </div>
+
+  <!-- Interactive Launcher Card -->
+  <div class="tool-widget-card">
+    <div class="drop-zone" onclick="window.location.href='index.html#ocr-tools'">
+      <span class="drop-icon">📑</span>
+      <h3 style="font-size: 1.4rem; color: #fff; margin-bottom: 0.4rem;">Drop an image or screenshot here to extract text</h3>
+      <p style="color: var(--muted); font-size: 0.95rem;">Supports JPG, PNG, WebP, screenshots • Copy to clipboard or export TXT</p>
+      <a href="index.html#ocr-tools" class="btn-action">Scan Image for Text Now →</a>
+    </div>
+  </div>
+
+  <!-- Editorial & Technical Guide -->
+  <main>
+    <article class="content-card">
+      <h2>How Modern Optical Character Recognition (OCR) Works</h2>
+      <p>Optical Character Recognition is the computational process of translating visual pixel arrays containing printed or handwritten characters into standard, machine-readable Unicode text strings. Historically, OCR pipelines required transmitting private documents to cloud vision APIs (such as Google Cloud Vision or AWS Textract).</p>
+      <p>OptiPixel Studio brings OCR computation directly into your local web browser. Before character recognition occurs, the image undergoes pre-processing on the HTML5 Canvas:</p>
+      <ul>
+        <li><strong>Binarization &amp; Thresholding:</strong> Color noise is stripped away to convert text into clean high-contrast black-and-white silhouettes.</li>
+        <li><strong>Skew Correction:</strong> Rotated and angled phone snaps are computationally leveled for uniform horizontal scanning.</li>
+        <li><strong>Character Segmentation &amp; Matching:</strong> In-memory pattern classifiers map stroke contours against standard font glyph databases to reconstruct full paragraphs with punctuation.</li>
+      </ul>
+    </article>
+
+    <article class="content-card">
+      <h2>Common Everyday Applications</h2>
+      <ul>
+        <li><strong>Digitizing Book Excerpts &amp; Academic Notes:</strong> Photograph printed textbooks and immediately paste editable quotes into research papers or Notion.</li>
+        <li><strong>Expense Tracking &amp; Receipts:</strong> Extract merchant names, transaction dates, and total dollar amounts from store receipts into spreadsheets.</li>
+        <li><strong>Uncopyable Screenshot Text:</strong> Extract text from protected video frames, error dialogs, or mobile app screenshots.</li>
+      </ul>
+    </article>
+
+    <article class="content-card">
+      <h2>Frequently Asked Questions</h2>
+      <div style="margin-top: 1rem;">
+        <h3>Can I extract text from sensitive confidential financial documents?</h3>
+        <p>Yes. Because OptiPixel Studio runs 100% on your device and does not upload your files to any cloud server, you can safely digitize tax forms, bank records, and legal letters with complete peace of mind.</p>
+
+        <h3>Which image formats are supported?</h3>
+        <p>We support all major image formats including PNG, JPG, JPEG, WebP, BMP, and direct clipboard screenshot pastes.</p>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4 style="font-size: 1.15rem; color: #fff; margin-bottom: 0.75rem;">OptiPixel Studio</h4>
+        <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; color: var(--muted);">
+          100% free, browser-based media and document utilities. Fast, privacy-first, zero cloud uploads. Built for creators, professionals, and students.
+        </p>
+        <p style="font-size: 0.82rem; color: #64748b;">Publisher ID: pub-9875981872644926</p>
+      </div>
+      <div class="footer-col">
+        <h4>Studio Tools</h4>
+        <ul>
+          <li><a href="image-compressor.html">Image Compressor</a></li>
+          <li><a href="pdf-editor.html">Visual PDF Editor</a></li>
+          <li><a href="background-remover.html">Background Remover</a></li>
+          <li><a href="qr-code-generator.html">QR Code Generator</a></li>
+          <li><a href="ocr-text-scan.html">OCR Text Scanner</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About &amp; Trust</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Support</a></li>
+          <li><a href="https://github.com/ishbirhanspal-max/ishbirhanspal-max.github.io" target="_blank" rel="noopener">GitHub Repository</a></li>
+          <li><a href="https://buymeacoffee.com/ISHBIR" target="_blank" rel="noopener" style="color: #facc15;">☕ Buy Me a Coffee</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal &amp; Policy</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+          <li><a href="sitemap.xml">XML Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 OptiPixel Studio. Created by Ishbir Hanspal. All rights reserved.</div>
+      <div>Client-side optical character recognition engine.</div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-9875981872644926">
+  <meta name="google-site-verification" content="jVQJff56nis0RTvooVRwHp6-dbM8nsIMy12GFCqMtJU">
+  <title>Contact Us — OptiPixel Studio Support &amp; Inquiries</title>
+  <meta name="description" content="Have questions, feature requests, or bug reports? Contact the OptiPixel Studio team and founder Ishbir Hanspal. We reply within 24 hours.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ishbirhanspal-max.github.io/contact.html">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9875981872644926" crossorigin="anonymous"></script>
+
+  <!-- Structured Data: ContactPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact OptiPixel Studio",
+    "url": "https://ishbirhanspal-max.github.io/contact.html",
+    "description": "Reach out to the OptiPixel Studio developer team for support, feature suggestions, or business inquiries.",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "OptiPixel Studio",
+      "url": "https://ishbirhanspal-max.github.io/",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Support",
+        "email": "privacy@optipixelstudio.dev",
+        "availableLanguage": ["English", "Hindi"]
+      }
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #070a12;
+      --surface: #0e1424;
+      --surface-card: rgba(18, 26, 44, 0.7);
+      --border: rgba(255,255,255,0.08);
+      --border-active: #6366f1;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #06b6d4;
+      --accent2: #6366f1;
+      --radius: 14px;
+    }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+    header {
+      background: rgba(7,10,18,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header a.brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+    header a.brand img { width: 34px; height: 34px; border-radius: 8px; box-shadow: 0 0 12px rgba(6,182,212,0.4); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: #000;
+      background: var(--accent);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.45rem 1.1rem;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover { background: #38bdf8; transform: translateY(-1px); }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(6,182,212,0.08) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(6,182,212,0.12);
+      border: 1px solid rgba(6,182,212,0.3);
+      color: var(--accent);
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8, #6366f1 60%, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .hero p {
+      max-width: 650px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.15rem;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 6rem;
+    }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .content-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem;
+      backdrop-filter: blur(12px);
+    }
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .channel-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .channel-item:last-child { border-bottom: none; }
+    .channel-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(99,102,241,0.15);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .channel-info h3 {
+      font-size: 1.05rem;
+      color: #fff;
+      margin-bottom: 0.2rem;
+    }
+    .channel-info p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .channel-info a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .channel-info a:hover { text-decoration: underline; }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    label {
+      display: block;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    input, select, textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 10px rgba(6,182,212,0.25);
+    }
+    button.submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.85rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    button.submit-btn:hover { opacity: 0.95; transform: translateY(-1px); }
+
+    .faq-block {
+      margin-top: 3.5rem;
+    }
+    .faq-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .faq-card h3 {
+      font-size: 1.15rem;
+      color: #f1f5f9;
+      margin-bottom: 0.5rem;
+    }
+    .faq-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    footer {
+      background: #05070d;
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 2rem 2.5rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-col h4 {
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .footer-col ul { list-style: none; margin: 0; padding: 0; }
+    .footer-col li { margin-bottom: 0.6rem; }
+    .footer-col a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.88rem;
+    }
+    @media (max-width: 768px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      .footer-container { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header>
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="OptiPixel Studio">
+      <span>OptiPixel<span style="color: var(--accent);">Studio</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#dropzone">Image Compressor</a>
+      <a href="index.html#pdf-tools">PDF Studio</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html" class="active">Contact</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+    <a href="index.html" class="nav-btn">Launch Tools ⚡</a>
+  </header>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="badge">📬 We are here to help</div>
+    <h1>Contact OptiPixel Studio</h1>
+    <p>Have an idea for a new client-side tool? Found a bug or compatibility issue with your device? Reach out to founder Ishbir Hanspal and the developer team.</p>
+  </div>
+
+  <!-- Main Content Layout -->
+  <main>
+    <div class="contact-layout">
+      <!-- Direct Contact Channels -->
+      <div class="content-card">
+        <h2>Direct Communication</h2>
+        <p style="color: var(--muted); margin-bottom: 1.5rem; font-size: 0.98rem;">We prioritize direct developer-to-user transparency. Every inquiry is reviewed personally.</p>
+
+        <div class="channel-item">
+          <div class="channel-icon">📧</div>
+          <div class="channel-info">
+            <h3>Support &amp; Feedback</h3>
+            <p>For bug reports, technical inquiries, or questions about tool functionality:</p>
+            <a href="mailto:privacy@optipixelstudio.dev">privacy@optipixelstudio.dev</a>
+          </div>
+        </div>
+
+        <div class="channel-item">
+          <div class="channel-icon">🐙</div>
+          <div class="channel-info">
+            <h3>GitHub Open Source Issues</h3>
+            <p>Track issues, request new features, or inspect client-side code on our public repository:</p>
+            <a href="https://github.com/ishbirhanspal-max/ishbirhanspal-max.github.io/issues" target="_blank" rel="noopener">github.com/ishbirhanspal-max →</a>
+          </div>
+        </div>
+
+        <div class="channel-item">
+          <div class="channel-icon">⏱️</div>
+          <div class="channel-info">
+            <h3>Response Time Guarantee</h3>
+            <p>We typically reply to all legitimate support and security inquiries within <strong>24 business hours</strong>.</p>
+          </div>
+        </div>
+
+        <div class="channel-item">
+          <div class="channel-icon">☕</div>
+          <div class="channel-info">
+            <h3>Support the Project</h3>
+            <p>OptiPixel Studio is completely free. Consider buying the developer a coffee to keep serverless tools ad-supported and free:</p>
+            <a href="https://buymeacoffee.com/ISHBIR" target="_blank" rel="noopener" style="color: #facc15;">buymeacoffee.com/ISHBIR →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="content-card">
+        <h2>Send a Message</h2>
+        <form id="contactForm" onsubmit="handleContactSubmit(event)">
+          <div class="form-group">
+            <label for="contactName">Your Name</label>
+            <input type="text" id="contactName" name="name" required placeholder="Jane Doe">
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Your Email Address</label>
+            <input type="email" id="contactEmail" name="email" required placeholder="jane@example.com">
+          </div>
+          <div class="form-group">
+            <label for="contactTopic">Inquiry Category</label>
+            <select id="contactTopic" name="category">
+              <option value="bug">Report a Bug / Tool Failure</option>
+              <option value="feature">Feature Request or New Tool Suggestion</option>
+              <option value="privacy">Privacy &amp; Data Rights (GDPR/CCPA)</option>
+              <option value="partnership">Business &amp; Advertising Inquiries</option>
+              <option value="general">General Question</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="contactMessage">Your Message</label>
+            <textarea id="contactMessage" name="message" rows="5" required placeholder="Please describe what tool you used, your browser version, and what occurred..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn">Send Inquiry →</button>
+        </form>
+
+        <div id="contactSuccessMsg" style="display:none; margin-top: 1.5rem; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3); border-radius: 10px; padding: 1.25rem; text-align: center; color: #10b981;">
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.3rem;">Message Ready!</h3>
+          <p style="font-size: 0.95rem; color: #cbd5e1;">Opening your email client to send your message directly to Ishbir Hanspal. Thank you for contributing to OptiPixel Studio.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frequently Asked Questions -->
+    <div class="faq-block">
+      <h2 style="margin-bottom: 1.5rem;">Frequently Asked Questions</h2>
+      <div class="faq-card">
+        <h3>Why didn't my file upload?</h3>
+        <p>OptiPixel Studio does not upload your files anywhere! All files are loaded directly into your browser's local RAM. If a large file fails to process, check that your device has sufficient free RAM (especially on mobile devices with PDFs over 50MB).</p>
+      </div>
+      <div class="faq-card">
+        <h3>Is OptiPixel Studio truly free to use for commercial projects?</h3>
+        <p>Yes, 100%. All images, PDFs, barcodes, QR codes, and OCR transcripts generated by OptiPixel Studio are yours to use for personal, commercial, and enterprise applications with zero attribution required.</p>
+      </div>
+      <div class="faq-card">
+        <h3>How can I suggest a new tool for the studio?</h3>
+        <p>Submit a feature request via the form above or open an issue on our GitHub repository. We love building new client-side utilities!</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      var name = document.getElementById('contactName').value;
+      var email = document.getElementById('contactEmail').value;
+      var category = document.getElementById('contactTopic').value;
+      var message = document.getElementById('contactMessage').value;
+
+      var subject = encodeURIComponent("[OptiPixel Studio Inquiries] " + category + " from " + name);
+      var body = encodeURIComponent("From: " + name + " (" + email + ")\nCategory: " + category + "\n\nMessage:\n" + message);
+
+      document.getElementById('contactSuccessMsg').style.display = 'block';
+      document.getElementById('submitBtn').innerText = "Opening Email Client...";
+      setTimeout(function() {
+        window.location.href = "mailto:privacy@optipixelstudio.dev?subject=" + subject + "&body=" + body;
+      }, 500);
+    }
+  </script>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4 style="font-size: 1.15rem; color: #fff; margin-bottom: 0.75rem;">OptiPixel Studio</h4>
+        <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; color: var(--muted);">
+          100% free, browser-based media and document utilities. Fast, privacy-first, zero cloud uploads. Built for creators, professionals, and students.
+        </p>
+        <p style="font-size: 0.82rem; color: #64748b;">Publisher ID: pub-9875981872644926</p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Tools</h4>
+        <ul>
+          <li><a href="image-compressor.html">Image Compressor</a></li>
+          <li><a href="pdf-editor.html">Visual PDF Editor</a></li>
+          <li><a href="background-remover.html">Background Remover</a></li>
+          <li><a href="qr-code-generator.html">QR Code Generator</a></li>
+          <li><a href="ocr-text-scan.html">OCR Text Scanner</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About &amp; Trust</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Support</a></li>
+          <li><a href="https://github.com/ishbirhanspal-max/ishbirhanspal-max.github.io" target="_blank" rel="noopener">GitHub Repository</a></li>
+          <li><a href="https://buymeacoffee.com/ISHBIR" target="_blank" rel="noopener" style="color: #facc15;">☕ Buy Me a Coffee</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal &amp; Policy</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+          <li><a href="sitemap.xml">XML Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 OptiPixel Studio. Created by Ishbir Hanspal. All rights reserved.</div>
+      <div>Designed for universal privacy &amp; zero-cloud processing.</div>
+    </div>
+  </footer>
+
+</body>
+</html>

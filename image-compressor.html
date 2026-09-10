@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-9875981872644926">
+  <meta name="google-site-verification" content="jVQJff56nis0RTvooVRwHp6-dbM8nsIMy12GFCqMtJU">
+  <title>Free Online Image Compressor &amp; Converter (WebP, JPG, PNG) — OptiPixel Studio</title>
+  <meta name="description" content="Compress and convert JPG, PNG, and WebP images online for free. 100% private in-browser compression with zero quality loss and no server uploads.">
+  <meta name="keywords" content="image compressor, reduce image size, webp converter, compress png, compress jpeg, bulk image optimizer, client-side compressor">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ishbirhanspal-max.github.io/image-compressor.html">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9875981872644926" crossorigin="anonymous"></script>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free Online Image Compressor & Converter — OptiPixel Studio">
+  <meta property="og:description" content="Bulk compress and convert JPG, PNG, and WebP images right in your browser with zero server uploads.">
+  <meta property="og:url" content="https://ishbirhanspal-max.github.io/image-compressor.html">
+  <meta property="og:image" content="https://ishbirhanspal-max.github.io/assets/logo.png">
+
+  <!-- Structured Data: WebApplication + FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "OptiPixel Image Compressor",
+        "url": "https://ishbirhanspal-max.github.io/image-compressor.html",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "All modern browsers",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "High-speed client-side image compression and format conversion utility."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does browser-based image compression work without servers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "OptiPixel Studio loads your image into an in-memory HTML5 Canvas element. The browser's native GPU image codecs re-encode the pixel data into modern lossy or lossless compression formats like WebP or JPEG with the exact quality ratio you select, entirely on your device."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will compressing an image reduce its visual clarity?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "When using quality settings between 75% and 85%, file sizes are reduced by 60% to 80% with virtually imperceptible loss in visual quality to the human eye. If you require absolute pixel fidelity, our lossless PNG mode preserves every single color value."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why should I convert my JPG and PNG images to WebP?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "WebP is Google's modern image format developed specifically for the web. It is roughly 26% smaller than PNGs and 25-34% smaller than comparable JPEGs at equivalent visual quality, dramatically speeding up web page loading and improving Google Core Web Vitals scores."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #070a12;
+      --surface: #0e1424;
+      --surface-card: rgba(18, 26, 44, 0.7);
+      --border: rgba(255,255,255,0.08);
+      --border-glow: rgba(99,102,241,0.25);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #06b6d4;
+      --accent2: #6366f1;
+      --radius: 16px;
+    }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+    header {
+      background: rgba(7,10,18,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header a.brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+    header a.brand img { width: 34px; height: 34px; border-radius: 8px; box-shadow: 0 0 12px rgba(6,182,212,0.4); }
+    .nav-links { display: flex; align-items: center; gap: 1.25rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;
+      color: #000; background: var(--accent); font-weight: 700; font-size: 0.9rem;
+      padding: 0.45rem 1.1rem; border-radius: 999px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(6,182,212,0.1) 0%, rgba(99,102,241,0.08) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 3.5rem 2rem 3rem;
+      text-align: center;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(6,182,212,0.12); border: 1px solid rgba(6,182,212,0.3);
+      color: var(--accent); padding: 0.35rem 1rem; border-radius: 999px;
+      font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8, #6366f1 60%, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .hero p { max-width: 700px; margin: 0 auto 1.5rem; color: var(--muted); font-size: 1.15rem; }
+
+    /* Interactive Launcher Widget */
+    .tool-widget-card {
+      max-width: 800px;
+      margin: -2rem auto 3rem;
+      background: var(--surface);
+      border: 1px solid rgba(6,182,212,0.3);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 25px rgba(6,182,212,0.15);
+      text-align: center;
+    }
+    .drop-zone {
+      border: 2px dashed rgba(6,182,212,0.4);
+      border-radius: 12px;
+      padding: 3rem 1.5rem;
+      background: rgba(255,255,255,0.02);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .drop-zone:hover {
+      border-color: var(--accent);
+      background: rgba(6,182,212,0.05);
+      transform: scale(1.01);
+    }
+    .drop-icon { font-size: 3rem; margin-bottom: 0.75rem; display: block; }
+    .btn-action {
+      display: inline-block;
+      margin-top: 1.25rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      font-weight: 700;
+      padding: 0.8rem 2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1.05rem;
+    }
+
+    /* Editorial Content */
+    main { max-width: 900px; margin: 0 auto; padding: 1rem 2rem 6rem; }
+    .content-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(12px);
+    }
+    h2 { font-size: 1.5rem; font-weight: 700; color: #f1f5f9; margin-bottom: 1rem; }
+    h3 { font-size: 1.2rem; font-weight: 600; color: #38bdf8; margin: 1.25rem 0 0.5rem; }
+    p { color: #cbd5e1; margin-bottom: 1.25rem; font-size: 1.05rem; }
+    ul, ol { margin: 0 0 1.25rem 1.5rem; color: #cbd5e1; }
+    li { margin-bottom: 0.5rem; }
+    strong { color: #fff; }
+
+    /* Comparison Table */
+    .table-wrap { overflow-x: auto; margin: 1.5rem 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+    th, td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: rgba(255,255,255,0.04);
+      color: #f8fafc;
+      font-weight: 700;
+    }
+    td { color: #cbd5e1; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* Footer */
+    footer {
+      background: #05070d;
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 2rem 2.5rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-col h4 { color: #fff; font-size: 1rem; margin-bottom: 1rem; font-weight: 700; }
+    .footer-col ul { list-style: none; margin: 0; padding: 0; }
+    .footer-col li { margin-bottom: 0.6rem; }
+    .footer-col a { color: var(--muted); text-decoration: none; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      max-width: 1100px; margin: 0 auto; padding-top: 2rem;
+      border-top: 1px solid var(--border); display: flex;
+      justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    @media (max-width: 768px) {
+      .footer-container { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="OptiPixel Studio">
+      <span>OptiPixel<span style="color: var(--accent);">Studio</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="image-compressor.html" style="color: var(--accent); font-weight: 700;">Image Compressor</a>
+      <a href="pdf-editor.html">PDF Studio</a>
+      <a href="background-remover.html">Remove BG</a>
+      <a href="qr-code-generator.html">QR Studio</a>
+      <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="nav-btn">All 12 Tools ⚡</a>
+  </header>
+
+  <!-- Hero Header -->
+  <div class="hero">
+    <div class="badge">⚡ 100% Client-Side In-Browser Compression</div>
+    <h1>Free Online Image Compressor &amp; Converter</h1>
+    <p>Reduce image file size by up to 85% without sacrificing quality. Convert seamlessly between WebP, PNG, and JPG right inside your browser—zero server uploads, complete privacy.</p>
+  </div>
+
+  <!-- Interactive Launcher Card -->
+  <div class="tool-widget-card">
+    <div class="drop-zone" onclick="window.location.href='index.html#dropzone'">
+      <span class="drop-icon">🖼️</span>
+      <h3 style="font-size: 1.4rem; color: #fff; margin-bottom: 0.4rem;">Drop your images here or click to open compressor</h3>
+      <p style="color: var(--muted); font-size: 0.95rem;">Supports JPG, PNG, WebP, GIF, BMP, and SVG • Up to 100 images in bulk</p>
+      <a href="index.html#dropzone" class="btn-action">Launch Full Studio Compressor →</a>
+    </div>
+  </div>
+
+  <!-- Main Comprehensive Guide & Documentation -->
+  <main>
+    <article class="content-card">
+      <h2>How Client-Side Image Compression Works</h2>
+      <p>Traditional image compression websites force you to upload high-resolution photographs to remote cloud servers. Once uploaded, a backend script (such as ImageMagick or Libvips) processes the file before returning a download link. This architecture introduces severe privacy risks, exposes sensitive personal photos to potential server breaches, and wastes valuable bandwidth.</p>
+      <p><strong>OptiPixel Studio eliminates the cloud middleman entirely.</strong> Using the modern HTML5 Canvas API and WebAssembly (Wasm) codecs, your browser loads the uncompressed pixel matrix directly into local device memory. Mathematical discrete cosine transform (DCT) and run-length encoding routines are computed locally using your device's native CPU and GPU. Your images never leave your computer or phone, guaranteeing 100% confidentiality.</p>
+    </article>
+
+    <article class="content-card">
+      <h2>Understanding Image Formats: WebP vs. JPG vs. PNG</h2>
+      <p>Choosing the correct image format is essential for maximizing web page speed, reducing mobile cellular data consumption, and passing Google Core Web Vitals (LCP — Largest Contentful Paint). Here is how each format compares:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Format</th>
+              <th>Compression Type</th>
+              <th>Transparency (Alpha)</th>
+              <th>Best Used For</th>
+              <th>Average Size Reduction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>WebP</strong></td>
+              <td>Both Lossy &amp; Lossless</td>
+              <td>✅ Yes</td>
+              <td>Modern websites, blogs, e-commerce stores</td>
+              <td><strong>65% – 85%</strong></td>
+            </tr>
+            <tr>
+              <td><strong>JPG / JPEG</strong></td>
+              <td>Lossy</td>
+              <td>❌ No</td>
+              <td>Photographs, portraits, rich complex colors</td>
+              <td><strong>50% – 75%</strong></td>
+            </tr>
+            <tr>
+              <td><strong>PNG</strong></td>
+              <td>Lossless</td>
+              <td>✅ Yes</td>
+              <td>Logos, UI icons, line art, graphics with text</td>
+              <td><strong>20% – 45%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Why You Should Switch to WebP</h3>
+      <p>WebP is an open modern format created by Google. It employs predictive coding to compress image data based on neighboring blocks of pixels, combined with entropy encoding. As a result, WebP images are on average <strong>26% smaller than PNGs</strong> and <strong>25% to 34% smaller than comparable JPEGs</strong> at identical SSIM (Structural Similarity Index) visual ratings.</p>
+    </article>
+
+    <article class="content-card">
+      <h2>Step-by-Step Guide: Compressing Images for Web &amp; Email</h2>
+      <ol>
+        <li><strong>Select or Drag-and-Drop Images:</strong> Launch the OptiPixel compressor above. You can drop individual photos or an entire batch of up to 100 images simultaneously.</li>
+        <li><strong>Choose Your Output Format:</strong> We recommend <strong>WebP</strong> for websites and applications, or <strong>JPG</strong> for standard email attachments and printing.</li>
+        <li><strong>Adjust the Compression Slider:</strong>
+          <ul>
+            <li><strong>80% – 85% Quality (Recommended):</strong> Offers the optimal balance. Shrinks file size by ~75% with zero perceptible difference in clarity.</li>
+            <li><strong>60% – 70% Quality:</strong> Best for high-traffic web pages where speed is top priority.</li>
+            <li><strong>95% Quality:</strong> For professional photography portfolios and gallery prints.</li>
+          </ul>
+        </li>
+        <li><strong>Download Your Optimized Files:</strong> Click download individually or save all compressed assets as a single tidy ZIP archive.</li>
+      </ol>
+    </article>
+
+    <article class="content-card">
+      <h2>Frequently Asked Questions</h2>
+      <div style="margin-top: 1rem;">
+        <h3>Is there a file size limit on how many images I can compress?</h3>
+        <p>Because processing occurs in your local browser rather than on a congested server, there are no artificial subscription paywalls or daily upload quotas. You can optimize hundreds of images completely free.</p>
+
+        <h3>Does OptiPixel Studio keep copies of my photos?</h3>
+        <p>No. OptiPixel Studio has zero server storage. The moment you refresh or close your browser tab, all temporary memory buffers are automatically garbage-collected by your browser.</p>
+
+        <h3>Can I compress images on my mobile phone?</h3>
+        <p>Yes. OptiPixel Studio is fully responsive and optimized for mobile Safari (iOS) and Google Chrome (Android). You can compress mobile camera roll shots directly without downloading any native app.</p>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4 style="font-size: 1.15rem; color: #fff; margin-bottom: 0.75rem;">OptiPixel Studio</h4>
+        <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; color: var(--muted);">
+          100% free, browser-based media and document utilities. Fast, privacy-first, zero cloud uploads. Built for creators, professionals, and students.
+        </p>
+        <p style="font-size: 0.82rem; color: #64748b;">Publisher ID: pub-9875981872644926</p>
+      </div>
+      <div class="footer-col">
+        <h4>Studio Tools</h4>
+        <ul>
+          <li><a href="image-compressor.html">Image Compressor</a></li>
+          <li><a href="pdf-editor.html">Visual PDF Editor</a></li>
+          <li><a href="background-remover.html">Background Remover</a></li>
+          <li><a href="qr-code-generator.html">QR Code Generator</a></li>
+          <li><a href="ocr-text-scan.html">OCR Text Scanner</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About &amp; Trust</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Support</a></li>
+          <li><a href="https://github.com/ishbirhanspal-max/ishbirhanspal-max.github.io" target="_blank" rel="noopener">GitHub Repository</a></li>
+          <li><a href="https://buymeacoffee.com/ISHBIR" target="_blank" rel="noopener" style="color: #facc15;">☕ Buy Me a Coffee</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal &amp; Policy</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+          <li><a href="sitemap.xml">XML Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 OptiPixel Studio. Created by Ishbir Hanspal. All rights reserved.</div>
+      <div>Zero-cloud client-side compression engine.</div>
+    </div>
+  </footer>
+
+</body>
+</html>

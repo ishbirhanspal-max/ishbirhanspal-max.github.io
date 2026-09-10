@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-9875981872644926">
+  <meta name="google-site-verification" content="jVQJff56nis0RTvooVRwHp6-dbM8nsIMy12GFCqMtJU">
+  <title>Free Online Visual PDF Editor (Edit Text, Sign, Merge, Split) — OptiPixel Studio</title>
+  <meta name="description" content="Edit existing text directly in your PDF, add electronic signatures, merge documents, redact sensitive info, and protect with passwords. 100% free and private in your browser.">
+  <meta name="keywords" content="pdf editor online, edit text in pdf free, merge pdf, visual pdf editor, sign pdf free, split pdf, client-side pdf tools">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ishbirhanspal-max.github.io/pdf-editor.html">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9875981872644926" crossorigin="anonymous"></script>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free Online Visual PDF Editor — OptiPixel Studio">
+  <meta property="og:description" content="Edit text directly in PDF, add signatures, merge, split, and convert with 100% client-side privacy.">
+  <meta property="og:url" content="https://ishbirhanspal-max.github.io/pdf-editor.html">
+  <meta property="og:image" content="https://ishbirhanspal-max.github.io/assets/logo.png">
+
+  <!-- Structured Data: WebApplication + FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "OptiPixel Visual PDF Editor",
+        "url": "https://ishbirhanspal-max.github.io/pdf-editor.html",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All modern browsers",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Complete client-side PDF editing, annotation, text modification, and signature suite."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Can I edit existing text inside a PDF document for free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! OptiPixel Studio provides an in-place visual text editor. Click on existing text lines to modify words, correct typos, adjust font sizes, or add new floating text blocks anywhere on the page without paying for costly desktop software."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is it safe to edit confidential legal or financial PDFs on this site?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Absolutely. Unlike typical cloud PDF converters that store your uploaded tax returns, contracts, or bank statements on remote servers, OptiPixel Studio runs entirely inside your browser's local sandbox using Mozilla's PDF.js and pdf-lib. Zero bytes are uploaded to the cloud."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I merge multiple PDF files into one?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Launch the PDF Studio tab, select the 'Merge' sub-tool, upload two or more PDF files, arrange them in your preferred order, and click 'Merge & Download'. The merged document is generated instantly."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #070a12;
+      --surface: #0e1424;
+      --surface-card: rgba(18, 26, 44, 0.7);
+      --border: rgba(255,255,255,0.08);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #06b6d4;
+      --accent2: #6366f1;
+      --radius: 16px;
+    }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+    header {
+      background: rgba(7,10,18,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header a.brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+    header a.brand img { width: 34px; height: 34px; border-radius: 8px; box-shadow: 0 0 12px rgba(6,182,212,0.4); }
+    .nav-links { display: flex; align-items: center; gap: 1.25rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;
+      color: #000; background: var(--accent); font-weight: 700; font-size: 0.9rem;
+      padding: 0.45rem 1.1rem; border-radius: 999px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(6,182,212,0.08) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 3.5rem 2rem 3rem;
+      text-align: center;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3);
+      color: #818cf8; padding: 0.35rem 1rem; border-radius: 999px;
+      font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8, #6366f1 60%, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .hero p { max-width: 700px; margin: 0 auto 1.5rem; color: var(--muted); font-size: 1.15rem; }
+
+    .tool-widget-card {
+      max-width: 800px;
+      margin: -2rem auto 3rem;
+      background: var(--surface);
+      border: 1px solid rgba(99,102,241,0.3);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 25px rgba(99,102,241,0.15);
+      text-align: center;
+    }
+    .drop-zone {
+      border: 2px dashed rgba(99,102,241,0.4);
+      border-radius: 12px;
+      padding: 3rem 1.5rem;
+      background: rgba(255,255,255,0.02);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .drop-zone:hover {
+      border-color: #818cf8;
+      background: rgba(99,102,241,0.05);
+      transform: scale(1.01);
+    }
+    .drop-icon { font-size: 3rem; margin-bottom: 0.75rem; display: block; }
+    .btn-action {
+      display: inline-block;
+      margin-top: 1.25rem;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      color: #fff;
+      font-weight: 700;
+      padding: 0.8rem 2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1.05rem;
+    }
+
+    main { max-width: 900px; margin: 0 auto; padding: 1rem 2rem 6rem; }
+    .content-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(12px);
+    }
+    h2 { font-size: 1.5rem; font-weight: 700; color: #f1f5f9; margin-bottom: 1rem; }
+    h3 { font-size: 1.2rem; font-weight: 600; color: #818cf8; margin: 1.25rem 0 0.5rem; }
+    p { color: #cbd5e1; margin-bottom: 1.25rem; font-size: 1.05rem; }
+    ul, ol { margin: 0 0 1.25rem 1.5rem; color: #cbd5e1; }
+    li { margin-bottom: 0.5rem; }
+    strong { color: #fff; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .feature-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .feature-box h4 { font-size: 1.15rem; color: #38bdf8; margin-bottom: 0.5rem; }
+    .feature-box p { font-size: 0.95rem; color: var(--muted); }
+
+    footer {
+      background: #05070d;
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 2rem 2.5rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-col h4 { color: #fff; font-size: 1rem; margin-bottom: 1rem; font-weight: 700; }
+    .footer-col ul { list-style: none; margin: 0; padding: 0; }
+    .footer-col li { margin-bottom: 0.6rem; }
+    .footer-col a { color: var(--muted); text-decoration: none; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      max-width: 1100px; margin: 0 auto; padding-top: 2rem;
+      border-top: 1px solid var(--border); display: flex;
+      justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    @media (max-width: 768px) {
+      .footer-container { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="OptiPixel Studio">
+      <span>OptiPixel<span style="color: var(--accent);">Studio</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="image-compressor.html">Image Compressor</a>
+      <a href="pdf-editor.html" style="color: var(--accent); font-weight: 700;">PDF Studio</a>
+      <a href="background-remover.html">Remove BG</a>
+      <a href="qr-code-generator.html">QR Studio</a>
+      <a href="about.html">About</a>
+    </nav>
+    <a href="index.html#pdf-tools" class="nav-btn">Launch PDF Studio ⚡</a>
+  </header>
+
+  <!-- Hero Header -->
+  <div class="hero">
+    <div class="badge">📄 Complete In-Browser PDF Suite</div>
+    <h1>Free Online Visual PDF Editor &amp; Tools</h1>
+    <p>Edit text inside your PDF, add electronic signatures, merge multiple documents, reorder pages, and protect confidential files. 100% private with zero server uploads.</p>
+  </div>
+
+  <!-- Interactive Launcher Card -->
+  <div class="tool-widget-card">
+    <div class="drop-zone" onclick="window.location.href='index.html#pdf-tools'">
+      <span class="drop-icon">📑</span>
+      <h3 style="font-size: 1.4rem; color: #fff; margin-bottom: 0.4rem;">Drop your PDF here or click to open editor</h3>
+      <p style="color: var(--muted); font-size: 0.95rem;">Supports all standard PDF documents • Visual editing, merge, sign, watermark</p>
+      <a href="index.html#pdf-tools" class="btn-action">Open Visual PDF Studio →</a>
+    </div>
+  </div>
+
+  <!-- Editorial & Technical Guide -->
+  <main>
+    <article class="content-card">
+      <h2>The Privacy Problem with Cloud PDF Converters</h2>
+      <p>PDF documents are the universal standard for human contracts, financial ledgers, tax filings, legal agreements, medical histories, and confidential corporate communications. Yet when everyday users need to add a signature, fix a typo, or merge two receipts, search engines commonly direct them to cloud-hosted PDF utilities.</p>
+      <p>When you upload a PDF to an external cloud converter, your document is sent across the public internet to third-party server disks. Many online services retain cached copies of uploaded documents for days or weeks, creating enormous compliance liabilities under regulations such as <strong>GDPR</strong>, <strong>HIPAA</strong>, and <strong>CCPA</strong>.</p>
+      <p><strong>OptiPixel Studio delivers a zero-cloud alternative.</strong> Powered by Mozilla's open-source PDF.js rendering pipeline and pdf-lib binary stream manipulators, every operation takes place strictly in your browser's local sandbox memory. No file leaves your device.</p>
+    </article>
+
+    <article class="content-card">
+      <h2>Full PDF Studio Feature Breakdown</h2>
+      <div class="grid-2">
+        <div class="feature-box">
+          <h4>✏️ In-Place Text Editing</h4>
+          <p>Click on any text line inside your document to edit typos, replace names, or update dates. Or add floating text blocks with custom fonts, colors, and sizes.</p>
+        </div>
+        <div class="feature-box">
+          <h4>✍️ Digital &amp; Hand-Drawn Signatures</h4>
+          <p>Draw your signature with a mouse or touchscreen, or type a stylized cursive signature to legally sign contracts in seconds.</p>
+        </div>
+        <div class="feature-box">
+          <h4>📑 Merge &amp; Split Documents</h4>
+          <p>Combine multiple invoices into a single unified packet, or extract individual page ranges to send only the necessary sheets.</p>
+        </div>
+        <div class="feature-box">
+          <h4>🔒 Password &amp; Watermark Protection</h4>
+          <p>Apply custom confidential watermarks across all pages and encrypt your documents with standard PDF password security.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="content-card">
+      <h2>How to Edit Text in a PDF Online (Step-by-Step)</h2>
+      <ol>
+        <li><strong>Open PDF Studio:</strong> Click the launcher button above to load the visual workspace.</li>
+        <li><strong>Upload Your PDF:</strong> Drag and drop your document. It renders instantly using GPU canvas acceleration.</li>
+        <li><strong>Select the Edit Tool:</strong>
+          <ul>
+            <li>To edit existing text: Click the <em>Edit Text</em> button, then tap any text segment on the document to edit its contents.</li>
+            <li>To add new annotations: Click <em>Add Text</em> and place your text box anywhere on the canvas.</li>
+            <li>To redact sensitive numbers: Use the whiteout/redact tool to blackout private account numbers.</li>
+          </ul>
+        </li>
+        <li><strong>Export Your Edited PDF:</strong> Click <em>Save &amp; Download</em>. The new PDF binary is assembled locally and saved directly to your downloads folder.</li>
+      </ol>
+    </article>
+
+    <article class="content-card">
+      <h2>Frequently Asked Questions</h2>
+      <div style="margin-top: 1rem;">
+        <h3>Does OptiPixel Studio charge a subscription to download edited PDFs?</h3>
+        <p>No. There are no watermarks added to your documents, no 3-document daily limits, and no credit card required. The studio is 100% free and funded through non-intrusive advertising.</p>
+
+        <h3>Can I convert an edited PDF to a Word document?</h3>
+        <p>Yes. Our PDF Studio includes a client-side Word export feature that extracts structured text blocks and exports them as a standard editable .docx document.</p>
+
+        <h3>Can I use this on my iPad or mobile tablet?</h3>
+        <p>Yes. The entire visual editor supports touch events, stylus inputs, and apple pencil drawing for smooth contract signatures on mobile devices.</p>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4 style="font-size: 1.15rem; color: #fff; margin-bottom: 0.75rem;">OptiPixel Studio</h4>
+        <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; color: var(--muted);">
+          100% free, browser-based media and document utilities. Fast, privacy-first, zero cloud uploads. Built for creators, professionals, and students.
+        </p>
+        <p style="font-size: 0.82rem; color: #64748b;">Publisher ID: pub-9875981872644926</p>
+      </div>
+      <div class="footer-col">
+        <h4>Studio Tools</h4>
+        <ul>
+          <li><a href="image-compressor.html">Image Compressor</a></li>
+          <li><a href="pdf-editor.html">Visual PDF Editor</a></li>
+          <li><a href="background-remover.html">Background Remover</a></li>
+          <li><a href="qr-code-generator.html">QR Code Generator</a></li>
+          <li><a href="ocr-text-scan.html">OCR Text Scanner</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About &amp; Trust</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Support</a></li>
+          <li><a href="https://github.com/ishbirhanspal-max/ishbirhanspal-max.github.io" target="_blank" rel="noopener">GitHub Repository</a></li>
+          <li><a href="https://buymeacoffee.com/ISHBIR" target="_blank" rel="noopener" style="color: #facc15;">☕ Buy Me a Coffee</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal &amp; Policy</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+          <li><a href="sitemap.xml">XML Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 OptiPixel Studio. Created by Ishbir Hanspal. All rights reserved.</div>
+      <div>Client-side PDF rendering &amp; editing engine.</div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-9875981872644926">
+  <meta name="google-site-verification" content="jVQJff56nis0RTvooVRwHp6-dbM8nsIMy12GFCqMtJU">
+  <title>About Us — OptiPixel Studio &amp; Ishbir Hanspal</title>
+  <meta name="description" content="Discover the mission, technology, and privacy architecture behind OptiPixel Studio. Built by Ishbir Hanspal to deliver 100% client-side, zero-server document and image processing.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ishbirhanspal-max.github.io/about.html">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9875981872644926" crossorigin="anonymous"></script>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="About Us — OptiPixel Studio">
+  <meta property="og:description" content="Learn about OptiPixel Studio's mission to protect digital privacy through zero-cloud, 100% client-side document and image utilities.">
+  <meta property="og:url" content="https://ishbirhanspal-max.github.io/about.html">
+  <meta property="og:image" content="https://ishbirhanspal-max.github.io/assets/logo.png">
+
+  <!-- Structured Data: AboutPage & Person Schema for E-E-A-T -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About OptiPixel Studio",
+    "url": "https://ishbirhanspal-max.github.io/about.html",
+    "description": "Learn about the mission, engineering philosophy, and author of OptiPixel Studio.",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Ishbir Hanspal",
+      "url": "https://github.com/ishbirhanspal-max",
+      "jobTitle": "Lead Developer & Founder",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "OptiPixel Studio",
+        "url": "https://ishbirhanspal-max.github.io/"
+      }
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #070a12;
+      --surface: #0e1424;
+      --surface-card: rgba(18, 26, 44, 0.7);
+      --border: rgba(255,255,255,0.08);
+      --border-active: #6366f1;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #06b6d4;
+      --accent2: #6366f1;
+      --accent-emerald: #10b981;
+      --radius: 14px;
+    }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+    header {
+      background: rgba(7,10,18,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header a.brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+    header a.brand img { width: 34px; height: 34px; border-radius: 8px; box-shadow: 0 0 12px rgba(6,182,212,0.4); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: #000;
+      background: var(--accent);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.45rem 1.1rem;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover { background: #38bdf8; transform: translateY(-1px); }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(6,182,212,0.08) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.3);
+      color: #10b981;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8, #6366f1 60%, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .hero p {
+      max-width: 680px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.15rem;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 6rem;
+    }
+    .content-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(12px);
+    }
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    p {
+      color: #cbd5e1;
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+    }
+    p:last-child { margin-bottom: 0; }
+    ul {
+      margin: 0 0 1.25rem 1.5rem;
+      color: #cbd5e1;
+    }
+    li { margin-bottom: 0.5rem; }
+    strong { color: #f8fafc; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .feature-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .feature-box h3 {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .feature-box p { font-size: 0.95rem; color: var(--muted); }
+
+    .author-card {
+      display: flex;
+      gap: 1.75rem;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(6,182,212,0.05) 100%);
+      border: 1px solid rgba(99,102,241,0.25);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .author-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #06b6d4, #6366f1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 0 20px rgba(99,102,241,0.4);
+    }
+    .author-details h3 {
+      font-size: 1.35rem;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+    .author-details .title {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+
+    footer {
+      background: #05070d;
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 2rem 2.5rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-col h4 {
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .footer-col ul { list-style: none; margin: 0; padding: 0; }
+    .footer-col li { margin-bottom: 0.6rem; }
+    .footer-col a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.88rem;
+    }
+    @media (max-width: 768px) {
+      .footer-container { grid-template-columns: 1fr; gap: 2rem; }
+      .author-card { flex-direction: column; text-align: center; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header>
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="OptiPixel Studio">
+      <span>OptiPixel<span style="color: var(--accent);">Studio</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#dropzone">Image Compressor</a>
+      <a href="index.html#pdf-tools">PDF Studio</a>
+      <a href="about.html" class="active">About Us</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+    <a href="index.html" class="nav-btn">Launch Tools ⚡</a>
+  </header>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="badge">🛡️ Transparency &amp; Engineering Ethics</div>
+    <h1>Empowering Privacy-First Digital Tools</h1>
+    <p>OptiPixel Studio is engineered with a radical commitment: your documents, photos, and media should NEVER leave your computer to be converted, compressed, or edited.</p>
+  </div>
+
+  <!-- Main Body Content -->
+  <main>
+    <article class="content-card">
+      <h2>🚀 Our Founding Mission</h2>
+      <p>Modern internet utility websites frequently force users into an unacceptable compromise: in exchange for compressing a JPEG or signing a PDF document, users are forced to upload sensitive bank statements, private medical records, or personal photos to untrusted remote cloud servers. These servers frequently retain files, log IP addresses, or use personal uploads for commercial data mining.</p>
+      <p><strong>OptiPixel Studio was founded by Ishbir Hanspal to prove a better paradigm exists.</strong> By leveraging high-performance browser computing—specifically modern WebAssembly (Wasm), HTML5 Canvas 2D acceleration, and modern JavaScript engines—we process your files locally on your own CPU and GPU. Your data never touches a server, eliminating the risk of data leaks, interception, or server breaches.</p>
+    </article>
+
+    <article class="content-card">
+      <h2>⚙️ The Technology Behind 100% Client-Side Processing</h2>
+      <p>Traditional SaaS conversion tools run on expensive multi-tenant server farms that create latency and security vulnerabilities. OptiPixel Studio replaces server-side pipelines with bleeding-edge browser primitives:</p>
+      
+      <div class="grid-2">
+        <div class="feature-box">
+          <h3>⚡ HTML5 Canvas &amp; WebGL</h3>
+          <p>Lossless and lossy image compression, format transcoding (WebP, JPG, PNG), resizing, and aesthetic filtering are computed in real time using your device's native GPU pipelines.</p>
+        </div>
+        <div class="feature-box">
+          <h3>📄 Client-Side PDF Engines</h3>
+          <p>We leverage Mozilla's PDF.js and pdf-lib directly inside your browser sandbox. PDF parsing, text editing, electronic signatures, redaction, and merging happen offline without cloud transmission.</p>
+        </div>
+        <div class="feature-box">
+          <h3>🧠 Browser Edge AI &amp; CV</h3>
+          <p>Background removal and optical character recognition (OCR) algorithms execute via client-side computer vision heuristics, ensuring biometric ID photos and receipts stay on your hardware.</p>
+        </div>
+        <div class="feature-box">
+          <h3>🔒 Zero Data Footprint</h3>
+          <p>Because there is no backend database or cloud storage connected to our processing engines, there is literally nothing to breach, leak, or sell. Complete privacy by mathematical architecture.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="content-card">
+      <h2>🌐 Publisher Standards &amp; Monetization Transparency</h2>
+      <p>To keep OptiPixel Studio completely free and accessible to students, freelancers, designers, and privacy-conscious professionals worldwide, we utilize privacy-respecting advertising through Google AdSense. We do not sell premium paywalls, enforce artificial file limits, or gate essential features behind monthly subscriptions.</p>
+      <p>Our advertising practices strictly adhere to the Google Publisher Policies, GDPR, and CCPA guidelines:</p>
+      <ul>
+        <li><strong>No File-Based Targeting:</strong> Advertisements shown on OptiPixel Studio have zero visibility into your files, image contents, or document text.</li>
+        <li><strong>User Consent:</strong> We display a granular Cookie &amp; Consent Manager allowing users in the EEA, UK, and worldwide to opt out of personalized cookies at any time.</li>
+        <li><strong>Clean Layouts:</strong> We never employ intrusive pop-ups, deceptive clickbait, or layout shifts that interfere with tool usage.</li>
+      </ul>
+    </article>
+
+    <!-- Author & Publisher Bio -->
+    <div class="author-card">
+      <div class="author-avatar">IH</div>
+      <div class="author-details">
+        <h3>Ishbir Hanspal</h3>
+        <div class="title">Founder &amp; Principal Software Engineer</div>
+        <p>Ishbir is a full-stack engineer passionate about decentralized web applications, edge computing, and digital privacy rights. OptiPixel Studio was developed as an open web initiative to deliver studio-grade media and document tools with zero cloud compromises.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+          <a href="https://github.com/ishbirhanspal-max" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none; font-weight: 600;">GitHub Profile →</a> &nbsp;|&nbsp; 
+          <a href="contact.html" style="color: var(--accent2); text-decoration: none; font-weight: 600;">Contact Directly →</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Comprehensive Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4 style="font-size: 1.15rem; color: #fff; margin-bottom: 0.75rem;">OptiPixel Studio</h4>
+        <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; color: var(--muted);">
+          100% free, browser-based media and document utilities. Fast, privacy-first, zero cloud uploads. Built for creators, professionals, and students.
+        </p>
+        <p style="font-size: 0.82rem; color: #64748b;">Publisher ID: pub-9875981872644926</p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Tools</h4>
+        <ul>
+          <li><a href="image-compressor.html">Image Compressor</a></li>
+          <li><a href="pdf-editor.html">Visual PDF Editor</a></li>
+          <li><a href="background-remover.html">Background Remover</a></li>
+          <li><a href="qr-code-generator.html">QR Code Generator</a></li>
+          <li><a href="ocr-text-scan.html">OCR Text Scanner</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About &amp; Trust</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Support</a></li>
+          <li><a href="https://github.com/ishbirhanspal-max/ishbirhanspal-max.github.io" target="_blank" rel="noopener">GitHub Repository</a></li>
+          <li><a href="https://buymeacoffee.com/ISHBIR" target="_blank" rel="noopener" style="color: #facc15;">☕ Buy Me a Coffee</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal &amp; Policy</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+          <li><a href="sitemap.xml">XML Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 OptiPixel Studio. Created by Ishbir Hanspal. All rights reserved.</div>
+      <div>Designed for universal privacy &amp; zero-cloud processing.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
