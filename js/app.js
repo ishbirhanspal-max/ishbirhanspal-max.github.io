@@ -3777,6 +3777,302 @@
     }
   }
 
+  // =========================================================================
+  // SOCIAL MEDIA CROP & RESIZE STUDIO
+  // =========================================================================
+  function setupSocialCropStudio() {
+    const ws = elements.socialCropWorkspace;
+    if (!ws) return;
+
+    const dropzone = elements.socialCropDropzone;
+    const fileInput = elements.socialCropFileInput;
+    const controlsContainer = elements.socialCropControlsContainer;
+    const ratioSelect = elements.socialRatioSelect;
+    const fitSelect = elements.socialFitSelect;
+    const resultCanvas = elements.socialCropResultCanvas;
+    const downloadBtn = elements.socialCropDownloadBtn;
+    const resetBtn = elements.socialCropResetBtn;
+    const sampleBtn = document.getElementById('sampleSocialBtn');
+
+    let currentImage = null;
+
+    const RATIOS = {
+      '16:9': [1920, 1080],
+      '1:1': [1080, 1080],
+      '9:16': [1080, 1920],
+      '4:5': [1080, 1350],
+      '3:2': [1200, 800],
+      '2:1': [1200, 600]
+    };
+
+    function renderCrop() {
+      if (!currentImage || !resultCanvas) return;
+      const [outW, outH] = RATIOS[ratioSelect ? ratioSelect.value : '16:9'] || [1920, 1080];
+      const fitMode = fitSelect ? fitSelect.value : 'blur-fill';
+
+      resultCanvas.width = outW;
+      resultCanvas.height = outH;
+      const ctx = resultCanvas.getContext('2d');
+
+      const imgAR = currentImage.width / currentImage.height;
+      const canvasAR = outW / outH;
+
+      if (fitMode === 'blur-fill') {
+        // Blurred background + centered original
+        const scale = Math.max(outW / currentImage.width, outH / currentImage.height);
+        const bW = currentImage.width * scale;
+        const bH = currentImage.height * scale;
+        const bX = (outW - bW) / 2;
+        const bY = (outH - bH) / 2;
+
+        ctx.filter = 'blur(28px) brightness(0.65) saturate(1.2)';
+        ctx.drawImage(currentImage, bX, bY, bW, bH);
+        ctx.filter = 'none';
+
+        // Draw sharp centered image
+        const scale2 = Math.min(outW / currentImage.width, outH / currentImage.height);
+        const sW = currentImage.width * scale2;
+        const sH = currentImage.height * scale2;
+        const sX = (outW - sW) / 2;
+        const sY = (outH - sH) / 2;
+        ctx.drawImage(currentImage, sX, sY, sW, sH);
+      } else if (fitMode === 'cover') {
+        const scale = Math.max(outW / currentImage.width, outH / currentImage.height);
+        const sW = currentImage.width * scale;
+        const sH = currentImage.height * scale;
+        ctx.drawImage(currentImage, (outW - sW) / 2, (outH - sH) / 2, sW, sH);
+      } else if (fitMode === 'contain-black') {
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, outW, outH);
+        const scale = Math.min(outW / currentImage.width, outH / currentImage.height);
+        const sW = currentImage.width * scale;
+        const sH = currentImage.height * scale;
+        ctx.drawImage(currentImage, (outW - sW) / 2, (outH - sH) / 2, sW, sH);
+      } else {
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, outW, outH);
+        const scale = Math.min(outW / currentImage.width, outH / currentImage.height);
+        const sW = currentImage.width * scale;
+        const sH = currentImage.height * scale;
+        ctx.drawImage(currentImage, (outW - sW) / 2, (outH - sH) / 2, sW, sH);
+      }
+
+      resultCanvas.style.display = 'block';
+    }
+
+    function loadSocialImage(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          currentImage = img;
+          if (controlsContainer) controlsContainer.style.display = 'block';
+          if (dropzone) dropzone.style.display = 'none';
+          renderCrop();
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    if (dropzone) {
+      dropzone.addEventListener('click', () => fileInput && fileInput.click());
+      dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag-over'); });
+      dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
+      dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('drag-over');
+        const f = e.dataTransfer.files[0];
+        if (f && f.type.startsWith('image/')) loadSocialImage(f);
+      });
+    }
+
+    if (fileInput) fileInput.addEventListener('change', (e) => {
+      if (e.target.files[0]) loadSocialImage(e.target.files[0]);
+    });
+
+    if (ratioSelect) ratioSelect.addEventListener('change', renderCrop);
+    if (fitSelect) fitSelect.addEventListener('change', renderCrop);
+
+    if (sampleBtn) sampleBtn.addEventListener('click', () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 800; canvas.height = 600;
+      const ctx = canvas.getContext('2d');
+      const g = ctx.createLinearGradient(0, 0, 800, 600);
+      g.addColorStop(0, '#6366f1'); g.addColorStop(0.5, '#06b6d4'); g.addColorStop(1, '#a855f7');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, 800, 600);
+      ctx.fillStyle = 'rgba(255,255,255,0.15)';
+      for (let i = 0; i < 8; i++) {
+        ctx.beginPath();
+        ctx.arc(100 + i * 90, 300, 40 + i * 10, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 48px Outfit, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('OptiPixel Studio', 400, 280);
+      ctx.font = '24px Outfit, sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.8)';
+      ctx.fillText('Social Media Ready', 400, 340);
+      const img = new Image();
+      img.onload = () => {
+        currentImage = img;
+        if (controlsContainer) controlsContainer.style.display = 'block';
+        if (dropzone) dropzone.style.display = 'none';
+        renderCrop();
+      };
+      img.src = canvas.toDataURL();
+    });
+
+    if (downloadBtn) downloadBtn.addEventListener('click', () => {
+      if (!resultCanvas || !currentImage) return;
+      const ratio = ratioSelect ? ratioSelect.value.replace(':', 'x') : '16x9';
+      resultCanvas.toBlob((blob) => {
+        triggerDownload(blob, `optipixel-social-${ratio}.jpg`);
+        showToast('Social media image downloaded!', 'success');
+      }, 'image/jpeg', 0.92);
+    });
+
+    if (resetBtn) resetBtn.addEventListener('click', () => {
+      currentImage = null;
+      if (controlsContainer) controlsContainer.style.display = 'none';
+      if (dropzone) dropzone.style.display = '';
+      if (resultCanvas) { resultCanvas.width = 0; resultCanvas.height = 0; }
+    });
+  }
+
+  // =========================================================================
+  // VIDEO FRAME EXTRACTOR (Replaces stub video-gif.js for full functionality)
+  // =========================================================================
+  function setupVideoGIFStudio() {
+    const dropzone = elements.videoDropzone;
+    const fileInput = elements.videoFileInput;
+    const controlsContainer = elements.videoControlsContainer;
+    const videoPlayer = elements.videoPlayer;
+    const captureBtn = elements.videoCaptureFrameBtn;
+    const sequenceBtn = elements.videoGenerateGifBtn;
+    const resetBtn = elements.videoResetBtn;
+    const sampleBtn = document.getElementById('sampleVideoBtn');
+
+    function loadVideoFile(file) {
+      if (!file || !file.type.startsWith('video/')) {
+        showToast('Please upload an MP4 or WebM video.', 'info');
+        return;
+      }
+      const url = URL.createObjectURL(file);
+      if (videoPlayer) {
+        videoPlayer.src = url;
+        videoPlayer.load();
+      }
+      if (controlsContainer) controlsContainer.style.display = 'block';
+      if (dropzone) dropzone.style.display = 'none';
+      showToast('Video loaded! Use controls below to capture frames.', 'success');
+    }
+
+    if (dropzone) {
+      dropzone.addEventListener('click', () => fileInput && fileInput.click());
+      dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag-over'); });
+      dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
+      dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('drag-over');
+        const f = e.dataTransfer.files[0];
+        if (f) loadVideoFile(f);
+      });
+    }
+
+    if (fileInput) fileInput.addEventListener('change', (e) => {
+      if (e.target.files[0]) loadVideoFile(e.target.files[0]);
+    });
+
+    if (captureBtn) captureBtn.addEventListener('click', () => {
+      if (!videoPlayer || !videoPlayer.videoWidth) {
+        showToast('Please load a video first.', 'info');
+        return;
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = videoPlayer.videoWidth;
+      canvas.height = videoPlayer.videoHeight;
+      canvas.getContext('2d').drawImage(videoPlayer, 0, 0, canvas.width, canvas.height);
+      const ts = videoPlayer.currentTime.toFixed(2).replace('.', 's').replace('s', '') + 's';
+      canvas.toBlob((blob) => {
+        triggerDownload(blob, `frame-${ts}.png`);
+        showToast(`Frame at ${ts} captured and downloaded!`, 'success');
+      }, 'image/png');
+    });
+
+    if (sequenceBtn) sequenceBtn.addEventListener('click', async () => {
+      if (!videoPlayer || !videoPlayer.videoWidth) {
+        showToast('Please load a video first.', 'info');
+        return;
+      }
+      const duration = videoPlayer.duration || 5;
+      const numFrames = Math.min(10, Math.floor(duration));
+      const interval = duration / numFrames;
+
+      showToast(`Extracting ${numFrames} frames... please wait.`, 'info');
+      sequenceBtn.disabled = true;
+
+      const frames = [];
+      for (let i = 0; i < numFrames; i++) {
+        videoPlayer.currentTime = i * interval;
+        await new Promise(r => { videoPlayer.onseeked = r; });
+        const c = document.createElement('canvas');
+        c.width = videoPlayer.videoWidth;
+        c.height = videoPlayer.videoHeight;
+        c.getContext('2d').drawImage(videoPlayer, 0, 0, c.width, c.height);
+        frames.push(c);
+      }
+
+      // Create a grid contact sheet of all frames
+      const cols = Math.ceil(Math.sqrt(numFrames));
+      const rows = Math.ceil(numFrames / cols);
+      const fW = frames[0].width;
+      const fH = frames[0].height;
+      const THUMB = 320;
+      const thumbH = Math.round(THUMB * (fH / fW));
+      const grid = document.createElement('canvas');
+      grid.width = cols * THUMB;
+      grid.height = rows * thumbH;
+      const gctx = grid.getContext('2d');
+      gctx.fillStyle = '#000';
+      gctx.fillRect(0, 0, grid.width, grid.height);
+
+      frames.forEach((f, idx) => {
+        const col = idx % cols;
+        const row = Math.floor(idx / cols);
+        gctx.drawImage(f, col * THUMB, row * thumbH, THUMB, thumbH);
+        gctx.strokeStyle = 'rgba(255,255,255,0.3)';
+        gctx.strokeRect(col * THUMB, row * thumbH, THUMB, thumbH);
+        gctx.fillStyle = 'rgba(0,0,0,0.7)';
+        gctx.fillRect(col * THUMB, row * thumbH, 60, 18);
+        gctx.fillStyle = '#fff';
+        gctx.font = '12px monospace';
+        gctx.fillText(`F${idx + 1}`, col * THUMB + 4, row * thumbH + 13);
+      });
+
+      grid.toBlob((blob) => {
+        triggerDownload(blob, 'video-frames-grid.png');
+        showToast(`${numFrames}-frame contact sheet downloaded!`, 'success');
+      }, 'image/png');
+
+      sequenceBtn.disabled = false;
+    });
+
+    if (resetBtn) resetBtn.addEventListener('click', () => {
+      if (videoPlayer) {
+        videoPlayer.src = '';
+        videoPlayer.load();
+      }
+      if (controlsContainer) controlsContainer.style.display = 'none';
+      if (dropzone) dropzone.style.display = '';
+    });
+
+    if (sampleBtn) sampleBtn.addEventListener('click', () => {
+      showToast('Please upload your own MP4 or WebM video to extract frames.', 'info');
+    });
+  }
+
   function setupFAQAccordion() {
     elements.faqItems.forEach(item => {
       const q = item.querySelector('.faq-question');

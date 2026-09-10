@@ -47,8 +47,24 @@
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="1024">
   <meta property="og:image:alt" content="OptiPixel Studio — Free Online Creative & PDF Tools">
-  <meta property="og:site_name" content="OptiPixel Studio">
   <meta property="og:locale" content="en_US">
+  <!-- Mobile & PWA Meta -->
+  <meta name="theme-color" content="#070a12">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="OptiPixel Studio">
+  <meta name="application-name" content="OptiPixel Studio">
+  <!-- hreflang for international SEO -->
+  <link rel="alternate" hreflang="en" href="https://optipixelstudio.online/">
+  <link rel="alternate" hreflang="hi" href="https://optipixelstudio.online/?lang=hi">
+  <link rel="alternate" hreflang="es" href="https://optipixelstudio.online/?lang=es">
+  <link rel="alternate" hreflang="fr" href="https://optipixelstudio.online/?lang=fr">
+  <link rel="alternate" hreflang="de" href="https://optipixelstudio.online/?lang=de">
+  <link rel="alternate" hreflang="ar" href="https://optipixelstudio.online/?lang=ar">
+  <link rel="alternate" hreflang="pt" href="https://optipixelstudio.online/?lang=pt">
+  <link rel="alternate" hreflang="ja" href="https://optipixelstudio.online/?lang=ja">
+  <link rel="alternate" hreflang="x-default" href="https://optipixelstudio.online/">
 
   <!-- ============================================================ -->
   <!-- TWITTER / X CARD -->
@@ -71,7 +87,7 @@
   <!-- ============================================================ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap&display=swap" rel="stylesheet">
 
   <!-- ============================================================ -->
   <!-- STYLESHEET -->
@@ -415,7 +431,7 @@
       
       <!-- Brand Logo -->
       <a href="#" class="brand-logo" id="brandLogo" style="flex-shrink: 0; display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
-        <img src="assets/logo.png" alt="OptiPixel Logo" width="34" height="34" style="border-radius: var(--radius-sm); box-shadow: 0 0 12px rgba(6, 182, 212, 0.4); flex-shrink: 0;">
+        <img src="assets/logo.png" alt="OptiPixel Logo" width="34" height="34" loading="eager" decoding="async" style="border-radius: var(--radius-sm); box-shadow: 0 0 12px rgba(6, 182, 212, 0.4); flex-shrink: 0;">
         <span style="font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; white-space: nowrap;">OptiPixel<span class="text-gradient">&amp;PDF</span></span>
       </a>
 
@@ -459,7 +475,7 @@
   </header>
 
   <!-- Main Content -->
-  <main class="container">
+  <main class="container" style="padding-bottom: 6rem;">
 
     <!-- Hero Header -->
     <section class="hero-section" style="padding: 2.25rem 0 1.5rem; text-align: center;">
@@ -558,12 +574,16 @@
 
     </section>
 
-    <!-- Top Responsive Ad Slot -->
-    <div class="ad-slot-horizontal" id="topAdSlot">
+    <!-- Top Responsive Ad Slot (Google AdSense) -->
+    <div class="ad-slot-horizontal" id="topAdSlot" style="text-align:center; overflow:hidden; min-height:90px;">
       <span class="ad-label">Advertisement</span>
-      <div class="ad-placeholder-text">
-        ⚡ <strong>Boost Your Website Speed</strong> — High-performance cloud hosting &amp; CDN solutions for developers.
-      </div>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9875981872644926"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <!-- ========================================== -->
@@ -1621,12 +1641,16 @@
 
     </section>
 
-    <!-- Bottom Responsive Ad Slot -->
-    <div class="ad-slot-horizontal" id="bottomAdSlot">
+    <!-- Bottom Responsive Ad Slot (Google AdSense) -->
+    <div class="ad-slot-horizontal" id="bottomAdSlot" style="text-align:center; overflow:hidden; min-height:90px;">
       <span class="ad-label">Sponsored</span>
-      <div class="ad-placeholder-text">
-        🔒 <strong>Try Cloudflare CDN &amp; Image Optimization</strong> — Accelerate your web apps globally.
-      </div>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9875981872644926"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <!-- Feature Highlights Section -->
@@ -1680,6 +1704,18 @@
         </div>
       </div>
     </section>
+
+    <!-- Mid-Page Ad Slot (Google AdSense — Rectangle) -->
+    <div style="text-align:center; overflow:hidden; margin: 1.5rem auto; min-height:250px; max-width:960px;">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9875981872644926"
+           data-ad-slot="auto"
+           data-ad-format="rectangle"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
 
     <!-- SEO FAQ Section -->
     <section class="info-section" id="faq">
@@ -1822,7 +1858,7 @@
       <div class="footer-grid" style="grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2rem;">
         <div class="footer-brand">
           <a href="#" class="brand-logo">
-            <img src="assets/logo.png" alt="OptiPixel Logo" width="32" height="32" style="border-radius: var(--radius-sm);">
+            <img src="assets/logo.png" alt="OptiPixel Logo" width="32" height="32" loading="lazy" decoding="async" style="border-radius: var(--radius-sm);">
             <span>OptiPixel<span class="text-gradient">&amp; PDF</span></span>
           </a>
           <p>The privacy-first bulk image optimizer and client-side PDF editor. Runs 100% locally in your browser with zero cloud storage.</p>
@@ -1884,6 +1920,26 @@
   <script defer src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/selfie_segmentation.js" crossorigin="anonymous"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+  <!-- Initialize PDF.js worker to prevent silent failures -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof pdfjsLib !== 'undefined') {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      } else {
+        document.addEventListener('pdfjs-loaded', function() {
+          if (typeof pdfjsLib !== 'undefined') {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+          }
+        });
+        // Retry after scripts load
+        window.addEventListener('load', function() {
+          if (typeof pdfjsLib !== 'undefined' && !pdfjsLib.GlobalWorkerOptions.workerSrc) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+          }
+        });
+      }
+    });
+  </script>
 
   <!-- Application Scripts (Deferred for Smooth Execution) -->
   <script defer src="js/i18n.js"></script>
