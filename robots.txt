@@ -7,5 +7,6 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
-# Sitemap location
+# Sitemap locations
 Sitemap: https://optipixelstudio.online/sitemap.xml
+Sitemap: https://optipixelstudio.online/sitemap.txt
