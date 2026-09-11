@@ -1,9 +1,31 @@
-// OptiPixel Studio — Production Service Worker (PWA)
-const CACHE_NAME = 'optipixel-cache-v1';
+// OptiPixel Studio — Production Service Worker (PWA) v2.6
+const CACHE_NAME = 'optipixel-cache-v2.6';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
-  '/css/main.css',
+  '/photo-collage.html',
+  '/photo-filters.html',
+  '/photo-resizer.html',
+  '/passport-photo.html',
+  '/background-remover.html',
+  '/image-compressor.html',
+  '/pdf-editor.html',
+  '/pdf-compressor.html',
+  '/image-to-pdf.html',
+  '/pdf-to-image.html',
+  '/ocr-text-scan.html',
+  '/video-to-gif.html',
+  '/voice-recorder.html',
+  '/qr-code-generator.html',
+  '/barcode-generator.html',
+  '/password-generator.html',
+  '/about.html',
+  '/contact.html',
+  '/privacy.html',
+  '/terms.html',
+  '/css/suite-nav.css',
+  '/js/shared-suite.js',
+  '/js/suite-nav.js',
   '/assets/logo.png',
   '/assets/favicon.svg',
   '/manifest.json'
@@ -28,7 +50,6 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Only handle GET requests and exclude external CDNs or ads from hard caching
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
   

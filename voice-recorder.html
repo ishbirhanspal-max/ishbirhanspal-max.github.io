@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BSQJ151TNF"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BSQJ151TNF');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-9875981872644926">
+  <meta name="google-site-verification" content="jVQJff56nis0RTvooVRwHp6-dbM8nsIMy12GFCqMtJU">
+  <title>Free Online Voice Recorder & Audio Studio — HD Quality, WAV & WebM — OptiPixel Studio</title>
+  <meta name="description" content="Record high-quality voice and audio online free with real-time waveform visualizer, pause/resume, playback speed control, and instant lossless WAV / WebM download. 100% private.">
+  <meta name="keywords" content="online voice recorder, audio recorder free, record voice in browser, mic recorder, microphone recorder online, audio to wav, sound recorder online, studio voice memo">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://optipixelstudio.online/voice-recorder.html">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9875981872644926" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/suite-nav.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"OptiPixel Voice Recorder","url":"https://optipixelstudio.online/voice-recorder.html","applicationCategory":"MultimediaApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#070a12;--surface:#0e1424;--surface-card:rgba(18,26,44,0.7);--border:rgba(255,255,255,0.08);--text:#f8fafc;--muted:#94a3b8;--accent:#06b6d4;--accent2:#0284c7;--radius:16px}
+    body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+    header{background:rgba(7,10,18,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+    header a.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--text);font-weight:800;font-size:1.25rem}
+    header a.brand img{width:34px;height:34px;border-radius:8px;box-shadow:0 0 12px rgba(6,182,212,.4)}
+    .nav-links{display:flex;align-items:center;gap:1.25rem}
+    .nav-links a{color:var(--muted);text-decoration:none;font-weight:500;font-size:.95rem;transition:color .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--accent)}
+    .nav-btn{text-decoration:none;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));font-weight:700;font-size:.9rem;padding:.45rem 1.1rem;border-radius:999px}
+    .hero{background:linear-gradient(135deg,rgba(6,182,212,.1) 0%,rgba(2,132,199,.07) 100%);border-bottom:1px solid var(--border);padding:3.5rem 2rem 3rem;text-align:center}
+    .badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(6,182,212,.12);border:1px solid rgba(6,182,212,.3);color:var(--accent);padding:.35rem 1rem;border-radius:999px;font-size:.85rem;font-weight:600;margin-bottom:1rem}
+    .hero h1{font-size:clamp(2rem,4.5vw,3rem);font-weight:800;background:linear-gradient(135deg,#a5f3fc,#06b6d4 40%,#0284c7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
+    .hero p{max-width:680px;margin:0 auto;color:var(--muted);font-size:1.1rem}
+    .tool-card{max-width:840px;margin:-1.5rem auto 3rem;background:var(--surface);border:1px solid rgba(6,182,212,.3);border-radius:var(--radius);padding:2.5rem 2rem;box-shadow:0 10px 40px rgba(0,0,0,.6);text-align:center}
+    .timer-display{font-family:'Outfit',monospace;font-size:clamp(2.5rem,6vw,4rem);font-weight:800;color:#fff;letter-spacing:2px;margin-bottom:.5rem;text-shadow:0 0 20px rgba(6,182,212,.4)}
+    .record-status{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .9rem;border-radius:999px;font-size:.88rem;font-weight:600;margin-bottom:1.5rem;background:rgba(255,255,255,.05);color:var(--muted)}
+    .status-dot{width:10px;height:10px;border-radius:50%;background:#64748b}
+    .status-dot.recording{background:#ef4444;animation:pulseDot 1.2s infinite}
+    .status-dot.paused{background:#f59e0b}
+    @keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.25)}}
+    .canvas-wrap{width:100%;height:140px;background:#05070f;border-radius:12px;border:1px solid var(--border);overflow:hidden;margin-bottom:2rem;position:relative}
+    canvas#visualizer{width:100%;height:100%;display:block}
+    .actions-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+    .btn-record{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#ef4444,#dc2626);border:none;color:#fff;font-size:1.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 0 25px rgba(239,68,68,.5);transition:all .2s}
+    .btn-record:hover{transform:scale(1.08);box-shadow:0 0 35px rgba(239,68,68,.7)}
+    .btn-action{padding:.8rem 1.4rem;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:#fff;font-weight:700;font-size:.95rem;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;transition:all .2s}
+    .btn-action:hover{background:rgba(255,255,255,.1);border-color:var(--accent)}
+    .playback-card{background:#060812;border:1px solid rgba(6,182,212,.3);border-radius:14px;padding:1.75rem;margin-top:2rem;display:none;text-align:left}
+    .playback-title{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between}
+    audio#audioPlayback{width:100%;margin-bottom:1.25rem;accent-color:var(--accent)}
+    .playback-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:1.5rem}
+    .playback-controls label{display:block;font-size:.82rem;font-weight:600;color:var(--muted);margin-bottom:.3rem}
+    .playback-controls select{width:100%;padding:.6rem .8rem;background:#090d19;border:1px solid var(--border);border-radius:8px;color:#fff;font-family:inherit}
+    .download-group{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.25rem}
+    .btn-dl-wav{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#041525;font-weight:800;padding:.85rem 1.6rem;border-radius:10px;border:none;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;gap:.5rem}
+    .btn-dl-wav:hover{opacity:.9}
+    .btn-dl-webm{background:rgba(255,255,255,.06);color:#fff;border:1px solid var(--border);font-weight:700;padding:.85rem 1.4rem;border-radius:10px;cursor:pointer;font-size:.95rem;display:inline-flex;align-items:center;gap:.5rem}
+    .btn-dl-webm:hover{background:rgba(255,255,255,.12);border-color:var(--accent)}
+    main{max-width:840px;margin:0 auto;padding:1rem 2rem 5rem}
+    .content-card{background:var(--surface-card);border:1px solid var(--border);border-radius:var(--radius);padding:2.25rem;margin-bottom:2rem;backdrop-filter:blur(12px)}
+    h2{font-size:1.5rem;font-weight:700;color:#f1f5f9;margin-bottom:1rem}
+    h3{font-size:1.15rem;font-weight:600;color:#a5f3fc;margin:1.25rem 0 .5rem}
+    p{color:#cbd5e1;margin-bottom:1.1rem;font-size:1rem;line-height:1.8}
+    ul{margin:0 0 1.25rem 1.5rem;color:#cbd5e1}
+    li{margin-bottom:.5rem}
+    strong{color:#fff}
+    footer{background:#05070d;border-top:1px solid var(--border);padding:3rem 2rem 2rem;color:var(--muted);font-size:.9rem}
+    .footer-container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2rem}
+    .footer-col h4{color:#fff;font-size:1rem;margin-bottom:.9rem;font-weight:700}
+    .footer-col ul{list-style:none;margin:0;padding:0}
+    .footer-col li{margin-bottom:.55rem}
+    .footer-col a{color:var(--muted);text-decoration:none}
+    .footer-col a:hover{color:var(--accent)}
+    .footer-bottom{max-width:1100px;margin:0 auto;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .toast{position:fixed;bottom:2rem;right:2rem;background:#10b981;color:#fff;padding:.75rem 1.5rem;border-radius:10px;font-weight:600;font-size:.9rem;z-index:9999;transform:translateY(120%);transition:transform .3s}
+    .toast.show{transform:translateY(0)}
+    @media(max-width:600px){.footer-container{grid-template-columns:1fr 1fr}.nav-links{display:none}}
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="brand"><img src="assets/logo.png" alt="OptiPixel Studio"><span>OptiPixel<span style="color:var(--accent)">Studio</span></span></a>
+    <nav class="nav-links">
+      <a href="image-compressor.html">Image Compressor</a>
+      <a href="voice-recorder.html" class="active">Voice Recorder</a>
+      <a href="video-to-gif.html">Video to GIF</a>
+      <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="nav-btn">All Tools ⚡</a>
+  </header>
+
+  <div class="hero">
+    <div class="badge">🎙️ 100% Client-Side Voice Recording — Studio Quality — Zero Server Uploads</div>
+    <h1>Free Online Voice & Audio Recorder</h1>
+    <p>Record crystal-clear voice memos, podcast tracks, interviews, and notes right inside your browser. Watch real-time waveform animations, trim or pause as you speak, and download lossless WAV or lightweight WebM audio files.</p>
+  </div>
+
+  <div class="tool-card">
+    <div class="timer-display" id="timer">00:00.0</div>
+    <div class="record-status" id="statusBadge">
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusText">Ready to Record</span>
+    </div>
+
+    <div class="canvas-wrap">
+      <canvas id="visualizer"></canvas>
+    </div>
+
+    <div class="actions-row">
+      <button class="btn-record" id="btnRecord" title="Start Recording" onclick="toggleRecord()">🎙️</button>
+      <button class="btn-action" id="btnPause" style="display:none" onclick="togglePause()">⏸️ Pause</button>
+      <button class="btn-action" id="btnStop" style="display:none" onclick="stopRecording()">⏹️ Stop & Save</button>
+      <button class="btn-action" id="btnReset" style="display:none" onclick="resetRecorder()">🔄 Start Over</button>
+    </div>
+
+    <div class="playback-card" id="playbackCard">
+      <div class="playback-title">
+        <span>🎧 Recording Preview</span>
+        <span id="audioDurationBadge" style="font-size:.85rem;color:var(--muted);font-weight:400"></span>
+      </div>
+
+      <audio id="audioPlayback" controls></audio>
+
+      <div class="playback-controls">
+        <div>
+          <label>Playback Speed:</label>
+          <select id="speedSelect" onchange="changeSpeed(this.value)">
+            <option value="0.75">0.75x (Slow)</option>
+            <option value="1.0" selected>1.0x (Normal)</option>
+            <option value="1.25">1.25x (Brisk)</option>
+            <option value="1.5">1.5x (Fast)</option>
+            <option value="2.0">2.0x (Double Speed)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="download-group">
+        <button class="btn-dl-wav" onclick="downloadAudio('wav')">⬇️ Download WAV (High-Fidelity Lossless)</button>
+        <button class="btn-dl-webm" onclick="downloadAudio('webm')">⬇️ Download WebM Audio</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="content-card">
+      <h2>Why Use OptiPixel's Voice & Audio Recorder?</h2>
+      <p>Whether you are rehearsing a presentation, documenting lecture notes, interviewing a guest, or creating quick voiceovers for video content, you need an audio recorder that is fast, reliable, and completely private. Most web tools force you to register an account or upload your voice to their cloud servers where it could be logged or stored. OptiPixel Studio records directly via your device's microphone through the native HTML5 MediaStream API — <strong>your voice data never travels over the network</strong>.</p>
+      
+      <h3>Features Designed for Creators</h3>
+      <ul>
+        <li><strong>Real-Time Dynamic Audio Waveform:</strong> Monitor your audio volume and frequency in real-time with our 60 FPS Web Audio frequency visualizer.</li>
+        <li><strong>Lossless 16-Bit WAV Export:</strong> Get standard uncompressed PCM audio files ready for Premiere Pro, Final Cut, Audacity, or podcast distribution.</li>
+        <li><strong>Pause and Resume Effortlessly:</strong> Need to gather your thoughts or clear your throat? Hit pause without splitting your recording into separate files.</li>
+        <li><strong>Variable Playback Speed:</strong> Review lengthy lectures or interviews at up to 2.0x speed directly in the browser.</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h2>Microphone Tips for Crystal-Clear Audio</h2>
+      <p>Follow these quick acoustic tips to get studio-grade sound without expensive hardware:</p>
+      <ul>
+        <li><strong>Distance:</strong> Position your mouth about 6 to 8 inches (15–20 cm) away from your microphone or laptop for optimal warmth without clipping.</li>
+        <li><strong>Echo Reduction:</strong> Record in a room with soft furnishings like curtains, carpets, or bookshelves to absorb sound reflections.</li>
+        <li><strong>Browser Permission:</strong> When prompted by your browser, make sure to click "Allow" for microphone access. You can revoke it anytime in your browser settings.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <div style="font-weight:800;font-size:1.15rem;color:#fff;margin-bottom:.6rem">OptiPixel Studio</div>
+        <p style="color:var(--muted);font-size:.88rem;line-height:1.6">The modern privacy-first browser toolkit for images, PDFs, audio, and video manipulation. No tracking, no uploads, no compromises.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Media & Utilities</h4>
+        <ul>
+          <li><a href="voice-recorder.html">Voice Recorder</a></li>
+          <li><a href="video-to-gif.html">Video to GIF</a></li>
+          <li><a href="barcode-generator.html">Barcode Generator</a></li>
+          <li><a href="qr-code-generator.html">QR Code Maker</a></li>
+          <li><a href="password-generator.html">Password Generator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Image Tools</h4>
+        <ul>
+          <li><a href="image-compressor.html">Image Compressor</a></li>
+          <li><a href="photo-resizer.html">Photo Resizer</a></li>
+          <li><a href="photo-filters.html">Photo Filters</a></li>
+          <li><a href="photo-collage.html">Photo Collage</a></li>
+          <li><a href="passport-photo.html">Passport Photo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company & Legal</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 OptiPixel Studio. All rights reserved. Free & open browser utility.</div>
+      <div>Designed with &hearts; for creators and developers worldwide.</div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let mediaRecorder = null;
+    let audioChunks = [];
+    let audioStream = null;
+    let audioContext = null;
+    let analyser = null;
+    let dataArray = null;
+    let animFrameId = null;
+    let recordedBlob = null;
+    let recordedAudioBuffer = null;
+
+    let timerInterval = null;
+    let startTime = 0;
+    let elapsedBeforePause = 0;
+    let isPaused = false;
+
+    const timerEl = document.getElementById('timer');
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    const btnRecord = document.getElementById('btnRecord');
+    const btnPause = document.getElementById('btnPause');
+    const btnStop = document.getElementById('btnStop');
+    const btnReset = document.getElementById('btnReset');
+    const playbackCard = document.getElementById('playbackCard');
+    const audioPlayback = document.getElementById('audioPlayback');
+
+    const canvas = document.getElementById('visualizer');
+    const canvasCtx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    drawIdleWaveform();
+
+    function drawIdleWaveform() {
+      canvasCtx.fillStyle = '#05070f';
+      canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+      canvasCtx.strokeStyle = 'rgba(6, 182, 212, 0.25)';
+      canvasCtx.lineWidth = 2;
+      canvasCtx.beginPath();
+      canvasCtx.moveTo(0, canvas.height / 2);
+      canvasCtx.lineTo(canvas.width, canvas.height / 2);
+      canvasCtx.stroke();
+    }
+
+    async function toggleRecord() {
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        stopRecording();
+        return;
+      }
+      try {
+        audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      } catch (err) {
+        showToast('Microphone access denied or not available', '#ef4444');
+        return;
+      }
+
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const source = audioContext.createMediaStreamSource(audioStream);
+      analyser = audioContext.createAnalyser();
+      analyser.fftSize = 256;
+      source.connect(analyser);
+      const bufferLength = analyser.frequencyBinCount;
+      dataArray = new Uint8Array(bufferLength);
+
+      audioChunks = [];
+      const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? 'audio/webm;codecs=opus' : 'audio/webm';
+      mediaRecorder = new MediaRecorder(audioStream, { mimeType });
+
+      mediaRecorder.ondataavailable = e => {
+        if (e.data.size > 0) audioChunks.push(e.data);
+      };
+
+      mediaRecorder.onstop = async () => {
+        recordedBlob = new Blob(audioChunks, { type: mimeType });
+        const audioUrl = URL.createObjectURL(recordedBlob);
+        audioPlayback.src = audioUrl;
+
+        // Decode audio for universal WAV generation
+        const arrayBuffer = await recordedBlob.arrayBuffer();
+        try {
+          recordedAudioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+          const dur = recordedAudioBuffer.duration.toFixed(1);
+          document.getElementById('audioDurationBadge').textContent = `Duration: ${dur}s • ${recordedAudioBuffer.sampleRate} Hz`;
+        } catch (e) {
+          console.warn('Could not decode audio for WAV export:', e);
+        }
+
+        playbackCard.style.display = 'block';
+        playbackCard.scrollIntoView({ behavior: 'smooth' });
+        showToast('Audio saved! Ready to preview & download.');
+      };
+
+      mediaRecorder.start(100);
+      startTime = Date.now();
+      elapsedBeforePause = 0;
+      isPaused = false;
+      startTimer();
+
+      statusDot.className = 'status-dot recording';
+      statusText.textContent = 'Recording live...';
+      btnRecord.style.display = 'none';
+      btnPause.style.display = 'inline-flex';
+      btnStop.style.display = 'inline-flex';
+      btnReset.style.display = 'none';
+      playbackCard.style.display = 'none';
+
+      visualize();
+    }
+
+    function visualize() {
+      if (!analyser) return;
+      animFrameId = requestAnimationFrame(visualize);
+      analyser.getByteFrequencyData(dataArray);
+
+      canvasCtx.fillStyle = '#05070f';
+      canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const barWidth = (canvas.width / (dataArray.length * 0.75));
+      let x = 0;
+
+      for (let i = 0; i < dataArray.length; i++) {
+        const barHeight = (dataArray[i] / 255) * canvas.height * 0.9;
+        const grad = canvasCtx.createLinearGradient(0, canvas.height, 0, canvas.height - barHeight);
+        grad.addColorStop(0, '#0284c7');
+        grad.addColorStop(1, '#22d3ee');
+
+        canvasCtx.fillStyle = grad;
+        canvasCtx.fillRect(x, canvas.height - barHeight, barWidth - 1, barHeight);
+        x += barWidth;
+        if (x > canvas.width) break;
+      }
+    }
+
+    function togglePause() {
+      if (!mediaRecorder) return;
+      if (!isPaused) {
+        mediaRecorder.pause();
+        isPaused = true;
+        elapsedBeforePause += Date.now() - startTime;
+        clearInterval(timerInterval);
+        statusDot.className = 'status-dot paused';
+        statusText.textContent = 'Paused';
+        btnPause.innerHTML = '▶️ Resume';
+      } else {
+        mediaRecorder.resume();
+        isPaused = false;
+        startTime = Date.now();
+        startTimer();
+        statusDot.className = 'status-dot recording';
+        statusText.textContent = 'Recording live...';
+        btnPause.innerHTML = '⏸️ Pause';
+      }
+    }
+
+    function stopRecording() {
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+      }
+      if (audioStream) {
+        audioStream.getTracks().forEach(track => track.stop());
+      }
+      if (animFrameId) cancelAnimationFrame(animFrameId);
+      clearInterval(timerInterval);
+
+      statusDot.className = 'status-dot';
+      statusText.textContent = 'Recording completed';
+      btnRecord.style.display = 'none';
+      btnPause.style.display = 'none';
+      btnStop.style.display = 'none';
+      btnReset.style.display = 'inline-flex';
+
+      drawIdleWaveform();
+    }
+
+    function resetRecorder() {
+      stopRecording();
+      timerEl.textContent = '00:00.0';
+      statusText.textContent = 'Ready to Record';
+      btnRecord.style.display = 'inline-flex';
+      btnReset.style.display = 'none';
+      playbackCard.style.display = 'none';
+      audioPlayback.src = '';
+      recordedBlob = null;
+      recordedAudioBuffer = null;
+    }
+
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        const totalMs = (Date.now() - startTime) + elapsedBeforePause;
+        const mins = Math.floor(totalMs / 60000);
+        const secs = Math.floor((totalMs % 60000) / 1000);
+        const tenths = Math.floor((totalMs % 1000) / 100);
+        timerEl.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}.${tenths}`;
+      }, 100);
+    }
+
+    function changeSpeed(val) {
+      audioPlayback.playbackRate = parseFloat(val);
+    }
+
+    function downloadAudio(format) {
+      if (!recordedBlob) {
+        showToast('No audio available to download', '#ef4444');
+        return;
+      }
+      if (format === 'webm') {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(recordedBlob);
+        a.download = `optipixel_recording_${Date.now()}.webm`;
+        a.click();
+        showToast('WebM Audio downloaded!');
+      } else if (format === 'wav') {
+        if (!recordedAudioBuffer) {
+          // Fallback to webm if buffer decode failed
+          downloadAudio('webm');
+          return;
+        }
+        const wavBlob = audioBufferToWav(recordedAudioBuffer);
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(wavBlob);
+        a.download = `optipixel_recording_${Date.now()}.wav`;
+        a.click();
+        showToast('Lossless WAV downloaded! 🎉');
+      }
+    }
+
+    // Universal 16-bit PCM WAV Encoder in pure JS
+    function audioBufferToWav(buffer) {
+      const numOfChan = buffer.numberOfChannels;
+      const length = buffer.length * numOfChan * 2 + 44;
+      const out = new DataView(new ArrayBuffer(length));
+      const channels = [];
+      let sampleRate = buffer.sampleRate;
+      let offset = 0;
+      let pos = 0;
+
+      function setUint16(data) { out.setUint16(pos, data, true); pos += 2; }
+      function setUint32(data) { out.setUint32(pos, data, true); pos += 4; }
+
+      // RIFF chunk descriptor
+      setUint32(0x46464952); // "RIFF"
+      setUint32(length - 8); // file length - 8
+      setUint32(0x45564157); // "WAVE"
+
+      // FMT sub-chunk
+      setUint32(0x20746d66); // "fmt "
+      setUint32(16);         // SubChunk1Size (16 for PCM)
+      setUint16(1);          // AudioFormat (1 for PCM)
+      setUint16(numOfChan);
+      setUint32(sampleRate);
+      setUint32(sampleRate * 2 * numOfChan); // byte rate
+      setUint16(numOfChan * 2);              // block align
+      setUint16(16);                         // bits per sample
+
+      // Data sub-chunk
+      setUint32(0x61746164); // "data"
+      setUint32(length - pos - 4);
+
+      for (let i = 0; i < buffer.numberOfChannels; i++) {
+        channels.push(buffer.getChannelData(i));
+      }
+
+      while (offset < buffer.length) {
+        for (let i = 0; i < numOfChan; i++) {
+          let sample = Math.max(-1, Math.min(1, channels[i][offset]));
+          sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767) | 0;
+          out.setInt16(pos, sample, true);
+          pos += 2;
+        }
+        offset++;
+      }
+
+      return new Blob([out.buffer], { type: 'audio/wav' });
+    }
+
+    function showToast(msg, color = '#10b981') {
+      OptiPixelSuite.showToast(msg, color);
+    }
+  </script>
+  <script src="js/shared-suite.js"></script>
+  <script src="js/suite-nav.js"></script>
+</body>
+</html>
