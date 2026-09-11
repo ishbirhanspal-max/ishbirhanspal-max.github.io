@@ -146,88 +146,163 @@
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
     }
-    .hero p { max-width: 700px; margin: 0 auto 1.5rem; color: var(--muted); font-size: 1.15rem; }
-
-    .tool-widget-card {
-      max-width: 800px;
+    .hero p { max-width: 700px; margin: 0 auto 1.5rem; color: var(--muted); font-size: 1.15rem; }    /* Interactive BG Remover Studio Styles */
+    .bg-workspace {
+      max-width: 960px;
       margin: -2rem auto 3rem;
       background: var(--surface);
-      border: 1px solid rgba(236,72,153,0.3);
+      border: 1px solid rgba(236, 72, 153, 0.3);
       border-radius: var(--radius);
-      padding: 2.5rem 2rem;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 25px rgba(236,72,153,0.15);
-      text-align: center;
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 25px rgba(236, 72, 153, 0.15);
     }
-    .drop-zone {
-      border: 2px dashed rgba(236,72,153,0.4);
-      border-radius: 12px;
-      padding: 3rem 1.5rem;
-      background: rgba(255,255,255,0.02);
+    .bg-dropzone {
+      border: 2px dashed rgba(236, 72, 153, 0.4);
+      border-radius: 14px;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.02);
       cursor: pointer;
       transition: all 0.2s;
     }
-    .drop-zone:hover {
+    .bg-dropzone:hover, .bg-dropzone.dragover {
       border-color: #f472b6;
-      background: rgba(236,72,153,0.05);
+      background: rgba(236, 72, 153, 0.08);
       transform: scale(1.01);
     }
-    .drop-icon { font-size: 3rem; margin-bottom: 0.75rem; display: block; }
-    .btn-action {
-      display: inline-block;
-      margin-top: 1.25rem;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff;
-      font-weight: 700;
-      padding: 0.8rem 2rem;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 1.05rem;
-    }
-
-    main { max-width: 900px; margin: 0 auto; padding: 1rem 2rem 6rem; }
-    .content-card {
-      background: var(--surface-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2.25rem;
-      margin-bottom: 2rem;
-      backdrop-filter: blur(12px);
-    }
-    h2 { font-size: 1.5rem; font-weight: 700; color: #f1f5f9; margin-bottom: 1rem; }
-    h3 { font-size: 1.2rem; font-weight: 600; color: #f472b6; margin: 1.25rem 0 0.5rem; }
-    p { color: #cbd5e1; margin-bottom: 1.25rem; font-size: 1.05rem; }
-    ul, ol { margin: 0 0 1.25rem 1.5rem; color: #cbd5e1; }
-    li { margin-bottom: 0.5rem; }
-    strong { color: #fff; }
-
-    footer {
-      background: #05070d;
-      border-top: 1px solid var(--border);
-      padding: 3.5rem 2rem 2.5rem;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-    .footer-container {
-      max-width: 1100px;
-      margin: 0 auto;
+    .bg-ctrl-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 2.5rem;
-      margin-bottom: 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .footer-col h4 { color: #fff; font-size: 1rem; margin-bottom: 1rem; font-weight: 700; }
-    .footer-col ul { list-style: none; margin: 0; padding: 0; }
-    .footer-col li { margin-bottom: 0.6rem; }
-    .footer-col a { color: var(--muted); text-decoration: none; }
-    .footer-col a:hover { color: #f472b6; }
-    .footer-bottom {
-      max-width: 1100px; margin: 0 auto; padding-top: 2rem;
-      border-top: 1px solid var(--border); display: flex;
-      justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    .bg-ctrl-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .bg-ctrl-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+    .bg-select, .bg-range {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      color: #fff;
+      font-family: inherit;
+      padding: 0.55rem 0.75rem;
+      outline: none;
+      width: 100%;
+    }
+    .bg-select:focus { border-color: #ec4899; }
+    .bg-preview-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
     }
     @media (max-width: 768px) {
-      .footer-container { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+      .bg-preview-row { grid-template-columns: 1fr; }
+    }
+    .bg-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .bg-box h4 {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .checkerboard-wrap {
+      width: 100%;
+      min-height: 280px;
+      max-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      overflow: hidden;
+      background: repeating-conic-gradient(#1e293b 0% 25%, #0f172a 0% 50%) 50% / 20px 20px;
+    }
+    .checkerboard-wrap img, .checkerboard-wrap canvas {
+      max-width: 100%;
+      max-height: 380px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    .bg-btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      width: 100%;
+    }
+    .bg-btn {
+      flex: 1;
+      min-width: 140px;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border: none;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .bg-btn-primary {
+      background: linear-gradient(135deg, #ec4899, #a855f7);
+      color: #fff;
+    }
+    .bg-btn-primary:hover {
+      box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+      transform: translateY(-1px);
+    }
+    .bg-btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+    .bg-btn-secondary:hover { background: rgba(255, 255, 255, 0.12); }
+    .bg-pipe-row {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .bg-pipe-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .bg-pipe-btn:hover {
+      background: rgba(236, 72, 153, 0.15);
+      border-color: rgba(236, 72, 153, 0.4);
+      color: #f472b6;
     }
   </style>
 </head>
@@ -246,7 +321,7 @@
       <a href="qr-code-generator.html">QR Studio</a>
       <a href="about.html">About</a>
     </nav>
-    <a href="index.html#bg-remover-tools" class="nav-btn">Launch BG Remover ⚡</a>
+    <a href="index.html" class="nav-btn">All Studio Tools ⚡</a>
   </header>
 
   <!-- Hero Header -->
@@ -256,13 +331,82 @@
     <p>Erase backgrounds from portraits, product listings, and graphics in one click. Instant transparent PNG creation with 100% private in-browser computation.</p>
   </div>
 
-  <!-- Interactive Launcher Card -->
-  <div class="tool-widget-card">
-    <div class="drop-zone" onclick="window.location.href='index.html#bg-remover-tools'">
-      <span class="drop-icon">🪄</span>
-      <h3 style="font-size: 1.4rem; color: #fff; margin-bottom: 0.4rem;">Drop a photo here to remove background</h3>
-      <p style="color: var(--muted); font-size: 0.95rem;">High-res cutout • Transparent PNG export • Free for commercial use</p>
-      <a href="index.html#bg-remover-tools" class="btn-action">Erase Background Now →</a>
+  <!-- Interactive Autonomous Background Remover Workspace -->
+  <div class="bg-workspace">
+    <div class="bg-dropzone" id="bgDropzone">
+      <span style="font-size:2.8rem;display:block;margin-bottom:.5rem">🪄</span>
+      <h3 style="font-size:1.3rem;color:#fff;margin-bottom:.3rem">Drop image here or click to upload</h3>
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem">Supports JPG, PNG, WebP • Zero upload, 100% private</p>
+      <div style="display:flex;gap:.6rem;justify-content:center">
+        <button type="button" class="bg-btn bg-btn-secondary" style="flex:none;padding:.45rem 1rem" onclick="event.stopPropagation();document.getElementById('bgFileInput').click()">📁 Select Image</button>
+        <button type="button" class="bg-btn bg-btn-secondary" style="flex:none;padding:.45rem 1rem" onclick="event.stopPropagation();loadSampleBgPortrait()">⚡ Try Sample Portrait</button>
+      </div>
+      <input type="file" id="bgFileInput" accept="image/*" style="display:none">
+    </div>
+
+    <!-- Controls -->
+    <div class="bg-ctrl-grid" id="bgControls" style="display:none">
+      <div class="bg-ctrl-group">
+        <label>Detection Mode</label>
+        <select id="bgMode" class="bg-select" onchange="processRemoval()">
+          <option value="ai-portrait" selected>👤 People / Portrait Mode (AI)</option>
+          <option value="ai-object">📦 Products &amp; Objects Mode</option>
+          <option value="color-key">🎨 Solid Color Backdrop Key</option>
+        </select>
+      </div>
+
+      <div class="bg-ctrl-group">
+        <label>Edge Smoothing: <span id="smoothVal">3px</span></label>
+        <input type="range" id="smoothSlider" class="bg-range" min="0" max="8" value="3" oninput="document.getElementById('smoothVal').textContent=this.value+'px';processRemoval()">
+      </div>
+
+      <div class="bg-ctrl-group">
+        <label>Tolerance: <span id="tolVal">30%</span></label>
+        <input type="range" id="tolSlider" class="bg-range" min="10" max="70" value="30" oninput="document.getElementById('tolVal').textContent=this.value+'%';processRemoval()">
+      </div>
+
+      <div class="bg-ctrl-group">
+        <label>New Backdrop</label>
+        <select id="bgBackdropSelect" class="bg-select" onchange="updateBackdropTheme()">
+          <option value="transparent" selected>🏁 Transparent Alpha PNG</option>
+          <option value="white">⚪ Clean Studio White</option>
+          <option value="black">🖤 OLED Deep Black</option>
+          <option value="sunset">🌅 Sunset Gradient</option>
+          <option value="emerald">🌿 Emerald Botanical</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Live Preview Row -->
+    <div class="bg-preview-row" id="bgPreviews" style="display:none">
+      <div class="bg-box">
+        <h4>Original Photo</h4>
+        <div class="checkerboard-wrap">
+          <img id="bgOrigImg" alt="Original Photo">
+        </div>
+      </div>
+
+      <div class="bg-box">
+        <h4>Transparent Cutout Result</h4>
+        <div class="checkerboard-wrap" id="cutoutContainer">
+          <canvas id="bgResultCanvas"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions Row -->
+    <div class="bg-btn-row" id="bgActions" style="display:none">
+      <button type="button" class="bg-btn bg-btn-primary" onclick="downloadCutout()">⬇️ Download Transparent PNG</button>
+      <button type="button" class="bg-btn bg-btn-secondary" onclick="copyCutoutToClipboard()">📋 Copy to Clipboard</button>
+      <button type="button" class="bg-btn bg-btn-secondary" onclick="processRemoval()">⚡ Re-apply</button>
+    </div>
+
+    <!-- Cross-Tool Pipeline Actions -->
+    <div class="bg-pipe-row" id="bgPipeline" style="display:none">
+      <span style="font-size:.8rem;color:var(--muted);font-weight:600">Cross-Tool Actions:</span>
+      <button type="button" class="bg-pipe-btn" onclick="sendCutoutTo('photo-collage.html', 'Photo Collage')">🖼️ Add to Photo Collage</button>
+      <button type="button" class="bg-pipe-btn" onclick="sendCutoutTo('photo-filters.html', 'Photo Filters')">🪄 Color Grade Cutout</button>
+      <button type="button" class="bg-pipe-btn" onclick="sendCutoutTo('image-to-pdf.html', 'Image to PDF')">📁 Add to Document PDF</button>
     </div>
   </div>
 
@@ -350,7 +494,150 @@
     </div>
   </footer>
 
+  <!-- Background Remover Engine & Suite -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/selfie_segmentation.js" crossorigin="anonymous"></script>
+  <script src="js/bg-remover.js"></script>
   <script src="js/shared-suite.js"></script>
   <script src="js/suite-nav.js"></script>
+  <script>
+    let bgEngine = null;
+    let currentImg = null;
+    let rawCutoutCanvas = null;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      bgEngine = new BackgroundRemoverEngine();
+    });
+
+    const dropzone = document.getElementById('bgDropzone');
+    const fileInp = document.getElementById('bgFileInput');
+
+    dropzone.addEventListener('click', () => fileInp.click());
+    dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+    dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropzone.classList.remove('dragover');
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        loadBgFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    fileInp.addEventListener('change', () => {
+      if (fileInp.files && fileInp.files[0]) {
+        loadBgFile(fileInp.files[0]);
+      }
+    });
+
+    function loadBgFile(file) {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        currentImg = img;
+        showBgWorkspace(img);
+        processRemoval();
+      };
+      img.src = url;
+    }
+
+    function loadSampleBgPortrait() {
+      const sample = OptiPixelSuite.getSampleImage('portrait', 900, 900);
+      currentImg = sample;
+      showBgWorkspace(sample);
+      processRemoval();
+      OptiPixelSuite.showToast('Sample portrait loaded! 🎨');
+    }
+
+    function showBgWorkspace(img) {
+      document.getElementById('bgControls').style.display = 'grid';
+      document.getElementById('bgPreviews').style.display = 'grid';
+      document.getElementById('bgActions').style.display = 'flex';
+      document.getElementById('bgPipeline').style.display = 'flex';
+      document.getElementById('bgOrigImg').src = img.src;
+    }
+
+    async function processRemoval() {
+      if (!currentImg || !bgEngine) return;
+      OptiPixelSuite.showToast('Extracting foreground subject... ⚡');
+
+      const mode = document.getElementById('bgMode').value;
+      const smoothness = parseInt(document.getElementById('smoothSlider').value);
+      const tolerance = parseInt(document.getElementById('tolSlider').value);
+
+      try {
+        rawCutoutCanvas = await bgEngine.removeBackground(currentImg, {
+          mode: mode,
+          tolerance: tolerance,
+          smoothness: smoothness
+        });
+        updateBackdropTheme();
+        OptiPixelSuite.showToast('Background removed successfully! ✨');
+      } catch (err) {
+        console.error('BG removal failed:', err);
+        OptiPixelSuite.showToast('Cutout processing error', '#ef4444');
+      }
+    }
+
+    function updateBackdropTheme() {
+      if (!rawCutoutCanvas) return;
+      const canvas = document.getElementById('bgResultCanvas');
+      canvas.width = rawCutoutCanvas.width;
+      canvas.height = rawCutoutCanvas.height;
+      const ctx = canvas.getContext('2d');
+      const theme = document.getElementById('bgBackdropSelect').value;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (theme === 'white') {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      } else if (theme === 'black') {
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      } else if (theme === 'sunset') {
+        const g = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        g.addColorStop(0, '#f97316'); g.addColorStop(0.5, '#ec4899'); g.addColorStop(1, '#8b5cf6');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      } else if (theme === 'emerald') {
+        const g = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        g.addColorStop(0, '#064e3b'); g.addColorStop(0.5, '#047857'); g.addColorStop(1, '#10b981');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      } // 'transparent' leaves clear alpha
+
+      ctx.drawImage(rawCutoutCanvas, 0, 0);
+    }
+
+    function downloadCutout() {
+      const canvas = document.getElementById('bgResultCanvas');
+      if (!canvas) return;
+      const a = document.createElement('a');
+      a.href = canvas.toDataURL('image/png');
+      a.download = `optipixel_cutout_${Date.now()}.png`;
+      a.click();
+      OptiPixelSuite.showToast('Transparent PNG downloaded! ✂️');
+    }
+
+    function copyCutoutToClipboard() {
+      const canvas = document.getElementById('bgResultCanvas');
+      if (!canvas) return;
+      OptiPixelSuite.copyCanvas(canvas, 'Cutout copied to clipboard! 📋');
+    }
+
+    function sendCutoutTo(targetPage, toolName) {
+      const canvas = document.getElementById('bgResultCanvas');
+      if (!canvas) return;
+      OptiPixelSuite.sendTo(canvas, targetPage, toolName);
+    }
+
+    // Pipeline Auto-Receive from other tools
+    window.addEventListener('load', () => {
+      OptiPixelSuite.receiveImage((img) => {
+        currentImg = img;
+        showBgWorkspace(img);
+        processRemoval();
+      });
+    });
+  </script>
 </body>
 </html>

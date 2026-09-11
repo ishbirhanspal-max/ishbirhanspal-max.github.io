@@ -157,77 +157,195 @@
       padding: 2.5rem 2rem;
       box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 25px rgba(16,185,129,0.15);
       text-align: center;
+    /* Interactive QR Studio Styles */
+    .qr-workspace {
+      max-width: 960px;
+      margin: -2rem auto 3rem;
+      background: var(--surface);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 25px rgba(16, 185, 129, 0.15);
     }
-    .drop-zone {
-      border: 2px dashed rgba(16,185,129,0.4);
-      border-radius: 12px;
-      padding: 3rem 1.5rem;
-      background: rgba(255,255,255,0.02);
+    .qr-type-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .qr-tab-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
       transition: all 0.2s;
     }
-    .drop-zone:hover {
-      border-color: #34d399;
-      background: rgba(16,185,129,0.05);
-      transform: scale(1.01);
+    .qr-tab-btn:hover {
+      background: rgba(16, 185, 129, 0.1);
+      color: #fff;
+      border-color: rgba(16, 185, 129, 0.4);
     }
-    .drop-icon { font-size: 3rem; margin-bottom: 0.75rem; display: block; }
-    .btn-action {
-      display: inline-block;
-      margin-top: 1.25rem;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #000;
-      font-weight: 700;
-      padding: 0.8rem 2rem;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 1.05rem;
+    .qr-tab-btn.active {
+      background: rgba(16, 185, 129, 0.18);
+      border-color: #10b981;
+      color: #34d399;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
     }
-
-    main { max-width: 900px; margin: 0 auto; padding: 1rem 2rem 6rem; }
-    .content-card {
-      background: var(--surface-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2.25rem;
-      margin-bottom: 2rem;
-      backdrop-filter: blur(12px);
-    }
-    h2 { font-size: 1.5rem; font-weight: 700; color: #f1f5f9; margin-bottom: 1rem; }
-    h3 { font-size: 1.2rem; font-weight: 600; color: #34d399; margin: 1.25rem 0 0.5rem; }
-    p { color: #cbd5e1; margin-bottom: 1.25rem; font-size: 1.05rem; }
-    ul, ol { margin: 0 0 1.25rem 1.5rem; color: #cbd5e1; }
-    li { margin-bottom: 0.5rem; }
-    strong { color: #fff; }
-
-    footer {
-      background: #05070d;
-      border-top: 1px solid var(--border);
-      padding: 3.5rem 2rem 2.5rem;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-    .footer-container {
-      max-width: 1100px;
-      margin: 0 auto;
+    .qr-studio-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 2.5rem;
-      margin-bottom: 2.5rem;
-    }
-    .footer-col h4 { color: #fff; font-size: 1rem; margin-bottom: 1rem; font-weight: 700; }
-    .footer-col ul { list-style: none; margin: 0; padding: 0; }
-    .footer-col li { margin-bottom: 0.6rem; }
-    .footer-col a { color: var(--muted); text-decoration: none; }
-    .footer-col a:hover { color: var(--accent); }
-    .footer-bottom {
-      max-width: 1100px; margin: 0 auto; padding-top: 2rem;
-      border-top: 1px solid var(--border); display: flex;
-      justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+      align-items: start;
     }
     @media (max-width: 768px) {
-      .footer-container { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+      .qr-studio-grid { grid-template-columns: 1fr; }
+    }
+    .qr-input-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    .qr-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .qr-field label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+    .qr-input, .qr-select {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      padding: 0.65rem 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .qr-input:focus, .qr-select:focus {
+      border-color: #10b981;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+    }
+    .qr-color-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .color-chip-row {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.35rem;
+    }
+    .color-chip {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .color-chip:hover { transform: scale(1.2); }
+    .qr-output-pane {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      text-align: center;
+    }
+    .qr-card-box {
+      background: #ffffff;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 220px;
+      min-height: 220px;
+    }
+    .qr-card-box img, .qr-card-box canvas {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    .qr-btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      width: 100%;
+    }
+    .qr-btn {
+      flex: 1;
+      min-width: 130px;
+      padding: 0.65rem 1rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border: none;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .qr-btn-primary {
+      background: linear-gradient(135deg, #10b981, #06b6d4);
+      color: #000;
+    }
+    .qr-btn-primary:hover {
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+      transform: translateY(-1px);
+    }
+    .qr-btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+    .qr-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .qr-pipeline-actions {
+      width: 100%;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .qr-pipe-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      padding: 0.45rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .qr-pipe-btn:hover {
+      background: rgba(16, 185, 129, 0.1);
+      color: #34d399;
+      border-color: rgba(16, 185, 129, 0.3);
     }
   </style>
 </head>
@@ -246,23 +364,164 @@
       <a href="qr-code-generator.html" style="color: #34d399; font-weight: 700;">QR Studio</a>
       <a href="about.html">About</a>
     </nav>
-    <a href="index.html#qr-tools" class="nav-btn">Generate QR ⚡</a>
+    <a href="index.html" class="nav-btn">All Studio Tools ⚡</a>
   </header>
 
   <!-- Hero Header -->
   <div class="hero">
-    <div class="badge">🎨 Free Forever • No Expiration Dates</div>
+    <div class="badge">🎨 Free Forever • No Expiration Dates • 100% Client-Side</div>
     <h1>Free Online QR Code Generator</h1>
-    <p>Generate high-resolution, custom QR codes for websites, home WiFi connections, WhatsApp chats, and digital business cards. 100% private, instantaneous, and permanent.</p>
+    <p>Generate high-resolution, permanent QR codes for websites, home WiFi connections, WhatsApp chats, and digital business cards. Instant, private, and customizable.</p>
   </div>
 
-  <!-- Interactive Launcher Card -->
-  <div class="tool-widget-card">
-    <div class="drop-zone" onclick="window.location.href='index.html#qr-tools'">
-      <span class="drop-icon">📱</span>
-      <h3 style="font-size: 1.4rem; color: #fff; margin-bottom: 0.4rem;">Open QR Studio &amp; Customize</h3>
-      <p style="color: var(--muted); font-size: 0.95rem;">Choose custom colors, embed logos, and download print-ready PNG codes</p>
-      <a href="index.html#qr-tools" class="btn-action">Create Free QR Code →</a>
+  <!-- Interactive Autonomous QR Studio Workspace -->
+  <div class="qr-workspace">
+    <!-- QR Type Tabs -->
+    <div class="qr-type-tabs">
+      <button type="button" class="qr-tab-btn active" onclick="setQrType('url', this)"><span>🌐</span> Website URL</button>
+      <button type="button" class="qr-tab-btn" onclick="setQrType('wifi', this)"><span>📶</span> Wi-Fi Network</button>
+      <button type="button" class="qr-tab-btn" onclick="setQrType('whatsapp', this)"><span>💬</span> WhatsApp Direct</button>
+      <button type="button" class="qr-tab-btn" onclick="setQrType('vcard', this)"><span>📇</span> vCard Contact</button>
+      <button type="button" class="qr-tab-btn" onclick="setQrType('text', this)"><span>📝</span> Plain Text</button>
+    </div>
+
+    <div class="qr-studio-grid">
+      <!-- Input Configuration Pane -->
+      <div class="qr-input-pane">
+        <!-- URL Form -->
+        <div id="pane_url" class="qr-type-form">
+          <div class="qr-field">
+            <label>Website URL (HTTPS recommended)</label>
+            <input type="url" id="qrUrlInput" class="qr-input" value="https://optipixelstudio.online" placeholder="https://example.com" oninput="generateQR()">
+          </div>
+        </div>
+
+        <!-- WiFi Form -->
+        <div id="pane_wifi" class="qr-type-form" style="display:none">
+          <div class="qr-field">
+            <label>Network SSID (Wi-Fi Name)</label>
+            <input type="text" id="wifiSsid" class="qr-input" placeholder="Home_WiFi_5G" oninput="generateQR()">
+          </div>
+          <div class="qr-field" style="margin-top:.8rem">
+            <label>Wi-Fi Password</label>
+            <input type="text" id="wifiPass" class="qr-input" placeholder="WPA2 Password" oninput="generateQR()">
+          </div>
+          <div class="qr-field" style="margin-top:.8rem">
+            <label>Security Encryption</label>
+            <select id="wifiEnc" class="qr-select" onchange="generateQR()">
+              <option value="WPA" selected>WPA / WPA2 / WPA3</option>
+              <option value="WEP">WEP (Legacy)</option>
+              <option value="nopass">No Password (Open Network)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- WhatsApp Form -->
+        <div id="pane_whatsapp" class="qr-type-form" style="display:none">
+          <div class="qr-field">
+            <label>WhatsApp Number (With Country Code, no + or spaces)</label>
+            <input type="tel" id="waPhone" class="qr-input" placeholder="15551234567" oninput="generateQR()">
+          </div>
+          <div class="qr-field" style="margin-top:.8rem">
+            <label>Pre-filled Message Draft (Optional)</label>
+            <input type="text" id="waMsg" class="qr-input" placeholder="Hello! I would like to inquire about..." oninput="generateQR()">
+          </div>
+        </div>
+
+        <!-- vCard Form -->
+        <div id="pane_vcard" class="qr-type-form" style="display:none">
+          <div class="qr-field">
+            <label>Full Name</label>
+            <input type="text" id="vcardName" class="qr-input" placeholder="Jane Doe" oninput="generateQR()">
+          </div>
+          <div class="qr-field" style="margin-top:.8rem">
+            <label>Phone Number</label>
+            <input type="tel" id="vcardPhone" class="qr-input" placeholder="+1 (555) 123-4567" oninput="generateQR()">
+          </div>
+          <div class="qr-field" style="margin-top:.8rem">
+            <label>Email Address</label>
+            <input type="email" id="vcardEmail" class="qr-input" placeholder="jane@example.com" oninput="generateQR()">
+          </div>
+          <div class="qr-field" style="margin-top:.8rem">
+            <label>Company / Organization</label>
+            <input type="text" id="vcardOrg" class="qr-input" placeholder="OptiPixel Studio" oninput="generateQR()">
+          </div>
+        </div>
+
+        <!-- Plain Text Form -->
+        <div id="pane_text" class="qr-type-form" style="display:none">
+          <div class="qr-field">
+            <label>Text or Note Content</label>
+            <textarea id="qrTextInput" class="qr-input" rows="3" placeholder="Enter instructions, notes, or serial keys..." oninput="generateQR()"></textarea>
+          </div>
+        </div>
+
+        <!-- Styling & Color Settings -->
+        <div class="qr-color-row" style="margin-top:.5rem">
+          <div class="qr-field">
+            <label>Foreground Color</label>
+            <input type="color" id="qrColorDark" value="#0f172a" oninput="generateQR()" style="height:38px;padding:2px;cursor:pointer;background:transparent;border:none">
+            <div class="color-chip-row">
+              <span class="color-chip" style="background:#000000" onclick="setFgColor('#000000')"></span>
+              <span class="color-chip" style="background:#10b981" onclick="setFgColor('#10b981')"></span>
+              <span class="color-chip" style="background:#06b6d4" onclick="setFgColor('#06b6d4')"></span>
+              <span class="color-chip" style="background:#6366f1" onclick="setFgColor('#6366f1')"></span>
+              <span class="color-chip" style="background:#ef4444" onclick="setFgColor('#ef4444')"></span>
+            </div>
+          </div>
+
+          <div class="qr-field">
+            <label>Background Color</label>
+            <input type="color" id="qrColorLight" value="#ffffff" oninput="generateQR()" style="height:38px;padding:2px;cursor:pointer;background:transparent;border:none">
+            <div class="color-chip-row">
+              <span class="color-chip" style="background:#ffffff" onclick="setBgColor('#ffffff')"></span>
+              <span class="color-chip" style="background:#fffbeb" onclick="setBgColor('#fffbeb')"></span>
+              <span class="color-chip" style="background:#f1f5f9" onclick="setBgColor('#f1f5f9')"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="qr-color-row">
+          <div class="qr-field">
+            <label>Render Resolution</label>
+            <select id="qrSizeSelect" class="qr-select" onchange="generateQR()">
+              <option value="300" selected>Standard Web (300 px)</option>
+              <option value="600">High-Res HD (600 px)</option>
+              <option value="1200">Print Quality (1200 px)</option>
+            </select>
+          </div>
+          <div class="qr-field">
+            <label>Error Correction</label>
+            <select id="qrEccSelect" class="qr-select" onchange="generateQR()">
+              <option value="H" selected>High 30% (Recommended)</option>
+              <option value="Q">Quartile 25%</option>
+              <option value="M">Medium 15%</option>
+              <option value="L">Low 7%</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Output Pane -->
+      <div class="qr-output-pane">
+        <div class="qr-card-box" id="qrBox">
+          <div id="qrcode"></div>
+        </div>
+        <div style="font-size:.82rem;color:var(--muted)">100% Static • Permanent • Scans Forever</div>
+
+        <div class="qr-btn-group">
+          <button type="button" class="qr-btn qr-btn-primary" onclick="downloadQRCode()">⬇️ Download PNG</button>
+          <button type="button" class="qr-btn qr-btn-secondary" onclick="copyQRToClipboard()">📋 Copy</button>
+          <button type="button" class="qr-btn qr-btn-secondary" onclick="loadSampleQR()">⚡ Sample</button>
+        </div>
+
+        <!-- Cross-Tool Actions -->
+        <div class="qr-pipeline-actions">
+          <span style="font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Cross-Tool Workflows</span>
+          <button type="button" class="qr-pipe-btn" onclick="sendQRTo('photo-collage.html', 'Photo Collage Maker')">🖼️ Add to Photo Collage</button>
+          <button type="button" class="qr-pipe-btn" onclick="sendQRTo('image-to-pdf.html', 'Image to PDF')">📁 Add to Document PDF</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -340,7 +599,162 @@
     </div>
   </footer>
 
+  <!-- QRCode Engine & Suite Integration -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="js/shared-suite.js"></script>
   <script src="js/suite-nav.js"></script>
+  <script>
+    let currentType = 'url';
+    let qrInstance = null;
+
+    function setQrType(type, btn) {
+      currentType = type;
+      document.querySelectorAll('.qr-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('.qr-type-form').forEach(p => p.style.display = 'none');
+      const targetPane = document.getElementById('pane_' + type);
+      if (targetPane) targetPane.style.display = 'block';
+
+      generateQR();
+    }
+
+    function setFgColor(hex) {
+      document.getElementById('qrColorDark').value = hex;
+      generateQR();
+    }
+
+    function setBgColor(hex) {
+      document.getElementById('qrColorLight').value = hex;
+      generateQR();
+    }
+
+    function getQRDataString() {
+      if (currentType === 'url') {
+        const val = document.getElementById('qrUrlInput').value.trim();
+        return val || 'https://optipixelstudio.online';
+      } else if (currentType === 'wifi') {
+        const ssid = document.getElementById('wifiSsid').value.trim() || 'My_WiFi';
+        const pass = document.getElementById('wifiPass').value.trim();
+        const enc = document.getElementById('wifiEnc').value;
+        return `WIFI:S:${ssid};T:${enc};P:${pass};;`;
+      } else if (currentType === 'whatsapp') {
+        const phone = document.getElementById('waPhone').value.replace(/[^0-9]/g, '');
+        const msg = document.getElementById('waMsg').value.trim();
+        return `https://wa.me/${phone}${msg ? '?text=' + encodeURIComponent(msg) : ''}`;
+      } else if (currentType === 'vcard') {
+        const name = document.getElementById('vcardName').value.trim() || 'Contact';
+        const phone = document.getElementById('vcardPhone').value.trim();
+        const email = document.getElementById('vcardEmail').value.trim();
+        const org = document.getElementById('vcardOrg').value.trim();
+        return `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nTEL:${phone}\nEMAIL:${email}\nORG:${org}\nEND:VCARD`;
+      } else {
+        const txt = document.getElementById('qrTextInput').value.trim();
+        return txt || 'OptiPixel Studio — 100% Free & Private';
+      }
+    }
+
+    function generateQR() {
+      const container = document.getElementById('qrcode');
+      container.innerHTML = '';
+
+      const text = getQRDataString();
+      const size = parseInt(document.getElementById('qrSizeSelect').value) || 300;
+      const fg = document.getElementById('qrColorDark').value;
+      const bg = document.getElementById('qrColorLight').value;
+      const eccStr = document.getElementById('qrEccSelect').value;
+
+      let correctLevel = QRCode.CorrectLevel.H;
+      if (eccStr === 'L') correctLevel = QRCode.CorrectLevel.L;
+      else if (eccStr === 'M') correctLevel = QRCode.CorrectLevel.M;
+      else if (eccStr === 'Q') correctLevel = QRCode.CorrectLevel.Q;
+
+      try {
+        qrInstance = new QRCode(container, {
+          text: text,
+          width: size,
+          height: size,
+          colorDark: fg,
+          colorLight: bg,
+          correctLevel: correctLevel
+        });
+      } catch (err) {
+        console.error('QR generation error:', err);
+      }
+    }
+
+    function getQRCanvas(callback) {
+      setTimeout(() => {
+        const container = document.getElementById('qrcode');
+        let canvas = container.querySelector('canvas');
+        if (canvas) {
+          callback(canvas);
+          return;
+        }
+        const img = container.querySelector('img');
+        if (img && img.src) {
+          const c = document.createElement('canvas');
+          c.width = img.naturalWidth || 300;
+          c.height = img.naturalHeight || 300;
+          const ctx = c.getContext('2d');
+          const tempImg = new Image();
+          tempImg.crossOrigin = 'anonymous';
+          tempImg.onload = () => {
+            ctx.drawImage(tempImg, 0, 0);
+            callback(c);
+          };
+          tempImg.src = img.src;
+        }
+      }, 50);
+    }
+
+    function downloadQRCode() {
+      getQRCanvas((canvas) => {
+        const a = document.createElement('a');
+        a.href = canvas.toDataURL('image/png');
+        a.download = `optipixel_qr_${currentType}_${Date.now()}.png`;
+        a.click();
+        OptiPixelSuite.showToast('QR Code downloaded as PNG! 📱');
+      });
+    }
+
+    function copyQRToClipboard() {
+      getQRCanvas((canvas) => {
+        OptiPixelSuite.copyCanvas(canvas, 'QR Code copied to clipboard! 📋');
+      });
+    }
+
+    function loadSampleQR() {
+      if (currentType === 'url') {
+        document.getElementById('qrUrlInput').value = 'https://optipixelstudio.online';
+      } else if (currentType === 'wifi') {
+        document.getElementById('wifiSsid').value = 'OptiPixel_Guest_WiFi';
+        document.getElementById('wifiPass').value = 'SuperSecurePass2026';
+      } else if (currentType === 'whatsapp') {
+        document.getElementById('waPhone').value = '18005550199';
+        document.getElementById('waMsg').value = 'Hello OptiPixel! Loving the studio tools.';
+      } else if (currentType === 'vcard') {
+        document.getElementById('vcardName').value = 'Ishbir Hanspal';
+        document.getElementById('vcardPhone').value = '+1 555-0144';
+        document.getElementById('vcardEmail').value = 'contact@optipixelstudio.online';
+        document.getElementById('vcardOrg').value = 'OptiPixel Studio';
+      } else {
+        document.getElementById('qrTextInput').value = 'OptiPixel Studio: Client-Side Freedom & Privacy';
+      }
+      generateQR();
+      OptiPixelSuite.showToast('Sample preset loaded! ✨');
+    }
+
+    function sendQRTo(targetPage, toolName) {
+      getQRCanvas((canvas) => {
+        OptiPixelSuite.sendTo(canvas, targetPage, toolName);
+      });
+    }
+
+    // Auto-generate initial QR
+    window.addEventListener('load', () => {
+      generateQR();
+    });
+  </script>
 </body>
 </html>

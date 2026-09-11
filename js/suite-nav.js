@@ -3,6 +3,7 @@
  * - Desktop mega-menu
  * - Mobile bottom drawer
  * - Global Ctrl+K / Cmd+K Spotlight Command Palette Search
+ * - 1-Click PWA "Install App" prompt & Offline mode indicators
  */
 
 (function() {
@@ -10,6 +11,7 @@
     { cat: 'Creative & Photo', items: [
       { name: 'Photo Collage', url: 'photo-collage.html', icon: '🖼️', keywords: 'grid layout split combine instagram story framing pan zoom' },
       { name: 'Photo Filters', url: 'photo-filters.html', icon: '🪄', keywords: 'color grading brightness contrast saturation cyberpunk film noir' },
+      { name: 'Watermark Images', url: 'image-watermark.html', icon: '💧', keywords: 'watermark photo batch copyright stamp logo text tile protection' },
       { name: 'Photo Resizer', url: 'photo-resizer.html', icon: '📐', keywords: 'crop dimension aspect ratio pixels scale social' },
       { name: 'Passport Photo', url: 'passport-photo.html', icon: '👤', keywords: 'visa id 2x2 inch 35x45mm print sheet biometrics' },
       { name: 'Background Remover', url: 'background-remover.html', icon: '✂️', keywords: 'transparent png ai cut cutout erase' },
@@ -40,6 +42,7 @@
 
   let selectedIndex = 0;
   let filteredTools = [...flatTools];
+  let deferredPrompt = null;
 
   function initSuiteNav() {
     const isIndexPage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/');
@@ -162,13 +165,16 @@
         <div class="suite-spotlight-modal" onclick="event.stopPropagation()">
           <div class="suite-spotlight-input-wrap">
             <span class="suite-spotlight-icon">🔍</span>
-            <input type="text" class="suite-spotlight-input" id="suiteSpotlightInput" placeholder="Search any tool, e.g. 'collage', 'compress', 'passport'..." autocomplete="off">
+            <input type="text" class="suite-spotlight-input" id="suiteSpotlightInput" placeholder="Search any tool, e.g. 'collage', 'compress', 'watermark'..." autocomplete="off">
             <span class="suite-kbd-badge">ESC</span>
           </div>
           <div class="suite-spotlight-results" id="suiteSpotlightResults"></div>
           <div class="suite-spotlight-footer">
             <span>Navigation: ↑ ↓ to select &bull; Enter to open</span>
-            <span>100% Free &amp; Private Browser Studio</span>
+            <div style="display:flex;align-items:center;gap:.75rem">
+              <button type="button" class="suite-install-trigger-btn" onclick="installStudioApp()" id="spotlightInstallBtn" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#38bdf8;padding:.2rem .6rem;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer">📲 Install App</button>
+              <span>100% Free &amp; Private</span>
+            </div>
           </div>
         </div>
       `;
@@ -211,7 +217,43 @@
         closeSuiteDrawer();
       }
     });
+
+    // PWA Install Prompt handling
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+
+    // Offline / Online status telemetry
+    window.addEventListener('offline', () => {
+      if (typeof OptiPixelSuite !== 'undefined') {
+        OptiPixelSuite.showToast('📶 Offline Mode: All 16+ studio tools continue working 100% locally!', '#38bdf8');
+      }
+    });
+
+    window.addEventListener('online', () => {
+      if (typeof OptiPixelSuite !== 'undefined') {
+        OptiPixelSuite.showToast('🌐 Connection restored!', '#10b981');
+      }
+    });
   }
+
+  window.installStudioApp = async function() {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        if (typeof OptiPixelSuite !== 'undefined') {
+          OptiPixelSuite.showToast('OptiPixel Studio installed to your device! 🚀');
+        }
+      }
+      deferredPrompt = null;
+    } else {
+      if (typeof OptiPixelSuite !== 'undefined') {
+        OptiPixelSuite.showToast('To install, tap browser menu (⋮ or Share) and select "Install" or "Add to Home Screen" 📲');
+      }
+    }
+  };
 
   function filterSpotlight(q) {
     const term = q.toLowerCase().trim();

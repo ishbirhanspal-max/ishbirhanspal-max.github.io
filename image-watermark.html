@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BSQJ151TNF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BSQJ151TNF');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-9875981872644926">
+  <meta name="google-site-verification" content="jVQJff56nis0RTvooVRwHp6-dbM8nsIMy12GFCqMtJU">
+  <title>Free Batch Image Watermark Online — Text &amp; Logo Stamps — OptiPixel Studio</title>
+  <meta name="description" content="Add text, logos, copyright stamps, or repeating diagonal watermark patterns to multiple photos at once. 100% private client-side processing with zero server uploads.">
+  <meta name="keywords" content="image watermark online, batch photo watermark, copyright stamp, add logo to photo, watermark photos free, tiled watermark pattern, client-side watermarker, optipixel studio">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://optipixelstudio.online/image-watermark.html">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:ital,wght@0,600;1,400&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+  <!-- AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9875981872644926" crossorigin="anonymous"></script>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free Batch Image Watermark Online — OptiPixel Studio">
+  <meta property="og:description" content="Watermark single or batch photos with custom text, logo graphics, or repeating tile patterns. Completely private in your browser.">
+  <meta property="og:url" content="https://optipixelstudio.online/image-watermark.html">
+  <meta property="og:image" content="https://optipixelstudio.online/assets/logo.png">
+
+  <!-- Structured Data: WebApplication + FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "OptiPixel Batch Image Watermark Studio",
+        "url": "https://optipixelstudio.online/image-watermark.html",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "All modern web browsers",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "High-performance client-side photo watermarking tool supporting custom text, logos, repeating patterns, and bulk ZIP exports."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Are my original photos uploaded to any external server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. OptiPixel Studio processes every single pixel locally in your device's browser memory using HTML5 Canvas rendering. Your private photos, logos, and documents never leave your computer or phone."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I watermark multiple photos simultaneously?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! You can drag and drop dozens of photos into the workspace. The live preview updates your active image instantly, and you can export all watermarked images as a bundled ZIP file with one click."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does repeating diagonal tile watermarking work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Tiled mode repeats your custom text or logo across the entire image at an angle (like -25° or -45°). This provides maximum anti-theft and anti-scraping protection for proofs, digital art, real estate photos, and portfolios."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="css/suite-nav.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #070a12;
+      --surface: #0e1424;
+      --surface-card: rgba(18, 26, 44, 0.75);
+      --border: rgba(255,255,255,0.08);
+      --border-glow: rgba(99,102,241,0.3);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #06b6d4;
+      --accent-glow: rgba(6,182,212,0.35);
+      --accent2: #6366f1;
+      --radius: 16px;
+    }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    header {
+      background: rgba(7,10,18,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header a.brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    header a.brand img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text);
+    }
+    .nav-btn {
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .nav-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    /* Main Container */
+    .wm-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .wm-hero {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .wm-hero .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(6,182,212,0.12);
+      border: 1px solid rgba(6,182,212,0.3);
+      color: var(--accent);
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .wm-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff 40%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.75rem;
+    }
+    .wm-hero p {
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+    }
+
+    /* Workspace Layout */
+    .wm-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    @media (max-width: 1024px) {
+      .wm-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Controls Panel */
+    .wm-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.3);
+    }
+    .wm-panel-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #fff;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Upload Dropzone */
+    .wm-dropzone {
+      border: 2px dashed rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      background: rgba(255,255,255,0.02);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .wm-dropzone:hover, .wm-dropzone.dragover {
+      border-color: var(--accent);
+      background: rgba(6,182,212,0.05);
+    }
+    .wm-dropzone .dz-icon {
+      font-size: 2rem;
+      margin-bottom: 0.35rem;
+    }
+    .wm-dropzone strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+    .wm-dropzone span {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Batch Image Queue List */
+    .wm-queue-wrap {
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-height: 180px;
+      overflow-y: auto;
+      padding: 0.5rem;
+      background: rgba(0,0,0,0.25);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .wm-queue-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.35rem 0.5rem;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .wm-queue-item:hover, .wm-queue-item.active {
+      background: rgba(6,182,212,0.18);
+      border: 1px solid rgba(6,182,212,0.3);
+    }
+    .wm-queue-thumb {
+      width: 36px;
+      height: 36px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    .wm-queue-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .wm-queue-name {
+      font-size: 0.82rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 500;
+    }
+    .wm-queue-dims {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* Mode Switcher Tabs */
+    .wm-tabs {
+      display: flex;
+      background: rgba(255,255,255,0.05);
+      padding: 0.25rem;
+      border-radius: 10px;
+      gap: 0.25rem;
+    }
+    .wm-tab {
+      flex: 1;
+      padding: 0.5rem 0.75rem;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .wm-tab.active {
+      background: var(--surface);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Control Groups */
+    .ctrl-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .ctrl-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .ctrl-group label span.val {
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+    }
+    .ctrl-input, .ctrl-select {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.55rem 0.75rem;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .ctrl-input:focus, .ctrl-select:focus {
+      border-color: var(--accent);
+    }
+    .ctrl-select option {
+      background: #0f172a;
+      color: #fff;
+    }
+
+    /* Color Chips Row */
+    .color-presets {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.3rem;
+    }
+    .color-chip {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .color-chip:hover {
+      transform: scale(1.15);
+    }
+
+    /* Anchor Grid (9-point) */
+    .anchor-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.35rem;
+      margin-top: 0.25rem;
+    }
+    .anchor-btn {
+      padding: 0.45rem 0.2rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .anchor-btn:hover, .anchor-btn.active {
+      background: rgba(6,182,212,0.18);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* Toggle Switch */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.4rem 0;
+    }
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255,255,255,0.15);
+      transition: .3s;
+      border-radius: 24px;
+    }
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    input:checked + .toggle-slider {
+      background: var(--accent);
+    }
+    input:checked + .toggle-slider:before {
+      transform: translateX(20px);
+    }
+
+    /* Canvas Stage Panel */
+    .wm-stage {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.3);
+    }
+    .wm-stage-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .wm-image-meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .meta-tag {
+      background: rgba(255,255,255,0.06);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+    }
+
+    .wm-canvas-wrap {
+      position: relative;
+      background: repeating-conic-gradient(#151d30 0% 25%, #0e1424 0% 50%) 50% / 20px 20px;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 480px;
+      max-height: 680px;
+      border: 1px solid var(--border);
+    }
+    #watermarkCanvas {
+      max-width: 100%;
+      max-height: 660px;
+      height: auto;
+      object-fit: contain;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    }
+
+    /* Action Buttons Row */
+    .wm-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .btn-action {
+      flex: 1;
+      min-width: 160px;
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: transform 0.15s, opacity 0.15s, box-shadow 0.15s;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      color: #fff;
+      box-shadow: 0 4px 16px var(--accent-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--accent-glow);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: #fff;
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-1px);
+    }
+
+    /* Pipeline cross-tool bar */
+    .pipeline-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      padding: 0.85rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .pipeline-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 600;
+      margin-right: 0.25rem;
+    }
+    .pipe-btn {
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: #cbd5e1;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .pipe-btn:hover {
+      background: rgba(6,182,212,0.15);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* SEO Article & FAQ Sections */
+    .wm-content-section {
+      max-width: 1000px;
+      margin: 4rem auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .feature-card .feat-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.75rem;
+    }
+    .feature-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+    }
+    .faq-item h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .faq-item p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Master Site Footer */
+    footer {
+      background: #05070d;
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 2rem 2.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 4rem;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-col h4 {
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .footer-col ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .footer-col li {
+      margin-bottom: 0.6rem;
+    }
+    .footer-col a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover {
+      color: var(--accent);
+    }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+      .wm-canvas-wrap {
+        min-height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Universal Header -->
+  <header>
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="OptiPixel Studio">
+      <span>OptiPixel<span style="color:var(--accent)">Studio</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="image-compressor.html">Image Compressor</a>
+      <a href="photo-collage.html">Photo Collage</a>
+      <a href="photo-filters.html">Photo Filters</a>
+      <a href="image-watermark.html" class="active">Watermark</a>
+      <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="nav-btn">All Tools ⚡</a>
+  </header>
+
+  <div class="wm-container">
+
+    <!-- Hero Header -->
+    <div class="wm-hero">
+      <div class="badge">💧 100% In-Browser Private &bull; Batch Watermark Studio</div>
+      <h1>Batch Image Watermark Studio</h1>
+      <p>Protect your intellectual property, add copyright notices, or stamp company logos across multiple photos simultaneously with custom positioning, opacity, and repeating diagonal patterns.</p>
+    </div>
+
+    <!-- Main Studio Grid -->
+    <div class="wm-grid">
+
+      <!-- Left Control Panel -->
+      <div class="wm-panel">
+        <div class="wm-panel-title">
+          <span>⚙️ Watermark Setup</span>
+        </div>
+
+        <!-- Multi-image dropzone -->
+        <div class="wm-dropzone" id="wmDropzone" onclick="document.getElementById('wmFileInput').click()">
+          <div class="dz-icon">📁</div>
+          <strong>Drop photos here or click to browse</strong>
+          <span>Supports multiple JPG, PNG, WebP</span>
+          <input type="file" id="wmFileInput" multiple accept="image/*" style="display:none" onchange="handleImageUpload(event)">
+        </div>
+
+        <!-- Sample Loader Quick Link -->
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <button type="button" class="pipe-btn" onclick="loadSamplePhoto()">📸 Load Sample Scenery Photo</button>
+          <span id="queueCounter" style="font-size:0.8rem; color:var(--muted)">0 images loaded</span>
+        </div>
+
+        <!-- Batch Image Queue Thumbnail Bar -->
+        <div class="wm-queue-wrap" id="wmQueueWrap"></div>
+
+        <!-- Watermark Mode Switcher -->
+        <div class="wm-tabs">
+          <button type="button" class="wm-tab active" id="tabTextMode" onclick="setWatermarkMode('text')">✍️ Text Stamp</button>
+          <button type="button" class="wm-tab" id="tabLogoMode" onclick="setWatermarkMode('logo')">🖼️ Logo Graphic</button>
+        </div>
+
+        <!-- Text Mode Controls -->
+        <div id="textControlsGroup" style="display:flex; flex-direction:column; gap:1rem;">
+          <div class="ctrl-group">
+            <label for="wmTextInput">Watermark Text</label>
+            <input type="text" id="wmTextInput" class="ctrl-input" value="© 2026 OPTIPIXEL STUDIO" placeholder="e.g. © 2026 Your Brand" oninput="renderWatermark()">
+          </div>
+
+          <div class="ctrl-group">
+            <label for="wmFontSelect">Font Family</label>
+            <select id="wmFontSelect" class="ctrl-select" onchange="renderWatermark()">
+              <option value="Outfit" selected>Outfit (Modern Clean)</option>
+              <option value="JetBrains Mono">JetBrains Mono (Technical Monospace)</option>
+              <option value="Playfair Display">Playfair Display (Luxury Editorial Serif)</option>
+              <option value="Permanent Marker">Permanent Marker (Casual Marker)</option>
+              <option value="Impact">Impact (Heavy Headline)</option>
+              <option value="Arial">Arial (Standard Sans)</option>
+            </select>
+          </div>
+
+          <div class="ctrl-group">
+            <label for="wmTextColor">Text Color</label>
+            <div style="display:flex; gap:0.5rem; align-items:center;">
+              <input type="color" id="wmTextColor" value="#ffffff" oninput="renderWatermark()" style="background:transparent; border:none; width:38px; height:38px; cursor:pointer;">
+              <input type="text" id="wmTextColorHex" class="ctrl-input" value="#ffffff" style="width:90px;" oninput="syncColorInput(this.value)">
+              <div class="color-presets">
+                <span class="color-chip" style="background:#ffffff;" onclick="setQuickColor('#ffffff')" title="White"></span>
+                <span class="color-chip" style="background:#000000;" onclick="setQuickColor('#000000')" title="Black"></span>
+                <span class="color-chip" style="background:#f59e0b;" onclick="setQuickColor('#f59e0b')" title="Gold"></span>
+                <span class="color-chip" style="background:#06b6d4;" onclick="setQuickColor('#06b6d4')" title="Cyan"></span>
+                <span class="color-chip" style="background:#f43f5e;" onclick="setQuickColor('#f43f5e')" title="Coral"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ctrl-group">
+            <label for="wmSizeSlider">Text Size <span class="val" id="wmSizeVal">4.5%</span></label>
+            <input type="range" id="wmSizeSlider" min="1" max="15" step="0.2" value="4.5" oninput="updateSliderVal('wmSizeVal', this.value + '%'); renderWatermark();">
+          </div>
+        </div>
+
+        <!-- Logo Mode Controls (Hidden by default) -->
+        <div id="logoControlsGroup" style="display:none; flex-direction:column; gap:1rem;">
+          <div class="ctrl-group">
+            <label>Upload Brand Logo</label>
+            <div class="wm-dropzone" style="padding:1rem;" onclick="document.getElementById('wmLogoInput').click()">
+              <span id="logoUploadText">Click to select PNG or SVG logo</span>
+              <input type="file" id="wmLogoInput" accept="image/*" style="display:none" onchange="handleLogoUpload(event)">
+            </div>
+          </div>
+
+          <div class="ctrl-group">
+            <label for="wmLogoScaleSlider">Logo Scale <span class="val" id="wmLogoScaleVal">20%</span></label>
+            <input type="range" id="wmLogoScaleSlider" min="5" max="60" step="1" value="20" oninput="updateSliderVal('wmLogoScaleVal', this.value + '%'); renderWatermark();">
+          </div>
+        </div>
+
+        <!-- Universal Appearance Controls -->
+        <div class="ctrl-group">
+          <label for="wmOpacitySlider">Opacity <span class="val" id="wmOpacityVal">60%</span></label>
+          <input type="range" id="wmOpacitySlider" min="10" max="100" step="1" value="60" oninput="updateSliderVal('wmOpacityVal', this.value + '%'); renderWatermark();">
+        </div>
+
+        <div class="ctrl-group">
+          <label for="wmRotationSlider">Rotation Angle <span class="val" id="wmRotationVal">-25°</span></label>
+          <input type="range" id="wmRotationSlider" min="-90" max="90" step="5" value="-25" oninput="updateSliderVal('wmRotationVal', this.value + '°'); renderWatermark();">
+        </div>
+
+        <div class="toggle-row">
+          <span style="font-size:0.85rem; font-weight:600; color:#e2e8f0;">Drop Shadow (Contrast Boost)</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="wmShadowToggle" checked onchange="renderWatermark()">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <!-- Placement Mode & Pattern Options -->
+        <div style="border-top:1px solid var(--border); padding-top:1rem; display:flex; flex-direction:column; gap:0.75rem;">
+          <div class="toggle-row">
+            <div>
+              <strong style="display:block; font-size:0.88rem; color:#fff;">Tiled Diagonal Pattern</strong>
+              <span style="font-size:0.75rem; color:var(--muted)">Repeated anti-theft proof grid</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="wmTileToggle" onchange="toggleTileMode(this.checked)">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <!-- Single Anchor Placement (Disabled when Tiled is on) -->
+          <div id="anchorGridGroup" class="ctrl-group">
+            <label>Position Alignment</label>
+            <div class="anchor-grid">
+              <button type="button" class="anchor-btn" onclick="setAnchor('tl')">Top-L</button>
+              <button type="button" class="anchor-btn" onclick="setAnchor('tc')">Top-C</button>
+              <button type="button" class="anchor-btn" onclick="setAnchor('tr')">Top-R</button>
+              <button type="button" class="anchor-btn" onclick="setAnchor('ml')">Mid-L</button>
+              <button type="button" class="anchor-btn" onclick="setAnchor('c')">Center</button>
+              <button type="button" class="anchor-btn" onclick="setAnchor('mr')">Mid-R</button>
+              <button type="button" class="anchor-btn" onclick="setAnchor('bl')">Bot-L</button>
+              <button type="button" class="anchor-btn" onclick="setAnchor('bc')">Bot-C</button>
+              <button type="button" class="anchor-btn active" onclick="setAnchor('br')">Bot-R</button>
+            </div>
+          </div>
+
+          <!-- Tiled Spacing Slider (Visible only when Tiled is on) -->
+          <div id="tileSpacingGroup" class="ctrl-group" style="display:none;">
+            <label for="wmTileSpacingSlider">Pattern Spacing <span class="val" id="wmTileSpacingVal">180px</span></label>
+            <input type="range" id="wmTileSpacingSlider" min="100" max="400" step="20" value="180" oninput="updateSliderVal('wmTileSpacingVal', this.value + 'px'); renderWatermark();">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Stage & Preview Panel -->
+      <div class="wm-stage">
+        <div class="wm-stage-header">
+          <div>
+            <h3 style="font-size:1.15rem; font-weight:700; color:#fff;">Live Watermark Canvas</h3>
+            <span style="font-size:0.82rem; color:var(--muted)">Hardware-accelerated pixel rendering</span>
+          </div>
+
+          <div class="wm-image-meta">
+            <span class="meta-tag" id="previewDimsTag">1800 &times; 1200 px</span>
+            <span class="meta-tag" id="previewActiveIdxTag">Image 1 of 1</span>
+          </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="wm-canvas-wrap">
+          <canvas id="watermarkCanvas"></canvas>
+        </div>
+
+        <!-- Export Buttons Row -->
+        <div class="wm-actions">
+          <button type="button" class="btn-action btn-primary" onclick="downloadCurrentWatermarked()">
+            <span>⬇️ Download Watermarked PNG</span>
+          </button>
+          <button type="button" class="btn-action btn-secondary" id="btnZipAll" onclick="downloadAllWatermarkedZip()">
+            <span>📦 Export All in ZIP</span>
+          </button>
+        </div>
+
+        <!-- Cross-Tool Pipeline Bar -->
+        <div class="pipeline-bar">
+          <span class="pipeline-label">Send Result To:</span>
+          <button type="button" class="pipe-btn" onclick="pipeTo('photo-filters.html')">🪄 Photo Filters</button>
+          <button type="button" class="pipe-btn" onclick="pipeTo('photo-collage.html')">🖼️ Collage Maker</button>
+          <button type="button" class="pipe-btn" onclick="pipeTo('image-compressor.html')">🗜️ Image Compressor</button>
+          <button type="button" class="pipe-btn" onclick="pipeTo('image-to-pdf.html')">📁 Image to PDF</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- AdSense Responsive Ad Slot -->
+    <div style="margin: 3rem 0; text-align: center; overflow: hidden; min-height: 90px; border-radius: 12px; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.06); padding: 0.5rem;">
+      <span style="font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.25rem;">Advertisement</span>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9875981872644926"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        window.addEventListener('load', function() {
+          try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+        });
+      </script>
+    </div>
+
+    <!-- Educational & Feature Highlights -->
+    <div class="wm-content-section">
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feat-icon">🛡️</div>
+          <h3>100% Client-Side Privacy</h3>
+          <p>Every single pixel transformation and watermark render happens locally in your device's browser memory. Your private client photos, watermarks, and logos are never transmitted or stored on remote servers.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">⚡</div>
+          <h3>Batch Processing &amp; ZIP Bundles</h3>
+          <p>Import dozens of photography files at once. Apply unified branding styles across the entire collection and export everything as an organized, high-resolution `.zip` bundle in seconds.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">📐</div>
+          <h3>Anti-Theft Tiled Grid</h3>
+          <p>Protect preview proofing galleries, real estate listings, and stock photography from unauthorized use with repeating diagonal watermark grids that cover every quadrant of the image.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div>
+        <h2 style="font-size:1.8rem; font-weight:800; margin-bottom:1.5rem; text-align:center; color:#fff;">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <h4>Can I use transparent PNG logos as watermarks?</h4>
+            <p>Yes! OptiPixel Studio's batch watermarker fully respects alpha-transparency in PNG and SVG logos. Upload your logo with a transparent background, adjust the scale and opacity, and position it anywhere on your photos.</p>
+          </div>
+          <div class="faq-item">
+            <h4>Will adding a watermark lower the quality of my original images?</h4>
+            <p>No. We render the watermark directly onto the original pixel dimensions of your uploaded image. An 18 megapixel camera photo remains crisp, full resolution, and ready for high-grade commercial display.</p>
+          </div>
+          <div class="faq-item">
+            <h4>What is the difference between single placement and tiled mode?</h4>
+            <p>Single placement stamps a discreet copyright mark or logo into one specific corner (such as the bottom-right or center). Tiled mode repeats the mark across the entire canvas at an angle, making it virtually impossible for image scrapers to crop out your copyright tag.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Master Site Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4 style="display:flex; align-items:center; gap:0.5rem;">
+          <img src="assets/logo.png" alt="OptiPixel" style="width:22px; height:22px; border-radius:4px;">
+          OptiPixel Studio
+        </h4>
+        <p style="margin-bottom: 1rem; line-height: 1.6;">The privacy-first bulk image optimizer, watermarking studio, and client-side PDF utility. Runs 100% locally in your browser with zero cloud storage.</p>
+        <p style="font-size: 0.8rem; color: #64748b;">Publisher ID: pub-9875981872644926 &bull; optipixelstudio.online</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Creative Tools</h4>
+        <ul>
+          <li><a href="image-watermark.html">Batch Watermarker</a></li>
+          <li><a href="photo-collage.html">Photo Collage Maker</a></li>
+          <li><a href="photo-filters.html">Photo Filters &amp; Lighting</a></li>
+          <li><a href="photo-resizer.html">Social Photo Resizer</a></li>
+          <li><a href="passport-photo.html">Passport Photo Maker</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>PDF &amp; Optimization</h4>
+        <ul>
+          <li><a href="image-compressor.html">Image Compressor</a></li>
+          <li><a href="background-remover.html">Background Remover</a></li>
+          <li><a href="pdf-editor.html">Visual PDF Editor</a></li>
+          <li><a href="image-to-pdf.html">Images to PDF</a></li>
+          <li><a href="qr-code-generator.html">QR Code Studio</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>About &amp; Legal</h4>
+        <ul>
+          <li><a href="about.html">About OptiPixel</a></li>
+          <li><a href="contact.html">Contact &amp; Support</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="sitemap.xml">XML Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 OptiPixel Studio. Created by Ishbir Hanspal. All rights reserved.</p>
+      <p>100% Client-Side Processing &bull; No Server Storage Guarantee</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="js/shared-suite.js"></script>
+  <script src="js/suite-nav.js"></script>
+  <script>
+    // State Management
+    let imageQueue = [];
+    let activeImageIndex = 0;
+    let watermarkMode = 'text'; // 'text' | 'logo'
+    let currentAnchor = 'br';
+    let isTiled = false;
+    let uploadedLogoImg = null;
+
+    const canvas = document.getElementById('watermarkCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Initialize with sample photo on load
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSamplePhoto();
+    });
+
+    function setWatermarkMode(mode) {
+      watermarkMode = mode;
+      document.getElementById('tabTextMode').classList.toggle('active', mode === 'text');
+      document.getElementById('tabLogoMode').classList.toggle('active', mode === 'logo');
+      document.getElementById('textControlsGroup').style.display = mode === 'text' ? 'flex' : 'none';
+      document.getElementById('logoControlsGroup').style.display = mode === 'logo' ? 'flex' : 'none';
+      renderWatermark();
+    }
+
+    function setAnchor(anchor) {
+      currentAnchor = anchor;
+      document.querySelectorAll('.anchor-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      renderWatermark();
+    }
+
+    function toggleTileMode(checked) {
+      isTiled = checked;
+      document.getElementById('anchorGridGroup').style.display = checked ? 'none' : 'flex';
+      document.getElementById('tileSpacingGroup').style.display = checked ? 'flex' : 'none';
+      renderWatermark();
+    }
+
+    function updateSliderVal(id, val) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = val;
+    }
+
+    function setQuickColor(hex) {
+      document.getElementById('wmTextColor').value = hex;
+      document.getElementById('wmTextColorHex').value = hex;
+      renderWatermark();
+    }
+
+    function syncColorInput(hex) {
+      if (/^#[0-9A-F]{6}$/i.test(hex)) {
+        document.getElementById('wmTextColor').value = hex;
+        renderWatermark();
+      }
+    }
+
+    // File Upload Handler
+    function handleImageUpload(e) {
+      const files = Array.from(e.target.files || []);
+      if (!files.length) return;
+      processIncomingFiles(files);
+    }
+
+    // Drag and Drop
+    const dz = document.getElementById('wmDropzone');
+    dz.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dz.classList.add('dragover');
+    });
+    dz.addEventListener('dragleave', () => {
+      dz.classList.remove('dragover');
+    });
+    dz.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dz.classList.remove('dragover');
+      if (e.dataTransfer.files && e.dataTransfer.files.length) {
+        processIncomingFiles(Array.from(e.dataTransfer.files));
+      }
+    });
+
+    function processIncomingFiles(files) {
+      let loadedCount = 0;
+      files.forEach((file) => {
+        if (!file.type.startsWith('image/')) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const img = new Image();
+          img.onload = () => {
+            imageQueue.push({
+              name: file.name,
+              img: img,
+              width: img.naturalWidth,
+              height: img.naturalHeight
+            });
+            loadedCount++;
+            if (loadedCount === files.length) {
+              activeImageIndex = imageQueue.length - files.length;
+              updateQueueUI();
+              renderWatermark();
+              OptiPixelSuite.showToast(`Loaded ${files.length} photos! 📸`);
+            }
+          };
+          img.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function handleLogoUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const img = new Image();
+        img.onload = () => {
+          uploadedLogoImg = img;
+          document.getElementById('logoUploadText').textContent = `✅ ${file.name}`;
+          renderWatermark();
+          OptiPixelSuite.showToast('Logo loaded successfully! 🎨');
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function loadSamplePhoto() {
+      const sample = OptiPixelSuite.getSampleImage('mountain', 1800, 1200);
+      const img = new Image();
+      img.onload = () => {
+        imageQueue = [{
+          name: 'optipixel_sample_mountain.png',
+          img: img,
+          width: img.naturalWidth,
+          height: img.naturalHeight
+        }];
+        activeImageIndex = 0;
+        updateQueueUI();
+        renderWatermark();
+      };
+      img.src = sample.toDataURL('image/png');
+    }
+
+    function updateQueueUI() {
+      const wrap = document.getElementById('wmQueueWrap');
+      const counter = document.getElementById('queueCounter');
+      counter.textContent = `${imageQueue.length} photo${imageQueue.length === 1 ? '' : 's'} in batch`;
+
+      if (imageQueue.length > 1) {
+        wrap.style.display = 'flex';
+        wrap.innerHTML = '';
+        imageQueue.forEach((item, idx) => {
+          const div = document.createElement('div');
+          div.className = `wm-queue-item ${idx === activeImageIndex ? 'active' : ''}`;
+          div.onclick = () => {
+            activeImageIndex = idx;
+            updateQueueUI();
+            renderWatermark();
+          };
+          div.innerHTML = `
+            <img class="wm-queue-thumb" src="${item.img.src}" alt="${item.name}">
+            <div class="wm-queue-info">
+              <div class="wm-queue-name">${item.name}</div>
+              <div class="wm-queue-dims">${item.width} &times; ${item.height}</div>
+            </div>
+          `;
+          wrap.appendChild(div);
+        });
+      } else {
+        wrap.style.display = 'none';
+      }
+
+      document.getElementById('previewActiveIdxTag').textContent = `Image ${activeImageIndex + 1} of ${imageQueue.length}`;
+    }
+
+    // Core High-Performance Watermark Engine
+    function renderWatermark() {
+      if (!imageQueue.length) return;
+      const current = imageQueue[activeImageIndex];
+      if (!current) return;
+
+      const w = current.width;
+      const h = current.height;
+      canvas.width = w;
+      canvas.height = h;
+
+      document.getElementById('previewDimsTag').textContent = `${w} × ${h} px`;
+
+      // 1. Draw base photo
+      ctx.drawImage(current.img, 0, 0, w, h);
+
+      // Common parameters
+      const opacity = parseFloat(document.getElementById('wmOpacitySlider').value) / 100;
+      const rotationDeg = parseFloat(document.getElementById('wmRotationSlider').value);
+      const rotationRad = (rotationDeg * Math.PI) / 180;
+      const hasShadow = document.getElementById('wmShadowToggle').checked;
+
+      ctx.save();
+      ctx.globalAlpha = opacity;
+
+      if (hasShadow) {
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.85)';
+        ctx.shadowBlur = Math.max(4, Math.round(w * 0.006));
+        ctx.shadowOffsetX = Math.max(2, Math.round(w * 0.003));
+        ctx.shadowOffsetY = Math.max(2, Math.round(w * 0.003));
+      }
+
+      if (watermarkMode === 'text') {
+        renderTextWatermark(w, h, rotationRad);
+      } else {
+        renderLogoWatermark(w, h, rotationRad);
+      }
+
+      ctx.restore();
+    }
+
+    function renderTextWatermark(w, h, rotationRad) {
+      const text = document.getElementById('wmTextInput').value || '© OptiPixel Studio';
+      const font = document.getElementById('wmFontSelect').value;
+      const sizePercent = parseFloat(document.getElementById('wmSizeSlider').value);
+      const color = document.getElementById('wmTextColor').value;
+
+      const fontSize = Math.max(16, Math.round((w * sizePercent) / 100));
+      ctx.font = `bold ${fontSize}px "${font}", sans-serif`;
+      ctx.fillStyle = color;
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'center';
+
+      const textMetrics = ctx.measureText(text);
+      const textWidth = textMetrics.width;
+      const textHeight = fontSize;
+
+      if (isTiled) {
+        // Repeated diagonal tiled pattern across the canvas
+        const spacing = (parseFloat(document.getElementById('wmTileSpacingSlider').value) / 100) * fontSize * 3.5;
+        const diagonal = Math.hypot(w, h);
+
+        ctx.save();
+        ctx.translate(w / 2, h / 2);
+        ctx.rotate(rotationRad);
+
+        for (let y = -diagonal; y < diagonal; y += spacing) {
+          for (let x = -diagonal; x < diagonal; x += (textWidth + spacing * 0.8)) {
+            ctx.fillText(text, x, y);
+          }
+        }
+        ctx.restore();
+      } else {
+        // Single anchor placement
+        const pos = calculateAnchorCoords(w, h, textWidth, textHeight, currentAnchor);
+        ctx.save();
+        ctx.translate(pos.x, pos.y);
+        ctx.rotate(rotationRad);
+        ctx.fillText(text, 0, 0);
+        ctx.restore();
+      }
+    }
+
+    function renderLogoWatermark(w, h, rotationRad) {
+      if (!uploadedLogoImg) {
+        // Draw placeholder text if no logo uploaded yet
+        ctx.font = `bold ${Math.round(w * 0.035)}px sans-serif`;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('⚡ Please upload a brand logo', w / 2, h / 2);
+        return;
+      }
+
+      const scalePercent = parseFloat(document.getElementById('wmLogoScaleSlider').value);
+      const logoW = Math.round((w * scalePercent) / 100);
+      const aspect = uploadedLogoImg.naturalWidth / uploadedLogoImg.naturalHeight;
+      const logoH = Math.round(logoW / aspect);
+
+      if (isTiled) {
+        const spacing = logoW * 1.8;
+        const diagonal = Math.hypot(w, h);
+
+        ctx.save();
+        ctx.translate(w / 2, h / 2);
+        ctx.rotate(rotationRad);
+
+        for (let y = -diagonal; y < diagonal; y += spacing) {
+          for (let x = -diagonal; x < diagonal; x += spacing) {
+            ctx.drawImage(uploadedLogoImg, x - logoW / 2, y - logoH / 2, logoW, logoH);
+          }
+        }
+        ctx.restore();
+      } else {
+        const pos = calculateAnchorCoords(w, h, logoW, logoH, currentAnchor);
+        ctx.save();
+        ctx.translate(pos.x, pos.y);
+        ctx.rotate(rotationRad);
+        ctx.drawImage(uploadedLogoImg, -logoW / 2, -logoH / 2, logoW, logoH);
+        ctx.restore();
+      }
+    }
+
+    function calculateAnchorCoords(canvasW, canvasH, itemW, itemH, anchor) {
+      const marginX = canvasW * 0.05;
+      const marginY = canvasH * 0.05;
+
+      let x = canvasW / 2;
+      let y = canvasH / 2;
+
+      switch(anchor) {
+        case 'tl': x = marginX + itemW / 2; y = marginY + itemH / 2; break;
+        case 'tc': x = canvasW / 2; y = marginY + itemH / 2; break;
+        case 'tr': x = canvasW - marginX - itemW / 2; y = marginY + itemH / 2; break;
+        case 'ml': x = marginX + itemW / 2; y = canvasH / 2; break;
+        case 'c':  x = canvasW / 2; y = canvasH / 2; break;
+        case 'mr': x = canvasW - marginX - itemW / 2; y = canvasH / 2; break;
+        case 'bl': x = marginX + itemW / 2; y = canvasH - marginY - itemH / 2; break;
+        case 'bc': x = canvasW / 2; y = canvasH - marginY - itemH / 2; break;
+        case 'br': x = canvasW - marginX - itemW / 2; y = canvasH - marginY - itemH / 2; break;
+      }
+      return { x, y };
+    }
+
+    // Single Download
+    function downloadCurrentWatermarked() {
+      if (!canvas.width || !canvas.height) return;
+      const current = imageQueue[activeImageIndex];
+      const filename = current ? `watermarked_${current.name}` : `optipixel_watermark_${Date.now()}.png`;
+
+      canvas.toBlob((blob) => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = filename;
+        a.click();
+        OptiPixelSuite.showToast(`Saved ${filename}! 💧`);
+      }, 'image/png');
+    }
+
+    // Batch ZIP Export
+    async function downloadAllWatermarkedZip() {
+      if (!imageQueue.length) return;
+      if (typeof JSZip === 'undefined') {
+        OptiPixelSuite.showToast('ZIP library is loading, please retry in a second...');
+        return;
+      }
+
+      OptiPixelSuite.showToast(`Generating watermarked ZIP bundle (${imageQueue.length} files)... 📦`);
+      const zip = new JSZip();
+
+      // Render each image in queue through the offscreen canvas
+      for (let i = 0; i < imageQueue.length; i++) {
+        activeImageIndex = i;
+        renderWatermark();
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+        zip.file(`watermarked_${imageQueue[i].name}`, blob);
+      }
+
+      // Restore active view to first image
+      activeImageIndex = 0;
+      updateQueueUI();
+      renderWatermark();
+
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(zipBlob);
+      a.download = `optipixel_watermarked_bundle_${Date.now()}.zip`;
+      a.click();
+      OptiPixelSuite.showToast('Batch ZIP exported successfully! 🎉');
+    }
+
+    // Cross-Tool Pipeline Navigation
+    function pipeTo(toolUrl) {
+      if (!canvas.width || !canvas.height) return;
+      canvas.toBlob((blob) => {
+        OptiPixelSuite.pipelineImage(blob, toolUrl);
+      }, 'image/png');
+    }
+  </script>
+</body>
+</html>

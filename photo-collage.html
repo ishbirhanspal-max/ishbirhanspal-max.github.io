@@ -15,7 +15,7 @@
   <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&family=JetBrains+Mono:wght@600&family=Permanent+Marker&display=swap" rel="stylesheet">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9875981872644926" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/suite-nav.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"OptiPixel Photo Collage Maker Pro","url":"https://optipixelstudio.online/photo-collage.html","applicationCategory":"MultimediaApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
@@ -297,10 +297,39 @@
       </div>
     </div>
 
+    <!-- Typography & Font Controls -->
+    <div class="ctrl-row" style="margin-top:-0.5rem;margin-bottom:1.5rem">
+      <div class="ctrl-group">
+        <label>Caption Typography</label>
+        <select id="captionFont" onchange="renderCollage()">
+          <option value="'Outfit', sans-serif" selected>Outfit (Clean Sans)</option>
+          <option value="'Playfair Display', serif">Playfair Display (Luxury Serif)</option>
+          <option value="'Permanent Marker', cursive">Permanent Marker (Handwriting)</option>
+          <option value="'JetBrains Mono', monospace">JetBrains Mono (Monospace)</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>Text Color</label>
+        <input type="color" id="captionColor" value="#ffffff" oninput="renderCollage()">
+      </div>
+      <div class="ctrl-group">
+        <label>Text Size: <span id="captionSizeVal">3.8%</span></label>
+        <input type="range" id="captionSizeSlider" min="20" max="70" value="38" oninput="document.getElementById('captionSizeVal').textContent=(this.value/10)+'%';renderCollage()">
+      </div>
+      <div class="ctrl-group">
+        <label>Text Drop Shadow</label>
+        <select id="captionShadow" onchange="renderCollage()">
+          <option value="on" selected>Subtle Dark Glow</option>
+          <option value="off">No Shadow</option>
+        </select>
+      </div>
+    </div>
+
     <!-- Canvas Preview -->
     <div class="canvas-wrap">
-      <canvas id="collageCanvas"></canvas>
+      <canvas id="collageCanvas" style="cursor: grab;"></canvas>
     </div>
+    <p style="text-align:center;font-size:0.82rem;color:var(--muted);margin-top:0.4rem;margin-bottom:1.25rem">💡 <strong>Direct Touch &amp; Drag:</strong> Click and drag anywhere inside a photo slot on the canvas to pan and frame it smoothly!</p>
 
     <!-- Multi-Format Export Bar -->
     <div class="export-bar">
@@ -716,7 +745,11 @@
       }
       const gridH = gridBottom - gridTop;
 
-      function drawCell(item, x, y, w, h) {
+      slotRects = [];
+
+      function drawCell(idx, x, y, w, h) {
+        slotRects[idx] = { x, y, w, h };
+        const item = photos[idx];
         if (!item || !item.img) return;
         const img = item.img;
         const zoom = item.zoom || 1.0;
@@ -749,43 +782,55 @@
       if (layout === '2side') {
         const cw = (W - gap * 3) / 2;
         const ch = gridH - gap * 2;
-        drawCell(photos[0], gap, gridTop + gap, cw, ch);
-        drawCell(photos[1], gap * 2 + cw, gridTop + gap, cw, ch);
+        drawCell(0, gap, gridTop + gap, cw, ch);
+        drawCell(1, gap * 2 + cw, gridTop + gap, cw, ch);
       } else if (layout === '2vert') {
         const cw = W - gap * 2;
         const ch = (gridH - gap * 3) / 2;
-        drawCell(photos[0], gap, gridTop + gap, cw, ch);
-        drawCell(photos[1], gap, gridTop + gap * 2 + ch, cw, ch);
+        drawCell(0, gap, gridTop + gap, cw, ch);
+        drawCell(1, gap, gridTop + gap * 2 + ch, cw, ch);
       } else if (layout === '3grid') {
         const topH = (gridH - gap * 3) * 0.55, botH = gridH - topH - gap * 3;
         const cw = (W - gap * 3) / 2;
-        drawCell(photos[0], gap, gridTop + gap, W - gap * 2, topH);
-        drawCell(photos[1], gap, gridTop + topH + gap * 2, cw, botH);
-        drawCell(photos[2], gap * 2 + cw, gridTop + topH + gap * 2, cw, botH);
+        drawCell(0, gap, gridTop + gap, W - gap * 2, topH);
+        drawCell(1, gap, gridTop + topH + gap * 2, cw, botH);
+        drawCell(2, gap * 2 + cw, gridTop + topH + gap * 2, cw, botH);
       } else if (layout === '2x2') {
         const cw = (W - gap * 3) / 2, ch = (gridH - gap * 3) / 2;
-        drawCell(photos[0], gap, gridTop + gap, cw, ch);
-        drawCell(photos[1], gap * 2 + cw, gridTop + gap, cw, ch);
-        drawCell(photos[2], gap, gridTop + gap * 2 + ch, cw, ch);
-        drawCell(photos[3], gap * 2 + cw, gridTop + gap * 2 + ch, cw, ch);
+        drawCell(0, gap, gridTop + gap, cw, ch);
+        drawCell(1, gap * 2 + cw, gridTop + gap, cw, ch);
+        drawCell(2, gap, gridTop + gap * 2 + ch, cw, ch);
+        drawCell(3, gap * 2 + cw, gridTop + gap * 2 + ch, cw, ch);
       } else if (layout === '6grid') {
         const cw = (W - gap * 4) / 3, ch = (gridH - gap * 3) / 2;
         for (let i = 0; i < 6; i++) {
           const col = i % 3, row = Math.floor(i / 3);
-          drawCell(photos[i], gap + col * (cw + gap), gridTop + gap + row * (ch + gap), cw, ch);
+          drawCell(i, gap + col * (cw + gap), gridTop + gap + row * (ch + gap), cw, ch);
         }
       }
 
-      // Draw Title / Caption
+      // Draw Title / Caption with Custom Typography
       if (caption && captionPos !== 'none') {
-        const isLightBg = currentBgTheme === 'white' || currentBgTheme === 'pastel';
-        ctx.fillStyle = isLightBg ? '#0f172a' : '#ffffff';
-        const fontSize = Math.round(H * 0.038);
-        ctx.font = `bold ${fontSize}px 'Outfit', sans-serif`;
+        const fontFam = document.getElementById('captionFont')?.value || "'Outfit', sans-serif";
+        const fontCol = document.getElementById('captionColor')?.value || '#ffffff';
+        const sizePct = (parseInt(document.getElementById('captionSizeSlider')?.value) || 38) / 1000;
+        const shadow = document.getElementById('captionShadow')?.value !== 'off';
+
+        ctx.save();
+        ctx.fillStyle = fontCol;
+        const fontSize = Math.max(18, Math.round(H * sizePct));
+        ctx.font = `bold ${fontSize}px ${fontFam}`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
+        if (shadow) {
+          ctx.shadowColor = 'rgba(0,0,0,0.85)';
+          ctx.shadowBlur = Math.round(fontSize * 0.25);
+          ctx.shadowOffsetX = 2;
+          ctx.shadowOffsetY = 2;
+        }
         const capY = captionPos === 'top' ? (captionHeight / 2) : (H - captionHeight / 2);
         ctx.fillText(caption, W / 2, capY);
+        ctx.restore();
       }
 
       // Draw Sticker Badge if selected
@@ -899,6 +944,136 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       document.getElementById('estSizeBadge').textContent = '~ 0 KB';
     }
+
+    // Direct Mouse & Touch Canvas Drag-to-Pan
+    let isDraggingSlot = false;
+    let dragSlotIndex = null;
+    let dragStartX = 0, dragStartY = 0;
+    let startPanX = 0, startPanY = 0;
+
+    const canvasEl = document.getElementById('collageCanvas');
+
+    function getCanvasCoords(clientX, clientY) {
+      const rect = canvasEl.getBoundingClientRect();
+      const scaleX = canvasEl.width / rect.width;
+      const scaleY = canvasEl.height / rect.height;
+      return {
+        x: (clientX - rect.left) * scaleX,
+        y: (clientY - rect.top) * scaleY
+      };
+    }
+
+    function findSlotAt(x, y) {
+      for (let i = 0; i < slotRects.length; i++) {
+        const r = slotRects[i];
+        if (r && x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    canvasEl.addEventListener('mousedown', (e) => {
+      const { x, y } = getCanvasCoords(e.clientX, e.clientY);
+      const slotIdx = findSlotAt(x, y);
+      if (slotIdx !== -1 && photos[slotIdx] && photos[slotIdx].img) {
+        isDraggingSlot = true;
+        dragSlotIndex = slotIdx;
+        dragStartX = e.clientX;
+        dragStartY = e.clientY;
+        startPanX = photos[slotIdx].panX || 0;
+        startPanY = photos[slotIdx].panY || 0;
+        canvasEl.style.cursor = 'grabbing';
+      }
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDraggingSlot || dragSlotIndex === null) return;
+      const r = slotRects[dragSlotIndex];
+      if (!r) return;
+
+      const rect = canvasEl.getBoundingClientRect();
+      const deltaX = (e.clientX - dragStartX) * (canvasEl.width / rect.width);
+      const deltaY = (e.clientY - dragStartY) * (canvasEl.height / rect.height);
+
+      const panDeltaX = (deltaX / r.w) * 100;
+      const panDeltaY = (deltaY / r.h) * 100;
+
+      const newPanX = Math.max(-50, Math.min(50, Math.round(startPanX + panDeltaX)));
+      const newPanY = Math.max(-50, Math.min(50, Math.round(startPanY + panDeltaY)));
+
+      photos[dragSlotIndex].panX = newPanX;
+      photos[dragSlotIndex].panY = newPanY;
+
+      if (activeSlotIndex === dragSlotIndex) {
+        document.getElementById('panXSlider').value = newPanX;
+        document.getElementById('panXVal').textContent = newPanX + '%';
+        document.getElementById('panYSlider').value = newPanY;
+        document.getElementById('panYVal').textContent = newPanY + '%';
+      }
+
+      renderCollage();
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDraggingSlot) {
+        isDraggingSlot = false;
+        dragSlotIndex = null;
+        canvasEl.style.cursor = 'grab';
+      }
+    });
+
+    // Touch Event Equivalents
+    canvasEl.addEventListener('touchstart', (e) => {
+      if (!e.touches.length) return;
+      const touch = e.touches[0];
+      const { x, y } = getCanvasCoords(touch.clientX, touch.clientY);
+      const slotIdx = findSlotAt(x, y);
+      if (slotIdx !== -1 && photos[slotIdx] && photos[slotIdx].img) {
+        e.preventDefault();
+        isDraggingSlot = true;
+        dragSlotIndex = slotIdx;
+        dragStartX = touch.clientX;
+        dragStartY = touch.clientY;
+        startPanX = photos[slotIdx].panX || 0;
+        startPanY = photos[slotIdx].panY || 0;
+      }
+    }, { passive: false });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!isDraggingSlot || dragSlotIndex === null || !e.touches.length) return;
+      e.preventDefault();
+      const touch = e.touches[0];
+      const r = slotRects[dragSlotIndex];
+      if (!r) return;
+
+      const rect = canvasEl.getBoundingClientRect();
+      const deltaX = (touch.clientX - dragStartX) * (canvasEl.width / rect.width);
+      const deltaY = (touch.clientY - dragStartY) * (canvasEl.height / rect.height);
+
+      const panDeltaX = (deltaX / r.w) * 100;
+      const panDeltaY = (deltaY / r.h) * 100;
+
+      const newPanX = Math.max(-50, Math.min(50, Math.round(startPanX + panDeltaX)));
+      const newPanY = Math.max(-50, Math.min(50, Math.round(startPanY + panDeltaY)));
+
+      photos[dragSlotIndex].panX = newPanX;
+      photos[dragSlotIndex].panY = newPanY;
+
+      if (activeSlotIndex === dragSlotIndex) {
+        document.getElementById('panXSlider').value = newPanX;
+        document.getElementById('panXVal').textContent = newPanX + '%';
+        document.getElementById('panYSlider').value = newPanY;
+        document.getElementById('panYVal').textContent = newPanY + '%';
+      }
+
+      renderCollage();
+    }, { passive: false });
+
+    window.addEventListener('touchend', () => {
+      isDraggingSlot = false;
+      dragSlotIndex = null;
+    });
 
     // Auto-load incoming pipeline image or initialize
     rebuildSlots();

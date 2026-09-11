@@ -1,11 +1,12 @@
-// OptiPixel Studio — Production Service Worker (PWA) v2.6
-const CACHE_NAME = 'optipixel-cache-v2.6';
+// OptiPixel Studio — Production Service Worker (PWA) v2.7
+const CACHE_NAME = 'optipixel-cache-v2.7';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/photo-collage.html',
   '/photo-filters.html',
   '/photo-resizer.html',
+  '/image-watermark.html',
   '/passport-photo.html',
   '/background-remover.html',
   '/image-compressor.html',
