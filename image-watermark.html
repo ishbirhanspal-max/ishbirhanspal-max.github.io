@@ -863,15 +863,15 @@
           <div id="anchorGridGroup" class="ctrl-group">
             <label>Position Alignment</label>
             <div class="anchor-grid">
-              <button type="button" class="anchor-btn" onclick="setAnchor('tl')">Top-L</button>
-              <button type="button" class="anchor-btn" onclick="setAnchor('tc')">Top-C</button>
-              <button type="button" class="anchor-btn" onclick="setAnchor('tr')">Top-R</button>
-              <button type="button" class="anchor-btn" onclick="setAnchor('ml')">Mid-L</button>
-              <button type="button" class="anchor-btn" onclick="setAnchor('c')">Center</button>
-              <button type="button" class="anchor-btn" onclick="setAnchor('mr')">Mid-R</button>
-              <button type="button" class="anchor-btn" onclick="setAnchor('bl')">Bot-L</button>
-              <button type="button" class="anchor-btn" onclick="setAnchor('bc')">Bot-C</button>
-              <button type="button" class="anchor-btn active" onclick="setAnchor('br')">Bot-R</button>
+              <button type="button" class="anchor-btn" data-anchor="tl" onclick="setAnchor('tl', this)">Top-L</button>
+              <button type="button" class="anchor-btn" data-anchor="tc" onclick="setAnchor('tc', this)">Top-C</button>
+              <button type="button" class="anchor-btn" data-anchor="tr" onclick="setAnchor('tr', this)">Top-R</button>
+              <button type="button" class="anchor-btn" data-anchor="ml" onclick="setAnchor('ml', this)">Mid-L</button>
+              <button type="button" class="anchor-btn" data-anchor="c"  onclick="setAnchor('c', this)">Center</button>
+              <button type="button" class="anchor-btn" data-anchor="mr" onclick="setAnchor('mr', this)">Mid-R</button>
+              <button type="button" class="anchor-btn" data-anchor="bl" onclick="setAnchor('bl', this)">Bot-L</button>
+              <button type="button" class="anchor-btn" data-anchor="bc" onclick="setAnchor('bc', this)">Bot-C</button>
+              <button type="button" class="anchor-btn active" data-anchor="br" onclick="setAnchor('br', this)">Bot-R</button>
             </div>
           </div>
 
@@ -1065,12 +1065,17 @@
       renderWatermark();
     }
 
-    function setAnchor(anchor) {
+    function setAnchor(anchor, el) {
       currentAnchor = anchor;
       document.querySelectorAll('.anchor-btn').forEach(btn => {
         btn.classList.remove('active');
       });
-      event.target.classList.add('active');
+      if (el) {
+        el.classList.add('active');
+      } else {
+        const matching = document.querySelector(`.anchor-btn[data-anchor="${anchor}"]`);
+        if (matching) matching.classList.add('active');
+      }
       renderWatermark();
     }
 
@@ -1415,6 +1420,22 @@
         OptiPixelSuite.pipelineImage(blob, toolUrl);
       }, 'image/png');
     }
+
+    // Auto-receive incoming piped images from other tools
+    window.addEventListener('load', () => {
+      OptiPixelSuite.receiveImage((img) => {
+        imageQueue = [{
+          name: 'optipixel_piped_photo.png',
+          img: img,
+          width: img.naturalWidth,
+          height: img.naturalHeight
+        }];
+        activeImageIndex = 0;
+        updateQueueUI();
+        renderWatermark();
+        OptiPixelSuite.showToast('Received piped image from Studio! ⚡');
+      });
+    });
   </script>
 </body>
 </html>

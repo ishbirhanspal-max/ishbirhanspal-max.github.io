@@ -955,6 +955,7 @@
 
     function getCanvasCoords(clientX, clientY) {
       const rect = canvasEl.getBoundingClientRect();
+      if (!rect.width || !rect.height) return { x: 0, y: 0 };
       const scaleX = canvasEl.width / rect.width;
       const scaleY = canvasEl.height / rect.height;
       return {
@@ -993,6 +994,7 @@
       if (!r) return;
 
       const rect = canvasEl.getBoundingClientRect();
+      if (!rect.width || !rect.height || !r.w || !r.h) return;
       const deltaX = (e.clientX - dragStartX) * (canvasEl.width / rect.width);
       const deltaY = (e.clientY - dragStartY) * (canvasEl.height / rect.height);
 
@@ -1048,6 +1050,7 @@
       if (!r) return;
 
       const rect = canvasEl.getBoundingClientRect();
+      if (!rect.width || !rect.height || !r.w || !r.h) return;
       const deltaX = (touch.clientX - dragStartX) * (canvasEl.width / rect.width);
       const deltaY = (touch.clientY - dragStartY) * (canvasEl.height / rect.height);
 
