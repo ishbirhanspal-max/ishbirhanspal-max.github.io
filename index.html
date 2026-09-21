@@ -46,7 +46,7 @@
   <meta name="rating" content="general">
   <link rel="canonical" href="https://optipixelstudio.online/">
 
-  <!-- Schema.org Rich Snippet JSON-LD for Google & Bing -->
+  <!-- Schema.org: WebApplication -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -70,8 +70,131 @@
     },
     "author": {
       "@type": "Person",
-      "name": "Ishbir Hanspal"
+      "name": "Ishbir Hanspal",
+      "url": "https://optipixelstudio.online/about.html"
     }
+  }
+  </script>
+
+  <!-- Schema.org: WebSite (Sitelinks Searchbox) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "OptiPixel Studio",
+    "url": "https://optipixelstudio.online/",
+    "description": "Free privacy-first image compressor, PDF editor, background remover, QR code generator, and 18+ browser-based tools by Ishbir Hanspal.",
+    "publisher": {
+      "@type": "Person",
+      "name": "Ishbir Hanspal",
+      "url": "https://optipixelstudio.online/about.html"
+    }
+  }
+  </script>
+
+  <!-- Schema.org: FAQPage (12 questions for E-E-A-T) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Are my images and PDF files private? Do you store them?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, 100% private. Every operation runs entirely inside your browser memory using HTML5 Canvas, WebAssembly, and client-side JavaScript. Your files are never uploaded to any server, never stored in any cloud database, and never transmitted over the internet. There is no backend, no database, and no storage bucket — making it architecturally impossible for your files to be accessed or breached."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is OptiPixel Studio completely free? Are there file size limits?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — completely free, forever. No hidden fees, no subscriptions, no watermarks on downloaded files, and no account registration required. The only practical limit is your device's available RAM. On a modern laptop or desktop with 8 GB+ RAM, even large batches of 50+ images process smoothly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What image formats are supported? Can I convert between formats?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The image compressor accepts JPG, JPEG, PNG, WebP, GIF, BMP, and HEIC files as input. You can output to JPG, PNG, or WebP. Converting from JPG to WebP typically reduces file size by 25–40% with no visible quality loss."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use OptiPixel on my phone (iOS or Android)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — all tools work on iPhone, iPad, Android phones, and Android tablets. The interface is fully responsive. You can also install OptiPixel as a Progressive Web App (PWA) directly from your mobile browser for an offline, home screen app experience."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does OptiPixel work offline without an internet connection?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, after the initial page load. OptiPixel Studio is a Progressive Web App (PWA) with a Service Worker that caches all core scripts, styles, and assets. After your first visit, the app loads and runs even with no internet connection."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between WebP, JPG, and PNG?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "JPG is best for photographs using lossy compression — invisible to the eye above 75% quality but no transparency support. PNG is best for logos, screenshots, and graphics needing transparency — lossless, so files are larger. WebP is Google's modern format delivering 25–35% smaller files than JPG or PNG at the same quality, with both transparency and lossy/lossless support. WebP is the best choice for web use in 2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the AI background remover work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The background remover uses Google's MediaPipe Selfie Segmentation model running 100% inside your browser via WebAssembly. The model analyses each pixel and assigns a foreground/background probability score. For portraits, accuracy is typically 95–99% on well-lit images. Results download as transparent PNG files."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I edit existing text in a PDF without it looking different?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. In the PDF Studio Edit Existing Text mode, click on any word, paragraph, or heading. An input field appears over the text. Type your replacement and press Enter. The overlay text is rendered in a matching font size and positioned to align with the original, creating a visually seamless result in any PDF reader."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is the OCR text scanner? What languages does it support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The OCR engine is powered by Tesseract.js — the WebAssembly port of Google's Tesseract OCR engine — supporting over 100 languages including English, Hindi, French, German, Spanish, Arabic, Japanese, and Chinese. Accuracy is highest on clearly printed, well-lit text."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I add a watermark to multiple photos at once?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use the Batch Image Watermarker at optipixelstudio.online/image-watermark.html. Upload up to 50 photos, configure your text or logo watermark with position, opacity, size, and font. Click Apply to All and download individual files or a ZIP archive. All processing is in-browser with zero uploads."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is OptiPixel different from Smallpdf, ILovePDF, or Adobe online tools?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The key difference is privacy and cost. Smallpdf, ILovePDF, and Adobe web tools require uploading your file to their cloud servers — creating privacy risks for sensitive documents. OptiPixel processes everything 100% inside your browser with no server upload. OptiPixel is also completely unlimited and free, whereas those services restrict free users to 2 tasks per hour."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is OptiPixel Studio GDPR and privacy law compliant?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Because OptiPixel operates on a zero-server, zero-upload architecture, it is inherently compliant with GDPR (EU), DPDP Act (India), CCPA (California), and similar data protection regulations. No personal data from your files is collected, processed on servers, or retained."
+        }
+      }
+    ]
   }
   </script>
 
