@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BSQJ151TNF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BSQJ151TNF');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-9875981872644926">
+  <meta name="google-site-verification" content="jVQJff56nis0RTvooVRwHp6-dbM8nsIMy12GFCqMtJU">
+  <title>Guides &amp; Tips — OptiPixel Studio Blog</title>
+  <meta name="description" content="Free guides on image compression, PDF editing, background removal, QR codes, passport photos, and more. Learn how to get the most from every OptiPixel tool.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://optipixelstudio.online/blog.html">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9875981872644926" crossorigin="anonymous"></script>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Guides &amp; Tips — OptiPixel Studio">
+  <meta property="og:description" content="In-depth guides on image compression, PDF editing, background removal, QR codes, and passport photos — all free tools explained.">
+  <meta property="og:url" content="https://optipixelstudio.online/blog.html">
+  <meta property="og:image" content="https://optipixelstudio.online/assets/logo.png">
+  <meta property="og:type" content="website">
+
+  <!-- Blog structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "OptiPixel Studio Guides",
+    "url": "https://optipixelstudio.online/blog.html",
+    "description": "Free tutorials and guides for image compression, PDF editing, background removal, QR codes, and more.",
+    "author": {
+      "@type": "Person",
+      "name": "Ishbir Hanspal",
+      "url": "https://optipixelstudio.online/about.html"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "OptiPixel Studio",
+      "url": "https://optipixelstudio.online/"
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #070a12;
+      --surface: #0e1424;
+      --surface-card: rgba(18,26,44,0.7);
+      --border: rgba(255,255,255,0.08);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #06b6d4;
+      --accent2: #6366f1;
+      --accent-em: #10b981;
+      --radius: 14px;
+    }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: rgba(7,10,18,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header a.brand {
+      display: flex; align-items: center; gap: 0.65rem;
+      text-decoration: none; color: var(--text); font-weight: 800; font-size: 1.15rem;
+    }
+    header a.brand img { width: 32px; height: 32px; border-radius: 8px; box-shadow: 0 0 12px rgba(6,182,212,0.4); }
+    .brand-grad { background: linear-gradient(135deg,#38bdf8,#6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-links { display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      text-decoration: none; color: #000; background: var(--accent);
+      font-weight: 700; font-size: 0.88rem;
+      padding: 0.4rem 1rem; border-radius: 999px; transition: all 0.2s;
+    }
+    .nav-btn:hover { background: #38bdf8; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .blog-hero {
+      background: linear-gradient(135deg, rgba(99,102,241,0.14) 0%, rgba(6,182,212,0.08) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3);
+      color: #10b981; padding: 0.35rem 1rem; border-radius: 999px;
+      font-size: 0.85rem; font-weight: 600; margin-bottom: 1.25rem;
+    }
+    .blog-hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8, #6366f1 60%, #a855f7);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 0.85rem; line-height: 1.22;
+    }
+    .blog-hero p { max-width: 650px; margin: 0 auto; color: var(--muted); font-size: 1.1rem; }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 6rem;
+      display: grid; grid-template-columns: 1fr 320px; gap: 2.5rem; align-items: start;
+    }
+    @media(max-width: 900px) { .page-wrap { grid-template-columns: 1fr; } .sidebar { display: none; } }
+
+    /* ── ARTICLES ── */
+    article.guide-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      backdrop-filter: blur(12px);
+      scroll-margin-top: 6rem;
+    }
+    article.guide-card:hover { border-color: rgba(99,102,241,0.35); }
+    .article-meta {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.25rem; flex-wrap: wrap;
+    }
+    .article-category {
+      background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3);
+      color: #a5b4fc; padding: 0.2rem 0.75rem; border-radius: 999px;
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .article-date { color: var(--muted); font-size: 0.85rem; }
+    .article-read { color: var(--muted); font-size: 0.85rem; }
+    .guide-card h2 {
+      font-size: clamp(1.35rem, 2.5vw, 1.75rem); font-weight: 800; color: #f1f5f9;
+      margin-bottom: 0.85rem; line-height: 1.3;
+    }
+    .guide-card h3 {
+      font-size: 1.15rem; font-weight: 700; color: var(--accent);
+      margin: 1.75rem 0 0.6rem;
+    }
+    .guide-card p { color: #cbd5e1; margin-bottom: 1.1rem; font-size: 1.02rem; line-height: 1.8; }
+    .guide-card p:last-of-type { margin-bottom: 0; }
+    .guide-card ul, .guide-card ol {
+      margin: 0.5rem 0 1.1rem 1.75rem; color: #cbd5e1; font-size: 1.02rem;
+    }
+    .guide-card li { margin-bottom: 0.5rem; line-height: 1.7; }
+    .guide-card strong { color: #f8fafc; }
+    .guide-card a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+    .tip-box {
+      background: rgba(16,185,129,0.08);
+      border: 1px solid rgba(16,185,129,0.25);
+      border-radius: 10px; padding: 1rem 1.25rem; margin: 1.25rem 0;
+      color: #6ee7b7; font-size: 0.97rem; display: flex; gap: 0.6rem;
+    }
+    .warn-box {
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 10px; padding: 1rem 1.25rem; margin: 1.25rem 0;
+      color: #fcd34d; font-size: 0.97rem; display: flex; gap: 0.6rem;
+    }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: linear-gradient(135deg, #06b6d4, #6366f1);
+      color: #fff; font-weight: 700; font-size: 0.92rem;
+      padding: 0.6rem 1.4rem; border-radius: 999px; text-decoration: none;
+      margin-top: 1.25rem; transition: opacity 0.2s, transform 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* ── SIDEBAR ── */
+    .sidebar { position: sticky; top: 5rem; }
+    .sidebar-card {
+      background: var(--surface-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem;
+      backdrop-filter: blur(12px);
+    }
+    .sidebar-card h4 { color: #fff; font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+    .sidebar-card ul { list-style: none; margin: 0; padding: 0; }
+    .sidebar-card li { margin-bottom: 0.65rem; }
+    .sidebar-card a {
+      color: var(--muted); text-decoration: none; font-size: 0.92rem;
+      display: flex; align-items: center; gap: 0.45rem; transition: color 0.2s;
+    }
+    .sidebar-card a:hover { color: var(--accent); }
+    .sidebar-tool-btn {
+      display: block; text-decoration: none; text-align: center;
+      background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(99,102,241,0.15));
+      border: 1px solid rgba(99,102,241,0.3); border-radius: 10px;
+      padding: 0.75rem 1rem; color: #fff; font-weight: 600; font-size: 0.9rem;
+      margin-bottom: 0.6rem; transition: all 0.2s;
+    }
+    .sidebar-tool-btn:hover { border-color: var(--accent); background: rgba(6,182,212,0.2); }
+    .sidebar-tool-btn span { display: block; color: var(--muted); font-size: 0.78rem; font-weight: 400; margin-top: 0.15rem; }
+
+    /* ── AD SLOT ── */
+    .ad-wrap { text-align: center; margin: 2rem 0; min-height: 90px; }
+    .ad-label { display: block; font-size: 0.72rem; color: #475569; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #05070d; border-top: 1px solid var(--border);
+      padding: 3rem 2rem 2rem; color: var(--muted); font-size: 0.92rem;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; margin-bottom: 2rem;
+    }
+    @media(max-width:768px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+    .footer-brand a { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: #fff; font-weight: 800; font-size: 1.1rem; margin-bottom: 0.75rem; }
+    .footer-brand img { width: 30px; height: 30px; border-radius: 7px; }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.6; }
+    .footer-col h4 { color: #fff; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.85rem; }
+    .footer-col ul { list-style: none; margin: 0; padding: 0; }
+    .footer-col li { margin-bottom: 0.55rem; }
+    .footer-col a { color: var(--muted); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid var(--border); text-align: center; font-size: 0.85rem; }
+    .footer-bottom a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="brand">
+      <img src="assets/logo.png" alt="OptiPixel Logo" width="32" height="32" loading="eager">
+      <span>OptiPixel<span class="brand-grad">&amp;PDF</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="/">🏠 Home</a>
+      <a href="blog.html" class="active">📖 Guides</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/" class="nav-btn">⚡ Open Tools</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="blog-hero">
+    <div class="badge">📖 Free Guides &amp; Tutorials</div>
+    <h1>How-To Guides for Every Tool</h1>
+    <p>Step-by-step tutorials, pro tips, and technical explanations for image compression, PDF editing, background removal, QR codes, and more — written by the OptiPixel team.</p>
+  </section>
+
+  <!-- Main Content -->
+  <div class="page-wrap">
+    <main>
+
+      <!-- ─────────────────────────────────────────────────── -->
+      <!-- ARTICLE 1: Image Compression -->
+      <!-- ─────────────────────────────────────────────────── -->
+      <article class="guide-card" id="image-compression">
+        <div class="article-meta">
+          <span class="article-category">Image Tools</span>
+          <span class="article-date">📅 September 2026</span>
+          <span class="article-read">⏱ 5 min read</span>
+        </div>
+        <h2>How to Compress Images Without Losing Quality — The Complete 2026 Guide</h2>
+
+        <p>Every extra kilobyte on your webpage costs real money — in slower load times, higher bounce rates, and lower Google search rankings. According to Google's own Core Web Vitals study, pages that load in under 2.5 seconds retain 70% more visitors than slow sites. Image compression is the single biggest lever you can pull to hit that target.</p>
+
+        <p>This guide explains everything you need to know about compressing images properly — without turning crisp photos into blurry messes.</p>
+
+        <h3>Why Image File Size Matters So Much</h3>
+        <p>A typical uncompressed photograph from a modern smartphone is between 5 MB and 12 MB. If a product page on your store shows 8 product images, that's potentially 96 MB of data a visitor must download before they see anything. Even on a fast 4G connection at 20 Mbps, that takes nearly 40 seconds. Most users leave within 3 seconds of a slow load.</p>
+        <p>Search engines penalise slow pages in their rankings. Google's PageSpeed Insights tool specifically flags oversized images as a critical issue. The good news: you can compress most photos by 70–90% with zero visible quality loss when done correctly.</p>
+
+        <h3>JPG vs PNG vs WebP — Which Format Should You Use?</h3>
+        <p>Choosing the right format before compressing is just as important as the compression level itself:</p>
+        <ul>
+          <li><strong>JPG (JPEG):</strong> Best for photographs, product images, and anything with complex colour gradients. Uses lossy compression — some data is discarded — but the quality drop is invisible to the human eye at 70–85% quality.</li>
+          <li><strong>PNG:</strong> Best for logos, screenshots, graphics with text, or anything needing a transparent background. Uses lossless compression — no data is discarded — so files are larger, but edges stay razor-sharp.</li>
+          <li><strong>WebP:</strong> Google's modern format that delivers 25–35% smaller files than JPG or PNG at the same perceived quality. Now supported by all major browsers. The best choice for web use in 2026.</li>
+        </ul>
+
+        <div class="tip-box">
+          💡 <span><strong>Pro tip:</strong> For product photos on e-commerce sites, convert to WebP at 80% quality. You'll typically reduce a 2 MB JPG to under 300 KB with zero visible difference.</span>
+        </div>
+
+        <h3>How to Compress Images with OptiPixel (Step by Step)</h3>
+        <ol>
+          <li>Open the <a href="image-compressor.html">Image Compressor tool</a> — no sign-up required.</li>
+          <li>Drag and drop your image files directly onto the upload zone, or click to browse. You can upload up to 50 images at once for batch processing.</li>
+          <li>Choose your output format: JPG, PNG, or WebP.</li>
+          <li>Set the quality slider. For most photographs, 75–85% quality is the sweet spot. For graphics or logos, use PNG lossless.</li>
+          <li>Click <strong>"Compress All"</strong>. Processing happens instantly inside your browser — no waiting for uploads to a cloud server.</li>
+          <li>Download individual files or click <strong>"Download ZIP"</strong> to get all optimised images in one bundle.</li>
+        </ol>
+
+        <h3>Understanding Compression Quality Levels</h3>
+        <p>The quality percentage in an image compressor does not mean the image will look X% as good as the original. At 80% quality, most people cannot distinguish a JPG from its uncompressed original when viewed on a standard screen. The quality scale is logarithmic — dropping from 100% to 85% removes the most redundant data with minimal visual impact, while going below 60% starts to introduce visible artefacts like blockiness around sharp edges.</p>
+        <p>For social media posts, 70–80% quality is ideal. For print materials, stay above 90%. For web thumbnails, you can go as low as 60% and still get acceptable results.</p>
+
+        <h3>Batch Compression for Photographers and E-Commerce</h3>
+        <p>If you run an online store or shoot event photography, you might need to process hundreds of images at once. The OptiPixel batch compressor handles this entirely in your browser — no server upload, no privacy risk, no monthly fee. Simply select all your images, set your quality preference once, and the engine processes every file in parallel using your device's CPU threads. A 100-image batch typically completes in under 30 seconds on a modern laptop.</p>
+
+        <div class="warn-box">
+          ⚠️ <span><strong>Remember:</strong> Always keep the original uncompressed files. Compression is a one-way process — you cannot fully restore detail once it is removed. Work from your originals and store the compressed versions separately.</span>
+        </div>
+
+        <a href="image-compressor.html" class="cta-btn">🖼️ Open Image Compressor →</a>
+      </article>
+
+      <!-- Ad Slot -->
+      <div class="ad-wrap">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9875981872644926" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────── -->
+      <!-- ARTICLE 2: Background Removal -->
+      <!-- ─────────────────────────────────────────────────── -->
+      <article class="guide-card" id="background-removal">
+        <div class="article-meta">
+          <span class="article-category">Image Tools</span>
+          <span class="article-date">📅 September 2026</span>
+          <span class="article-read">⏱ 4 min read</span>
+        </div>
+        <h2>How to Remove an Image Background Online for Free (No Watermarks, No Uploads)</h2>
+
+        <p>Removing the background from a photo used to require Photoshop expertise and hours of painstaking pen-tool tracing. Today, browser-based AI can do the same job in under 3 seconds — and the best tools do it entirely on your device, so your private photos never leave your hands.</p>
+
+        <h3>Why Background Removal Matters</h3>
+        <p>Background removal is one of the most requested photo editing tasks for a reason. Whether you're creating product listings on Amazon, designing a professional headshot, building a presentation, or posting on Instagram, a clean transparent or white background makes your subject look crisp, professional, and on-brand. Studies show e-commerce product images with white backgrounds get 30% more clicks than cluttered photo backgrounds.</p>
+
+        <h3>How AI Background Removal Works</h3>
+        <p>Modern browser-based background removal uses a technique called <strong>semantic segmentation</strong>. The AI model — in OptiPixel's case, powered by Google's MediaPipe Selfie Segmentation running entirely inside your browser via WebAssembly — analyses every pixel in your image and assigns it a probability score: "person/foreground" or "background". Pixels above the threshold are kept; pixels below are made transparent.</p>
+        <p>The model was trained on millions of labelled images, so it understands the difference between hair strands and a sky gradient, or between a product's edge and a reflective table surface. The result is a clean cutout with preserved edge detail that would take a professional editor 20–30 minutes to reproduce manually.</p>
+
+        <h3>Best Use Cases for Background Removal</h3>
+        <ul>
+          <li><strong>E-commerce product photos:</strong> Amazon, Etsy, Shopify — all prefer white or transparent backgrounds. Remove cluttered home backgrounds instantly.</li>
+          <li><strong>Professional headshots:</strong> Replace a messy office wall with a clean white or neutral background for LinkedIn profile photos.</li>
+          <li><strong>Instagram and social media:</strong> Create floating subject effects, sticker-style cutouts, and on-brand content templates.</li>
+          <li><strong>Presentations and reports:</strong> Drop product or person images into slides without ugly rectangles around them.</li>
+          <li><strong>Photo collages and composites:</strong> Combine subjects from multiple photos by removing individual backgrounds.</li>
+        </ul>
+
+        <h3>How to Remove a Background with OptiPixel (No Sign-Up)</h3>
+        <ol>
+          <li>Go to the <a href="background-remover.html">AI Background Remover</a> on OptiPixel Studio.</li>
+          <li>Upload your image by dragging it onto the drop zone or clicking to browse. JPG and PNG are supported.</li>
+          <li>The AI processes the image locally in your browser. No internet upload is required — your photo never leaves your device.</li>
+          <li>Preview the result. The background will be replaced with a transparent checkerboard pattern (indicating transparent pixels).</li>
+          <li>Optionally, use the brush tools to manually refine edges in complex areas like hair or fur.</li>
+          <li>Download the result as a PNG with a transparent background, ready for use anywhere.</li>
+        </ol>
+
+        <div class="tip-box">
+          💡 <span><strong>Best results tip:</strong> Use images with a clear contrast between the subject and background. Bright, evenly lit subjects on plain backgrounds yield the cleanest cutouts. Avoid very low-contrast images (e.g., a white cat on a white sofa).</span>
+        </div>
+
+        <h3>OptiPixel vs Paid Background Removal Services</h3>
+        <p>Services like Remove.bg and Canva charge monthly fees (often $9–$49/month) and require you to upload your images to their servers. If you're processing photos of clients, legal documents, or sensitive personal images, this creates a real privacy risk. OptiPixel's background remover is 100% free, unlimited, and runs entirely in your browser — your photos are never transmitted anywhere.</p>
+
+        <a href="background-remover.html" class="cta-btn">✂️ Remove Background Now →</a>
+      </article>
+
+      <!-- Ad Slot -->
+      <div class="ad-wrap">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9875981872644926" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────── -->
+      <!-- ARTICLE 3: QR Code Generator -->
+      <!-- ─────────────────────────────────────────────────── -->
+      <article class="guide-card" id="qr-code-guide">
+        <div class="article-meta">
+          <span class="article-category">QR &amp; Barcodes</span>
+          <span class="article-date">📅 September 2026</span>
+          <span class="article-read">⏱ 5 min read</span>
+        </div>
+        <h2>QR Code Generator: The Complete Beginner's Guide (What They Are, How to Make Them, Best Practices)</h2>
+
+        <p>QR codes — Quick Response codes — are now one of the most widely used technologies in everyday life. From restaurant menus to boarding passes, museum exhibits to product packaging, business cards to COVID vaccination certificates, QR codes bridge the physical and digital world in an instant. Here's everything you need to know to create professional QR codes yourself, for free.</p>
+
+        <h3>What Is a QR Code? How Does It Work?</h3>
+        <p>A QR code is a two-dimensional barcode that encodes data as a matrix of black and white squares. Unlike a traditional linear barcode that can only store ~20 numbers, a QR code can encode up to 7,089 numeric characters or 4,296 alphanumeric characters. When a smartphone camera or QR scanner captures the pattern, it decodes the stored data and performs the encoded action — opening a URL, dialling a phone number, connecting to Wi-Fi, or displaying a contact card.</p>
+        <p>QR codes were invented in 1994 by Denso Wave in Japan, originally for tracking car parts. Today they are the de facto standard for contactless information exchange worldwide.</p>
+
+        <h3>Types of Data You Can Encode in a QR Code</h3>
+        <ul>
+          <li><strong>Website URL:</strong> Scan to open any webpage — your portfolio, product page, Google Maps listing, or social media profile.</li>
+          <li><strong>Wi-Fi credentials:</strong> Encode your SSID and password so guests can connect to your network with one scan — no typing required.</li>
+          <li><strong>Contact card (vCard):</strong> Encode your name, phone, email, and company so people can add you to their contacts instantly.</li>
+          <li><strong>Plain text:</strong> Encode any short message, instructions, or information.</li>
+          <li><strong>Email / SMS:</strong> Pre-fill an email address and subject line, or a phone number with a message draft.</li>
+          <li><strong>Phone number:</strong> Dial a number directly from a scan.</li>
+          <li><strong>WhatsApp:</strong> Open a WhatsApp chat to a specific number pre-loaded with a message.</li>
+          <li><strong>UPI Payment:</strong> Encode your UPI ID for instant payment collection (popular in India).</li>
+        </ul>
+
+        <h3>What Is Error Correction and Why Does It Matter?</h3>
+        <p>QR codes have a built-in error correction system based on <strong>Reed-Solomon coding</strong> — the same technology used to recover data from scratched CDs. Error correction allows a QR code to remain scannable even if up to 30% of the code is obscured, dirty, or damaged. There are four error correction levels:</p>
+        <ul>
+          <li><strong>Level L (Low) — 7% correction:</strong> Smallest code, used when the QR code will be displayed digitally and is unlikely to get damaged.</li>
+          <li><strong>Level M (Medium) — 15% correction:</strong> Good balance for most use cases — business cards, flyers, posters.</li>
+          <li><strong>Level Q (Quartile) — 25% correction:</strong> Recommended when the QR code will be printed on packaging that may experience minor wear.</li>
+          <li><strong>Level H (High) — 30% correction:</strong> Best for industrial use, outdoor signage, or when adding a logo over the centre of the code (the logo covers some squares, and the high error correction ensures the code remains readable).</li>
+        </ul>
+
+        <div class="tip-box">
+          💡 <span><strong>When adding a logo to a QR code:</strong> Always use Error Correction Level H, and ensure the logo covers no more than 20–25% of the code's total area to guarantee reliable scanning.</span>
+        </div>
+
+        <h3>Static vs Dynamic QR Codes</h3>
+        <p>A <strong>static QR code</strong> encodes the destination data permanently. Once generated, it cannot be changed — if your URL changes, you must generate a new code. Static codes generated with OptiPixel are completely free and last forever because there is no server involved. They are ideal for permanent uses like business card URLs that won't change, Wi-Fi passwords, and vCards.</p>
+        <p>A <strong>dynamic QR code</strong> redirects through a third-party service URL, allowing you to change the destination later. These require paid subscriptions (typically $10–$25/month) and depend on the service staying online. For most small businesses and personal uses, a static QR code is the better choice.</p>
+
+        <h3>How to Create a QR Code with OptiPixel</h3>
+        <ol>
+          <li>Open the <a href="qr-code-generator.html">QR Code Studio</a> tool.</li>
+          <li>Select the data type: URL, Wi-Fi, Contact, Text, Email, WhatsApp, etc.</li>
+          <li>Enter your data into the relevant fields.</li>
+          <li>Choose colours, background, and error correction level.</li>
+          <li>Optionally upload a logo to embed in the centre.</li>
+          <li>Download as PNG (for digital use) or SVG (for print — infinitely scalable with no blur).</li>
+        </ol>
+
+        <h3>QR Code Sizing and Print Guidelines</h3>
+        <p>The minimum recommended print size for reliable scanning is <strong>2 cm × 2 cm (0.8 inches)</strong>. For outdoor signage or point-of-sale displays, use at least 5 cm × 5 cm. Always maintain a quiet zone — a white border at least 4 modules wide around the code — as scanners rely on this margin to detect the code's boundaries. Never print a QR code on a reflective or very dark background, as camera scanners struggle with low contrast.</p>
+
+        <a href="qr-code-generator.html" class="cta-btn">🎨 Create a QR Code →</a>
+      </article>
+
+      <!-- ─────────────────────────────────────────────────── -->
+      <!-- ARTICLE 4: Passport Photo -->
+      <!-- ─────────────────────────────────────────────────── -->
+      <article class="guide-card" id="passport-photo-guide">
+        <div class="article-meta">
+          <span class="article-category">Photo Tools</span>
+          <span class="article-date">📅 September 2026</span>
+          <span class="article-read">⏱ 4 min read</span>
+        </div>
+        <h2>How to Make a Passport Photo at Home in 2026 (Free, Without Going to a Studio)</h2>
+
+        <p>Paying ₹200–₹500 (or $10–$15) at a photo studio for a set of passport photos is increasingly unnecessary. With a modern smartphone, decent lighting, and a free online tool, you can produce government-compliant passport photos at home and either print them locally or order prints online — often for a fraction of the studio price.</p>
+
+        <h3>Passport Photo Requirements: What You Need to Know</h3>
+        <p>Every country has official specifications for passport photos, and failure to meet them leads to application rejection. While requirements vary slightly, most countries (including India, USA, UK, EU nations, and Australia) share common rules:</p>
+        <ul>
+          <li><strong>Size:</strong> 35mm × 45mm (Europe/India) or 2 inches × 2 inches (USA). The tool auto-formats for both.</li>
+          <li><strong>Background:</strong> Plain white or off-white. No patterns, shadows, or objects in the background.</li>
+          <li><strong>Head position:</strong> Looking directly at the camera, full face visible, centred in the frame.</li>
+          <li><strong>Expression:</strong> Neutral expression, mouth closed.</li>
+          <li><strong>Eyes:</strong> Open, clearly visible, no glasses (most countries now require glasses-free photos).</li>
+          <li><strong>Lighting:</strong> Even, no harsh shadows on face or background. No red-eye.</li>
+          <li><strong>Recency:</strong> Taken within the last 6 months.</li>
+        </ul>
+
+        <h3>How to Take the Perfect Passport Photo at Home</h3>
+        <p>You don't need a professional camera. A modern smartphone in good light is more than sufficient. Follow these steps:</p>
+        <ol>
+          <li><strong>Find a plain white wall or hang a white sheet</strong> behind you. This becomes your background.</li>
+          <li><strong>Set up natural light:</strong> Stand facing a window. Daylight provides the softest, most even illumination. Avoid direct sunlight which creates harsh shadows.</li>
+          <li><strong>Use the rear camera,</strong> not the selfie camera. Ask someone else to take the photo for better control, or use a timer on a tripod.</li>
+          <li><strong>Frame the shot:</strong> Head and shoulders should fill most of the frame. Leave a small gap at the top above your head.</li>
+          <li><strong>Take 5–10 shots</strong> and choose the sharpest one with the most even lighting.</li>
+        </ol>
+
+        <div class="tip-box">
+          💡 <span><strong>Lighting hack:</strong> If you don't have a window, tape a white sheet of paper to the wall and use two lamps placed at 45° angles to your face (one on each side). This creates studio-style even lighting.</span>
+        </div>
+
+        <h3>How to Format and Print a Passport Photo with OptiPixel</h3>
+        <ol>
+          <li>Open the <a href="passport-photo.html">Passport Photo Maker</a> tool.</li>
+          <li>Upload your photo. The tool accepts JPG and PNG.</li>
+          <li>Select your country or document type to auto-load the correct dimensions (35×45mm for India/UK, 2×2 inch for USA, etc.).</li>
+          <li>Use the crop tool to centre your face within the frame. The tool shows a live guideline overlay.</li>
+          <li>Click <strong>"Generate Print Sheet"</strong>. The tool arranges 4 or 6 photos on a standard 4×6 inch print layout — the exact size most photo print services and home printers use.</li>
+          <li>Download the print-ready layout as a high-resolution JPG. Take it to any local photo print shop or upload it to an online printing service.</li>
+        </ol>
+
+        <h3>Cost Comparison: Studio vs Home vs Online Service</h3>
+        <p>A passport photo session at a high-street studio in India typically costs ₹150–₹400 for 4 photos. Online services charge ₹50–₹150 plus shipping. Using OptiPixel to create the layout and printing at a local print shop (or on a home inkjet printer) costs as little as ₹10–₹30 for the same 4-photo sheet. The saving is small per session but adds up if you need multiple copies for different family members or visa applications.</p>
+
+        <a href="passport-photo.html" class="cta-btn">🪪 Make a Passport Photo →</a>
+      </article>
+
+      <!-- Ad Slot -->
+      <div class="ad-wrap">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9875981872644926" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────── -->
+      <!-- ARTICLE 5: PDF Editor Guide -->
+      <!-- ─────────────────────────────────────────────────── -->
+      <article class="guide-card" id="pdf-editor-guide">
+        <div class="article-meta">
+          <span class="article-category">PDF Tools</span>
+          <span class="article-date">📅 September 2026</span>
+          <span class="article-read">⏱ 6 min read</span>
+        </div>
+        <h2>Free Online PDF Editor: Everything You Can Do Without Paying for Adobe Acrobat</h2>
+
+        <p>Adobe Acrobat Pro costs ₹1,500–₹2,500 per month (or $15–$24/month) and is one of the most expensive productivity subscriptions that most people use only occasionally. The good news: nearly every common PDF task can be done entirely for free using a browser-based tool — no subscription, no software installation, and no file upload to a cloud server. Here's a complete breakdown of what you can do.</p>
+
+        <h3>What Can a Free Online PDF Editor Actually Do?</h3>
+        <p>Modern browser-based PDF editors leverage open-source libraries — most notably <strong>PDF.js</strong> (developed by Mozilla) for rendering and <strong>pdf-lib</strong> for manipulation. These libraries are powerful enough to handle most real-world PDF workflows:</p>
+        <ul>
+          <li>View and navigate any PDF document</li>
+          <li>Add, edit, and delete text annotations</li>
+          <li>Draw freehand annotations and highlights</li>
+          <li>Add image stamps (signatures, logos, watermarks)</li>
+          <li>Add text watermarks (CONFIDENTIAL, DRAFT, etc.)</li>
+          <li>Merge multiple PDF files into one document</li>
+          <li>Split a PDF into separate files by page range</li>
+          <li>Extract specific pages from a multi-page document</li>
+          <li>Compress PDF file size for email or WhatsApp sharing</li>
+          <li>Convert images (JPG, PNG) into a PDF</li>
+          <li>Convert PDF pages to images (JPG or PNG)</li>
+          <li>Password-protect a PDF with AES encryption</li>
+        </ul>
+
+        <h3>How to Edit Text on a PDF (Without Losing Formatting)</h3>
+        <p>One of the most commonly searched PDF tasks is editing existing text in a PDF. True text editing in a PDF is complex because PDFs are not documents in the traditional sense — they are fixed-layout page descriptions. The text in a PDF is stored as positioned glyphs with embedded font data, not as editable paragraphs like in a Word document.</p>
+        <p>What the OptiPixel PDF editor's "Edit Existing Text" mode does is render the PDF as a visual canvas, detect text blocks, and allow you to click on any word or paragraph to replace it with your own text, overlaid in a matching font and size. The result is visually identical to the original but with your changes applied.</p>
+
+        <h3>How to Merge Multiple PDFs Into One File</h3>
+        <ol>
+          <li>Open the <a href="/">PDF Studio</a> on the homepage (click the "📄 PDF" tab).</li>
+          <li>Select <strong>"Merge PDFs"</strong> from the mode dropdown.</li>
+          <li>Upload all the PDF files you want to combine. You can drag and reorder them.</li>
+          <li>Click <strong>"Process &amp; Download PDF"</strong>. The merged document downloads instantly.</li>
+        </ol>
+
+        <h3>How to Compress a PDF (Reduce File Size)</h3>
+        <p>Large PDFs — especially those exported from design software like Adobe InDesign or Canva — often contain embedded high-resolution images that bloat the file size unnecessarily. A 50 MB PDF can often be compressed to under 5 MB with no visible quality change when viewed on a screen.</p>
+        <ol>
+          <li>Open the <a href="pdf-compressor.html">PDF Compressor</a> tool.</li>
+          <li>Upload your large PDF file.</li>
+          <li>Select a compression level: Light (preserves near-original quality), Medium (best balance), or Heavy (maximum size reduction).</li>
+          <li>Download the compressed file. File size and compression ratio are shown before downloading.</li>
+        </ol>
+
+        <div class="tip-box">
+          💡 <span><strong>Email attachment tip:</strong> Most email providers cap attachments at 10–25 MB. If your PDF is over the limit, use Medium compression — it typically reduces most PDFs by 60–80% while keeping text and images crisp enough for professional use.</span>
+        </div>
+
+        <h3>How to Password-Protect a PDF</h3>
+        <p>If you're sharing sensitive documents — contracts, HR records, financial statements — password-protecting the PDF is a basic but important security step. The OptiPixel PDF editor uses <strong>AES-128 encryption</strong>, which is the same standard used by most enterprise document management systems. All encryption happens in your browser — the password and document are never transmitted to any server.</p>
+        <ol>
+          <li>Select <strong>"Password Protect"</strong> mode in the PDF Studio.</li>
+          <li>Upload your PDF.</li>
+          <li>Enter and confirm your password in the input field.</li>
+          <li>Click <strong>"Process &amp; Download PDF"</strong>. The encrypted file requires the password to open in any PDF viewer.</li>
+        </ol>
+
+        <h3>Privacy: Why You Should Avoid Uploading PDFs to Cloud Services</h3>
+        <p>Popular online PDF tools like Smallpdf, ILovePDF, PDF24, and Adobe's own web tools all require you to upload your file to their servers for processing. For personal documents — tax returns, medical reports, legal contracts, bank statements — this creates real privacy exposure. While most services claim files are deleted after processing, their privacy policies reserve the right to retain files for "quality improvement" or "service improvement" purposes.</p>
+        <p>OptiPixel's PDF tools process everything entirely in your browser's memory using client-side JavaScript and WebAssembly. Your PDF file never leaves your device. When you close the browser tab, every trace of the file is gone — not even cached in the browser.</p>
+
+        <a href="pdf-editor.html" class="cta-btn">📄 Open PDF Editor →</a>
+      </article>
+
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h4>📖 Jump to Guide</h4>
+        <ul>
+          <li><a href="#image-compression">🖼️ Image Compression</a></li>
+          <li><a href="#background-removal">✂️ Background Removal</a></li>
+          <li><a href="#qr-code-guide">🎨 QR Code Generator</a></li>
+          <li><a href="#passport-photo-guide">🪪 Passport Photos</a></li>
+          <li><a href="#pdf-editor-guide">📄 PDF Editor Guide</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>⚡ Open a Tool Now</h4>
+        <a href="image-compressor.html" class="sidebar-tool-btn">🖼️ Image Compressor <span>Compress JPG, PNG, WebP</span></a>
+        <a href="background-remover.html" class="sidebar-tool-btn">✂️ Background Remover <span>AI-powered, instant</span></a>
+        <a href="qr-code-generator.html" class="sidebar-tool-btn">🎨 QR Code Studio <span>Wi-Fi, URLs, WhatsApp</span></a>
+        <a href="passport-photo.html" class="sidebar-tool-btn">🪪 Passport Photo Maker <span>US, UK, India, EU sizes</span></a>
+        <a href="pdf-compressor.html" class="sidebar-tool-btn">📄 PDF Compressor <span>Reduce size up to 80%</span></a>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>🔒 100% Private</h4>
+        <p style="color:var(--muted);font-size:0.88rem;line-height:1.6;">All tools run in your browser. Your files never leave your device. No accounts. No cloud. No limits.</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand footer-col">
+        <a href="/"><img src="assets/logo.png" alt="OptiPixel" width="30" height="30"> OptiPixel Studio</a>
+        <p>Free, privacy-first image &amp; PDF tools. Runs entirely in your browser — zero cloud uploads.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="#image-compression">Image Compression</a></li>
+          <li><a href="#background-removal">Background Removal</a></li>
+          <li><a href="#qr-code-guide">QR Code Guide</a></li>
+          <li><a href="#passport-photo-guide">Passport Photos</a></li>
+          <li><a href="#pdf-editor-guide">PDF Editor</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="image-compressor.html">Image Compressor</a></li>
+          <li><a href="background-remover.html">Background Remover</a></li>
+          <li><a href="qr-code-generator.html">QR Code Studio</a></li>
+          <li><a href="pdf-editor.html">PDF Editor</a></li>
+          <li><a href="image-watermark.html">Watermark Images</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="sitemap.xml">Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 OptiPixel &amp; PDF Studio by Ishbir Hanspal &nbsp;|&nbsp;
+        <a href="privacy.html">Privacy</a> &nbsp;|&nbsp;
+        <a href="terms.html">Terms</a> &nbsp;|&nbsp;
+        <a href="blog.html">Guides</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

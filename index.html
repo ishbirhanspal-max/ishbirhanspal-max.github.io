@@ -646,6 +646,7 @@
         <!-- Quick Desktop Nav Links -->
         <a href="javascript:void(0)" class="nav-link desktop-only-link" id="navImageLink" style="font-size: 0.85rem; padding: 0.35rem 0.6rem;">🖼️ Images</a>
         <a href="javascript:void(0)" class="nav-link desktop-only-link" id="navPdfLink" style="color: var(--accent-cyan-light); font-weight: 700; font-size: 0.85rem; padding: 0.35rem 0.6rem;">📄 PDF</a>
+        <a href="blog.html" class="nav-link desktop-only-link" style="font-size: 0.85rem; padding: 0.35rem 0.6rem;">📖 Guides</a>
         <a href="about.html" class="nav-link desktop-only-link" style="font-size: 0.85rem; padding: 0.35rem 0.6rem;">About</a>
         <a href="contact.html" class="nav-link desktop-only-link" style="font-size: 0.85rem; padding: 0.35rem 0.6rem;">Contact</a>
         <a href="#faq" class="nav-link desktop-only-link" style="font-size: 0.85rem; padding: 0.35rem 0.6rem;">FAQ</a>
@@ -1897,29 +1898,101 @@
       </div>
     </section>
 
-    <!-- How It Works Section -->
+    <!-- How It Works Section — Deep Technical Explainer -->
     <section class="info-section" id="how-it-works">
       <div class="section-heading">
         <h2 class="section-title">How It <span class="text-gradient">Works</span></h2>
-        <p class="section-desc">Three simple steps to optimize your multimedia workflow.</p>
+        <p class="section-desc">OptiPixel Studio uses modern browser technologies to process your files entirely on your own device — no cloud, no uploads, no waiting.</p>
       </div>
 
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-number">1</div>
           <h3 class="step-title">Select or Drop Files</h3>
-          <p class="step-text">Drag and drop any image, video, audio, or PDF file into the browser workspace.</p>
+          <p class="step-text">Drag and drop any image, video, audio, or PDF file into the browser workspace. The browser's native File API reads your file directly from your device's storage into memory — the file data goes into your browser's RAM and nowhere else.</p>
         </div>
         <div class="step-card">
           <div class="step-number">2</div>
-          <h3 class="step-title">Instant Live Processing</h3>
-          <p class="step-text">Our client-side engine uses WebAssembly and Canvas APIs to process media with zero delay.</p>
+          <h3 class="step-title">Instant Client-Side Processing</h3>
+          <p class="step-text">Depending on the tool, processing uses HTML5 Canvas for pixel-level image manipulation, WebAssembly (WASM) modules for high-performance compression algorithms, PDF.js and pdf-lib for document parsing and rendering, and TensorFlow.js / MediaPipe for AI-powered background segmentation. All computation runs on your CPU and GPU — never on a remote server.</p>
         </div>
         <div class="step-card">
           <div class="step-number">3</div>
           <h3 class="step-title">Download &amp; Save</h3>
-          <p class="step-text">Export single files or bulk ZIP bundles instantly with 1 click.</p>
+          <p class="step-text">Processed files are made available for download via the browser's <code>createObjectURL</code> API, which creates a temporary local URL pointing to the result in memory. Download single files or click "Download ZIP" to package all results into a compressed archive using JSZip — again, all happening client-side.</p>
         </div>
+      </div>
+
+      <!-- Expanded Technical Explainer -->
+      <div style="margin-top: 2.5rem; background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 2rem;">
+        <h3 style="font-size: 1.2rem; color: #f1f5f9; margin-bottom: 1rem;">🔬 The Technology Behind Zero-Upload Processing</h3>
+        <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.75; margin-bottom: 1rem;">
+          Traditional online tools work by sending your file to a remote server, processing it in a data centre, and sending the result back to your browser. This architecture introduces latency, privacy risks, and server costs — which is why most services charge subscription fees. OptiPixel Studio flips this model entirely: every operation happens locally, inside your browser process.
+        </p>
+        <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.75; margin-bottom: 1rem;">
+          <strong style="color: #f1f5f9;">Image compression</strong> uses the browser's built-in Canvas API. When you upload an image, it is decoded into a pixel buffer (an array of RGBA values). The tool then re-encodes that buffer using the browser's native JPEG or WebP encoder at your chosen quality level — the same encoder your browser uses to display images every day. This means compression quality and output are completely consistent across operating systems.
+        </p>
+        <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.75; margin-bottom: 1rem;">
+          <strong style="color: #f1f5f9;">Background removal</strong> loads Google's MediaPipe Selfie Segmentation model — a pre-trained neural network compiled to WebAssembly — directly in your browser. The model runs inference on your image and produces a segmentation mask. OptiPixel's engine applies this mask to the image's alpha channel, making background pixels transparent and writing the result to a new PNG file. This entire ML inference pipeline — model loading, inference, mask application, and export — runs offline after the first visit.
+        </p>
+        <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.75; margin-bottom: 1rem;">
+          <strong style="color: #f1f5f9;">PDF operations</strong> use two open-source libraries: Mozilla's PDF.js for rendering PDF pages to a Canvas element (so you can see and interact with the document), and pdf-lib for structural PDF manipulation — merging documents, adding pages, embedding fonts, writing annotations, and applying encryption. When you merge, split, watermark, or compress a PDF, pdf-lib rebuilds the PDF byte stream in memory and triggers a download. The document's content never touches any server.
+        </p>
+        <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.75;">
+          <strong style="color: #f1f5f9;">OCR text extraction</strong> uses Tesseract.js — the WebAssembly port of Google's Tesseract OCR engine, which has been in development since the 1980s and is considered the world's most accurate open-source OCR system. The engine preprocesses your image (binarisation, deskew, noise reduction), segments it into text regions, and runs pattern matching against its trained language models. All of this runs as a background worker thread so it doesn't freeze your browser while processing large or complex images.
+        </p>
+      </div>
+    </section>
+
+    <!-- Who Uses OptiPixel Section -->
+    <section class="info-section" id="who-uses">
+      <div class="section-heading">
+        <h2 class="section-title">Who Uses <span class="text-gradient">OptiPixel Studio</span>?</h2>
+        <p class="section-desc">From photographers to students, small businesses to legal professionals — here's how different people use these tools every day.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.75rem;">
+          <div style="font-size: 2rem; margin-bottom: 0.75rem;">📷</div>
+          <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 0.6rem;">Photographers &amp; Content Creators</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.7;">Wedding and event photographers use the batch compressor to deliver hundreds of edited photos to clients via WhatsApp or email without hitting file size limits. Portrait photographers use the background remover to create clean studio-style cutouts without expensive Photoshop subscriptions. The batch watermarker lets creators stamp their Instagram handle or copyright notice on every image before publishing, protecting their work from uncredited reuse.</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.75rem;">
+          <div style="font-size: 2rem; margin-bottom: 0.75rem;">🛒</div>
+          <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 0.6rem;">E-Commerce Sellers</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.7;">Amazon, Flipkart, Etsy, and Meesho sellers need product photos with plain white backgrounds — a mandatory listing requirement on most platforms. The background remover turns any product photo into a clean studio-quality image in seconds, with no studio rental cost. The image compressor then reduces the file size so pages load faster on mobile — directly improving conversion rates. QR codes link product packaging to tutorial videos or warranty registration pages.</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.75rem;">
+          <div style="font-size: 2rem; margin-bottom: 0.75rem;">🎓</div>
+          <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 0.6rem;">Students &amp; Researchers</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.7;">Students use the OCR scanner to extract text from scanned textbook pages, handwritten notes, and printed question papers — saving hours of manual retyping. The PDF tools help merge assignment files before submission and compress large documents before emailing to professors. The passport photo maker saves the cost of a studio session when applying for student ID cards, visas, or internship applications that require biometric photos.</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.75rem;">
+          <div style="font-size: 2rem; margin-bottom: 0.75rem;">💼</div>
+          <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 0.6rem;">Freelancers &amp; Small Businesses</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.7;">Freelance designers use the QR Studio to create branded QR codes for clients' business cards, menus, and product labels. Caterers and restaurants use Wi-Fi QR codes to let customers connect without asking for the password. Event managers use the barcode generator for ticket systems. The voice recorder serves as a professional memo tool for client meeting notes. PDF password protection helps when sharing quotations or contracts that shouldn't be forwarded.</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.75rem;">
+          <div style="font-size: 2rem; margin-bottom: 0.75rem;">🏢</div>
+          <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 0.6rem;">Office Workers &amp; HR Professionals</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.7;">HR teams process employee documents daily — offer letters, ID proofs, policy acknowledgements, and payslips. The PDF merger combines multiple documents into a single attachment for record-keeping. The PDF compressor makes documents small enough to share over WhatsApp or email when network bandwidth is limited. The passport photo maker is used during onboarding to produce ID card photos without sending employees to an external studio. All document processing stays within the organisation — no files are ever uploaded to third-party servers.</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.75rem;">
+          <div style="font-size: 2rem; margin-bottom: 0.75rem;">⚖️</div>
+          <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 0.6rem;">Legal &amp; Financial Professionals</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.7;">Lawyers, chartered accountants, and compliance officers deal with highly sensitive documents — affidavits, balance sheets, audit reports, and court filings. They cannot afford to upload these to third-party cloud services due to confidentiality and regulatory obligations. OptiPixel's zero-upload architecture makes it the only viable free tool for this use case. PDF merging, splitting, watermarking with "CONFIDENTIAL" stamps, and AES-128 password protection all happen entirely on the user's own device with no data leaving the premises.</p>
+        </div>
+
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="blog.html" style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.35); color: #a5b4fc; font-weight: 600; font-size: 0.95rem; padding: 0.65rem 1.5rem; border-radius: 999px; text-decoration: none; transition: all 0.2s;">📖 Read In-Depth Tool Guides →</a>
       </div>
     </section>
 
@@ -1945,38 +2018,131 @@
     <section class="info-section" id="faq">
       <div class="section-heading">
         <h2 class="section-title">Frequently Asked <span class="text-gradient">Questions</span></h2>
+        <p class="section-desc">Everything you need to know about OptiPixel Studio's tools, privacy, file formats, and how they work.</p>
       </div>
 
       <div class="faq-accordion">
+
         <div class="faq-item">
           <button class="faq-question">
-            <span>Are my images and PDF files private?</span>
+            <span>Are my images and PDF files private? Do you store them?</span>
             <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-answer">
-            <p>Yes, 100%. Everything runs locally inside your browser's memory using HTML5 Canvas, WebAssembly, and JavaScript. Your files never leave your device.</p>
+            <p>Yes, 100% private. Every single operation — compression, background removal, PDF editing, OCR, QR generation — runs entirely inside your browser's memory using HTML5 Canvas, WebAssembly, and client-side JavaScript. Your files are never uploaded to any server, never stored in any cloud database, and never transmitted over the internet. When you close the browser tab, all file data is immediately cleared from memory. There is no backend, no database, and no storage bucket on OptiPixel's side — making it architecturally impossible for your files to be accessed, breached, or shared.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>Is this tool completely free to use?</span>
+            <span>Is OptiPixel Studio completely free? Are there file size limits?</span>
             <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-answer">
-            <p>Yes! There are no hidden fees, subscriptions, or file size limits. You can optimize, convert, and edit as many files as you want.</p>
+            <p>Yes — completely free, forever. There are no hidden fees, no subscriptions, no watermarks on downloaded files, and no account registration required. The only practical limit is your device's available RAM. Because processing happens in your browser's memory, very large files (e.g., a 100 MB PDF or a 50 MB RAW photo) may be slow on older devices with limited RAM. On a modern laptop or desktop with 8 GB+ RAM, even large batches of 50+ images process smoothly.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>Can I edit existing text on a PDF document?</span>
+            <span>What image formats are supported? Can I convert between formats?</span>
             <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-answer">
-            <p>Yes! In the PDF Studio tab, click on "Edit Existing Text" mode and click on any word, heading, or paragraph on the PDF to modify it in-place.</p>
+            <p>The image compressor accepts <strong>JPG, JPEG, PNG, WebP, GIF, BMP, and HEIC</strong> files as input. You can output to JPG, PNG, or WebP. Converting from JPG to WebP typically reduces file size by 25–40% with no visible quality loss. Converting from PNG to JPG (with a white background fill) is useful when you need smaller files and don't need transparency. Converting from JPG to PNG is lossless but results in larger files — only do this if you specifically need a PNG for transparency or editing purposes.</p>
           </div>
         </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can I use OptiPixel on my phone (iOS / Android)?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Yes — all tools work on iPhone, iPad, Android phones, and Android tablets. The interface is fully responsive and adapts to any screen size. On mobile, the bottom navigation bar gives quick access to the most popular tools: Image Optimizer, Remove BG, PDF Studio, and OCR Text Scan. You can also install OptiPixel as a Progressive Web App (PWA) directly from your mobile browser — tap the "Install" prompt that appears, and the app will be added to your home screen like a native app, with offline capability.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Does OptiPixel work offline, without an internet connection?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, after the initial page load. OptiPixel Studio is a Progressive Web App (PWA) with a Service Worker that caches all core scripts, styles, and assets. After your first visit, the app loads and runs even with no internet connection. Tools that rely on external AI models (like the background remover, which uses Google MediaPipe) require an internet connection to download the ML model on first use, but the model is also cached for subsequent offline use.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What is the difference between WebP, JPG, and PNG? Which should I use?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p><strong>JPG</strong> is best for photographs — it uses lossy compression that discards some colour data, but the difference is invisible to the human eye at quality levels above 75%. JPG does not support transparency.<br><strong>PNG</strong> is best for screenshots, logos, graphics with text, and images that require a transparent background. PNG uses lossless compression — no data is discarded — so files are larger but edges and text remain perfectly sharp.<br><strong>WebP</strong> is Google's modern format that delivers 25–35% smaller files than JPG or PNG at the same visual quality. It supports both lossy compression (like JPG) and lossless compression (like PNG), as well as transparency. For web use in 2026, WebP is the best default choice — all major browsers support it.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How does the AI background remover work? Is it accurate?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>The background remover uses <strong>Google's MediaPipe Selfie Segmentation model</strong>, running 100% inside your browser via WebAssembly. The model analyses each pixel and assigns a probability score — "foreground" vs "background" — based on patterns learned from millions of training images. For portraits and people, accuracy is very high (typically 95–99%) on well-lit images with clear contrast between subject and background. For complex subjects like animals with fur, transparent objects, or subjects against a cluttered background, accuracy may be lower and you can use the manual brush refinement tools to clean up edges.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can I edit existing text in a PDF without it looking different?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. In the <strong>PDF Studio → Edit Existing Text</strong> mode, click on any word, paragraph, or heading in the rendered PDF. An input field appears over the text. Type your replacement text and press Enter. The overlay text is rendered in a matching font size and positioned to align with the original text block. The result is visually seamless when viewed in any PDF reader. Note: because PDF fonts are embedded per-document and are not system fonts, the closest available browser font is used for the overlay — for most standard documents (Times New Roman, Arial, Helvetica), the match is near-perfect.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How accurate is the OCR text scanner? What languages does it support?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>The OCR (Optical Character Recognition) engine is powered by <strong>Tesseract.js</strong>, the WebAssembly port of Google's industry-standard Tesseract OCR engine. It supports over 100 languages including English, Hindi, French, German, Spanish, Arabic, Japanese, Chinese (Simplified and Traditional), Russian, and more. Accuracy is highest on printed text with good contrast and straight alignment. For handwritten text, accuracy varies significantly. Tips for best results: ensure the image is well-lit, keep the text in focus (not blurry), and ensure the text occupies most of the image frame rather than being a small element in a large scene.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How do I add a watermark to multiple photos at once?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Use the <a href="image-watermark.html" style="color: #06b6d4;">Batch Image Watermarker</a>. Upload as many photos as you like (up to 50 at once), configure your watermark — choose text (your brand name, website, copyright notice) or upload a logo image, set the position (corner, centre, tile), adjust opacity, size, and font. Click "Apply to All" and the watermark is rendered onto every image in your batch using the HTML5 Canvas API entirely in your browser. Download all watermarked images as individual files or as a single ZIP archive.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How is OptiPixel different from Smallpdf, ILovePDF, or Adobe online tools?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>The key difference is <strong>privacy and cost</strong>. Smallpdf, ILovePDF, and Adobe's web tools all require you to upload your file to their cloud servers for processing. This means your documents travel across the internet and are stored on third-party systems — creating privacy and security risks, especially for sensitive documents like contracts, tax returns, or medical records. OptiPixel processes everything 100% inside your browser — your files never leave your device. Additionally, those services enforce monthly file limits on free tiers (e.g., Smallpdf limits free users to 2 tasks/hour). OptiPixel is unlimited, completely free, forever.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Is OptiPixel Studio GDPR and privacy law compliant?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. Because OptiPixel Studio operates on a zero-server, zero-upload architecture, it is inherently compliant with GDPR (EU), DPDP Act (India), CCPA (California), and similar data protection regulations. No personal data from your files is collected, processed on our servers, or retained. The only data we collect is standard website analytics (page views, browser type) through Google Analytics, which you can opt out of via your browser settings. For full details, see our <a href="privacy.html" style="color: #06b6d4;">Privacy Policy</a>.</p>
+          </div>
+        </div>
+
       </div>
     <!-- Comprehensive Architecture & Educational Guides Section -->
     <section class="info-section" id="architecture-guides" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
@@ -2169,6 +2335,7 @@
           <ul class="footer-links">
             <li><a href="about.html">About Us &amp; Founder</a></li>
             <li><a href="contact.html">Contact Support</a></li>
+            <li><a href="blog.html">📖 Guides &amp; Tips</a></li>
             <li><a href="privacy.html">Privacy Policy</a></li>
             <li><a href="terms.html">Terms of Service</a></li>
             <li><a href="disclaimer.html">Disclaimer</a></li>
