@@ -2192,7 +2192,8 @@
   // =========================================================================
   function setupI18n() {
     if (window.I18nEngine) {
-      const saved = localStorage.getItem('optipixel_lang') || 'en';
+      let saved = 'en';
+      try { saved = localStorage.getItem('optipixel_lang') || 'en'; } catch(e) { /* Safari private mode */ }
       I18nEngine.setLanguage(saved);
       if (elements.langSelect) {
         elements.langSelect.value = saved;

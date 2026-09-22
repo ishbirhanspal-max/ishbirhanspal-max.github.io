@@ -221,7 +221,7 @@ class I18nEngine {
   static setLanguage(lang) {
     if (!I18N_TRANSLATIONS[lang]) lang = 'en';
     this.currentLang = lang;
-    localStorage.setItem('optipixel_lang', lang);
+    try { localStorage.setItem('optipixel_lang', lang); } catch(e) { /* Safari private mode */ }
     const t = I18N_TRANSLATIONS[lang];
 
     // Update Hero Title & Subtitle
@@ -282,7 +282,8 @@ class I18nEngine {
   }
 
   static init() {
-    const saved = localStorage.getItem('optipixel_lang') || 'en';
+    let saved = 'en';
+    try { saved = localStorage.getItem('optipixel_lang') || 'en'; } catch(e) { /* Safari private mode */ }
     const select = document.getElementById('langSelect');
     if (select) {
       select.value = saved;

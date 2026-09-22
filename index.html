@@ -699,19 +699,24 @@
 
   <script>
     (function() {
-      var consent = localStorage.getItem('optipixel_cookie_consent');
-      if (!consent) {
+      try {
+        var consent = localStorage.getItem('optipixel_cookie_consent');
+        if (!consent) {
+          document.getElementById('cookieConsentBanner').style.display = 'flex';
+        }
+      } catch(e) {
+        // Safari private mode — just show the banner once
         document.getElementById('cookieConsentBanner').style.display = 'flex';
       }
     })();
 
     function acceptCookies() {
-      localStorage.setItem('optipixel_cookie_consent', 'accepted');
+      try { localStorage.setItem('optipixel_cookie_consent', 'accepted'); } catch(e) {}
       document.getElementById('cookieConsentBanner').style.display = 'none';
     }
 
     function rejectCookies() {
-      localStorage.setItem('optipixel_cookie_consent', 'rejected');
+      try { localStorage.setItem('optipixel_cookie_consent', 'rejected'); } catch(e) {}
       document.getElementById('cookieConsentBanner').style.display = 'none';
     }
 
@@ -726,7 +731,7 @@
 
     function saveManaged() {
       var adCookies = document.getElementById('adCookieToggle').checked;
-      localStorage.setItem('optipixel_cookie_consent', adCookies ? 'accepted' : 'rejected');
+      try { localStorage.setItem('optipixel_cookie_consent', adCookies ? 'accepted' : 'rejected'); } catch(e) {}
       document.getElementById('cookieManageModal').style.display = 'none';
       document.getElementById('cookieConsentBanner').style.display = 'none';
     }
