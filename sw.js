@@ -2,7 +2,7 @@
 // FIX: cache.addAll() was crashing the entire SW install if ANY asset failed.
 // NEW: Each asset is cached individually with try/catch so failures are isolated.
 
-const CACHE_VERSION = 'optipixel-v3.0';
+const CACHE_VERSION = 'optipixel-v3.1';
 
 // Core assets needed for basic functionality — fetched individually, never all-or-nothing
 const CORE_ASSETS = [
