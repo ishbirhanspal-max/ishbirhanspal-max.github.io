@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BSQJ151TNF"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BSQJ151TNF');</script>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-9875981872644926">
+  <meta name="google-site-verification" content="jVQJff56nis0RTvooVRwHp6-dbM8nsIMy12GFCqMtJU">
+  <title>Complete Guide to QR Code Generation: Types, Error Correction & Design (2026) | OptiPixel Studio</title>
+  <meta name="description" content="Learn everything about QR codes in 2026. Explore static vs dynamic QR codes, Reed-Solomon error correction levels (L, M, Q, H), styling options, and Wi-Fi/vCard payloads.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://optipixelstudio.online/qr-code-generator-guide.html">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9875981872644926" crossorigin="anonymous"></script>
+  <meta property="og:title" content="Complete Guide to QR Code Generation: Types, Error Correction & Design (2026)">
+  <meta property="og:type" content="article">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Complete Guide to QR Code Generation: Types, Error Correction & Design (2026)",
+    "author": {"@type": "Person", "name": "Ishbir Hanspal"},
+    "publisher": {"@type": "Organization", "name": "OptiPixel Studio", "url": "https://optipixelstudio.online/"},
+    "datePublished": "2026-09-28",
+    "dateModified": "2026-10-02"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do static QR codes ever expire?",
+        "acceptedAnswer": {"@type": "Answer", "text": "No. Static QR codes encode your exact URL or plain text directly into the 2D matrix pattern. Because there is no intermediary redirect server or database lookup, a static QR code works forever as long as the underlying target URL or Wi-Fi network remains valid."}
+      },
+      {
+        "@type": "Question",
+        "name": "Which Reed-Solomon error correction level should I choose?",
+        "acceptedAnswer": {"@type": "Answer", "text": "For standard website URLs on digital screens or printed paper, Level M (15% recovery) offers the best balance of scanning speed and density. If you plan to embed a logo or icon in the center of the QR code, always use Level H (30% recovery) so camera scanners can reconstruct the covered data."}
+      },
+      {
+        "@type": "Question",
+        "name": "What is the minimum physical print size for a reliable QR code?",
+        "acceptedAnswer": {"@type": "Answer", "text": "For standard viewing distances (arms length of 30-50 cm), a printed QR code should never be smaller than 2 x 2 cm (0.8 x 0.8 inches). For posters, billboards, or business signs, use the 10:1 viewing distance ratio rule: if viewers are 2 meters away, print the QR code at least 20 cm wide."}
+      }
+    ]
+  }
+  </script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#070a12;--surface:#0e1424;--border:rgba(255,255,255,.08);--text:#f8fafc;--muted:#94a3b8;--accent:#06b6d4;--accent2:#6366f1;--em:#10b981;--r:14px}
+    body{font-family:Outfit,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;min-height:100vh}
+    header{background:rgba(7,10,18,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+    .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--text);font-weight:800;font-size:1.15rem}
+    .brand img{width:32px;height:32px;border-radius:8px}
+    .nav-links{display:flex;align-items:center;gap:1.5rem}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:.95rem;transition:color .2s}
+    .nav-links a:hover{color:var(--accent)}
+    .nav-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff!important;padding:.45rem 1.1rem;border-radius:999px;font-weight:700;font-size:.9rem!important;text-decoration:none}
+    .hero{background:linear-gradient(135deg,rgba(6,182,212,.08),rgba(99,102,241,.12));border-bottom:1px solid var(--border);padding:4rem 2rem 3rem;text-align:center}
+    .breadcrumb{font-size:.85rem;color:var(--muted);margin-bottom:1.25rem}
+    .breadcrumb a{color:var(--accent);text-decoration:none}
+    .cat-badge{display:inline-block;background:rgba(6,182,212,.15);border:1px solid rgba(6,182,212,.3);color:var(--accent);font-size:.8rem;font-weight:700;padding:.25rem .9rem;border-radius:999px;margin-bottom:1.25rem;letter-spacing:.05em;text-transform:uppercase}
+    .hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;max-width:860px;margin:0 auto 1.25rem;line-height:1.25;background:linear-gradient(135deg,#fff 40%,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .meta{display:flex;align-items:center;justify-content:center;gap:1.5rem;color:var(--muted);font-size:.88rem;flex-wrap:wrap}
+    .layout{max-width:1200px;margin:0 auto;padding:3rem 2rem 5rem;display:grid;grid-template-columns:1fr 300px;gap:3rem;align-items:start}
+    @media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar,.nav-links{display:none}}
+    article h2{font-size:1.55rem;font-weight:800;color:#fff;margin:2.5rem 0 1rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+    article h2:first-child{margin-top:0;border-top:none;padding-top:0}
+    article h3{font-size:1.15rem;font-weight:700;color:var(--accent);margin:1.75rem 0 .75rem}
+    article p{color:#cbd5e1;margin-bottom:1.1rem;font-size:1.02rem}
+    article ul,article ol{margin:.75rem 0 1.25rem 1.5rem;color:#cbd5e1;font-size:1.02rem}
+    article li{margin-bottom:.6rem}
+    article strong{color:#f8fafc}
+    article a{color:var(--accent);text-decoration:underline}
+    .tip{background:rgba(16,185,129,.08);border-left:4px solid var(--em);border-radius:10px;padding:1rem 1.25rem;margin:1.5rem 0;color:#a7f3d0}
+    .tw{overflow-x:auto;margin:1.5rem 0}
+    .tw table{width:100%;border-collapse:collapse;font-size:.92rem}
+    .tw th{background:rgba(99,102,241,.12);color:var(--accent);padding:.75rem 1rem;text-align:left;font-weight:700;border-bottom:1px solid var(--border)}
+    .tw td{padding:.65rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);color:#cbd5e1}
+    .cta-box{background:linear-gradient(135deg,rgba(6,182,212,.1),rgba(99,102,241,.1));border:1px solid rgba(99,102,241,.3);border-radius:var(--r);padding:2rem;text-align:center;margin:2.5rem 0}
+    .cta-box h3{color:#fff;font-size:1.3rem;margin-bottom:.75rem}
+    .cta-box p{color:var(--muted);margin-bottom:1.25rem}
+    .cta-btn{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;text-decoration:none;padding:.75rem 2rem;border-radius:999px;font-weight:700}
+    .toc{background:rgba(6,182,212,.05);border:1px solid rgba(6,182,212,.2);border-radius:var(--r);padding:1.5rem;margin-bottom:2.5rem}
+    .toc h3{color:var(--accent);font-size:.95rem;font-weight:700;margin-bottom:1rem}
+    .toc ol{margin:0;padding-left:1.5rem}
+    .toc li{margin-bottom:.4rem}
+    .toc a{color:var(--muted);text-decoration:none;font-size:.9rem}
+    .toc a:hover{color:var(--accent)}
+    .sidebar-card{background:rgba(14,20,36,.7);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;margin-bottom:1.5rem}
+    .sidebar-card h4{color:#fff;font-size:1rem;font-weight:700;margin-bottom:1rem}
+    .sidebar-card ul{list-style:none;padding:0;margin:0}
+    .sidebar-card li{margin-bottom:.65rem}
+    .sidebar-card a{color:var(--muted);text-decoration:none;font-size:.92rem;display:flex;align-items:center;gap:.5rem;transition:color .2s}
+    .sidebar-card a:hover{color:var(--accent)}
+    .tool-link-btn{display:block;text-decoration:none;background:linear-gradient(135deg,rgba(6,182,212,.15),rgba(99,102,241,.15));border:1px solid rgba(99,102,241,.3);border-radius:10px;padding:.75rem 1rem;color:#fff;font-weight:600;font-size:.9rem;text-align:center;margin-bottom:.6rem;transition:all .2s}
+    .tool-link-btn:hover{border-color:var(--accent);background:rgba(6,182,212,.2)}
+    footer{background:#05070d;border-top:1px solid var(--border);padding:3rem 2rem 2rem;color:var(--muted);font-size:.92rem}
+    .footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem}
+    @media(max-width:768px){.footer-inner{grid-template-columns:1fr 1fr}}
+    .footer-brand img{width:30px;height:30px;border-radius:7px}
+    .footer-brand p{font-size:.88rem;line-height:1.6;margin-top:.5rem}
+    .footer-col h4{color:#fff;font-size:.95rem;font-weight:700;margin-bottom:.85rem}
+    .footer-col ul{list-style:none;padding:0;margin:0}
+    .footer-col li{margin-bottom:.55rem}
+    .footer-col a{color:var(--muted);text-decoration:none;font-size:.88rem;transition:color .2s}
+    .footer-col a:hover{color:var(--accent)}
+    .footer-bottom{max-width:1100px;margin:0 auto;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;font-size:.85rem}
+    .footer-bottom a{color:var(--accent);text-decoration:none}
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="brand">
+      <img src="assets/logo.png" alt="OptiPixel Studio">
+      <span>OptiPixel<span style="background:linear-gradient(135deg,#38bdf8,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;"> Studio</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="blog.html">Guides</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="qr-code-generator.html" class="nav-btn">Generate QR Code</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="blog.html">Guides</a> &rsaquo; QR Code Generator Guide</div>
+    <span class="cat-badge">Productivity &bull; Marketing</span>
+    <h1>Complete Guide to QR Code Generation: Types, Error Correction &amp; Design (2026)</h1>
+    <div class="meta">
+      <span>By <strong>Ishbir Hanspal</strong></span>
+      <span>Published: September 2026</span>
+      <span>Updated: October 2026</span>
+      <span>Reading Time: 8 min</span>
+    </div>
+  </section>
+
+  <div class="layout">
+    <article>
+      <div class="toc">
+        <h3>Contents</h3>
+        <ol>
+          <li><a href="#how-qr-works">1. How QR Codes Encode Data</a></li>
+          <li><a href="#static-vs-dynamic">2. Static vs Dynamic QR Codes: The Real Differences</a></li>
+          <li><a href="#error-correction">3. Reed-Solomon Error Correction Explained (L, M, Q, H)</a></li>
+          <li><a href="#common-payloads">4. Popular Payload Types: URLs, Wi-Fi, vCard &amp; WhatsApp</a></li>
+          <li><a href="#design-best-practices">5. Design, Contrast, and Safe Zones</a></li>
+          <li><a href="#step-by-step">6. How to Generate High-Res QR Codes with OptiPixel</a></li>
+          <li><a href="#faq">7. Frequently Asked Questions</a></li>
+        </ol>
+      </div>
+
+      <h2 id="how-qr-works">1. How QR Codes Encode Data</h2>
+      <p>Invented in 1994 by Masahiro Hara at Denso Wave for automotive inventory tracking, the <strong>Quick Response (QR) code</strong> has evolved into the ubiquitous bridge between the physical and digital worlds. Unlike traditional 1D barcodes (such as UPC or Code 128), which encode numbers horizontally along parallel vertical bars, a QR code is a <strong>two-dimensional matrix symbology</strong> that encodes binary data both horizontally and vertically.</p>
+
+      <p>This 2D geometry allows a standard QR code to store up to <strong>7,089 numeric characters</strong>, <strong>4,296 alphanumeric characters</strong>, or <strong>2,953 binary bytes</strong> in a compact square footprint. The architecture of every standard QR code relies on distinct functional zones:</p>
+      <ul>
+        <li><strong>Finder Patterns:</strong> The three prominent concentric squares positioned at the top-left, top-right, and bottom-left corners. These enable optical scanners and smartphone cameras to detect the QR code at any angle, orientation, or tilt in 360-degree space.</li>
+        <li><strong>Alignment Patterns:</strong> Smaller squares distributed throughout larger QR code versions that correct for geometric warping, curvature on bottles or curved packaging, and perspective distortion.</li>
+        <li><strong>Timing Patterns:</strong> Alternating black and white modules connecting the finder squares that establish the matrix grid coordinate system.</li>
+        <li><strong>Format Information &amp; Data Area:</strong> Dedicated cells storing the active error correction level, masking pattern, and the encoded data payload.</li>
+      </ul>
+
+      <h2 id="static-vs-dynamic">2. Static vs Dynamic QR Codes: The Real Differences</h2>
+      <p>When selecting a QR generator, the most critical decision is whether you need a <strong>static</strong> or a <strong>dynamic</strong> code. Many commercial QR generator websites deliberately obfuscate this distinction to trap users in monthly recurring subscriptions.</p>
+
+      <h3>Static QR Codes (100% Free &amp; Permanent)</h3>
+      <p>In a static QR code, the actual destination data (e.g., <code>https://yourwebsite.com/menu</code> or your home Wi-Fi credentials) is mathematically encoded directly into the black and white pixel matrix. No third-party redirect server is ever involved.</p>
+      <ul>
+        <li><strong>Lifespan:</strong> Permanent. It will never expire, stop working, or be hijacked by an expired billing subscription.</li>
+        <li><strong>Privacy:</strong> Zero surveillance. Scanners decode the text locally without routing through an intermediate tracking analytics server.</li>
+        <li><strong>Limitation:</strong> Once printed on physical brochures, business cards, or packaging, the encoded URL cannot be edited.</li>
+      </ul>
+
+      <h3>Dynamic QR Codes (Subscription-Dependent)</h3>
+      <p>Dynamic QR codes encode a short intermediary redirect URL owned by a specific service provider (e.g., <code>https://qrservice.io/x89q2</code>), which then forwards the scanner to your destination.</p>
+      <ul>
+        <li><strong>Advantage:</strong> You can edit the final destination link at any time without reprinting the physical flyer, and monitor scan counts by device and location.</li>
+        <li><strong>Massive Risk:</strong> If you cancel your monthly $15–$35 subscription, or if the provider goes out of business, all your printed marketing materials immediately break into 404 error pages.</li>
+      </ul>
+
+      <div class="tip">
+        <strong>Security &amp; Cost Tip:</strong> For menus, retail packaging, permanent signs, contact cards, and Wi-Fi networks, always generate <strong>Static QR Codes</strong> using OptiPixel Studio. You own the code forever with zero subscription lock-in.
+      </div>
+
+      <h2 id="error-correction">3. Reed-Solomon Error Correction Explained (L, M, Q, H)</h2>
+      <p>One of the most powerful engineering triumphs of the QR specification is the integration of <strong>Reed-Solomon error correction algorithms</strong>. Originally developed for deep-space communications and NASA satellites, Reed-Solomon encoding embeds mathematical polynomial redundancy into the QR matrix.</p>
+
+      <p>This allows scanners to accurately read and reconstruct 100% of the payload even if the physical QR code is scratched, torn, partially obscured by dirt, or overlaid with a brand logo in the center. The QR standard defines four discrete recovery levels:</p>
+
+      <div class="tw">
+        <table>
+          <thead>
+            <tr>
+              <th>Level</th>
+              <th>Recovery Capacity</th>
+              <th>Matrix Density</th>
+              <th>Recommended Use Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Level L</strong> (Low)</td>
+              <td>~7% damaged data restored</td>
+              <td>Lowest density (largest modules)</td>
+              <td>Clean digital screens, internal documents, very small prints.</td>
+            </tr>
+            <tr>
+              <td><strong>Level M</strong> (Medium)</td>
+              <td>~15% damaged data restored</td>
+              <td>Moderate density</td>
+              <td>Standard default for flyers, marketing brochures, product manuals.</td>
+            </tr>
+            <tr>
+              <td><strong>Level Q</strong> (Quartile)</td>
+              <td>~25% damaged data restored</td>
+              <td>High density</td>
+              <td>Industrial environments, outdoor signs exposed to dust/weathering.</td>
+            </tr>
+            <tr>
+              <td><strong>Level H</strong> (High)</td>
+              <td>~30% damaged data restored</td>
+              <td>Highest density (smaller modules)</td>
+              <td><strong>Mandatory for Custom Logo insertion</strong> in the center.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>When you place an image or corporate icon in the center of a QR code, you are deliberately destroying approximately 15% to 25% of the data modules in that region. If you generate a QR code with Level L error correction and paste a logo in the middle, the code will fail to scan. By selecting <strong>Level H</strong>, the remaining 70% of the matrix contains sufficient Reed-Solomon parity bytes to reconstruct the entire message effortlessly.</p>
+
+      <h2 id="common-payloads">4. Popular Payload Types: URLs, Wi-Fi, vCard &amp; WhatsApp</h2>
+      <p>A QR code can store any raw string, but standard mobile operating systems (iOS Camera and Android Google Lens) automatically recognize structured URI schemas:</p>
+
+      <h3>Website URL</h3>
+      <p>Standard web links: <code>https://example.com/promo</code>. When scanned, the smartphone immediately displays a clickable browser preview.</p>
+
+      <h3>Instant Wi-Fi Connection</h3>
+      <p>Formats the payload as <code>WIFI:S:NetworkName;T:WPA;P:Password123;;</code>. Scanning this QR code prompts the phone: <em>"Join Wi-Fi Network 'NetworkName'?"</em> with zero manual password typing. Ideal for cafés, Airbnb hosts, and office reception areas.</p>
+
+      <h3>Digital Business Card (vCard 3.0)</h3>
+      <p>Encodes full contact details including full name, telephone, email, company title, and website:
+      <br><code>BEGIN:VCARD
+VERSION:3.0
+N:Hanspal;Ishbir
+TEL:+1234567890
+EMAIL:contact@optipixelstudio.online
+END:VCARD</code>
+      <br>Scanning directly saves the contact into the user's mobile address book.</p>
+
+      <h3>WhatsApp Direct Message</h3>
+      <p>Uses the official API deep link: <code>https://wa.me/919876543210?text=Hi%20I%20have%20an%20inquiry</code>. Automatically launches WhatsApp with the recipient and pre-filled message ready to send.</p>
+
+      <h2 id="design-best-practices">5. Design, Contrast, and Safe Zones</h2>
+      <p>While modern smartphones feature neural image processors capable of reading QR codes under poor conditions, adhering to foundational optical principles guarantees instantaneous scanning across budget devices and low-light environments:</p>
+
+      <ul>
+        <li><strong>High Contrast is Mandatory:</strong> The foreground modules must contrast sharply with the background. The gold standard is dark modules on a light background (#000000 on #ffffff). While color styling is supported, avoid pastel modules on white or dark blue on black.</li>
+        <li><strong>Inverted QR Codes Risk Failures:</strong> Light modules on a dark background (an inverted QR code) look sleek on dark-mode landing pages, but many budget Android barcode scanner apps fail to parse inverted polarity. Always provide an ambient white border if embedding in dark themes.</li>
+        <li><strong>The Quiet Zone (Margin):</strong> Every QR code requires an empty buffer space around all four edges equal to at least <strong>4 module widths</strong>. If text, graphics, or borders crowd this quiet zone, optical finder detection fails.</li>
+        <li><strong>Printing Resolution:</strong> When exporting for print, generate high-resolution PNG or SVG vector formats at a minimum of 300 DPI. Never upscale a blurry 150px thumbnail for an A4 poster.</li>
+      </ul>
+
+      <h2 id="step-by-step">6. How to Generate High-Res QR Codes with OptiPixel</h2>
+      <p>OptiPixel Studio features a comprehensive client-side QR studio that generates standard, high-resolution QR codes entirely inside your browser:</p>
+      <ol>
+        <li>Navigate to the <a href="qr-code-generator.html">QR Code Studio</a> tool.</li>
+        <li>Select your content type: <strong>URL</strong>, <strong>Plain Text</strong>, <strong>Wi-Fi</strong>, <strong>Email</strong>, or <strong>WhatsApp</strong>.</li>
+        <li>Input your destination data in the interactive form fields.</li>
+        <li>Select your error correction level: Choose <strong>Medium (M)</strong> for basic links, or <strong>High (H)</strong> for resilient outdoor printing.</li>
+        <li>Customize your foreground color, background tone, and output canvas resolution (up to 1024×1024 px).</li>
+        <li>Preview in real-time and click <strong>"Download PNG"</strong> for instant high-definition export.</li>
+      </ol>
+
+      <div class="cta-box">
+        <h3>Create Your Free Permanent QR Code Now</h3>
+        <p>No subscriptions. No expiration dates. 100% private in-browser generation with high-resolution export.</p>
+        <a href="qr-code-generator.html" class="cta-btn">Open QR Code Studio &rarr;</a>
+      </div>
+
+      <h2 id="faq">7. Frequently Asked Questions</h2>
+      <div style="margin-top:1.5rem">
+        <h3 style="color:#fff;font-size:1.1rem;margin-bottom:.5rem">Do static QR codes ever expire?</h3>
+        <p>No. Static QR codes encode the raw payload directly into the matrix. Because they don't depend on an intermediary redirect server, they remain functional indefinitely as long as your destination link exists.</p>
+
+        <h3 style="color:#fff;font-size:1.1rem;margin-bottom:.5rem">Can I put a logo in the center of my QR code?</h3>
+        <p>Yes, provided you generate the QR code using Reed-Solomon <strong>Level H (High)</strong> error correction. This ensures that up to 30% of covered or obscured modules can be reconstructed by scanner error recovery algorithms.</p>
+
+        <h3 style="color:#fff;font-size:1.1rem;margin-bottom:.5rem">What is the best format for printing QR codes?</h3>
+        <p>For small print runs (business cards, stickers), export as a high-resolution PNG (at least 800×800 pixels). For commercial billboards, large signage, or offset packaging, vector SVG or high-DPI raster graphics are optimal to prevent pixelation.</p>
+      </div>
+    </article>
+
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h4>⚡ Recommended Tools</h4>
+        <a href="qr-code-generator.html" class="tool-link-btn">🎨 QR Code Studio</a>
+        <a href="barcode-generator.html" class="tool-link-btn">📊 Barcode Generator</a>
+        <a href="image-compressor.html" class="tool-link-btn">🖼️ Image Compressor</a>
+        <a href="image-watermark.html" class="tool-link-btn">🛡️ Watermark Images</a>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>📚 Related Guides</h4>
+        <ul>
+          <li><a href="how-to-compress-image-without-losing-quality.html">&rarr; Image Compression Guide</a></li>
+          <li><a href="best-image-format-for-web.html">&rarr; Best Web Format (2026)</a></li>
+          <li><a href="how-to-remove-image-background-free.html">&rarr; Free BG Removal HD</a></li>
+          <li><a href="how-to-watermark-images.html">&rarr; Image Watermark Guide</a></li>
+          <li><a href="free-pdf-editor-guide.html">&rarr; Free Online PDF Editor</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>🔒 100% Client-Side Privacy</h4>
+        <p style="color:var(--muted);font-size:.88rem;line-height:1.6">OptiPixel tools generate QR codes directly in browser RAM using JavaScript. No payload strings or user IPs are ever transmitted to a server.</p>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand footer-col">
+        <a href="/"><img src="assets/logo.png" alt="OptiPixel"> OptiPixel Studio</a>
+        <p>Free, privacy-first image &amp; PDF tools. Runs entirely in your browser — zero cloud uploads.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Guides &amp; Tutorials</h4>
+        <ul>
+          <li><a href="how-to-compress-image-without-losing-quality.html">Image Compression Guide</a></li>
+          <li><a href="how-to-remove-image-background-free.html">Background Removal HD</a></li>
+          <li><a href="how-to-make-passport-photo-at-home.html">Passport Photo Guide</a></li>
+          <li><a href="how-to-reduce-pdf-file-size.html">Reduce PDF Size Guide</a></li>
+          <li><a href="best-image-format-for-web.html">Best Web Format (WebP/AVIF)</a></li>
+          <li><a href="qr-code-generator-guide.html">QR Code Complete Guide</a></li>
+          <li><a href="how-to-watermark-images.html">Watermarking Guide</a></li>
+          <li><a href="free-pdf-editor-guide.html">Free PDF Editor Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="qr-code-generator.html">QR Code Studio</a></li>
+          <li><a href="image-compressor.html">Image Compressor</a></li>
+          <li><a href="background-remover.html">Background Remover</a></li>
+          <li><a href="pdf-editor.html">PDF Editor</a></li>
+          <li><a href="image-watermark.html">Watermark Images</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company &amp; Legal</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Support</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="sitemap.xml">XML Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 OptiPixel &amp; PDF Studio by Ishbir Hanspal &nbsp;|&nbsp;
+        <a href="privacy.html">Privacy</a> &nbsp;|&nbsp;
+        <a href="terms.html">Terms</a> &nbsp;|&nbsp;
+        <a href="blog.html">Guides</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

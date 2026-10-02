@@ -15,23 +15,24 @@
   <meta name="google-adsense-account" content="ca-pub-9875981872644926">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9875981872644926" crossorigin="anonymous"></script>
   <title>Terms of Service — OptiPixel Studio</title>
-  <meta name="description" content="Terms of Service for OptiPixel Studio. Review user guidelines, privacy standards, and service terms for our free online web tools.">
+  <meta name="description" content="Terms of Service for OptiPixel Studio. Review user guidelines, intellectual property ownership, zero-cloud architecture, and service terms for our free online web tools.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://optipixelstudio.online/terms.html">
   <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --bg: #070a12;
-      --surface: #0f1520;
+      --surface: #0e1424;
       --border: rgba(255,255,255,0.08);
       --text: #e2e8f0;
       --muted: #94a3b8;
       --accent: #06b6d4;
       --accent2: #6366f1;
+      --em: #10b981;
       --radius: 14px;
     }
     body {
@@ -42,13 +43,16 @@
       min-height: 100vh;
     }
     header {
-      background: rgba(7,10,18,0.9);
+      background: rgba(7,10,18,0.92);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       padding: 1rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     header a.brand {
       display: flex;
@@ -56,24 +60,25 @@
       gap: 0.75rem;
       text-decoration: none;
       color: var(--text);
-      font-weight: 700;
+      font-weight: 800;
       font-size: 1.2rem;
     }
     header a.brand img { width: 34px; height: 34px; border-radius: 8px; }
-    header a.back {
+    .nav-actions { display: flex; align-items: center; gap: 0.85rem; }
+    .back-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
       text-decoration: none;
       color: var(--accent);
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       border: 1px solid var(--accent);
-      padding: 0.4rem 1rem;
+      padding: 0.35rem 0.9rem;
       border-radius: 999px;
       transition: all 0.2s;
     }
-    header a.back:hover { background: var(--accent); color: #000; }
+    .back-btn:hover { background: var(--accent); color: #000; }
     .hero {
       background: linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(6,182,212,0.08) 100%);
       border-bottom: 1px solid var(--border);
@@ -89,9 +94,9 @@
       background-clip: text;
       margin-bottom: 0.75rem;
     }
-    .hero p { color: var(--muted); font-size: 1.05rem; }
+    .hero p { color: var(--muted); font-size: 1.05rem; max-width: 680px; margin: 0 auto; }
     main {
-      max-width: 820px;
+      max-width: 860px;
       margin: 0 auto;
       padding: 3rem 2rem 5rem;
     }
@@ -99,96 +104,253 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 2rem 2.25rem;
-      margin-bottom: 1.5rem;
+      padding: 2.25rem 2.5rem;
+      margin-bottom: 2rem;
     }
     .section h2 {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
       color: var(--accent);
+      margin: 1.5rem 0 0.5rem;
+    }
+    .section p { color: #cbd5e1; margin-bottom: 1rem; font-size: 0.98rem; line-height: 1.8; }
+    .section p:last-child { margin-bottom: 0; }
+    .section ul, .section ol { color: #cbd5e1; font-size: 0.98rem; margin: 0.5rem 0 1rem 1.75rem; }
+    .section li { margin-bottom: 0.5rem; line-height: 1.7; }
+    .badge {
+      display: inline-block;
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.3);
+      color: #10b981;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
       margin-bottom: 1rem;
     }
-    .section p { color: var(--muted); margin-bottom: 0.85rem; font-size: 0.98rem; }
-    .section p:last-child { margin-bottom: 0; }
-    .section ul { list-style: none; color: var(--muted); font-size: 0.98rem; }
-    .section ul li { padding: 0.3rem 0 0.3rem 1.5rem; position: relative; }
-    .section ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
-    a { color: var(--accent); }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: var(--muted);
-      font-size: 0.85rem;
-      border-top: 1px solid var(--border);
+    .callout {
+      background: rgba(6,182,212,0.06);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      margin: 1.25rem 0;
+      color: #cbd5e1;
+      font-size: 0.95rem;
     }
+    a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+    footer {
+      background: #05070d;
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem 2rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    @media(max-width: 768px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+    .footer-brand img { width: 30px; height: 30px; border-radius: 7px; }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.6; margin-top: 0.5rem; }
+    .footer-col h4 { color: #fff; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.85rem; }
+    .footer-col ul { list-style: none; padding: 0; margin: 0; }
+    .footer-col li { margin-bottom: 0.55rem; }
+    .footer-col a { color: var(--muted); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    .footer-bottom a { color: var(--accent); text-decoration: none; }
   </style>
 </head>
 <body>
 
 <header>
-  <a href="index.html" class="brand">
+  <a href="/" class="brand">
     <img src="assets/logo.png" alt="OptiPixel Logo">
-    <span>OptiPixel Studio</span>
+    <span>OptiPixel<span style="background:linear-gradient(135deg,#38bdf8,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;"> Studio</span></span>
   </a>
-  <div style="display: flex; align-items: center; gap: 0.75rem;">
-    <a href="https://buymeacoffee.com/ISHBIR" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.4rem; background: #FFDD00; color: #000; font-weight: 700; font-size: 0.88rem; padding: 0.4rem 0.95rem; border-radius: 999px; text-decoration: none; box-shadow: 0 4px 12px rgba(255,221,0,0.3);">
-      <span>☕</span>
-      <span>Buy me a coffee</span>
+  <div class="nav-actions">
+    <a href="blog.html" class="back-btn">📖 Guides</a>
+    <a href="/" class="back-btn">⚡ All Tools</a>
+    <a href="https://buymeacoffee.com/ISHBIR" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.35rem; background: #FFDD00; color: #000; font-weight: 700; font-size: 0.85rem; padding: 0.35rem 0.85rem; border-radius: 999px; text-decoration: none;">
+      <span>☕ Coffee</span>
     </a>
-    <a href="index.html" class="back">← Back to App</a>
   </div>
 </header>
 
 <div class="hero">
+  <div class="badge">Legal Terms &amp; Policies</div>
   <h1>Terms of Service</h1>
-  <p>Please read these terms before using OptiPixel Studio.</p>
+  <p>Effective Date: October 2, 2026 &bull; Publisher: OptiPixel Studio &bull; Official Domain: optipixelstudio.online</p>
 </div>
 
 <main>
 
   <div class="section">
-    <h2>1. Acceptance of Terms</h2>
-    <p>By accessing or using OptiPixel Studio at <strong>optipixelstudio.online</strong>, you agree to be bound by these Terms of Service. If you do not agree, please do not use the application.</p>
-    <p><strong>Last Updated: September 6, 2026</strong></p>
+    <h2>1. Acceptance and Agreement</h2>
+    <p>Welcome to <strong>OptiPixel Studio</strong> ("the Service", "we", "our", or "us"), accessible via <strong>https://optipixelstudio.online</strong> and authorized mirrors. These Terms of Service ("Terms") constitute a legally binding agreement between you ("User", "you", or "your") and OptiPixel Studio, founded and maintained by Ishbir Hanspal.</p>
+    <p>By accessing, browsing, interacting with, or using any web tool, API, calculator, converter, or guide hosted on this domain, you explicitly acknowledge that you have read, understood, and agreed to be bound by these Terms and our companion <a href="privacy.html">Privacy Policy</a> and <a href="disclaimer.html">Disclaimer</a>. If you do not agree to every provision contained herein, you must immediately terminate use of the website.</p>
   </div>
 
   <div class="section">
-    <h2>2. Description of Service</h2>
-    <p>OptiPixel Studio provides free client-side browser utilities including image compression, background removal, visual PDF editing, Word/PDF conversions, QR code and barcode generation, OCR text extraction, passport photo creation, collage maker, audio recording, and video GIF creation.</p>
-    <p>All processing is performed locally inside your web browser using HTML5 Canvas, WebAssembly, and JavaScript. Your files are not uploaded or stored on our servers.</p>
+    <h2>2. Architectural Description of Service</h2>
+    <p>OptiPixel Studio provides an advanced suite of free, browser-based digital media and document editing utilities. Key tools provided include, but are not limited to:</p>
+    <ul>
+      <li><strong>Image Processing:</strong> Lossless and lossy image compression (JPG, PNG, WebP), format conversion, image resizing, dimensions scaling, and batch watermarking.</li>
+      <li><strong>PDF Studio:</strong> Client-side PDF viewing, visual text annotations, page merging, splitting, high-ratio compression, image-to-PDF conversion, and AES-128 document encryption.</li>
+      <li><strong>Generative &amp; Barcode Utilities:</strong> Permanent static 2D QR code generation (URL, text, Wi-Fi, vCard, WhatsApp) and linear barcode generation (Code 128, EAN, UPC).</li>
+      <li><strong>AI &amp; Computer Vision:</strong> Machine-learning background removal via in-browser MediaPipe models, optical character recognition (OCR) text extraction via Tesseract.js, and passport photo dimensioning.</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Zero-Cloud, Client-Side Guarantee:</strong> Unlike traditional SaaS file conversion websites, OptiPixel Studio utilizes modern HTML5 Canvas, Web Workers, WebAssembly (Wasm), and browser memory threads. All file manipulation, compression, and analysis occurs strictly on your local client device. Your images, documents, credentials, and text are <strong>never uploaded to our servers, never stored in a cloud database, and never processed remotely</strong>.
+    </div>
   </div>
 
   <div class="section">
-    <h2>3. Intellectual Property and User Ownership</h2>
-    <p>You retain 100% ownership of all images, documents, and content you process using OptiPixel Studio. We claim no intellectual property rights over your materials.</p>
+    <h2>3. Intellectual Property Rights &amp; User Ownership</h2>
+    <h3>Your Content Remains 100% Yours</h3>
+    <p>You retain absolute and unencumbered ownership, copyright, and title to all images, graphics, photographs, PDF documents, and textual files that you load into the OptiPixel Studio interface. Because our architecture executes client-side with zero server transmission, we do not obtain, store, inspect, replicate, or claim any license or intellectual property rights over any of your user content.</p>
+
+    <h3>Platform Intellectual Property</h3>
+    <p>The OptiPixel Studio brand name, logo, custom user interface design tokens, visual css styling, technical guides, original articles, and proprietary JavaScript integration logic are the exclusive intellectual property of Ishbir Hanspal and OptiPixel Studio, protected by applicable international copyright, trademark, and unfair competition laws.</p>
   </div>
 
   <div class="section">
-    <h2>4. Acceptable Use</h2>
-    <p>You agree not to use the Service for any unlawful activities or in any manner that could disable, overburden, or impair the website or interfere with any other party's use of the Service.</p>
+    <h2>4. Permitted Use and Prohibited Activities</h2>
+    <p>You are granted a revocable, non-exclusive, non-transferable, royalty-free license to use OptiPixel Studio for personal, academic, non-profit, or commercial business workflows, subject to the following express restrictions:</p>
+    <ul>
+      <li>You must not use the Service to process, alter, or produce documents, identity cards, or photographs for fraudulent, unlawful, deceptive, or defamatory purposes.</li>
+      <li>You must not reverse engineer, decompile, scrape, or systematically harvest our proprietary editorial articles, guides, or site architecture for republishing without explicit written attribution.</li>
+      <li>You must not launch automated Denial of Service (DoS) attacks, flood requests, or attempt to compromise client-side integrity or bypass security headers.</li>
+      <li>You must not use our QR code generator or watermark studio to distribute malicious URLs, phishing payloads, spyware, or copyright-infringing assets.</li>
+    </ul>
   </div>
 
   <div class="section">
-    <h2>5. Disclaimer of Warranties</h2>
-    <p>The Service is provided "as is" and "as available" without warranties of any kind, whether express or implied. While we strive for maximum accuracy, reliability, and performance, we do not guarantee that the tools will meet all specific requirements or be uninterrupted.</p>
+    <h2>5. Advertising, Cookies, and Third-Party Partnerships</h2>
+    <p>OptiPixel Studio is completely free to the end user with no mandatory registration or paid subscription tiers. To support ongoing server hosting costs, domain renewals, and development:</p>
+    <ul>
+      <li><strong>Google AdSense:</strong> We partner with Google AdSense (Publisher ID: <code>pub-9875981872644926</code>) to serve commercial banner, native, and responsive advertisements. Google and its ad network partners may use cookies and web beacons to serve ads based on your prior visits to this website or other sites on the internet.</li>
+      <li><strong>Consent Management:</strong> In compliance with the General Data Protection Regulation (GDPR), California Consumer Privacy Act (CCPA), and Google EU User Consent Policy, visitors can inspect, accept, or decline advertising cookies at any time via our Cookie Settings banner or preferences modal.</li>
+      <li><strong>Voluntary Contributions:</strong> Users may voluntarily support the creator via Buy Me a Coffee (https://buymeacoffee.com/ISHBIR). Donations are strictly voluntary gifts and do not constitute a commercial contract for guaranteed service level agreements (SLAs).</li>
+    </ul>
   </div>
 
   <div class="section">
-    <h2>6. Advertising and Monetization</h2>
-    <p>The Service is funded through advertisements served by Google AdSense and voluntary user donations via Buy Me a Coffee. By using the site, you acknowledge that advertisements may be displayed in accordance with our <a href="privacy.html">Privacy Policy</a>.</p>
+    <h2>6. Open Source Library Attributions</h2>
+    <p>OptiPixel Studio proudly stands on the shoulders of the global open-source community. Certain client-side functions utilize battle-tested, permissive open-source libraries:</p>
+    <ul>
+      <li><strong>PDF.js:</strong> Developed by Mozilla under the Apache License 2.0.</li>
+      <li><strong>pdf-lib:</strong> Created by Andrew Dillon under the MIT License.</li>
+      <li><strong>JSZip:</strong> Created by Stuart Knightley, David Duponchel, Franz Buchinger under the MIT License.</li>
+      <li><strong>Tesseract.js:</strong> Pure JavaScript OCR port maintained under the Apache License 2.0.</li>
+      <li><strong>MediaPipe Selfie Segmentation:</strong> Developed by Google LLC under the Apache License 2.0.</li>
+      <li><strong>QRCode.js:</strong> Lightweight QR generator by David Shim under the MIT License.</li>
+    </ul>
+    <p>All respective copyrights, licenses, and notices remain with their original authors.</p>
   </div>
 
   <div class="section">
-    <h2>7. Contact Information</h2>
-    <p>For questions or inquiries regarding these Terms of Service, please contact us at:</p>
-    <p>📧 <a href="mailto:contact@optipixelstudio.online">contact@optipixelstudio.online</a></p>
-    <p>🌐 Website: <a href="https://optipixelstudio.online">https://optipixelstudio.online</a></p>
+    <h2>7. Disclaimer of Warranties</h2>
+    <p>THE SERVICE AND ALL ASSOCIATED TOOLS, GUIDES, AND CONTENT ARE PROVIDED STRICTLY ON AN <strong>"AS IS"</strong> AND <strong>"AS AVAILABLE"</strong> BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMISSIBLE UNDER APPLICABLE LAW, OPTIPIXEL STUDIO DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO:</p>
+    <ul>
+      <li>Implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</li>
+      <li>Warranties that browser-based conversions will never crash or exhaust device memory (RAM) when handling massive file batches or oversized 100MB+ PDF documents.</li>
+      <li>Warranties regarding the complete legal validity of user-generated passport photos before specific government consulates or immigration officers (users must always verify the latest regional embassy specifications).</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>8. Limitation of Liability</h2>
+    <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL OPTIPIXEL STUDIO, ITS FOUNDER ISHBIR HANSPAL, OR ITS AFFILIATES BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, PUNITIVE, OR EXEMPLARY DAMAGES (INCLUDING LOSS OF DATA, DEVICE PERFORMANCE ISSUES, LOST PROFITS, OR BUSINESS INTERRUPTION) ARISING OUT OF OR IN CONNECTION WITH YOUR USE OR INABILITY TO USE THE SERVICE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+    <p>BECAUSE YOUR FILES REMAIN EXCLUSIVELY ON YOUR LOCAL MACHINE, OPTIPIXEL STUDIO ASSUMES ZERO RESPONSIBILITY FOR ACCIDENTAL LOSS OF ORIGINAL FILES. USERS ARE ALWAYS ADVISED TO MAINTAIN SECURE BACKUPS OF SOURCE ASSETS BEFORE COMPRESSING OR MODIFYING FILES.</p>
+  </div>
+
+  <div class="section">
+    <h2>9. Severability, Governing Law, and Jurisdiction</h2>
+    <p>If any provision of these Terms is deemed unlawful, void, or unenforceable by an arbitrator or court of competent jurisdiction, that provision shall be severable from these Terms and shall not affect the validity and enforceability of any remaining provisions.</p>
+    <p>These Terms shall be governed by and construed in accordance with the substantive laws of India, without regard to conflict of law principles. Any legal suit, action, or proceeding arising out of these Terms shall be instituted exclusively in courts located in Delhi, India.</p>
+  </div>
+
+  <div class="section">
+    <h2>10. Modifications and Legal Inquiries</h2>
+    <p>We reserve the right to revise or update these Terms of Service periodically to reflect changes in our tool suite, regulatory requirements, or advertising standards. The "Effective Date" at the top of this document indicates when the latest amendments were enacted. Continued use of the website following any update signifies your acceptance of the revised Terms.</p>
+    <p>If you have any questions, legal notices, or feedback regarding these Terms, please reach out directly:</p>
+    <p>📧 <strong>Email:</strong> <a href="mailto:contact@optipixelstudio.online">contact@optipixelstudio.online</a></p>
+    <p>🌐 <strong>Website Contact:</strong> <a href="contact.html">https://optipixelstudio.online/contact.html</a></p>
+    <p>📍 <strong>Developer Profile:</strong> <a href="about.html">About Founder Ishbir Hanspal</a></p>
   </div>
 
 </main>
 
 <footer>
-  <p>&copy; 2026 OptiPixel Studio. All rights reserved. &nbsp;|&nbsp; <a href="about.html">About Us</a> &nbsp;|&nbsp; <a href="contact.html">Contact</a> &nbsp;|&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms.html">Terms of Service</a> &nbsp;|&nbsp; <a href="disclaimer.html">Disclaimer</a> &nbsp;|&nbsp; <a href="index.html">← Back to App</a></p>
+  <div class="footer-inner">
+    <div class="footer-brand footer-col">
+      <a href="/"><img src="assets/logo.png" alt="OptiPixel"> OptiPixel Studio</a>
+      <p>Free, privacy-first image &amp; PDF tools. Runs entirely in your browser — zero cloud uploads.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Guides &amp; Tutorials</h4>
+      <ul>
+        <li><a href="how-to-compress-image-without-losing-quality.html">Image Compression Guide</a></li>
+        <li><a href="how-to-remove-image-background-free.html">Background Removal HD</a></li>
+        <li><a href="how-to-make-passport-photo-at-home.html">Passport Photo Guide</a></li>
+        <li><a href="how-to-reduce-pdf-file-size.html">Reduce PDF Size Guide</a></li>
+        <li><a href="best-image-format-for-web.html">Best Web Format (WebP/AVIF)</a></li>
+        <li><a href="qr-code-generator-guide.html">QR Code Complete Guide</a></li>
+        <li><a href="how-to-watermark-images.html">Watermarking Guide</a></li>
+        <li><a href="free-pdf-editor-guide.html">Free PDF Editor Guide</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Tools</h4>
+      <ul>
+        <li><a href="image-compressor.html">Image Compressor</a></li>
+        <li><a href="background-remover.html">Background Remover</a></li>
+        <li><a href="qr-code-generator.html">QR Code Studio</a></li>
+        <li><a href="pdf-editor.html">PDF Editor</a></li>
+        <li><a href="image-watermark.html">Watermark Images</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company &amp; Legal</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Support</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="disclaimer.html">Disclaimer</a></li>
+        <li><a href="sitemap.xml">XML Sitemap</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 OptiPixel &amp; PDF Studio by Ishbir Hanspal &nbsp;|&nbsp;
+      <a href="privacy.html">Privacy</a> &nbsp;|&nbsp;
+      <a href="terms.html">Terms</a> &nbsp;|&nbsp;
+      <a href="blog.html">Guides</a>
+    </p>
+  </div>
 </footer>
 
 </body>
