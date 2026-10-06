@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BSQJ151TNF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BSQJ151TNF');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="jVQJff56nis0RTvooVRwHp6-dbM8nsIMy12GFCqMtJU">
+  <meta name='impact-site-verification' value='23105593-9fc9-4afd-90e2-eba54fd0c149'>
+
+  <title>Ishbir Hanspal — Web Development &amp; Client Projects Portfolio</title>
+  <meta name="title" content="Ishbir Hanspal — Web Development &amp; Client Projects Portfolio">
+  <meta name="description" content="Explore client websites and web applications engineered by Ishbir Hanspal. Featuring Shapes by Satinder Kaur, Shapes Uniforms, OptiPixel Studio, and Milla Pro.">
+  <meta name="keywords" content="Ishbir Hanspal, web developer portfolio, web design client projects, shapes by satinder kaur, shapesuniform.in, optipixel studio, freelance web designer, hostinger partner web developer">
+  <meta name="author" content="Ishbir Hanspal">
+  <link rel="canonical" href="https://optipixelstudio.online/portfolio.html">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+
+  <!-- Google Fonts: Outfit & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #070a12;
+      --surface: #0e1424;
+      --surface-card: rgba(18, 26, 44, 0.75);
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(6,182,212,0.4);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #06b6d4;
+      --accent-purple: #6366f1;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --radius: 16px;
+    }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* Sticky Navigation */
+    header {
+      background: rgba(7,10,18,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header a.brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text);
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+    header a.brand img { width: 34px; height: 34px; border-radius: 8px; box-shadow: 0 0 12px rgba(6,182,212,0.4); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #000;
+      background: var(--accent);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.45rem 1.15rem;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover { background: #38bdf8; transform: translateY(-1px); }
+
+    /* Hero Section */
+    .hero {
+      background: radial-gradient(circle at 50% 20%, rgba(99,102,241,0.18) 0%, rgba(6,182,212,0.06) 50%, transparent 80%);
+      border-bottom: 1px solid var(--border);
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+    }
+    .hero-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(6,182,212,0.1);
+      border: 1px solid rgba(6,182,212,0.3);
+      color: var(--accent);
+      padding: 0.35rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.3rem, 5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 span.gradient {
+      background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* Stats Counter Bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      max-width: 820px;
+      margin: 0 auto;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #FFF;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4.5rem 1.5rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .section-tag {
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 650px;
+      margin: 0.75rem auto 0;
+      font-size: 1.05rem;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+    .project-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(12px);
+      position: relative;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-hover);
+      box-shadow: 0 20px 40px -15px rgba(6,182,212,0.18);
+    }
+    .card-top {
+      padding: 2rem 2rem 1.25rem;
+      flex-grow: 1;
+    }
+    .card-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    .badge-fashion { background: rgba(244,63,94,0.12); color: #fb7185; border: 1px solid rgba(244,63,94,0.3); }
+    .badge-b2b { background: rgba(59,130,246,0.12); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+    .badge-d2c { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+    .badge-saas { background: rgba(16,185,129,0.12); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+
+    .card-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+      color: #FFF;
+    }
+    .card-desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .tag {
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #cbd5e1;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+    }
+    .card-footer {
+      padding: 1.25rem 2rem;
+      background: rgba(7,10,18,0.5);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .live-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: gap 0.2s;
+    }
+    .live-link:hover { gap: 0.65rem; color: #38bdf8; }
+    .status-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: #34d399;
+      font-weight: 600;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    /* Hosting & Agency Services */
+    .services-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 5rem 1.5rem;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .service-box {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem;
+      transition: border-color 0.2s;
+    }
+    .service-box:hover { border-color: var(--accent); }
+    .service-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1.25rem;
+    }
+    .service-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      color: #FFF;
+    }
+    .service-desc {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Hosting Partner Callout */
+    .partner-banner {
+      background: linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(6,182,212,0.12) 100%);
+      border: 1px solid rgba(99,102,241,0.3);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      max-width: 1000px;
+      margin: 4rem auto 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .partner-content h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+    .partner-content p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 600px;
+    }
+
+    /* Contact & Call to Action */
+    .cta-wrap {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+    }
+    .cta-wrap h2 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+    .cta-btns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      font-weight: 800;
+      padding: 0.85rem 2rem;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { background: #38bdf8; transform: translateY(-2px); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: #FFF;
+      font-weight: 700;
+      padding: 0.85rem 2rem;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    footer a { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      header { padding: 1rem; }
+      .nav-links a:not(.active) { display: none; }
+      .hero { padding: 3.5rem 1rem 2.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .card-top { padding: 1.5rem 1.5rem 1rem; }
+      .card-footer { padding: 1rem 1.5rem; }
+      .partner-banner { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Master Header -->
+  <header>
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="OptiPixel Studio">
+      <span>OptiPixel <span style="color:var(--accent);">Studio</span>™</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Free Web Tools</a>
+      <a href="portfolio.html" class="active">Portfolio &amp; Work</a>
+      <a href="about.html">About Developer</a>
+      <a href="contact.html" class="nav-btn">Hire Developer ↗</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="badge">🚀 Client Web Engineering &amp; Architecture</div>
+      <h1>Ishbir Hanspal — <span class="gradient">Web Developer</span> &amp; Digital Architect</h1>
+      <p>Designing and engineering fast, high-conversion e-commerce storefronts, scalable business portals, and cloud-hosted web platforms.</p>
+
+      <div class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-num">4+</div>
+          <div class="stat-label">Live Enterprise Sites</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100k+</div>
+          <div class="stat-label">Web Operations Handled</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">99.9%</div>
+          <div class="stat-label">Cloud Uptime Architecture</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">&lt;1.2s</div>
+          <div class="stat-label">Average Page Load Speed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Works Grid -->
+  <main class="container">
+    <div class="section-header">
+      <div class="section-tag">Showcase Projects</div>
+      <h2 class="section-title">Featured Client Platforms &amp; Applications</h2>
+      <p class="section-subtitle">A collection of live production websites engineered with clean architecture, modern responsive design, and enterprise cloud infrastructure.</p>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- Project 1: Shapes by Satinder Kaur -->
+      <article class="project-card">
+        <div class="card-top">
+          <span class="card-badge badge-fashion">Bespoke Couture &amp; E-Commerce</span>
+          <h3 class="card-title">Shapes by Satinder Kaur</h3>
+          <p class="card-desc">
+            A luxury bespoke apparel and designer fashion storefront. Engineered with an elegant, responsive mobile catalog, high-resolution visual curation, and streamlined customer purchasing flow.
+          </p>
+          <div class="card-tags">
+            <span class="tag">Fashion E-Commerce</span>
+            <span class="tag">Luxury UI/UX</span>
+            <span class="tag">Mobile Optimized</span>
+            <span class="tag">Cloud Hosted</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="status-dot"><span class="dot"></span> Live In Production</div>
+          <a href="https://shapesbysatinderkaur.com/" target="_blank" rel="noopener noreferrer" class="live-link">
+            Visit Website <span>↗</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Project 2: Shapes Uniforms -->
+      <article class="project-card">
+        <div class="card-top">
+          <span class="card-badge badge-b2b">Corporate &amp; Institutional B2B</span>
+          <h3 class="card-title">Shapes Uniforms</h3>
+          <p class="card-desc">
+            A nationwide institutional and corporate uniform manufacturing portal. Features extensive category indexing, custom bulk quotation engine, and optimized B2B customer inquiry pipeline.
+          </p>
+          <div class="card-tags">
+            <span class="tag">B2B Manufacturing</span>
+            <span class="tag">Corporate Catalog</span>
+            <span class="tag">Bulk Quote Engine</span>
+            <span class="tag">High Speed DNS</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="status-dot"><span class="dot"></span> Live In Production</div>
+          <a href="https://shapesuniform.in/" target="_blank" rel="noopener noreferrer" class="live-link">
+            Visit Website <span>↗</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Project 3: OptiPixel Studio -->
+      <article class="project-card">
+        <div class="card-top">
+          <span class="card-badge badge-saas">Zero-Cloud Web Utility Suite</span>
+          <h3 class="card-title">OptiPixel Studio™</h3>
+          <p class="card-desc">
+            A comprehensive, 100% private client-side image and document processing suite. Handles background removal, PDF compression, image optimization, OCR, and QR generation with zero server uploads.
+          </p>
+          <div class="card-tags">
+            <span class="tag">Client-Side Canvas</span>
+            <span class="tag">PDF WebAssembly</span>
+            <span class="tag">Privacy Architecture</span>
+            <span class="tag">100k+ Runs</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="status-dot"><span class="dot"></span> Live In Production</div>
+          <a href="https://optipixelstudio.online/" target="_blank" rel="noopener noreferrer" class="live-link">
+            Visit Platform <span>↗</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Project 4: MILLA PRO Store -->
+      <article class="project-card">
+        <div class="card-top">
+          <span class="card-badge badge-d2c">D2C Nutrition &amp; FMCG E-Commerce</span>
+          <h3 class="card-title">MILLA PRO™ High-Protein Store</h3>
+          <p class="card-desc">
+            Next-generation clean nutrition food storefront. Built with an interactive macro &amp; whey savings calculator, NABL certified lab verification displays, 60fps GPU infinite reviews, and dynamic cart drawer.
+          </p>
+          <div class="card-tags">
+            <span class="tag">D2C E-Commerce</span>
+            <span class="tag">Interactive Calculators</span>
+            <span class="tag">Mobile First (393px)</span>
+            <span class="tag">Global CDN</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="status-dot"><span class="dot"></span> Verified Deployment</div>
+          <a href="https://optipixelstudio.online/milla-pro/" target="_blank" rel="noopener noreferrer" class="live-link">
+            View Live Store <span>↗</span>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Web & Hosting Services Section -->
+  <section class="services-section">
+    <div class="section-header">
+      <div class="section-tag">Engineering Capabilities</div>
+      <h2 class="section-title">End-to-End Web &amp; Hosting Architecture</h2>
+      <p class="section-subtitle">From custom frontend engineering to managed cloud infrastructure, every project is delivered ready for scale.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-box">
+        <div class="service-icon">⚡</div>
+        <h3 class="service-title">Managed Cloud &amp; Web Hosting</h3>
+        <p class="service-desc">
+          Deployment on high-speed NVMe SSD cloud hosting architecture (LiteSpeed, Cloudflare CDN, daily automated backups, and free SSL). Expert DNS management and server migration.
+        </p>
+      </div>
+
+      <div class="service-box">
+        <div class="service-icon">🛍️</div>
+        <h3 class="service-title">Custom E-Commerce Storefronts</h3>
+        <p class="service-desc">
+          High-conversion D2C and B2B product catalogs, seamless payment gateway integration, responsive checkout workflows, and fast mobile navigation.
+        </p>
+      </div>
+
+      <div class="service-box">
+        <div class="service-icon">🎨</div>
+        <h3 class="service-title">Modern UI/UX &amp; Micro-Interactions</h3>
+        <p class="service-desc">
+          Clean typography, rich dark modes, smooth GPU hardware-accelerated animations, and responsive layouts calibrated for all device viewports.
+        </p>
+      </div>
+
+      <div class="service-box">
+        <div class="service-icon">🔍</div>
+        <h3 class="service-title">Technical SEO &amp; Performance</h3>
+        <p class="service-desc">
+          Rigorous Core Web Vitals optimization, semantic HTML5, Schema.org structured JSON-LD data, open-graph cards, and sub-second page delivery.
+        </p>
+      </div>
+    </div>
+
+    <!-- Official Hosting Partner Callout -->
+    <div class="partner-banner">
+      <div class="partner-content">
+        <h3>Official Cloud Hosting &amp; Infrastructure Partner</h3>
+        <p>I configure and recommend enterprise cloud hosting packages for client platforms, ensuring maximum uptime, automatic DDoS protection, and high-speed global delivery.</p>
+      </div>
+      <div>
+        <a href="contact.html" class="nav-btn" style="padding: 0.75rem 1.75rem; font-size: 1rem;">Work Together ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / Contact -->
+  <section class="cta-wrap">
+    <h2>Ready to Launch Your Next Project?</h2>
+    <p style="color:var(--muted); font-size:1.1rem;">
+      Whether you need an e-commerce storefront, a custom web application, or cloud hosting configuration, let's build something exceptional together.
+    </p>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn-primary">Get In Touch Today ↗</a>
+      <a href="https://github.com/ishbirhanspal-max" target="_blank" rel="noopener noreferrer" class="btn-secondary">GitHub Profile ↗</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Ishbir Hanspal &bull; <a href="index.html">OptiPixel Studio™</a>. All rights reserved.</p>
+    <p style="margin-top:0.4rem; font-size:0.8rem; color: #64748b;">
+      Bespoke Web Development &bull; Cloud Hosting Infrastructure &bull; Client Showcase
+    </p>
+  </footer>
+
+</body>
+</html>

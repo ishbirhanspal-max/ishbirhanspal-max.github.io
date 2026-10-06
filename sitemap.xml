@@ -193,6 +193,12 @@
     <priority>0.90</priority>
   </url>
   <url>
+    <loc>https://optipixelstudio.online/portfolio.html</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://optipixelstudio.online/about.html</loc>
     <lastmod>2026-09-22</lastmod>
     <changefreq>monthly</changefreq>
