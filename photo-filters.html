@@ -192,6 +192,31 @@
       <h3>What format is the download?</h3>
       <p>The filtered image is downloaded as a high-quality PNG, preserving all pixel detail at the original image resolution.</p>
     </article>
+    <article class="content-card">
+      <h2>How CSS Filters Work: The Technology Behind the Presets</h2>
+      <p>OptiPixel's Photo Filter tool uses the browser's native CSS filter API combined with HTML5 Canvas rendering to apply adjustments to your images in real time — without uploading a single pixel to any server. Understanding how each filter function works helps you combine them more intentionally for professional results.</p>
+      <h3>Brightness</h3>
+      <p>The brightness filter multiplies every pixel's RGB channel values by a constant factor. At 100% (the default), no change is applied. At 150%, all colour values are multiplied by 1.5, making the image appear lighter. At 50%, the image becomes half as bright. Unlike exposure adjustment in professional photo editors, CSS brightness affects all channels equally and linearly, which can produce slightly washed-out highlights at very high values. For the best results, keep brightness between 90% and 130% for natural-looking adjustments.</p>
+      <h3>Contrast</h3>
+      <p>Contrast adjustment remaps each pixel's luminance so that bright pixels become brighter and dark pixels become darker — expanding the tonal range of the image. At 100% (default), there is no change. At 150%, the image becomes more dramatic with richer shadows and punchier highlights, ideal for cinematic looks. At 200%, the image becomes high-contrast, approaching a two-tone posterized look that works well for graphic design and social media thumb-nails. The Cyberpunk and Drama presets leverage high contrast settings for their signature look.</p>
+      <h3>Saturation</h3>
+      <p>Saturation controls the intensity of all colours in an image. At 100%, colours are rendered at their natural intensity as captured. At 200%, colours are twice as vivid — greens become emerald, blues turn electric, and reds become fire-engine bright. At 0%, all colour information is removed and the image becomes a pure black-and-white grayscale rendering. The Film Noir preset uses 0% saturation, while the Vivid Boost and Cyberpunk presets use high saturation values above 140% to create their characteristic intensity.</p>
+      <h3>Hue Rotation</h3>
+      <p>Hue rotation shifts the position of all colours around the HSL (Hue, Saturation, Lightness) colour wheel. At 0°, colours are unchanged. At 180°, every colour shifts to its complementary opposite — blues become orange, greens become purple, reds become cyan. The Cool Breeze preset uses a 210° hue shift to push warm tones towards blue-violet for a chilly, atmospheric effect. Hue rotation is a powerful tool for creating surreal, otherworldly moods without changing the structural contrast or luminance of an image.</p>
+      <h3>Sepia</h3>
+      <p>Sepia toning recolours the image with warm brown-orange tones that simulate the chemical patina of antique photographic prints. Unlike simple colour overlays, CSS sepia filtering uses a mathematically precise linear colour matrix that desaturates the image and applies warm amber-brown hue, closely approximating the look of real silver-gelatin photographic prints aged in alum-based fix solution. The Vintage Film preset pairs sepia with reduced contrast and a slight brightness lift to complete the antique film aesthetic.</p>
+    </article>
+    <article class="content-card">
+      <h2>Photo Filtering for Different Creative Use Cases</h2>
+      <h3>Social Media Content Creation</h3>
+      <p>Instagram, Pinterest, and TikTok are visual platforms where consistent aesthetic treatment of photos builds a recognisable brand identity. Content creators who use a consistent filter across their posts — for example, always applying Sunset Warm to food photos, or consistently using Cool Breeze for urban street photography — develop a cohesive visual feed that increases follower retention and brand recognition. OptiPixel's presets give you a repeatable, one-click way to apply your signature aesthetic to every image.</p>
+      <h3>YouTube Thumbnail Optimisation</h3>
+      <p>YouTube thumbnails compete in a grid where strong visual contrast and vibrant colour make individual videos stand out. The Vivid Boost preset, which cranks saturation to 140% and contrast to 130%, is specifically calibrated to produce the kind of bold, eye-catching colour that YouTube thumbnails need to perform well in search results and recommendation feeds. Applying a Cyberpunk filter to gaming content thumbnails, or a Film Noir filter to true-crime documentary thumbnails, can reinforce the genre associations that help viewers self-select.</p>
+      <h3>Product Photography Enhancement</h3>
+      <p>When photographing products for online stores without professional studio lighting, the Vivid Boost preset compensates for the flat, low-contrast look that indoor ambient light often produces. Increasing saturation and contrast brings out the true colour vibrancy of textiles, packaging, and accessories that can look dull and unappetising under typical home lighting conditions.</p>
+      <h3>Portrait and Headshot Retouching</h3>
+      <p>The Matte Fade preset, which combines reduced contrast with a gentle sepia undertone and elevated brightness, creates a fashionable low-contrast lifestyle photography aesthetic that is popular in portrait, beauty, and fashion photography. This look softens skin tones and de-emphasises background detail, placing focus on the subject's face. It pairs well with the opacity tools in downstream compositing workflows.</p>
+    </article>
   </main>
 
   <footer>
