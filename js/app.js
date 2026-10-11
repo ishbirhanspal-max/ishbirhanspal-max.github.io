@@ -1,23 +1,12 @@
-/**
- * OptiPixel Studio - Main Application Controller (Image + Full In-Place PDF Text Editor)
- * Features:
- * - In-Place Edit Existing PDF Text (Click to replace words/paragraphs)
- * - Add New Interactive Floating Text Boxes with Live Typing
- * - Whiteout / Eraser for existing text & graphics
- * - Freehand Signatures & Drawing
- * - Redaction & Highlighting Rectangles
- * - Bulk Image Optimization & Format Conversion
- */
+
 
 (function () {
   'use strict';
 
-  // Application State
   const state = {
     activeTab: 'image-tools', // 'image-tools' | 'pdf-tools'
     pdfActiveSubtool: 'visual-edit', // 'visual-edit' | 'merge' | 'img2pdf' | 'organize' | 'watermark'
     
-    // Image state
     files: [],
     settings: {
       format: 'image/webp',
@@ -29,13 +18,11 @@
       stripMetadata: true
     },
     
-    // PDF State
     pdfFiles: [],
     pdfPages: [],
     currentPdfFile: null,
     watermarkText: 'CONFIDENTIAL',
 
-    // Visual PDF Editor State
     visualDoc: null,
     visualPageNum: 1,
     visualTotalPages: 1,
@@ -50,9 +37,7 @@
     floatingTextBoxes: [] // Array of { id, element, x, y, text, fontSize, color }
   };
 
-  // DOM Elements
   const elements = {
-    // Navigation Tabs & Navbar
     tabImageBtn: document.getElementById('tabImageBtn'),
     tabPdfBtn: document.getElementById('tabPdfBtn'),
     navImageLink: document.getElementById('navImageLink'),
@@ -60,7 +45,6 @@
     imageWorkspace: document.getElementById('imageWorkspace'),
     pdfWorkspace: document.getElementById('pdfWorkspace'),
 
-    // Image Elements
     dropzone: document.getElementById('dropzone'),
     fileInput: document.getElementById('fileInput'),
     filesContainer: document.getElementById('filesContainer'),
@@ -74,14 +58,12 @@
     clearAllBtn: document.getElementById('clearAllBtn'),
     sampleImagesBtn: document.getElementById('sampleImagesBtn'),
 
-    // Global Controls
     formatSelect: document.getElementById('formatSelect'),
     qualitySlider: document.getElementById('qualitySlider'),
     qualityValue: document.getElementById('qualityValue'),
     resizeSelect: document.getElementById('resizeSelect'),
     resizeOptionsContainer: document.getElementById('resizeOptionsContainer'),
 
-    // Comparison Modal
     comparisonModal: document.getElementById('comparisonModal'),
     comparisonCloseBtn: document.getElementById('comparisonCloseBtn'),
     comparisonContainer: document.getElementById('comparisonContainer'),
@@ -92,7 +74,6 @@
     comparisonOrigMeta: document.getElementById('comparisonOrigMeta'),
     comparisonCompMeta: document.getElementById('comparisonCompMeta'),
 
-    // PDF Elements
     pdfSubtoolBtns: document.querySelectorAll('.pdf-subtool-btn'),
     pdfDropzone: document.getElementById('pdfDropzone'),
     pdfFileInput: document.getElementById('pdfFileInput'),
@@ -105,7 +86,6 @@
     pdfWatermarkInputContainer: document.getElementById('pdfWatermarkInputContainer'),
     watermarkTextInput: document.getElementById('watermarkTextInput'),
 
-    // Visual Canvas Editor Elements
     visualEditorWorkspace: document.getElementById('visualEditorWorkspace'),
     toolEditTextBtn: document.getElementById('toolEditTextBtn'),
     toolTextBtn: document.getElementById('toolTextBtn'),
@@ -129,7 +109,6 @@
     pdfAnnotationCanvas: document.getElementById('pdfAnnotationCanvas'),
     pdfTextOverlayLayer: document.getElementById('pdfTextOverlayLayer'),
 
-    // Background Remover Elements
     tabBgBtn: document.getElementById('tabBgBtn'),
     bgRemoverWorkspace: document.getElementById('bgRemoverWorkspace'),
     bgDropzone: document.getElementById('bgDropzone'),
@@ -161,7 +140,6 @@
     bgCopyClipboardBtn: document.getElementById('bgCopyClipboardBtn'),
     bgDownloadBtn: document.getElementById('bgDownloadBtn'),
 
-    // QR Code Studio Elements
     tabQrBtn: document.getElementById('tabQrBtn'),
     qrWorkspace: document.getElementById('qrWorkspace'),
     qrTypeSelect: document.getElementById('qrTypeSelect'),
@@ -177,7 +155,6 @@
     qrCopyClipboardBtn: document.getElementById('qrCopyClipboardBtn'),
     qrDownloadPngBtn: document.getElementById('qrDownloadPngBtn'),
 
-    // Passport Photo Elements
     tabPassportBtn: document.getElementById('tabPassportBtn'),
     passportWorkspace: document.getElementById('passportWorkspace'),
     passportDropzone: document.getElementById('passportDropzone'),
@@ -194,7 +171,6 @@
     passportResetBtn: document.getElementById('passportResetBtn'),
     passportDownloadBtn: document.getElementById('passportDownloadBtn'),
 
-    // Filters & Effects Elements
     tabFiltersBtn: document.getElementById('tabFiltersBtn'),
     filtersWorkspace: document.getElementById('filtersWorkspace'),
     filtersDropzone: document.getElementById('filtersDropzone'),
@@ -213,7 +189,6 @@
     filtersResetBtn: document.getElementById('filtersResetBtn'),
     filtersDownloadBtn: document.getElementById('filtersDownloadBtn'),
 
-    // Social Crop Elements
     tabSocialCropBtn: document.getElementById('tabSocialCropBtn'),
     socialCropWorkspace: document.getElementById('socialCropWorkspace'),
     socialCropDropzone: document.getElementById('socialCropDropzone'),
@@ -225,7 +200,6 @@
     socialCropResetBtn: document.getElementById('socialCropResetBtn'),
     socialCropDownloadBtn: document.getElementById('socialCropDownloadBtn'),
 
-    // Barcode Elements
     tabBarcodeBtn: document.getElementById('tabBarcodeBtn'),
     barcodeWorkspace: document.getElementById('barcodeWorkspace'),
     barcodeFormatSelect: document.getElementById('barcodeFormatSelect'),
@@ -235,7 +209,6 @@
     barcodeResultCanvas: document.getElementById('barcodeResultCanvas'),
     barcodeDownloadBtn: document.getElementById('barcodeDownloadBtn'),
 
-    // Collage Maker Elements
     tabCollageBtn: document.getElementById('tabCollageBtn'),
     collageWorkspace: document.getElementById('collageWorkspace'),
     collageDropzone: document.getElementById('collageDropzone'),
@@ -252,7 +225,6 @@
     collageResetBtn: document.getElementById('collageResetBtn'),
     collageDownloadBtn: document.getElementById('collageDownloadBtn'),
 
-    // OCR Elements
     tabOcrBtn: document.getElementById('tabOcrBtn'),
     ocrWorkspace: document.getElementById('ocrWorkspace'),
     ocrDropzone: document.getElementById('ocrDropzone'),
@@ -268,7 +240,6 @@
     ocrDownloadTxtBtn: document.getElementById('ocrDownloadTxtBtn'),
     ocrResetBtn: document.getElementById('ocrResetBtn'),
 
-    // Video to GIF Elements
     tabVideoBtn: document.getElementById('tabVideoBtn'),
     videoWorkspace: document.getElementById('videoWorkspace'),
     videoDropzone: document.getElementById('videoDropzone'),
@@ -280,7 +251,6 @@
     videoGenerateGifBtn: document.getElementById('videoGenerateGifBtn'),
     videoResetBtn: document.getElementById('videoResetBtn'),
 
-    // Audio Studio Elements
     tabAudioBtn: document.getElementById('tabAudioBtn'),
     audioWorkspace: document.getElementById('audioWorkspace'),
     audioVisualizerCanvas: document.getElementById('audioVisualizerCanvas'),
@@ -291,15 +261,12 @@
     audioSpeedSelect: document.getElementById('audioSpeedSelect'),
     audioDownloadBtn: document.getElementById('audioDownloadBtn'),
 
-    // Multi-Language Selector
     langSelect: document.getElementById('langSelect'),
 
-    // FAQ Accordion & Toast
     faqItems: document.querySelectorAll('.faq-item'),
     toastContainer: document.getElementById('toastContainer')
   };
 
-  // Initialize Application (Resilient Failure-Proof Architecture)
   function init() {
     const modules = [
       ['EventListeners', setupEventListeners],
@@ -331,9 +298,7 @@
     });
   }
 
-  // Setup Event Listeners
   function setupEventListeners() {
-    // Navigation Tabs & Navbar links
     if (elements.tabImageBtn) elements.tabImageBtn.addEventListener('click', () => switchMainTab('image-tools'));
     if (elements.tabBgBtn) elements.tabBgBtn.addEventListener('click', () => switchMainTab('bg-tools'));
     if (elements.tabQrBtn) elements.tabQrBtn.addEventListener('click', () => switchMainTab('qr-tools'));
@@ -350,7 +315,6 @@
     if (elements.navImageLink) elements.navImageLink.addEventListener('click', (e) => { e.preventDefault(); switchMainTab('image-tools'); });
     if (elements.navPdfLink) elements.navPdfLink.addEventListener('click', (e) => { e.preventDefault(); switchMainTab('pdf-tools'); });
 
-    // Language change
     if (elements.langSelect) {
       elements.langSelect.addEventListener('change', (e) => {
         if (window.I18nEngine) {
@@ -360,7 +324,6 @@
       });
     }
 
-    // Image File Selection
     elements.dropzone.addEventListener('click', () => elements.fileInput.click());
     elements.fileInput.addEventListener('change', (e) => handleFilesSelected(e.target.files));
 
@@ -377,18 +340,15 @@
       addMoreFilesBtn.addEventListener('click', () => elements.fileInput.click());
     }
 
-    // Sample Images & PDF Buttons
     if (elements.sampleImagesBtn) elements.sampleImagesBtn.addEventListener('click', loadSampleImages);
     const samplePdfBtn = document.getElementById('samplePdfBtn');
     if (samplePdfBtn) samplePdfBtn.addEventListener('click', loadSamplePDF);
 
-    // Format Change
     elements.formatSelect.addEventListener('change', (e) => {
       state.settings.format = e.target.value;
       recompressAll();
     });
 
-    // Quality Slider
     elements.qualitySlider.addEventListener('input', (e) => {
       const val = parseInt(e.target.value, 10);
       elements.qualityValue.textContent = `${val}%`;
@@ -402,7 +362,6 @@
     });
     elements.qualitySlider.addEventListener('change', () => recompressAll());
 
-    // Quality Quick Preset Buttons
     document.querySelectorAll('.compress-preset-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const q = parseInt(btn.dataset.quality, 10);
@@ -420,25 +379,21 @@
       });
     });
 
-    // Resize Mode Change
     elements.resizeSelect.addEventListener('change', (e) => {
       state.settings.resizeMode = e.target.value;
       updateResizeControlsUI();
       recompressAll();
     });
 
-    // Batch Actions
     elements.downloadAllBtn.addEventListener('click', downloadAllAsZip);
     elements.clearAllBtn.addEventListener('click', clearAllFiles);
 
-    // Modal Close
     elements.comparisonCloseBtn.addEventListener('click', closeComparisonModal);
     elements.comparisonModal.addEventListener('click', (e) => {
       if (e.target === elements.comparisonModal) closeComparisonModal();
     });
   }
 
-  // Switch Main Workspace Tabs
   function switchMainTab(tabId) {
     state.activeTab = tabId;
     elements.tabImageBtn.classList.toggle('active', tabId === 'image-tools');
@@ -467,7 +422,6 @@
     if (elements.audioWorkspace) elements.audioWorkspace.style.display = tabId === 'audio-tools' ? 'block' : 'none';
     elements.pdfWorkspace.style.display = tabId === 'pdf-tools' ? 'block' : 'none';
 
-    // Lazy load heavy third-party libraries only when requested
     if (typeof window.loadLibrary === 'function') {
       if (tabId === 'bg-tools') {
         window.loadLibrary('mediapipe').then(() => {
@@ -482,25 +436,21 @@
       }
     }
 
-    // Auto-scroll active tab into center on mobile carousel
     const activeBtn = document.querySelector('.tab-btn.active');
     if (activeBtn && window.innerWidth <= 768) {
       activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
 
-    // Sync mobile bottom thumb bar
     document.querySelectorAll('.mobile-bottom-btn').forEach(b => b.classList.remove('active'));
     if (tabId === 'image-tools') document.getElementById('mobTabCompress')?.classList.add('active');
     else if (tabId === 'bg-tools') document.getElementById('mobTabBg')?.classList.add('active');
     else if (tabId === 'pdf-tools') document.getElementById('mobTabPdf')?.classList.add('active');
     else if (tabId === 'ocr-tools') document.getElementById('mobTabOcr')?.classList.add('active');
 
-    // Auto update for QR or Barcode
     if (tabId === 'qr-tools' && window.updateQRCode) window.updateQRCode();
     if (tabId === 'barcode-tools' && window.updateBarcode) window.updateBarcode();
   }
 
-  // Global Helpers for Mobile Bottom Navigation & Tools Drawer
   window.openMobileToolsDrawer = function() {
     const drawer = document.getElementById('mobileToolsDrawer');
     if (drawer) {
@@ -550,9 +500,6 @@
     window.openMobileToolsDrawer();
   };
 
-  // =========================================================================
-  // BACKGROUND REMOVER IMPLEMENTATION (AI & REMOVE.BG GRADE)
-  // =========================================================================
   function setupBackgroundRemover() {
     let currentBgRawImage = null;
     let currentMode = 'ai-portrait';
@@ -565,7 +512,6 @@
 
     if (!elements.bgDropzone) return;
 
-    // Dropzone Listeners
     elements.bgDropzone.addEventListener('click', () => elements.bgFileInput.click());
     const bgAddFileBtn = document.getElementById('bgAddFileBtn');
     if (bgAddFileBtn) {
@@ -599,7 +545,6 @@
       if (file) loadBgImageFile(file);
     });
 
-    // Sample Image Buttons
     if (elements.sampleBgPortraitBtn) {
       elements.sampleBgPortraitBtn.addEventListener('click', loadSamplePortraitImage);
     }
@@ -607,7 +552,6 @@
       elements.sampleBgBtn.addEventListener('click', loadSampleBgImage);
     }
 
-    // Engine Mode Switcher
     const modeBtns = document.querySelectorAll('.bg-mode-btn');
     modeBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -619,7 +563,6 @@
         btn.classList.add('btn-primary');
         currentMode = btn.dataset.mode;
         
-        // Show/hide tolerance slider based on mode
         const tolGroup = document.getElementById('bgToleranceGroup');
         if (tolGroup) {
           tolGroup.style.display = currentMode === 'ai-portrait' ? 'none' : 'block';
@@ -629,7 +572,6 @@
       });
     });
 
-    // Tolerance & Smoothness Sliders
     if (elements.bgToleranceSlider) {
       elements.bgToleranceSlider.addEventListener('input', (e) => {
         elements.bgToleranceValue.textContent = `${e.target.value}%`;
@@ -644,7 +586,6 @@
       elements.bgSmoothSlider.addEventListener('change', () => runBgCutout());
     }
 
-    // Background Swatches Strip (Mobile-Native UI)
     const swatchItems = document.querySelectorAll('.bg-swatch-item');
     swatchItems.forEach(item => {
       item.addEventListener('click', () => {
@@ -671,7 +612,6 @@
       elements.bgCustomColorInput.addEventListener('input', () => runBgCutout());
     }
 
-    // Touchup Brush Modes
     const brushBtns = document.querySelectorAll('.bg-brush-btn');
     brushBtns.forEach(b => {
       b.addEventListener('click', () => {
@@ -701,7 +641,6 @@
       });
     }
 
-    // Reset Button
     if (elements.bgResetBtn) {
       elements.bgResetBtn.addEventListener('click', () => {
         currentBgRawImage = null;
@@ -712,7 +651,6 @@
       });
     }
 
-    // Copy to Clipboard
     if (elements.bgCopyClipboardBtn) {
       elements.bgCopyClipboardBtn.addEventListener('click', async () => {
         const canvas = elements.bgResultCanvas;
@@ -733,7 +671,6 @@
       });
     }
 
-    // Download PNG Button
     if (elements.bgDownloadBtn) {
       elements.bgDownloadBtn.addEventListener('click', () => {
         const canvas = elements.bgResultCanvas;
@@ -744,10 +681,8 @@
       });
     }
 
-    // Setup Interactive Split Comparison Handle
     setupComparisonSlider();
 
-    // Brush canvas listeners
     setupBrushDrawingEvents();
 
     function loadBgImageFile(file) {
@@ -818,19 +753,16 @@
         ctx.clearRect(0, 0, displayCanvas.width, displayCanvas.height);
         ctx.drawImage(result.resultCanvas, 0, 0);
 
-        // Update brush overlay size
         if (elements.bgBrushOverlayCanvas) {
           elements.bgBrushOverlayCanvas.width = displayCanvas.width;
           elements.bgBrushOverlayCanvas.height = displayCanvas.height;
         }
 
-        // Align Original Image dimensions perfectly with display canvas for flawless split comparison
         if (elements.bgOriginalImg) {
           elements.bgOriginalImg.style.width = '100%';
           elements.bgOriginalImg.style.height = '100%';
         }
 
-        // Set Split Slider to 50%
         updateSplitSlider(50);
       } catch (err) {
         console.error('Background removal error:', err);
@@ -946,7 +878,6 @@
         mCtx.arc(pos.x, pos.y, brushSize, 0, Math.PI * 2);
         mCtx.fill();
 
-        // Render preview overlay
         const oCtx = canvas.getContext('2d');
         oCtx.fillStyle = currentBrushMode === 'erase' ? 'rgba(239, 68, 68, 0.4)' : 'rgba(16, 185, 129, 0.4)';
         oCtx.beginPath();
@@ -970,7 +901,6 @@
       window.addEventListener('touchend', stopDraw);
     }
 
-    // Sample Portrait (Human AI Test)
     function loadSamplePortraitImage() {
       showToast('Generating HD model portrait for AI cutout...', 'info');
       const c = document.createElement('canvas');
@@ -978,7 +908,6 @@
       c.height = 900;
       const ctx = c.getContext('2d');
 
-      // Natural gradient background with studio lighting
       const bgGrad = ctx.createLinearGradient(0, 0, 720, 900);
       bgGrad.addColorStop(0, '#f8fafc');
       bgGrad.addColorStop(0.5, '#cbd5e1');
@@ -986,14 +915,11 @@
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, 720, 900);
 
-      // Studio light circles
       ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
       ctx.beginPath();
       ctx.arc(360, 300, 240, 0, Math.PI * 2);
       ctx.fill();
 
-      // Human Silhouette / Portrait Illustration with hair details
-      // Shoulders / Jacket
       ctx.fillStyle = '#1e293b';
       ctx.beginPath();
       ctx.moveTo(120, 900);
@@ -1002,7 +928,6 @@
       ctx.closePath();
       ctx.fill();
 
-      // Shirt / Tie
       ctx.fillStyle = '#06b6d4';
       ctx.beginPath();
       ctx.moveTo(330, 600);
@@ -1011,25 +936,21 @@
       ctx.closePath();
       ctx.fill();
 
-      // Neck
       ctx.fillStyle = '#e2a76f';
       ctx.beginPath();
       ctx.roundRect(325, 460, 70, 160, 20);
       ctx.fill();
 
-      // Face
       ctx.fillStyle = '#f5c69b';
       ctx.beginPath();
       ctx.ellipse(360, 380, 110, 140, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Hair
       ctx.fillStyle = '#331800';
       ctx.beginPath();
       ctx.arc(360, 330, 125, Math.PI * 0.8, Math.PI * 2.2);
       ctx.fill();
 
-      // Hair wisps
       ctx.lineWidth = 6;
       ctx.strokeStyle = '#331800';
       for (let i = 0; i < 8; i++) {
@@ -1038,7 +959,6 @@
         ctx.stroke();
       }
 
-      // Sunglasses / Eyeglasses (Cool Look)
       ctx.fillStyle = '#0f172a';
       ctx.beginPath();
       ctx.roundRect(280, 360, 65, 40, 10);
@@ -1059,7 +979,6 @@
         elements.bgControlsContainer.style.display = 'block';
         if (elements.bgOriginalImg) elements.bgOriginalImg.src = c.toDataURL('image/png');
         
-        // Default to AI Portrait
         currentMode = 'ai-portrait';
         document.querySelectorAll('.bg-mode-btn').forEach(b => {
           b.classList.toggle('btn-primary', b.dataset.mode === 'ai-portrait');
@@ -1072,7 +991,6 @@
       img.src = c.toDataURL('image/png');
     }
 
-    // Sample Product (Wireless Headphones)
     function loadSampleBgImage() {
       showToast('Creating sample e-commerce product...', 'info');
       const c = document.createElement('canvas');
@@ -1080,30 +998,25 @@
       c.height = 800;
       const ctx = c.getContext('2d');
 
-      // Studio White/Grey background
       ctx.fillStyle = '#f1f5f9';
       ctx.fillRect(0, 0, 800, 800);
 
-      // Gradient shadow
       ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
       ctx.beginPath();
       ctx.ellipse(400, 620, 220, 45, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Modern Wireless Headphones graphic
       const grad = ctx.createLinearGradient(200, 200, 600, 600);
       grad.addColorStop(0, '#06b6d4');
       grad.addColorStop(0.5, '#6366f1');
       grad.addColorStop(1, '#a855f7');
 
-      // Headphone Band
       ctx.strokeStyle = grad;
       ctx.lineWidth = 36;
       ctx.beginPath();
       ctx.arc(400, 380, 180, Math.PI * 0.9, Math.PI * 2.1);
       ctx.stroke();
 
-      // Left Ear Cup
       ctx.fillStyle = '#0f172a';
       ctx.beginPath();
       ctx.roundRect(220, 360, 70, 160, 35);
@@ -1113,7 +1026,6 @@
       ctx.roundRect(245, 390, 20, 100, 10);
       ctx.fill();
 
-      // Right Ear Cup
       ctx.fillStyle = '#0f172a';
       ctx.beginPath();
       ctx.roundRect(510, 360, 70, 160, 35);
@@ -1131,7 +1043,6 @@
         elements.bgControlsContainer.style.display = 'block';
         if (elements.bgOriginalImg) elements.bgOriginalImg.src = c.toDataURL('image/png');
 
-        // Switch to Product & Object mode
         currentMode = 'ai-object';
         document.querySelectorAll('.bg-mode-btn').forEach(b => {
           b.classList.toggle('btn-primary', b.dataset.mode === 'ai-object');
@@ -1145,9 +1056,6 @@
     }
   }
 
-  // =========================================================================
-  // QR CODE STUDIO IMPLEMENTATION
-  // =========================================================================
   function setupQRCodeStudio() {
     let currentLogoImg = null;
 
@@ -1269,15 +1177,11 @@
       });
     }
 
-    // Initial QR render
     setTimeout(() => {
       if (window.updateQRCode) window.updateQRCode();
     }, 200);
   }
 
-  // =========================================================================
-  // PASSPORT PHOTO MAKER IMPLEMENTATION
-  // =========================================================================
   function setupPassportMaker() {
     let currentPortraitImg = null;
 
@@ -1365,7 +1269,6 @@
       elements.passportDownloadBtn.addEventListener('click', () => {
         const canvas = elements.passportResultCanvas;
         if (!canvas) return;
-        // Temporarily hide face guide when exporting to save clean photo
         const guideState = state.passportFaceGuide;
         if (guideState) {
           state.passportFaceGuide = false;
@@ -1423,7 +1326,6 @@
       ctx.clearRect(0, 0, display.width, display.height);
       ctx.drawImage(finalCanvas, 0, 0);
 
-      // Biometric face guide overlay for single photo mode
       if (state.passportFaceGuide && sheet !== '4x6') {
         ctx.save();
         ctx.strokeStyle = '#00e5ff';
@@ -1435,12 +1337,10 @@
         const radiusX = display.width * 0.23;
         const radiusY = display.height * 0.28;
 
-        // Head ellipse
         ctx.beginPath();
         ctx.ellipse(centerX, centerY, radiusX, radiusY, 0, 0, Math.PI * 2);
         ctx.stroke();
 
-        // Eye alignment line
         ctx.strokeStyle = '#38bdf8';
         ctx.setLineDash([4, 4]);
         ctx.beginPath();
@@ -1448,7 +1348,6 @@
         ctx.lineTo(centerX + radiusX * 1.25, centerY - radiusY * 0.15);
         ctx.stroke();
 
-        // Chin limit line
         ctx.beginPath();
         ctx.moveTo(centerX - radiusX * 0.85, centerY + radiusY);
         ctx.lineTo(centerX + radiusX * 0.85, centerY + radiusY);
@@ -1465,29 +1364,24 @@
       c.height = 600;
       const ctx = c.getContext('2d');
 
-      // Gradient background
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, 600, 600);
 
-      // Face silhouette
       ctx.fillStyle = '#fbcfe8';
       ctx.beginPath();
       ctx.ellipse(300, 260, 110, 140, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Hair
       ctx.fillStyle = '#1e293b';
       ctx.beginPath();
       ctx.arc(300, 220, 125, Math.PI, Math.PI * 2);
       ctx.fill();
 
-      // Suit / Shoulders
       ctx.fillStyle = '#0f172a';
       ctx.beginPath();
       ctx.ellipse(300, 520, 220, 150, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Shirt collar & tie
       ctx.fillStyle = '#ffffff';
       ctx.beginPath();
       ctx.moveTo(250, 390);
@@ -1515,9 +1409,6 @@
     }
   }
 
-  // =========================================================================
-  // IMAGE FILTERS & EFFECTS IMPLEMENTATION
-  // =========================================================================
   function setupFiltersStudio() {
     let currentFilterImg = null;
     let activePreset = 'none';
@@ -1643,9 +1534,6 @@
     }
   }
 
-  // =========================================================================
-  // SOCIAL MEDIA CROP & RESIZE IMPLEMENTATION
-  // =========================================================================
   function setupSocialCropStudio() {
     let currentCropImg = null;
 
@@ -1746,9 +1634,6 @@
     }
   }
 
-  // =========================================================================
-  // UNIVERSAL BARCODE STUDIO IMPLEMENTATION
-  // =========================================================================
   function setupBarcodeStudio() {
     window.updateBarcode = function() {
       if (!elements.barcodeResultCanvas || !window.BarcodeEngine) return;
@@ -1795,9 +1680,6 @@
     }
   }
 
-  // =========================================================================
-  // SMART PHOTO COLLAGE MAKER IMPLEMENTATION
-  // =========================================================================
   function setupCollageMaker() {
     let currentCollageImages = [];
 
@@ -1932,9 +1814,6 @@
     }
   }
 
-  // =========================================================================
-  // IMAGE TO TEXT (OCR) STUDIO IMPLEMENTATION
-  // =========================================================================
   function setupOCRStudio() {
     if (!elements.ocrDropzone) return;
 
@@ -2057,9 +1936,6 @@
     }
   }
 
-  // =========================================================================
-  // VIDEO TO GIF & FRAME EXTRACTOR IMPLEMENTATION
-  // =========================================================================
   function setupVideoGIFStudio() {
     if (!elements.videoDropzone) return;
 
@@ -2156,9 +2032,6 @@
     }
   }
 
-  // =========================================================================
-  // AUDIO RECORDER & STUDIO IMPLEMENTATION
-  // =========================================================================
   function setupAudioStudio() {
     let audioEngine = null;
     let recordedData = null;
@@ -2209,13 +2082,10 @@
     }
   }
 
-  // =========================================================================
-  // MULTI-LANGUAGE I18N IMPLEMENTATION
-  // =========================================================================
   function setupI18n() {
     if (window.I18nEngine) {
       let saved = 'en';
-      try { saved = localStorage.getItem('optipixel_lang') || 'en'; } catch(e) { /* Safari private mode */ }
+      try { saved = localStorage.getItem('optipixel_lang') || 'en'; } catch(e) {  }
       I18nEngine.setLanguage(saved);
       if (elements.langSelect) {
         elements.langSelect.value = saved;
@@ -2223,15 +2093,11 @@
     }
   }
 
-  // =========================================================================
-  // PDF STUDIO & TOOLS IMPLEMENTATION
-  // =========================================================================
   function setupPDFStudio() {
     if (window.pdfjsLib) {
       pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
     }
 
-    // Subtools switcher (Visual Edit, Merge, Split, Img2PDF, Organize, Watermark, Protect)
     elements.pdfSubtoolBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         elements.pdfSubtoolBtns.forEach(b => b.classList.remove('active'));
@@ -2241,7 +2107,6 @@
       });
     });
 
-    // Dropzone for PDF
     elements.pdfDropzone.addEventListener('click', () => elements.pdfFileInput.click());
     elements.pdfFileInput.addEventListener('change', (e) => handlePDFFilesSelected(e.target.files));
 
@@ -2264,7 +2129,6 @@
       handlePDFFilesSelected(e.dataTransfer.files);
     });
 
-    // PDF Execute Action
     elements.pdfExecuteBtn.addEventListener('click', executePDFAction);
     elements.pdfResetBtn.addEventListener('click', resetPDFState);
   }
@@ -2417,9 +2281,6 @@
     elements.pdfFileInput.value = '';
   }
 
-  // =========================================================================
-  // VISUAL CANVAS PDF ANNOTATOR & IN-PLACE TEXT EDITOR
-  // =========================================================================
   async function loadPDFInVisualEditor(pdfFile) {
     showToast('Loading document for In-Place Text Editing...', 'info');
     try {
@@ -2443,10 +2304,8 @@
     const baseCanvas = elements.pdfBaseCanvas;
     const annotCanvas = elements.pdfAnnotationCanvas;
 
-    // Render Base Page
     await PDFEditorEngine.renderPageToCanvas(state.visualDoc, state.visualPageNum, baseCanvas, 1.4);
 
-    // Sync annotation canvas dimensions
     annotCanvas.width = baseCanvas.width;
     annotCanvas.height = baseCanvas.height;
     annotCanvas.style.width = `${baseCanvas.clientWidth}px`;
@@ -2455,7 +2314,6 @@
     const ctx = annotCanvas.getContext('2d');
     ctx.clearRect(0, 0, annotCanvas.width, annotCanvas.height);
 
-    // Restore saved page annotations if user previously edited this page
     if (state.pageAnnotations && state.pageAnnotations[state.visualPageNum]) {
       const savedImg = new Image();
       savedImg.onload = () => {
@@ -2464,11 +2322,9 @@
       savedImg.src = state.pageAnnotations[state.visualPageNum];
     }
 
-    // Clear existing floating text boxes for current page
     elements.pdfTextOverlayLayer.innerHTML = '';
     state.floatingTextBoxes = [];
 
-    // Extract text items from PDF to enable 1-click in-place text replacement
     try {
       state.detectedTextItems = await PDFEditorEngine.extractPageTextItems(state.visualDoc, state.visualPageNum, 1.4);
       renderDetectedTextHighlights();
@@ -2477,8 +2333,6 @@
     }
   }
 
-  // Render clickable hover boxes over existing text when in 'edit-text' mode
-  // Render clickable hover boxes over existing text with smart background color matching
   function renderDetectedTextHighlights() {
     elements.pdfTextOverlayLayer.innerHTML = '';
     const scaleX = elements.pdfBaseCanvas.clientWidth / elements.pdfBaseCanvas.width;
@@ -2497,7 +2351,6 @@
         box.addEventListener('click', (e) => {
           e.stopPropagation();
 
-          // Sample background color and luminance from base canvas at this text's coordinates
           let sampledBg = '#FFFFFF';
           let textColor = '#000000';
           try {
@@ -2513,15 +2366,12 @@
             console.warn('Color sampling error:', err);
           }
 
-          // 1. Cover original text with clean whiteout/background rectangle on annotation canvas
           const ctx = elements.pdfAnnotationCanvas.getContext('2d');
           ctx.fillStyle = sampledBg;
           ctx.fillRect(item.x - 3, item.y - 2, item.width + 6, item.height + 6);
 
-          // 2. Remove the hover box
           box.remove();
 
-          // 3. Create interactive editable text box prefilled with original text, matched font size and colors!
           createFloatingTextBox(
             item.x * scaleX,
             item.y * scaleY,
@@ -2538,12 +2388,10 @@
     }
   }
 
-  // Deselect any active text widgets when clicking canvas
   function deselectAllTextWidgets() {
     document.querySelectorAll('.pdf-pro-text-widget').forEach(w => w.classList.remove('selected'));
   }
 
-  // Create a Pro Editable & Draggable Floating Text Widget on the PDF
   function createFloatingTextBox(screenX, screenY, initialText = '', fontSize = 18, fontFamily = "'Outfit', sans-serif", initialColor = null, initialBg = null, saveHistory = true) {
     if (saveHistory && window.savePdfHistoryState) window.savePdfHistoryState();
     deselectAllTextWidgets();
@@ -2556,7 +2404,6 @@
     widget.style.left = `${screenX}px`;
     widget.style.top = `${screenY}px`;
 
-    // Widget State
     const textState = {
       id: boxId,
       widget: widget,
@@ -2571,7 +2418,6 @@
       bgColor: initialBg || null
     };
 
-    // 1. Floating Mini Toolbar (Detached above the widget)
     const toolbar = document.createElement('div');
     toolbar.className = 'text-mini-toolbar';
     if (screenY < 50) toolbar.classList.add('flipped-bottom');
@@ -2608,7 +2454,6 @@
       <button type="button" class="mini-btn delete-btn" style="color: #f87171;" title="Delete">🗑️</button>
     `;
 
-    // 2. Text Area (auto-expanding)
     const textarea = document.createElement('textarea');
     textarea.className = 'pdf-pro-text-textarea';
     textarea.style.fontSize = `${fontSize}px`;
@@ -2619,12 +2464,10 @@
     textarea.placeholder = 'Type text...';
     textarea.rows = 1;
 
-    // 3. Corner Resize Handle
     const resizeHandle = document.createElement('div');
     resizeHandle.className = 'widget-resize-handle';
     resizeHandle.title = 'Drag to resize text box width';
 
-    // Auto-adjust size
     const adjustTextarea = () => {
       textarea.style.height = 'auto';
       textarea.style.height = Math.max(28, textarea.scrollHeight) + 'px';
@@ -2635,7 +2478,6 @@
 
     textarea.addEventListener('input', adjustTextarea);
 
-    // Stop propagation on interaction
     ['mousedown', 'mousemove', 'mouseup', 'click', 'touchstart', 'touchmove', 'touchend'].forEach(evt => {
       toolbar.addEventListener(evt, e => e.stopPropagation());
       textarea.addEventListener(evt, e => e.stopPropagation());
@@ -2648,7 +2490,6 @@
       widget.classList.add('selected');
     });
 
-    // Wire Controls
     const dragBtn = toolbar.querySelector('.drag-btn');
     const fontSelect = toolbar.querySelector('.font-family-select');
     const sizeDec = toolbar.querySelector('.size-dec-btn');
@@ -2734,7 +2575,6 @@
       state.floatingTextBoxes = state.floatingTextBoxes.filter(t => t.id !== boxId);
     });
 
-    // 4. Drag-to-move logic (via Drag Button or widget frame)
     let isDragging = false;
     let dragStartX = 0;
     let dragStartY = 0;
@@ -2771,7 +2611,6 @@
     dragBtn.addEventListener('mousedown', (e) => { e.preventDefault(); startDragAction(e.clientX, e.clientY); });
     dragBtn.addEventListener('touchstart', (e) => { startDragAction(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
 
-    // 5. Corner Resize Logic
     let isResizing = false;
     let resizeStartX = 0;
     let initialWidth = 0;
@@ -2811,7 +2650,6 @@
       isDragging = false;
     });
 
-    // Assemble Widget
     widget.appendChild(toolbar);
     widget.appendChild(textarea);
     widget.appendChild(resizeHandle);
@@ -2898,7 +2736,6 @@
       });
     }
 
-    // PDF Undo / Redo & Zoom Implementation
     function savePdfHistoryState() {
       if (!state.pdfUndoStack) state.pdfUndoStack = [];
       if (!state.pdfRedoStack) state.pdfRedoStack = [];
@@ -2959,7 +2796,6 @@
       const prev = state.pdfUndoStack.pop();
       ctx.putImageData(prev.canvasData, 0, 0);
 
-      // Restore text boxes
       if (elements.pdfTextOverlayLayer) elements.pdfTextOverlayLayer.innerHTML = '';
       state.floatingTextBoxes = [];
       if (prev.textBoxes && prev.textBoxes.length > 0) {
@@ -3039,7 +2875,6 @@
     if (elements.pdfZoomInBtn) elements.pdfZoomInBtn.addEventListener('click', () => updatePdfZoom(0.15));
     if (elements.pdfZoomOutBtn) elements.pdfZoomOutBtn.addEventListener('click', () => updatePdfZoom(-0.15));
 
-    // Canvas drawing interaction
     const canvas = elements.pdfAnnotationCanvas;
     if (!canvas) return;
 
@@ -3124,9 +2959,6 @@
     window.addEventListener('touchend', endDraw);
   }
 
-  // =========================================================================
-  // GLOBAL CLIPBOARD & SHORTCUTS (Professional Workflow)
-  // =========================================================================
   function setupGlobalClipboardAndShortcuts() {
     window.addEventListener('paste', async (e) => {
       const target = e.target;
@@ -3205,7 +3037,6 @@
     });
   }
 
-  // Saves current page's annotations & baked text into persistent state
   function saveCurrentPageAnnotationState() {
     bakeFloatingTextToCanvas();
     const canvas = elements.pdfAnnotationCanvas;
@@ -3213,7 +3044,6 @@
     state.pageAnnotations[state.visualPageNum] = canvas.toDataURL('image/png');
   }
 
-  // Rasterizes all floating text boxes onto the canvas before export/page change
   function bakeFloatingTextToCanvas() {
     const canvas = elements.pdfAnnotationCanvas;
     const ctx = canvas.getContext('2d');
@@ -3233,7 +3063,6 @@
       const width = (rect.width) * scaleX;
       const height = (rect.height) * scaleY;
 
-      // 1. Draw Background Fill if not transparent
       if (item.bgMode === 'white') {
         ctx.fillStyle = '#FFFFFF';
         ctx.fillRect(left - 2, top - 2, width + 4, height + 4);
@@ -3245,7 +3074,6 @@
         ctx.fillRect(left - 2, top - 2, width + 4, height + 4);
       }
 
-      // 2. Setup Font & Baseline
       const fontStyle = item.isItalic ? 'italic' : 'normal';
       const fontWeight = item.isBold ? 'bold' : 'normal';
       const fontSize = Math.round(item.fontSize * scaleY);
@@ -3253,7 +3081,6 @@
       ctx.fillStyle = item.color || '#000000';
       ctx.textBaseline = 'top';
 
-      // 3. Multi-line drawing support
       const lines = text.split(/\r?\n/);
       const lineHeight = fontSize * 1.25;
 
@@ -3455,9 +3282,6 @@
     state.pageAnnotations = {};
   }
 
-  // =========================================================================
-  // UNIVERSAL DOWNLOAD HELPER (Direct Native Browser File Download)
-  // =========================================================================
   function triggerDownload(blobOrDataUrl, filename) {
     if (typeof blobOrDataUrl === 'string') {
       const a = document.createElement('a');
@@ -3485,9 +3309,6 @@
     }
   }
 
-  // =========================================================================
-  // IMAGE OPTIMIZER IMPLEMENTATION
-  // =========================================================================
   function setupDropzone() {
     ['dragenter', 'dragover'].forEach(eventName => {
       elements.dropzone.addEventListener(eventName, (e) => {
@@ -3810,9 +3631,6 @@
     }
   }
 
-  // =========================================================================
-  // SOCIAL MEDIA CROP & RESIZE STUDIO
-  // =========================================================================
   function setupSocialCropStudio() {
     const ws = elements.socialCropWorkspace;
     if (!ws) return;
@@ -3851,7 +3669,6 @@
       const canvasAR = outW / outH;
 
       if (fitMode === 'blur-fill') {
-        // Blurred background + centered original
         const scale = Math.max(outW / currentImage.width, outH / currentImage.height);
         const bW = currentImage.width * scale;
         const bH = currentImage.height * scale;
@@ -3862,7 +3679,6 @@
         ctx.drawImage(currentImage, bX, bY, bW, bH);
         ctx.filter = 'none';
 
-        // Draw sharp centered image
         const scale2 = Math.min(outW / currentImage.width, outH / currentImage.height);
         const sW = currentImage.width * scale2;
         const sH = currentImage.height * scale2;
@@ -3974,9 +3790,6 @@
     });
   }
 
-  // =========================================================================
-  // VIDEO FRAME EXTRACTOR (Replaces stub video-gif.js for full functionality)
-  // =========================================================================
   function setupVideoGIFStudio() {
     const dropzone = elements.videoDropzone;
     const fileInput = elements.videoFileInput;
@@ -4057,7 +3870,6 @@
         frames.push(c);
       }
 
-      // Create a grid contact sheet of all frames
       const cols = Math.ceil(Math.sqrt(numFrames));
       const rows = Math.ceil(numFrames / cols);
       const fW = frames[0].width;
@@ -4219,7 +4031,6 @@ This document is confidential and proprietary. Generated securely 100% in-browse
 
       const { width, height } = page.getSize();
 
-      // Header Banner
       page.drawRectangle({
         x: 0,
         y: height - 120,
@@ -4260,7 +4071,6 @@ This document is confidential and proprietary. Generated securely 100% in-browse
         color: rgb(0.95, 0.6, 0.1)
       });
 
-      // Billed To
       page.drawText('BILLED TO:', {
         x: 50,
         y: height - 160,
@@ -4278,7 +4088,6 @@ This document is confidential and proprietary. Generated securely 100% in-browse
         lineHeight: 16
       });
 
-      // Table Header
       page.drawRectangle({
         x: 50,
         y: height - 280,
@@ -4292,7 +4101,6 @@ This document is confidential and proprietary. Generated securely 100% in-browse
       page.drawText('RATE', { x: 380, y: height - 262, size: 10, font: fontBold, color: rgb(0.3, 0.3, 0.3) });
       page.drawText('AMOUNT', { x: 460, y: height - 262, size: 10, font: fontBold, color: rgb(0.3, 0.3, 0.3) });
 
-      // Line Items
       page.drawText('Web Application Architecture & Design', { x: 60, y: height - 310, size: 11, font: fontRegular, color: rgb(0.2, 0.2, 0.2) });
       page.drawText('40', { x: 310, y: height - 310, size: 11, font: fontRegular, color: rgb(0.2, 0.2, 0.2) });
       page.drawText('$85.00', { x: 380, y: height - 310, size: 11, font: fontRegular, color: rgb(0.2, 0.2, 0.2) });
@@ -4303,11 +4111,9 @@ This document is confidential and proprietary. Generated securely 100% in-browse
       page.drawText('$85.00', { x: 380, y: height - 340, size: 11, font: fontRegular, color: rgb(0.2, 0.2, 0.2) });
       page.drawText('$2,125.00', { x: 460, y: height - 340, size: 11, font: fontBold, color: rgb(0.2, 0.2, 0.2) });
 
-      // Total Line
       page.drawText('TOTAL DUE:', { x: 350, y: height - 420, size: 14, font: fontBold, color: rgb(0.04, 0.06, 0.12) });
       page.drawText('$5,525.00', { x: 450, y: height - 420, size: 16, font: fontBold, color: rgb(0.06, 0.71, 0.83) });
 
-      // Instructions note
       page.drawText('Thank you for your business! Please remit payment within 30 days.', {
         x: 50,
         y: 120,
@@ -4327,7 +4133,6 @@ This document is confidential and proprietary. Generated securely 100% in-browse
         return;
       }
 
-      // Default: visual-edit tool
       state.pdfActiveSubtool = 'visual-edit';
       elements.pdfSubtoolBtns.forEach(b => {
         if (b.dataset.tool === 'visual-edit') b.classList.add('active');
