@@ -1169,6 +1169,13 @@
       }
 
       try {
+        if (typeof QRCode === 'undefined') {
+          if (typeof window.loadLibrary === 'function') {
+            try { await window.loadLibrary('qr'); } catch (e) {}
+          }
+        }
+        if (typeof QRCode === 'undefined') return;
+
         const qrCanvas = await QRCodeEngine.generateQRCode({
           text: text,
           size: 400,
@@ -1184,7 +1191,7 @@
         ctx.clearRect(0, 0, 400, 400);
         ctx.drawImage(qrCanvas, 0, 0);
       } catch (err) {
-        console.error('QR error', err);
+        console.warn('QR update deferred:', err);
       }
     };
 
