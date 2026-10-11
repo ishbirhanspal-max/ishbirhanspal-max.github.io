@@ -347,8 +347,8 @@
     if (elements.tabAudioBtn) elements.tabAudioBtn.addEventListener('click', () => switchMainTab('audio-tools'));
     if (elements.tabPdfBtn) elements.tabPdfBtn.addEventListener('click', () => switchMainTab('pdf-tools'));
 
-    if (elements.navImageLink) elements.navImageLink.addEventListener('click', () => switchMainTab('image-tools'));
-    if (elements.navPdfLink) elements.navPdfLink.addEventListener('click', () => switchMainTab('pdf-tools'));
+    if (elements.navImageLink) elements.navImageLink.addEventListener('click', (e) => { e.preventDefault(); switchMainTab('image-tools'); });
+    if (elements.navPdfLink) elements.navPdfLink.addEventListener('click', (e) => { e.preventDefault(); switchMainTab('pdf-tools'); });
 
     // Language change
     if (elements.langSelect) {
@@ -466,6 +466,21 @@
     if (elements.videoWorkspace) elements.videoWorkspace.style.display = tabId === 'video-tools' ? 'block' : 'none';
     if (elements.audioWorkspace) elements.audioWorkspace.style.display = tabId === 'audio-tools' ? 'block' : 'none';
     elements.pdfWorkspace.style.display = tabId === 'pdf-tools' ? 'block' : 'none';
+
+    // Lazy load heavy third-party libraries only when requested
+    if (typeof window.loadLibrary === 'function') {
+      if (tabId === 'bg-tools') {
+        window.loadLibrary('mediapipe').then(() => {
+          if (window.bgRemover && !window.bgRemover.isModelLoaded) window.bgRemover.initModel();
+        }).catch(err => console.warn('Background remover loading deferred:', err));
+      } else if (tabId === 'pdf-tools') {
+        window.loadLibrary('pdf').catch(err => console.warn('PDF library loading deferred:', err));
+      } else if (tabId === 'ocr-tools') {
+        window.loadLibrary('ocr').catch(err => console.warn('OCR library loading deferred:', err));
+      } else if (tabId === 'qr-tools') {
+        window.loadLibrary('qr').catch(err => console.warn('QR library loading deferred:', err));
+      }
+    }
 
     // Auto-scroll active tab into center on mobile carousel
     const activeBtn = document.querySelector('.tab-btn.active');
@@ -3673,6 +3688,13 @@
 
   async function downloadAllAsZip() {
     if (state.files.length === 0) return;
+    if (typeof JSZip === 'undefined' && typeof window.loadLibrary === 'function') {
+      try {
+        await window.loadLibrary('jszip');
+      } catch (err) {
+        console.warn('Could not load JSZip CDN:', err);
+      }
+    }
     if (typeof JSZip === 'undefined') return showToast('ZIP library loading...', 'info');
 
     elements.downloadAllBtn.disabled = true;

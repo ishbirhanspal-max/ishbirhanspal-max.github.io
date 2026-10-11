@@ -44,6 +44,14 @@ class OCREngine {
    * Recognizes text from image
    */
   static async extractText(sourceImage) {
+    if (!window.Tesseract && typeof window.loadLibrary === 'function') {
+      try {
+        await window.loadLibrary('ocr');
+      } catch (err) {
+        console.warn('Could not load Tesseract library:', err);
+      }
+    }
+
     if (window.Tesseract && typeof window.Tesseract.recognize === 'function') {
       try {
         const res = await Promise.race([

@@ -252,13 +252,15 @@
   <!-- ============================================================ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 
   <!-- ============================================================ -->
   <!-- STYLESHEET (Cache-busted v3.0) & CRITICAL MOBILE OVERRIDES   -->
   <!-- ============================================================ -->
   <link rel="stylesheet" href="css/styles.css?v=3.3">
-  <link rel="stylesheet" href="css/suite-nav.css">
+  <link rel="stylesheet" href="css/suite-nav.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="css/suite-nav.css"></noscript>
   <style>
     /* Critical Mobile Header & Footer Rules */
     #sponsorBtn {
@@ -773,8 +775,8 @@
         </div>
 
         <!-- Quick Desktop Nav Links -->
-        <a href="javascript:void(0)" class="nav-link desktop-only-link" id="navImageLink" style="font-size: 0.85rem; padding: 0.35rem 0.6rem;">🖼️ Images</a>
-        <a href="javascript:void(0)" class="nav-link desktop-only-link" id="navPdfLink" style="color: var(--accent-cyan-light); font-weight: 700; font-size: 0.85rem; padding: 0.35rem 0.6rem;">📄 PDF</a>
+        <a href="#imageWorkspace" class="nav-link desktop-only-link" id="navImageLink" style="font-size: 0.85rem; padding: 0.35rem 0.6rem;">🖼️ Images</a>
+        <a href="#pdfWorkspace" class="nav-link desktop-only-link" id="navPdfLink" style="color: var(--accent-cyan-light); font-weight: 700; font-size: 0.85rem; padding: 0.35rem 0.6rem;">📄 PDF</a>
         <a href="blog.html" class="nav-link desktop-only-link" style="font-size: 0.85rem; padding: 0.35rem 0.6rem;">📖 Guides</a>
         <a href="about.html" class="nav-link desktop-only-link" style="font-size: 0.85rem; padding: 0.35rem 0.6rem;">About</a>
         <a href="contact.html" class="nav-link desktop-only-link" style="font-size: 0.85rem; padding: 0.35rem 0.6rem;">Contact</a>
@@ -933,7 +935,7 @@
     <section class="studio-card" id="imageWorkspace">
 
       <!-- Upload Dropzone -->
-      <div class="dropzone-container" id="dropzone" role="button" tabindex="0" aria-label="Upload images for optimization">
+      <div class="dropzone-container" id="dropzone" role="button" tabindex="0" aria-label="Drop your files here, or browse - Add Files">
         <input type="file" id="fileInput" multiple accept="image/jpeg,image/png,image/webp,image/avif,image/bmp,image/svg+xml" style="display: none;">
         
         <div class="dropzone-icon" style="margin-bottom: 0.75rem;">
@@ -2482,38 +2484,52 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2026 OptiPixel &amp; PDF Studio. Created by Ishbir Hanspal. &nbsp;|&nbsp; <a href="privacy.html" style="color: var(--accent-cyan); text-decoration: none;">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms.html" style="color: var(--accent-cyan); text-decoration: none;">Terms of Service</a> &nbsp;|&nbsp; <a href="disclaimer.html" style="color: var(--accent-cyan); text-decoration: none;">Disclaimer</a> &nbsp;|&nbsp; <a href="javascript:void(0)" onclick="localStorage.removeItem('optipixel_cookie_consent'); location.reload();" style="color: var(--accent-cyan); text-decoration: none;">Cookie Settings</a></p>
+        <p>&copy; 2026 OptiPixel &amp; PDF Studio. Created by Ishbir Hanspal. &nbsp;|&nbsp; <a href="privacy.html" style="color: var(--accent-cyan); text-decoration: underline;">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms.html" style="color: var(--accent-cyan); text-decoration: underline;">Terms of Service</a> &nbsp;|&nbsp; <a href="disclaimer.html" style="color: var(--accent-cyan); text-decoration: underline;">Disclaimer</a> &nbsp;|&nbsp; <button type="button" onclick="localStorage.removeItem('optipixel_cookie_consent'); location.reload();" style="background: none; border: none; padding: 0; color: var(--accent-cyan); text-decoration: underline; font: inherit; cursor: pointer;">Cookie Settings</button></p>
       </div>
     </div>
   </footer>
 
-  <!-- Third Party CDNs (Deferred for Instant First Paint) -->
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <script defer src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/selfie_segmentation.js" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
-  <!-- Initialize PDF.js worker to prevent silent failures -->
+  <!-- On-Demand Dynamic Library Loader (Saves >2.5MB payload on initial paint) -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      if (typeof pdfjsLib !== 'undefined') {
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-      } else {
-        document.addEventListener('pdfjs-loaded', function() {
-          if (typeof pdfjsLib !== 'undefined') {
-            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-          }
+    window.loadLibrary = function(name) {
+      if (!window._libPromises) window._libPromises = {};
+      if (window._libPromises[name]) return window._libPromises[name];
+
+      var urls = {
+        'mediapipe': ['https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/selfie_segmentation.js'],
+        'ocr': ['https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'],
+        'pdf': [
+          'https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js',
+          'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
+          'https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js'
+        ],
+        'qr': ['https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'],
+        'jszip': ['https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js']
+      };
+
+      var list = urls[name] || [];
+      window._libPromises[name] = Promise.all(list.map(function(src) {
+        return new Promise(function(resolve, reject) {
+          if (document.querySelector('script[src="' + src + '"]')) return resolve();
+          var s = document.createElement('script');
+          s.src = src;
+          s.async = true;
+          s.crossOrigin = 'anonymous';
+          s.onload = function() {
+            if (src.indexOf('pdf.min.js') !== -1 && typeof pdfjsLib !== 'undefined') {
+              pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+            }
+            resolve();
+          };
+          s.onerror = function(err) {
+            console.warn('Script load error for ' + src, err);
+            resolve(); // Don't crash entire chain
+          };
+          document.body.appendChild(s);
         });
-        // Retry after scripts load
-        window.addEventListener('load', function() {
-          if (typeof pdfjsLib !== 'undefined' && !pdfjsLib.GlobalWorkerOptions.workerSrc) {
-            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-          }
-        });
-      }
-    });
+      }));
+      return window._libPromises[name];
+    };
   </script>
 
   <!-- Application Scripts (Deferred for Smooth Execution) -->

@@ -12,13 +12,23 @@ class BackgroundRemoverEngine {
   constructor() {
     this.selfieSegmentation = null;
     this.isModelLoaded = false;
-    this.initModel();
+    // Model is loaded on-demand to ensure fast initial page load (saving 1.8MB payload)
   }
 
   /**
    * Initializes MediaPipe Selfie Segmentation Neural Network
    */
   async initModel() {
+    if (this.isModelLoaded && this.selfieSegmentation) return;
+    if (typeof SelfieSegmentation === 'undefined') {
+      if (typeof window.loadLibrary === 'function') {
+        try {
+          await window.loadLibrary('mediapipe');
+        } catch (e) {
+          console.warn('Could not load MediaPipe CDN, falling back to smart matting:', e);
+        }
+      }
+    }
     if (typeof SelfieSegmentation !== 'undefined') {
       try {
         this.selfieSegmentation = new SelfieSegmentation({
